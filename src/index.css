@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    overflow-x: hidden;
+    font-family: 'Alexandria', 'IBM Plex Sans Arabic', system-ui, sans-serif;
+  }
+}
+
+/* Lenis smooth scrolling support */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+} 
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Custom 3D & visual utilities */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.perspective-2000 {
+  perspective: 2000px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+/* Sound Wave animated bar */
+@keyframes soundBarPulse {
+  0%, 100% {
+    transform: scaleY(0.3);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+.animate-sound-bar {
+  animation: soundBarPulse 1.2s ease-in-out infinite;
+  transform-origin: bottom;
+}
+
+/* Glass & Glow utilities */
+.sada-card-glow {
+  box-shadow: 0 20px 40px -15px rgba(115, 87, 217, 0.15),
+              0 0 0 1px rgba(115, 87, 217, 0.08);
+}
+
+.sada-card-hover {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.sada-card-hover:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 60px -15px rgba(115, 87, 217, 0.25),
+              0 0 0 2px rgba(115, 87, 217, 0.2);
+}
+
+/* Ribbon SVG stroke dash */
+.sound-ribbon-path {
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 0;
+  will-change: stroke-dashoffset;
+}
+
+/* Text stroke for large editorial Arabic typography */
+.text-stroke-sada {
+  -webkit-text-stroke: 1.5px rgba(39, 33, 62, 0.2);
+  color: transparent;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #FFF8ED;
+}
+::-webkit-scrollbar-thumb {
+  background: #7357D9;
+  border-radius: 5px;
+  border: 2px solid #FFF8ED;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #583EB8;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
