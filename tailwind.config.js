@@ -31,28 +31,34 @@ export default {
         }
       },
       fontFamily: {
-        arabic: ['"Alexandria"', '"IBM Plex Sans Arabic"', 'sans-serif'],
-        display: ['"Alexandria"', 'sans-serif'],
+        arabic: ['"Alexandria"', '"IBM Plex Sans Arabic"', 'system-ui', 'sans-serif'],
+        display: ['"Alexandria"', '"IBM Plex Sans Arabic"', 'sans-serif'],
       },
       keyframes: {
         float: {
-          '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
-          '50%': { transform: 'translateY(-10px) rotate(1.5deg)' },
+          '0%, 100%': { transform: 'translate3d(0, 0px, 0)' },
+          '50%': { transform: 'translate3d(0, -8px, 0)' },
         },
         'pulse-glow': {
-          '0%, 100%': { opacity: '0.6', transform: 'scale(1)' },
-          '50%': { opacity: '0.9', transform: 'scale(1.05)' },
+          '0%, 100%': { opacity: '0.55', transform: 'scale(1)' },
+          '50%': { opacity: '0.85', transform: 'scale(1.04)' },
         },
-        wave: {
-          '0%': { transform: 'translateX(0)' },
-          '100%': { transform: 'translateX(-50%)' },
-        }
+        'char-breathe': {
+          '0%, 100%': { transform: 'translate3d(0, 0px, 0) scale(1)' },
+          '50%': { transform: 'translate3d(0, -5px, 0) scale(1.012)' },
+        },
+        'char-speak': {
+          '0%, 100%': { transform: 'translate3d(0, 0px, 0) rotate(0deg) scale(1.03)' },
+          '35%': { transform: 'translate3d(0, -6px, 0) rotate(-0.8deg) scale(1.045)' },
+          '70%': { transform: 'translate3d(0, -3px, 0) rotate(0.8deg) scale(1.035)' },
+        },
       },
       animation: {
-        float: 'float 5s ease-in-out infinite',
+        float: 'float 5.5s ease-in-out infinite',
         'float-slow': 'float 8s ease-in-out infinite',
-        'pulse-glow': 'pulse-glow 3s ease-in-out infinite',
-        wave: 'wave 15s linear infinite',
+        'pulse-glow': 'pulse-glow 3.4s ease-in-out infinite',
+        'char-breathe': 'char-breathe 4.4s ease-in-out infinite',
+        'char-speak': 'char-speak 1.15s ease-in-out infinite',
       }
     },
   },

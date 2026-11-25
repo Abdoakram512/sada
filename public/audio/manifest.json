@@ -1,0 +1,60 @@
+{
+  "version": "1.0.0",
+  "project": "SADA — صدى",
+  "mcpServer": "https://api.elevenlabs.io/v1/mcp",
+  "productionStatus": "pending_oauth_and_voice_approval",
+  "creditBudget": {
+    "auditionsMaxCredits": 500,
+    "productionMaxCredits": 6000,
+    "auditionsUsedCredits": 0,
+    "productionUsedCredits": 0
+  },
+  "auditions": [
+    {
+      "characterId": "omar",
+      "audioPath": "/audio/auditions/audition-omar.mp3",
+      "text": "أهلاً بيكم في عالم صدى! كل صوت حوالينا وراه حكاية، يلا نبدأ الرحلة مع بعض!",
+      "voiceId": null,
+      "modelId": null,
+      "status": "pending",
+      "durationSec": null
+    },
+    {
+      "characterId": "maryam",
+      "audioPath": "/audio/auditions/audition-maryam.mp3",
+      "text": "مع كل صوت بيسمعه الطفل، خطوة منظمة بتساعدنا نتابع تطوره بهدوء ووضوح.",
+      "voiceId": null,
+      "modelId": null,
+      "status": "pending",
+      "durationSec": null
+    },
+    {
+      "characterId": "zain",
+      "audioPath": "/audio/auditions/audition-zain.mp3",
+      "text": "تفتكروا إزاي بنفرق بين الصوت القصير والطويل؟ يلا نركّب قطعة البازل ونكتشف!",
+      "voiceId": null,
+      "modelId": null,
+      "status": "pending",
+      "durationSec": null
+    },
+    {
+      "characterId": "nour",
+      "audioPath": "/audio/auditions/audition-nour.mp3",
+      "text": "في البيت الهادئ ومع كل كلمة تشجيع، رحلة الاستماع بتبقى أدفى وأقرب للقلب.",
+      "voiceId": null,
+      "modelId": null,
+      "status": "pending",
+      "durationSec": null
+    },
+    {
+      "characterId": "sarah",
+      "audioPath": "/audio/auditions/audition-sarah.mp3",
+      "text": "يا سلام! كل محاولة شاطرة ليها نجمة بتلمع... جاهزين نلعب مع الأصوات؟",
+      "voiceId": null,
+      "modelId": null,
+      "status": "pending",
+      "durationSec": null
+    }
+  ],
+  "clips": []
+}

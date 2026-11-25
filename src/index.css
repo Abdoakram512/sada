@@ -2,27 +2,107 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --sada-hero-size: clamp(2.1rem, 4.5vw, 3.85rem);
+  --sada-h2-size: clamp(1.75rem, 3.4vw, 2.85rem);
+  --sada-h3-size: clamp(1.25rem, 2.1vw, 1.85rem);
+  --sada-body-size: clamp(0.95rem, 1.1vw, 1.125rem);
+  --sada-section-pad-y: clamp(4rem, 7vw, 6.25rem);
+}
+
 @layer base {
   html {
-    scroll-behavior: smooth;
+    direction: rtl;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
   body {
     overflow-x: hidden;
-    font-family: 'Alexandria', 'IBM Plex Sans Arabic', system-ui, sans-serif;
+    font-family: 'Alexandria', 'IBM Plex Sans Arabic', system-ui, -apple-system, sans-serif;
+    letter-spacing: 0 !important;
+    word-spacing: normal;
+    line-height: 1.75;
+  }
+
+  /* Enforce natural Arabic cursive shaping — never apply negative or wide tracking to RTL Arabic text */
+  [dir='rtl'] h1,
+  [dir='rtl'] h2,
+  [dir='rtl'] h3,
+  [dir='rtl'] h4,
+  [dir='rtl'] p,
+  [dir='rtl'] span,
+  [dir='rtl'] button,
+  [dir='rtl'] a,
+  [dir='rtl'] li {
+    letter-spacing: 0;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    overflow-wrap: break-word;
+    text-wrap: balance;
+  }
+
+  p {
+    overflow-wrap: break-word;
+    text-align: start;
   }
 }
 
+/* Fluid Arabic typography helpers */
+.sada-hero-title {
+  font-size: var(--sada-hero-size);
+  line-height: 1.38;
+  letter-spacing: 0;
+}
+
+.sada-section-title {
+  font-size: var(--sada-h2-size);
+  line-height: 1.4;
+  letter-spacing: 0;
+}
+
+.sada-card-title {
+  font-size: var(--sada-h3-size);
+  line-height: 1.45;
+  letter-spacing: 0;
+}
+
+.sada-body-copy {
+  font-size: var(--sada-body-size);
+  line-height: 1.8;
+  letter-spacing: 0;
+}
+
+/* Balanced gradient text for Arabic without clipping descenders/hamza */
+.sada-gradient-text {
+  background-image: linear-gradient(115deg, #7357D9 0%, #159D98 55%, #FF886F 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  padding-block: 0.14em;
+  display: inline-block;
+}
+
+/* Explicit LTR spans inside RTL (phonetic symbols, formulas, English badges) */
+.dir-ltr {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
 /* Lenis smooth scrolling support */
-html.lenis, html.lenis body {
+html.lenis,
+html.lenis body {
   height: auto;
 }
 
 .lenis.lenis-smooth {
   scroll-behavior: auto !important;
-} 
+}
 
 .lenis.lenis-smooth [data-lenis-prevent] {
   overscroll-behavior: contain;
@@ -36,27 +116,23 @@ html.lenis, html.lenis body {
   pointer-events: none;
 }
 
-/* Custom 3D & visual utilities */
+/* 3D card perspective utilities */
 .perspective-1000 {
   perspective: 1000px;
 }
 
-.perspective-2000 {
-  perspective: 2000px;
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
-
-.transform-style-3d {
-  transform-style: preserve-3d;
-}
-
-.backface-hidden {
-  backface-visibility: hidden;
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 /* Sound Wave animated bar */
 @keyframes soundBarPulse {
   0%, 100% {
-    transform: scaleY(0.3);
+    transform: scaleY(0.32);
   }
   50% {
     transform: scaleY(1);
@@ -64,41 +140,38 @@ html.lenis, html.lenis body {
 }
 
 .animate-sound-bar {
-  animation: soundBarPulse 1.2s ease-in-out infinite;
+  animation: soundBarPulse 1.1s ease-in-out infinite;
   transform-origin: bottom;
 }
 
-/* Glass & Glow utilities */
-.sada-card-glow {
-  box-shadow: 0 20px 40px -15px rgba(115, 87, 217, 0.15),
-              0 0 0 1px rgba(115, 87, 217, 0.08);
+@keyframes fadeInSoft {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
 }
 
-.sada-card-hover {
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.sada-card-hover:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 30px 60px -15px rgba(115, 87, 217, 0.25),
-              0 0 0 2px rgba(115, 87, 217, 0.2);
+.animate-fade-in {
+  animation: fadeInSoft 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Ribbon SVG stroke dash */
-.sound-ribbon-path {
-  stroke-dasharray: 2000;
-  stroke-dashoffset: 0;
-  will-change: stroke-dashoffset;
-}
-
-/* Text stroke for large editorial Arabic typography */
-.text-stroke-sada {
-  -webkit-text-stroke: 1.5px rgba(39, 33, 62, 0.2);
-  color: transparent;
+@layer components {
+  /* Scene wrapper baseline spacing inside components layer so utility pb-* overrides cleanly */
+  .sada-scene {
+    padding-block: var(--sada-section-pad-y);
+    padding-inline: clamp(1rem, 3vw, 2.5rem);
+    position: relative;
+    overflow-x: clip;
+  }
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 9px;
 }
 ::-webkit-scrollbar-track {
   background: #FFF8ED;
@@ -112,8 +185,16 @@ html.lenis, html.lenis body {
   background: #583EB8;
 }
 
+/* Accessible focus outlines */
+:focus-visible {
+  outline: 3px solid #FFC552;
+  outline-offset: 2px;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  * {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
