@@ -1,82 +1,105 @@
 import React, { useState } from 'react';
 import { Home, Stethoscope, CheckCircle, ShieldAlert, Sparkles, Heart } from 'lucide-react';
 import { soundEngine } from '../utils/audioEngine';
+import { useStorySceneFocus } from '../hooks/useStoryAudio';
+import { CharacterStageActor } from './CharacterStageActor';
 
 export const GuidesSection: React.FC = () => {
   const [activeGuide, setActiveGuide] = useState<'parent' | 'specialist'>('parent');
+  const { isSceneActive, activeSpeakerId } = useStorySceneFocus('scene-08-parents-specialists');
 
   return (
-    <section className="relative py-28 px-4 md:px-8 bg-sada-cream overflow-hidden">
+    <section
+      id="guides"
+      data-scene-id="scene-08-parents-specialists"
+      className="sada-scene bg-sada-cream"
+    >
       <div className="max-w-7xl mx-auto">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sada-lavender text-sada-violet text-xs font-bold mb-4">
+        {/* Scene Header */}
+        <div className="text-center max-w-3xl mx-auto mb-10">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sada-lavender text-sada-violet text-xs font-bold mb-3">
             <Heart size={14} />
-            <span>Guides & Collaboration · أدلة الاستخدام والقيمة المشتركة</span>
+            <span>المشهد 08 · شراكة الأسرة والأخصائي</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-black text-sada-ink leading-tight mb-4">
-            تكامل مهني بين <span className="text-sada-teal">المنزل والعيادة التأهيلية</span>
+          <h2 className="sada-section-title font-black text-sada-ink mb-4">
+            تكامل واعٍ بين <span className="text-sada-teal">المنزل وجلسات المختص</span>
           </h2>
-          <p className="text-base sm:text-lg text-sada-ink/75 leading-relaxed font-medium">
-            صُمم صدى ليضمن لغة مشتركة واضحة؛ بحيث تمارس الأسرة أنشطة المتابعة المنزلية بوعي، ويتابع الأخصائي البيانات بدقة سريرية منظمة.
+          <p className="sada-body-copy text-sada-ink/75 font-medium text-center">
+            تشارك نور نصائح المتابعة المنزلية الهادئة للأسرة، بينما تستعرض مريم أدوات التنظيم والمتابعة المهنية للأخصائي.
           </p>
         </div>
 
-        {/* Dual Tab Switcher */}
-        <div className="flex justify-center mb-12">
-          <div className="bg-white p-1.5 rounded-2xl border border-sada-violet/15 flex items-center shadow-md gap-1">
+        {/* Characters Duo */}
+        <div className="flex items-end justify-center gap-8 mb-10">
+          <CharacterStageActor
+            characterId="nour"
+            sizeClass="w-24 sm:w-28"
+            isSpeaking={isSceneActive && activeSpeakerId === 'nour'}
+            isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'nour')}
+            onClick={() => setActiveGuide('parent')}
+          />
+          <CharacterStageActor
+            characterId="maryam"
+            sizeClass="w-24 sm:w-28"
+            isSpeaking={isSceneActive && activeSpeakerId === 'maryam'}
+            isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'maryam')}
+            onClick={() => setActiveGuide('specialist')}
+          />
+        </div>
+
+        {/* Dual Switcher */}
+        <div className="flex justify-center mb-10">
+          <div className="bg-white p-1.5 rounded-2xl border border-sada-violet/15 flex flex-wrap sm:flex-nowrap items-center justify-center shadow-md gap-1.5">
             <button
+              type="button"
               onClick={() => {
                 soundEngine.playPop();
                 setActiveGuide('parent');
               }}
-              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-extrabold text-sm transition-all ${
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-extrabold text-xs sm:text-sm transition-all ${
                 activeGuide === 'parent'
                   ? 'bg-sada-teal text-white shadow-md'
-                  : 'text-sada-ink/70 hover:text-sada-ink'
+                  : 'text-sada-ink/75 hover:text-sada-ink'
               }`}
             >
-              <Home size={18} />
+              <Home size={17} />
               <span>دليل ولي الأمر (مشاركة منزلية واعية)</span>
             </button>
             <button
+              type="button"
               onClick={() => {
                 soundEngine.playPop();
                 setActiveGuide('specialist');
               }}
-              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-extrabold text-sm transition-all ${
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-extrabold text-xs sm:text-sm transition-all ${
                 activeGuide === 'specialist'
                   ? 'bg-sada-violet text-white shadow-md'
-                  : 'text-sada-ink/70 hover:text-sada-ink'
+                  : 'text-sada-ink/75 hover:text-sada-ink'
               }`}
             >
-              <Stethoscope size={18} />
+              <Stethoscope size={17} />
               <span>دليل الأخصائي (متابعة منظمة ومهنية)</span>
             </button>
           </div>
         </div>
 
-        {/* Guide Content Card */}
-        <div className="bg-white rounded-[2.5rem] border-2 border-sada-violet/15 p-6 sm:p-12 shadow-xl">
+        {/* Content Card */}
+        <div className="bg-white rounded-[2.25rem] border-2 border-sada-violet/15 p-6 sm:p-10 shadow-xl">
           {activeGuide === 'parent' ? (
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center animate-fade-in">
-              <div className="lg:col-span-7 space-y-6 text-right">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-sada-teal/15 text-sada-teal text-xs font-black">
-                  <span>إرشادات للأسرة في البيئة المنزلية</span>
-                </div>
-                <h3 className="text-2xl sm:text-4xl font-black text-sada-ink">
+              <div className="lg:col-span-7 space-y-5 text-right">
+                <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-sada-teal/15 text-sada-teal-dark text-xs font-black">
+                  إرشادات للأسرة في البيئة المنزلية
+                </span>
+                <h3 className="sada-card-title font-black text-sada-ink">
                   مشاركة منزلية واعية تدعم جلسات المركز
                 </h3>
-                <p className="text-base text-sada-ink/80 leading-relaxed font-medium">
-                  المنزل هو المساحة الطبيعية التي يقضي فيها الطفل معظم وقته؛ لذا يوفر صدى لولي الأمر خطوات واضحة ومبسطة:
-                </p>
-
-                <div className="space-y-3.5">
+                <div className="space-y-3">
                   {[
-                    'إنشاء ملف الطفل واختيار التقييم المناسب لعمره السمعي.',
-                    'اتباع طريقة تسجيل الاستجابات بدقة فور ملاحظة حركة الطفل.',
-                    'تهيئة البيئة المنزلية الهادئة وتجنب المشتتات البصرية أو التلفاز أثناء الجلسة.',
-                    'قراءة النتائج الدورية ومراجعة الأخصائي لمناقشة التطور دون قلق أو تخمين.'
+                    'إنشاء ملف الطفل واختيار التقييم المناسب.',
+                    'اتباع طريقة تسجيل الاستجابات كما هو موضح.',
+                    'تهيئة البيئة المنزلية الهادئة وتجنب المشتتات.',
+                    'قراءة النتائج ومراجعة الأخصائي عند الحاجة.',
                   ].map((item, idx) => (
                     <div key={idx} className="flex items-start gap-3 p-3.5 rounded-2xl bg-sada-surface border border-gray-100">
                       <CheckCircle size={18} className="text-sada-teal flex-shrink-0 mt-0.5" />
@@ -86,38 +109,35 @@ export const GuidesSection: React.FC = () => {
                 </div>
               </div>
 
-              <div className="lg:col-span-5 flex flex-col items-center justify-center p-8 rounded-3xl bg-gradient-to-br from-emerald-50 via-teal-50 to-white border border-sada-teal/20 text-center">
-                <div className="w-16 h-16 rounded-2xl bg-sada-teal text-white flex items-center justify-center mb-4 shadow-md">
-                  <Home size={32} />
-                </div>
-                <h4 className="text-xl font-black text-sada-ink mb-2">دور الأسرة المحوري</h4>
-                <p className="text-xs sm:text-sm text-sada-ink/75 leading-relaxed font-medium mb-4">
-                  «أنت لست فاحصاً طبياً، بل الشريك الأهم في تحفيز الطفل وخلق بيئة استماع يومية محبة ومشجعة.»
+              <div className="lg:col-span-5 flex flex-col items-center justify-center p-6 rounded-3xl bg-gradient-to-br from-emerald-50 via-teal-50 to-white border border-sada-teal/20 text-center">
+                <img
+                  src="/assets/char_guide.webp"
+                  alt="نور تحمل كتاب الإرشادات"
+                  loading="lazy"
+                  decoding="async"
+                  className="w-40 sm:w-48 h-auto object-contain mb-3 drop-shadow-md"
+                />
+                <h4 className="text-lg font-black text-sada-ink mb-1.5">دور الأسرة الداعم</h4>
+                <p className="text-xs sm:text-sm text-sada-ink/75 leading-relaxed font-medium text-center">
+                  مشاركة منزلية واعية تشجع الطفل في أجواء دافئة وتُكمل جلسات التأهيل المتخصصة.
                 </p>
-                <span className="text-xs font-bold text-sada-teal px-3 py-1 rounded-full bg-white shadow-2xs">
-                  دعم مستمر بدون إرهاق
-                </span>
               </div>
             </div>
           ) : (
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center animate-fade-in">
-              <div className="lg:col-span-7 space-y-6 text-right">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-sada-violet/15 text-sada-violet text-xs font-black">
-                  <span>أدوات سريرية وتنظيمية للأخصائي</span>
-                </div>
-                <h3 className="text-2xl sm:text-4xl font-black text-sada-ink">
-                  متابعة منظمة ومهنية تساند اتخاذ القرار التأهيلي
+              <div className="lg:col-span-7 space-y-5 text-right">
+                <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-sada-violet/15 text-sada-violet text-xs font-black">
+                  أدوات تنظيمية للأخصائي
+                </span>
+                <h3 className="sada-card-title font-black text-sada-ink">
+                  متابعة منظمة ومهنية لكل مهارة عبر الزمن
                 </h3>
-                <p className="text-base text-sada-ink/80 leading-relaxed font-medium">
-                  يمنح صدى أخصائي السمع والتخاطب مرجعاً موثوقاً لتقييم كل مهارة بصورة مستقلة ومقارنة المنحنيات:
-                </p>
-
-                <div className="space-y-3.5">
+                <div className="space-y-3">
                   {[
-                    'مراجعة ملف الطفل الشامل وتاريخ التقييمات السابقة عبر جدول زمني.',
-                    'قراءة استجابات لينج لكل صوت ومقارنة الترددات التي تحتاج إلى ضبط أو تدريب مكثف.',
-                    'مراجعة أداء المهارات السمعية بصورة مستقلة دون اشتراط ترتيب موحد.',
-                    'تحديد المهام الملائمة لقدرات الطفل ومتابعة التغير التراكمي بمرور الوقت.'
+                    'مراجعة ملف الطفل وتاريخ التقييمات.',
+                    'قراءة استجابات لينج لكل صوت ومقارنتها.',
+                    'مراجعة أداء المهارات السمعية بصورة مستقلة.',
+                    'تحديد المهام الملائمة ومتابعة التغير بمرور الوقت.',
                   ].map((item, idx) => (
                     <div key={idx} className="flex items-start gap-3 p-3.5 rounded-2xl bg-sada-surface border border-gray-100">
                       <CheckCircle size={18} className="text-sada-violet flex-shrink-0 mt-0.5" />
@@ -127,45 +147,40 @@ export const GuidesSection: React.FC = () => {
                 </div>
               </div>
 
-              <div className="lg:col-span-5 flex flex-col items-center justify-center p-8 rounded-3xl bg-gradient-to-br from-indigo-50 via-purple-50 to-white border border-sada-violet/20 text-center">
+              <div className="lg:col-span-5 flex flex-col items-center justify-center p-7 rounded-3xl bg-gradient-to-br from-indigo-50 via-purple-50 to-white border border-sada-violet/20 text-center">
                 <div className="w-16 h-16 rounded-2xl bg-sada-violet text-white flex items-center justify-center mb-4 shadow-md">
                   <Stethoscope size={32} />
                 </div>
-                <h4 className="text-xl font-black text-sada-ink mb-2">الدقة العلمية والموضوعية</h4>
-                <p className="text-xs sm:text-sm text-sada-ink/75 leading-relaxed font-medium mb-4">
-                  «بيانات رقمية موثقة تدعم جلساتك وتمنحك رؤية واضحة لتعديل الخطط التأهيلية بدقة وبناءً على شواهد.»
+                <h4 className="text-lg font-black text-sada-ink mb-2">متابعة منظمة وموضوعية</h4>
+                <p className="text-xs sm:text-sm text-sada-ink/75 leading-relaxed font-medium text-center">
+                  توثيق الجلسات والظروف يمنح الأخصائي مرجعاً واضحاً لتوجيه الخطة التأهيلية الملائمة لقدرات الطفل.
                 </p>
-                <span className="text-xs font-bold text-sada-violet px-3 py-1 rounded-full bg-white shadow-2xs">
-                  كفاءة مهنية أعلى
-                </span>
               </div>
             </div>
           )}
 
-          {/* Scientific Disclaimer Banner (Mandatory as per PDF Page 16) */}
-          <div className="mt-8 p-5 rounded-2xl bg-amber-50 border border-amber-200/80 flex items-start gap-4">
-            <ShieldAlert className="text-amber-600 flex-shrink-0 mt-1" size={22} />
+          {/* Mandatory Scientific Disclaimer */}
+          <div className="mt-8 p-5 rounded-2xl bg-amber-50 border border-amber-200 flex items-start gap-3.5">
+            <ShieldAlert className="text-amber-700 flex-shrink-0 mt-0.5" size={22} />
             <div className="text-right">
               <span className="text-xs sm:text-sm font-black text-amber-950 block mb-1">
-                تنويه علمي معتمد من فريق صدى:
+                تنويه علمي معتمد:
               </span>
-              <p className="text-xs text-amber-900 leading-relaxed font-medium">
+              <p className="text-xs text-amber-950 leading-relaxed font-medium">
                 تطبيق صدى وسيلة مساعدة للتقييم الوظيفي والمتابعة والتدريب السمعي، ولا يحل محل التقييم السمعي المتخصص أو ضبط السماعات الطبية وزراعة القوقعة أو جلسات التأهيل تحت إشراف المختصين.
               </p>
             </div>
           </div>
         </div>
 
-        {/* SADA Value Added Banner */}
-        <div className="mt-12 text-center p-6 rounded-3xl bg-gradient-to-r from-sada-violet to-sada-teal text-white shadow-xl">
+        {/* Value Added Banner */}
+        <div className="mt-10 text-center p-6 sm:p-7 rounded-3xl bg-gradient-to-r from-sada-violet to-sada-teal text-white shadow-xl">
           <div className="inline-flex items-center gap-2 mb-2">
             <Sparkles size={16} />
-            <span className="text-xs font-bold uppercase tracking-widest text-sada-yellow">
-              القيمة المضافة للمشروع
-            </span>
+            <span className="text-xs font-bold text-sada-yellow">القيمة المضافة للمشروع</span>
           </div>
-          <p className="text-base sm:text-lg font-black max-w-3xl mx-auto leading-relaxed">
-            «يجمع صدى في مكان واحد تقييم الاستجابة السمعية، وتقييم المهارات السمعية، وتوثيق النتائج، وأدلة الاستخدام، والألعاب التعزيزية؛ ليكون لكل صوت حكاية.. ولكل طفل فرصة.»
+          <p className="text-sm sm:text-lg font-black max-w-3xl mx-auto leading-relaxed text-center">
+            «يجمع صدى في مكان واحد تقييم الاستجابة السمعية، وتقييم المهارات السمعية، وتوثيق النتائج، وأدلة الاستخدام، والألعاب التعزيزية؛ ويساعد في تحقيق تعاون أفضل بين الطفل وولي الأمر والأخصائي، إلى جانب الجلسات التأهيلية.»
           </p>
         </div>
       </div>

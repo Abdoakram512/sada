@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
   Smartphone,
   ChevronLeft,
@@ -8,118 +10,197 @@ import {
   Save,
   CheckCircle2,
   TrendingUp,
-  CalendarCheck
+  CalendarCheck,
 } from 'lucide-react';
 import { soundEngine } from '../utils/audioEngine';
+import { useStorySceneFocus } from '../hooks/useStoryAudio';
+import { CharacterStageActor } from './CharacterStageActor';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export const AppWorkflowSection: React.FC = () => {
   const [currentStep, setCurrentStep] = useState<number>(0);
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const phoneRef = useRef<HTMLDivElement | null>(null);
+  const { isSceneActive, activeSpeakerId } = useStorySceneFocus('scene-03-discovering-sada');
 
   const steps = [
     {
       id: '01',
       title: 'ملف الطفل',
       englishTitle: 'Child Profile',
-      desc: 'إنشاء ملف رقمي متكامل للطفل يتضمن معلومات العمر السمعي، نوع المعين السمعي (سماعة طبية أو زراعة قوقعة)، وتاريخ بدء التأهيل.',
+      desc: 'إنشاء ملف رقمي منظم للطفل يضم بياناته الأساسية ونوع المعين السمعي وتاريخ المتابعة.',
       icon: UserCheck,
       screenImage: '/assets/screens/screen_welcome.png',
-      color: '#7357D9'
+      color: '#7357D9',
+      bullets: [
+        'البدء من ملف الطفل لحفظ جميع التقييمات والنتائج في مكان واحد.',
+        'ربط كل جلسة لاحقة بالملف نفسه لمتابعة الأداء عبر الزمن.',
+      ],
     },
     {
       id: '02',
       title: 'تقييم أصوات لينج',
       englishTitle: 'Ling Sound Check',
-      desc: 'تقديم الأصوات الستة منفصلة عبر الواجهة وتسجيل استجابة الطفل الفورية لمتابعة كفاءة التقاط الطيف الصوتي.',
+      desc: 'تقديم الأصوات الستة /m/, /u/, /a/, /i/, /ʃ/, /s/ كل صوت على حدة وتسجيل استجابة الطفل.',
       icon: Ear,
       screenImage: '/assets/screens/screen_ling_test.png',
-      color: '#159D98'
+      color: '#159D98',
+      bullets: [
+        'تشغيل الصوت في بيئة هادئة دون إشارات بصرية مضللة.',
+        'تسجيل الاستجابة السلوكية مباشرة عبر خيار (استجاب) أو (لم يستجب).',
+      ],
     },
     {
       id: '03',
       title: 'حفظ النتائج والتوثيق',
       englishTitle: 'Save Results',
-      desc: 'أرشفة فورية لنتائج كل جلسة وتوثيق تاريخها وظروف التقديم السمعي لضمان مقارنة علمية موثوقة مستقبلاً.',
+      desc: 'حساب نسبة الاستجابة آلياً وفق المعادلة المعتمدة وتوثيق تاريخ الجلسة وظروفها.',
       icon: Save,
       screenImage: '/assets/screens/screen_ling_results.png',
-      color: '#FF886F'
+      color: '#FF886F',
+      bullets: [
+        'تطبيق معادلة: نسبة الاستجابة = (عدد الأصوات المستجاب لها ÷ 6) × 100.',
+        'مقارنة الجلسات السابقة لمعرفة التغير في التقاط الترددات.',
+      ],
     },
     {
       id: '04',
-      title: 'تقييم وتدريب المهارات',
+      title: 'تقييم المهارات السمعية',
       englishTitle: 'Auditory Skills',
-      desc: 'الانتقال إلى المهارات السمعية الخمس (إدراك، تمييز، تعرف، فهم، إغلاق) عبر مهام تفاعلية وألعاب تعزيزية مناسبة.',
+      desc: 'اختيار أي من المهارات السمعية الخمس الأساسية بصورة مستقلة دون فرض ترتيب موحد.',
       icon: CheckCircle2,
       screenImage: '/assets/screens/screen_skills_list.png',
-      color: '#8F75EC'
+      color: '#8F75EC',
+      bullets: [
+        'تقييم نوعي مستقل للإدراك، التمييز، التعرف والربط، الفهم، والإغلاق السمعي.',
+        'مكافآت بصرية لطيفة بالنجوم لرفع حماس الطفل أثناء المشاركة.',
+      ],
     },
     {
       id: '05',
       title: 'لوحة مؤشرات الأداء',
       englishTitle: 'Performance Dashboard',
-      desc: 'قراءة نسب الإنجاز التراكمية (مثل نسبة 78% ومعدل الاستجابات الصحيحة) ومقارنة الجلسات لمعرفة نقاط القوة ومواطن الدعم.',
+      desc: 'عرض مبسط لنسب الأداء وعدد الإجابات الصحيحة لمساعدة الأسرة والأخصائي على القراءة السريعة.',
       icon: TrendingUp,
       screenImage: '/assets/screens/screen_dashboard.png',
-      color: '#FFC552'
+      color: '#D99200',
+      bullets: [
+        'عرض نسبة أداء المهارات واستجابة لينج جنباً إلى جنب في تقارير واضحة.',
+        'تحديد المهارات التي تحتاج إلى دعم ومتابعة إضافية في الخطة التأهيلية.',
+      ],
     },
     {
       id: '06',
       title: 'خطة المتابعة الدورية',
       englishTitle: 'Assessment Timeline',
-      desc: 'جدولة محطات التقييم (قبلي، متابعة دورية كل 3 أشهر، بعدي) مع تذكيرات آلية لولي الأمر والأخصائي للحفاظ على ثبات الخطة.',
+      desc: 'متابعة منظمة تشمل التقييم القبلي والمتابعة الدورية (مثل كل 3 أشهر، قابل للتعديل) والتقييم البعدي.',
       icon: CalendarCheck,
       screenImage: '/assets/screens/screen_timeline.png',
-      color: '#55D6BE'
-    }
+      color: '#32B8B3',
+      bullets: [
+        'جدولة المواعيد وإرسال تذكيرات لولي الأمر والأخصائي.',
+        'مقارنة النتائج في ظروف متسقة عبر فترة التأهيل.',
+      ],
+    },
   ];
 
   const activeStepData = steps[currentStep];
 
-  const handleStepClick = (idx: number) => {
-    soundEngine.playPop();
-    setCurrentStep(idx);
-  };
+  useEffect(() => {
+    const section = sectionRef.current;
+    const phone = phoneRef.current;
+    if (!section || !phone) return;
 
-  const nextStep = () => {
-    soundEngine.playPop();
-    setCurrentStep((prev) => (prev + 1) % steps.length);
-  };
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
 
-  const prevStep = () => {
-    soundEngine.playPop();
-    setCurrentStep((prev) => (prev - 1 + steps.length) % steps.length);
-  };
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        phone,
+        { scale: 0.92, y: 36, opacity: 0 },
+        {
+          scale: 1,
+          y: 0,
+          opacity: 1,
+          duration: 0.85,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: section,
+            start: 'top 76%',
+            once: true,
+          },
+        }
+      );
+    }, section);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <section id="app" className="relative py-28 px-4 md:px-8 bg-sada-surface overflow-hidden">
+    <section
+      ref={sectionRef}
+      id="app"
+      data-scene-id="scene-03-discovering-sada"
+      className="sada-scene bg-sada-cream-warm"
+    >
       <div className="max-w-7xl mx-auto">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sada-lavender text-sada-violet text-xs font-bold mb-4">
+        {/* Scene Header */}
+        <div className="text-center max-w-3xl mx-auto mb-10">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sada-lavender text-sada-violet text-xs font-bold mb-3">
             <Smartphone size={14} />
-            <span>Workflow & App Journey · رحلة الاستخدام داخل التطبيق</span>
+            <span>المشهد 03 · اكتشاف تطبيق صدى</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-black text-sada-ink leading-tight mb-4">
-            تسلسل متقن من <span className="text-sada-teal">إنشاء الملف إلى قراءة النتائج</span>
+          <h2 className="sada-section-title font-black text-sada-ink mb-4">
+            رحلة <span className="text-sada-teal">مترابطة في التطبيق</span> من البداية إلى المتابعة
           </h2>
-          <p className="text-base sm:text-lg text-sada-ink/75 leading-relaxed font-medium">
-            ست مراحل متتابعة ومترابطة داخل التطبيق تضمن متابعة سلسة وشاملة لمسار تأهيل الطفل السمعي عبر الزمن.
+          <p className="sada-body-copy text-sada-ink/75 font-medium text-center">
+            يكشف عمر ومريم كيف يجمع تطبيق صدى ملف الطفل، وتقييم لينج، والمهارات السمعية، والتقارير في ست خطوات واضحة.
           </p>
         </div>
 
-        {/* 6 Step Interactive Journey Track */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5 mb-14">
+        {/* Cast + Tablet Discovery Bridge */}
+        <div className="flex flex-wrap items-center justify-center gap-6 mb-10">
+          <CharacterStageActor
+            characterId="omar"
+            sizeClass="w-24 sm:w-28"
+            isSpeaking={isSceneActive && activeSpeakerId === 'omar'}
+            isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'omar')}
+          />
+          <div className="w-40 sm:w-52 bg-white/80 rounded-3xl p-2 border border-sada-violet/15 shadow-md">
+            <img
+              src="/assets/group_tablet.webp"
+              alt="عمر وزين يستكشفان تطبيق صدى على الجهاز اللوحي"
+              loading="lazy"
+              decoding="async"
+              className="w-full h-auto object-contain"
+            />
+          </div>
+          <CharacterStageActor
+            characterId="maryam"
+            sizeClass="w-24 sm:w-28"
+            isSpeaking={isSceneActive && activeSpeakerId === 'maryam'}
+            isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'maryam')}
+          />
+        </div>
+
+        {/* 6-Stage Selector */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5 mb-10">
           {steps.map((st, idx) => {
             const Icon = st.icon;
             const isCurrent = idx === currentStep;
-
             return (
               <button
                 key={st.id}
-                onClick={() => handleStepClick(idx)}
+                type="button"
+                onClick={() => {
+                  soundEngine.playPop();
+                  setCurrentStep(idx);
+                }}
                 className={`p-3.5 rounded-2xl border-2 text-right transition-all flex flex-col justify-between ${
                   isCurrent
-                    ? 'bg-white shadow-lg scale-102 border-sada-violet ring-2 ring-sada-violet/20'
-                    : 'bg-white/70 hover:bg-white border-transparent text-sada-ink/70'
+                    ? 'bg-white shadow-lg border-sada-violet ring-2 ring-sada-violet/15'
+                    : 'bg-white/75 hover:bg-white border-transparent text-sada-ink/75'
                 }`}
               >
                 <div className="flex items-center justify-between mb-2">
@@ -130,15 +211,12 @@ export const AppWorkflowSection: React.FC = () => {
                   >
                     {st.id}
                   </span>
-                  <Icon
-                    size={16}
-                    className={isCurrent ? 'text-sada-violet' : 'text-sada-ink/40'}
-                  />
+                  <Icon size={16} className={isCurrent ? 'text-sada-violet' : 'text-sada-ink/45'} />
                 </div>
-                <span className="font-extrabold text-xs sm:text-sm text-sada-ink block line-clamp-1">
+                <span className="font-extrabold text-xs sm:text-sm text-sada-ink block">
                   {st.title}
                 </span>
-                <span className="text-[10px] text-sada-ink/50 mt-0.5 block">
+                <span className="dir-ltr text-[10px] text-sada-ink/55 mt-0.5 block text-right">
                   {st.englishTitle}
                 </span>
               </button>
@@ -146,46 +224,36 @@ export const AppWorkflowSection: React.FC = () => {
           })}
         </div>
 
-        {/* The Live Phone Mockup & Storytelling Stage */}
-        <div className="bg-white rounded-[2.5rem] border-2 border-sada-violet/15 p-6 md:p-12 shadow-2xl relative overflow-hidden">
+        {/* Phone Mockup & Stage Details */}
+        <div className="bg-white rounded-[2.25rem] border-2 border-sada-violet/15 p-6 md:p-10 shadow-xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            {/* Phone Screen Mockup (Center Left) */}
-            <div className="lg:col-span-5 flex flex-col items-center justify-center relative">
-              {/* Outer Phone Bezel */}
-              <div className="relative w-64 sm:w-72 aspect-[9/19] rounded-[3rem] bg-sada-ink p-3 shadow-2xl border-4 border-gray-800 ring-8 ring-sada-violet/15 flex flex-col items-center justify-between overflow-hidden">
-                {/* Dynamic Island / Notch */}
-                <div className="w-24 h-5 bg-black rounded-full mb-2 z-20 flex items-center justify-center">
-                  <div className="w-2.5 h-2.5 rounded-full bg-white/20" />
-                </div>
-
-                {/* Cropped Screen Image with smooth fade-in */}
-                <div className="relative w-full flex-1 rounded-[2.2rem] overflow-hidden bg-sada-surface flex items-center justify-center">
+            <div ref={phoneRef} className="lg:col-span-5 flex flex-col items-center justify-center">
+              <div className="relative w-60 sm:w-68 aspect-[9/19] rounded-[2.75rem] bg-sada-ink p-3 shadow-2xl border-4 border-gray-800 ring-8 ring-sada-violet/10 flex flex-col items-center justify-between overflow-hidden">
+                <div className="w-20 h-4 bg-black rounded-full mb-2 z-20" />
+                <div className="relative w-full flex-1 rounded-[2rem] overflow-hidden bg-sada-surface flex items-center justify-center">
                   <img
                     key={activeStepData.screenImage}
                     src={activeStepData.screenImage}
                     alt={activeStepData.title}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover animate-fade-in"
                   />
                 </div>
-
-                {/* Bottom Home Indicator */}
-                <div className="w-28 h-1 bg-white/40 rounded-full mt-2" />
+                <div className="w-24 h-1 bg-white/40 rounded-full mt-2" />
               </div>
-
-              {/* Conceptual UI disclaimer note from PDF */}
-              <span className="text-[11px] text-sada-ink/50 text-center mt-3 font-semibold">
-                * تصوّر مبدئي لواجهة التطبيق (UI Concept) معتمد في ملف المشروع.
+              <span className="text-[11px] text-sada-ink/60 text-center mt-3 font-semibold">
+                * تصوّر مبدئي لواجهة التطبيق (Concept UI) معتمد في وثيقة المشروع.
               </span>
             </div>
 
-            {/* Step Storytelling & Explanation (Right Column) */}
             <div className="lg:col-span-7 flex flex-col text-right">
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
                 <span
-                  className="text-xs font-black px-3.5 py-1.5 rounded-xl shadow-xs"
+                  className="text-xs font-black px-3.5 py-1.5 rounded-xl"
                   style={{
-                    backgroundColor: `${activeStepData.color}20`,
-                    color: activeStepData.color
+                    backgroundColor: `${activeStepData.color}1F`,
+                    color: activeStepData.color,
                   }}
                 >
                   المرحلة {activeStepData.id} من 06 · {activeStepData.englishTitle}
@@ -193,83 +261,54 @@ export const AppWorkflowSection: React.FC = () => {
 
                 <div className="flex items-center gap-2">
                   <button
-                    onClick={prevStep}
+                    type="button"
+                    onClick={() => {
+                      soundEngine.playPop();
+                      setCurrentStep((prev) => (prev - 1 + steps.length) % steps.length);
+                    }}
                     className="p-2 rounded-xl bg-gray-100 hover:bg-gray-200 text-sada-ink transition-colors"
-                    aria-label="الخطوة السابقة"
+                    aria-label="المرحلة السابقة"
                   >
                     <ChevronRight size={18} />
                   </button>
                   <button
-                    onClick={nextStep}
+                    type="button"
+                    onClick={() => {
+                      soundEngine.playPop();
+                      setCurrentStep((prev) => (prev + 1) % steps.length);
+                    }}
                     className="p-2 rounded-xl bg-gray-100 hover:bg-gray-200 text-sada-ink transition-colors"
-                    aria-label="الخطوة التالية"
+                    aria-label="المرحلة التالية"
                   >
                     <ChevronLeft size={18} />
                   </button>
                 </div>
               </div>
 
-              <h3 className="text-2xl sm:text-4xl font-black text-sada-ink mb-4">
+              <h3 className="sada-card-title font-black text-sada-ink mb-3">
                 {activeStepData.title}
               </h3>
 
-              <p className="text-base sm:text-lg text-sada-ink/80 leading-relaxed font-medium mb-8">
+              <p className="sada-body-copy text-sada-ink/80 font-medium mb-6">
                 {activeStepData.desc}
               </p>
 
-              {/* Additional Context Box based on step */}
-              <div className="p-5 rounded-2xl bg-sada-surface border border-sada-violet/10 mb-6">
-                <h4 className="text-xs font-bold text-sada-ink/60 uppercase tracking-wider mb-2">
-                  ماذا يحدث في هذه الخطوة؟
+              <div className="p-5 rounded-2xl bg-sada-surface border border-sada-violet/10">
+                <h4 className="text-xs font-extrabold text-sada-ink/65 mb-2.5">
+                  تفاصيل هذه المرحلة:
                 </h4>
-                <ul className="space-y-2 text-xs sm:text-sm text-sada-ink/80 font-medium">
-                  {currentStep === 0 && (
-                    <>
-                      <li>• تسجيل الاسم والعمر ونوع الجهاز المساعد وتاريخ أول ارتداء.</li>
-                      <li>• تعيين تفضيلات التنبيهات الصوتية ونوع المكافآت التي يفضلها الطفل.</li>
-                    </>
-                  )}
-                  {currentStep === 1 && (
-                    <>
-                      <li>• تقديم أصوات لينج /m/, /u/, /a/, /i/, /ʃ/, /s/ بدون منبهات بصرية مضللة.</li>
-                      <li>• تدوين الاستجابة السلوكية المباشرة عبر زر (استجاب) أو (لم يستجب).</li>
-                    </>
-                  )}
-                  {currentStep === 2 && (
-                    <>
-                      <li>• حساب نسبة الاستجابة التلقائية استناداً لمعادلة (المستجاب لها ÷ 6) × 100.</li>
-                      <li>• ربط النتيجة بملف الطفل السحابي الآمن مع تسجيل ظروف الفحص.</li>
-                    </>
-                  )}
-                  {currentStep === 3 && (
-                    <>
-                      <li>• اختيار المهارة المستهدفة في الجلسة من قائمة المهارات الخمس المستقلة.</li>
-                      <li>• خوض الطفل للمهام التفاعلية مع تعزيز فوري بالنجوم والشارات اللطيفة.</li>
-                    </>
-                  )}
-                  {currentStep === 4 && (
-                    <>
-                      <li>• استعراض مؤشرات الأداء الشاملة ومخطط المقارنة البياني بين الجلسات.</li>
-                      <li>• مساعدة الأخصائي في تحديد المهارات التي حققت نمواً ملحوظاً.</li>
-                    </>
-                  )}
-                  {currentStep === 5 && (
-                    <>
-                      <li>• تثبيت مواعيد التقييم الدوري (القبلي، المتابعة كل 3 أشهر، والبعدي).</li>
-                      <li>• إشعار متبادل للأسرة والمركز الطبي لضمان التنسيق المستمر.</li>
-                    </>
-                  )}
+                <ul className="space-y-2 text-xs sm:text-sm text-sada-ink/85 font-medium">
+                  {activeStepData.bullets.map((b, i) => (
+                    <li key={i} className="flex items-start gap-2">
+                      <CheckCircle2
+                        size={16}
+                        className="flex-shrink-0 mt-0.5"
+                        style={{ color: activeStepData.color }}
+                      />
+                      <span>{b}</span>
+                    </li>
+                  ))}
                 </ul>
-              </div>
-
-              {/* Mascot Guide commentary */}
-              <div className="flex items-center gap-3.5 p-4 rounded-2xl bg-sada-lavender/30 border border-sada-violet/15">
-                <div className="w-10 h-10 rounded-full bg-sada-violet text-white font-bold flex items-center justify-center flex-shrink-0">
-                  ص
-                </div>
-                <p className="text-xs text-sada-ink/80 font-semibold leading-relaxed">
-                  تضمن دورة العمل توثيق كل محاولة ليكون لكل استجابة صوتية أثر ملموس في رحلة تطور الطفل.
-                </p>
               </div>
             </div>
           </div>

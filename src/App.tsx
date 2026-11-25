@@ -1,40 +1,53 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef, lazy, Suspense } from 'react';
 import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-import { OpeningLoader } from './components/OpeningLoader';
 import { Navbar } from './components/Navbar';
 import { SoundRibbon } from './components/SoundRibbon';
+import { SceneTransitionWave } from './components/SceneTransitionWave';
 import { HeroSection } from './components/HeroSection';
 import { ProblemSolutionSection } from './components/ProblemSolutionSection';
-import { CharactersSection } from './components/CharactersSection';
+import { AppWorkflowSection } from './components/AppWorkflowSection';
 import { LingSixSection } from './components/LingSixSection';
 import { TrainingJourneySection } from './components/TrainingJourneySection';
+import { ListeningNoiseSection } from './components/ListeningNoiseSection';
 import { GamesWorldSection } from './components/GamesWorldSection';
-import { SadaExperienceSection } from './components/SadaExperienceSection';
-import { AppWorkflowSection } from './components/AppWorkflowSection';
 import { GuidesSection } from './components/GuidesSection';
 import { GoalsSection } from './components/GoalsSection';
 import { TeamSection } from './components/TeamSection';
 import { FinalCelebrationSection } from './components/FinalCelebrationSection';
+import { StoryAudioBar } from './components/StoryAudioBar';
+import { STORY_SCENES } from './data/storyManifest';
+import { storyAudioController } from './utils/storyAudioController';
+import type { AuditorySkill } from './data/sadaData';
+
+const VoiceAuditionModal = lazy(() =>
+  import('./components/VoiceAuditionModal').then((m) => ({ default: m.VoiceAuditionModal }))
+);
 
 gsap.registerPlugin(ScrollTrigger);
 
 export const App: React.FC = () => {
-  const [loading, setLoading] = useState<boolean>(true);
-  const [currentSection, setCurrentSection] = useState<string>('hero');
-  const [scrollProgress, setScrollProgress] = useState<number>(0);
-  const [activeRibbonColor, setActiveRibbonColor] = useState<string>('#7357D9');
+  const [currentAnchor, setCurrentAnchor] = useState<string>('hero');
+  const [selectedSkillIdForGame, setSelectedSkillIdForGame] = useState<number>(1);
+  const [auditionsOpen, setAuditionsOpen] = useState<boolean>(false);
+
+  // Mutable refs for 60 FPS SoundRibbon without React re-render churn on every scroll frame
+  const scrollProgressRef = useRef<number>(0);
+  const activeColorRef = useRef<string>('#7357D9');
 
   useEffect(() => {
-    // Check prefers-reduced-motion
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
 
     let lenis: Lenis | null = null;
-    if (!prefersReducedMotion) {
+    let tickerFn: ((time: number) => void) | null = null;
+
+    // Use Lenis on desktop/precision pointers; let mobile touch use native momentum scrolling
+    if (!prefersReducedMotion && !isCoarsePointer) {
       lenis = new Lenis({
-        duration: 1.1,
+        duration: 1.05,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         orientation: 'vertical',
         gestureOrientation: 'vertical',
@@ -42,117 +55,169 @@ export const App: React.FC = () => {
       });
 
       lenis.on('scroll', (e: { progress: number }) => {
-        setScrollProgress(e.progress);
+        scrollProgressRef.current = e.progress;
         ScrollTrigger.update();
       });
 
-      const tickerFn = (time: number) => {
+      tickerFn = (time: number) => {
         lenis?.raf(time * 1000);
       };
       gsap.ticker.add(tickerFn);
       gsap.ticker.lagSmoothing(0);
+    } else {
+      const handleNativeScroll = () => {
+        const doc = document.documentElement;
+        const max = Math.max(1, doc.scrollHeight - window.innerHeight);
+        scrollProgressRef.current = Math.min(1, Math.max(0, window.scrollY / max));
+      };
+      window.addEventListener('scroll', handleNativeScroll, { passive: true });
+      return () => {
+        window.removeEventListener('scroll', handleNativeScroll);
+      };
     }
 
-    // ScrollSpy to highlight active navigation link and update Sound Ribbon accent
-    const sections = [
-      { id: 'hero', color: '#7357D9' },
-      { id: 'about', color: '#159D98' },
-      { id: 'characters', color: '#FF886F' },
-      { id: 'ling-test', color: '#FFC552' },
-      { id: 'training', color: '#8F75EC' },
-      { id: 'games', color: '#55D6BE' },
-      { id: 'app', color: '#7357D9' },
-      { id: 'team', color: '#159D98' },
-    ];
+    return () => {
+      if (tickerFn) gsap.ticker.remove(tickerFn);
+      if (lenis) lenis.destroy();
+      ScrollTrigger.getAll().forEach((t) => t.kill());
+    };
+  }, []);
+
+  // Unified Scene Observer across all 11 connected scenes
+  useEffect(() => {
+    const sceneEls = Array.from(document.querySelectorAll<HTMLElement>('[data-scene-id]'));
+    if (sceneEls.length === 0) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
+        // Pick the entry with highest intersection ratio currently visible
+        let bestEntry: IntersectionObserverEntry | null = null;
+        for (const entry of entries) {
           if (entry.isIntersecting) {
-            setCurrentSection(entry.target.id);
-            const found = sections.find((s) => s.id === entry.target.id);
-            if (found) {
-              setActiveRibbonColor(found.color);
+            if (!bestEntry || entry.intersectionRatio > bestEntry.intersectionRatio) {
+              bestEntry = entry;
             }
           }
-        });
+        }
+        if (bestEntry) {
+          const el = bestEntry.target as HTMLElement;
+          const sceneId = el.dataset.sceneId;
+          if (sceneId) {
+            const meta = STORY_SCENES.find((s) => s.id === sceneId);
+            if (meta) {
+              setCurrentAnchor(meta.anchorId);
+              activeColorRef.current = meta.accentColor;
+              storyAudioController.notifySceneInView(meta.id);
+            }
+          }
+        }
       },
-      { threshold: 0.3 }
+      {
+        rootMargin: '-20% 0px -30% 0px',
+        threshold: [0.15, 0.35, 0.6],
+      }
     );
 
-    sections.forEach(({ id }) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
+    sceneEls.forEach((el) => observer.observe(el));
+
+    // Refresh ScrollTrigger once fonts/images settle
+    const refreshTimer = window.setTimeout(() => ScrollTrigger.refresh(), 500);
 
     return () => {
       observer.disconnect();
-      if (lenis) {
-        lenis.destroy();
-      }
-      ScrollTrigger.getAll().forEach((t) => t.kill());
+      window.clearTimeout(refreshTimer);
     };
   }, []);
 
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
+  };
+
+  const handleJumpToGame = (skill: AuditorySkill) => {
+    setSelectedSkillIdForGame(skill.id);
+    scrollToSection('games');
   };
 
   return (
     <div className="relative min-h-screen bg-sada-cream text-sada-ink font-arabic selection:bg-sada-yellow selection:text-sada-ink">
-      {/* Opening Loader */}
-      {loading && <OpeningLoader onComplete={() => setLoading(false)} />}
+      {/* Persistent Continuous Sound Ribbon */}
+      <SoundRibbon scrollProgressRef={scrollProgressRef} activeColorRef={activeColorRef} />
 
-      {/* Persistent Animated Sound Ribbon in Background */}
-      <SoundRibbon scrollProgress={scrollProgress} activeColor={activeRibbonColor} />
+      {/* Header Navigation */}
+      <Navbar currentSection={currentAnchor} />
 
-      {/* Floating Minimal Navigation Bar */}
-      <Navbar currentSection={currentSection} />
-
-      {/* Website Chapters */}
+      {/* Main 11-Scene Continuous Story */}
       <main className="relative z-10">
-        {/* Chapter 02: Cinematic Hero */}
+        {/* Scene 01 — Welcome to SADA */}
         <HeroSection
           onExploreClick={() => scrollToSection('ling-test')}
           onAboutClick={() => scrollToSection('about')}
         />
 
-        {/* Chapter 03: Why SADA Exists (Problem & Solution) */}
+        <SceneTransitionWave fromColor="#FFF8ED" toColor="#FDFBF7" waveColor="#159D98" />
+
+        {/* Scene 02 — Understanding the Challenge */}
         <ProblemSolutionSection />
 
-        {/* Chapter 04: Meet the 5 Illustrated Mascots */}
-        <CharactersSection />
+        <SceneTransitionWave fromColor="#FDFBF7" toColor="#FBF3E4" waveColor="#7357D9" flip />
 
-        {/* Chapter 05: Ling Six Sound Test (Educational Demonstration) */}
-        <LingSixSection />
-
-        {/* Chapter 06: Auditory Training Journey */}
-        <TrainingJourneySection onPlayGame={() => scrollToSection('games')} />
-
-        {/* Chapter 07: SADA Game World (Inspired by Nex Playground) */}
-        <GamesWorldSection />
-
-        {/* Chapter 08: The SADA Experience & Ecosystem */}
-        <SadaExperienceSection />
-
-        {/* Chapter 09: How the Application Works (6-Stage Workflow & Phone Mockup) */}
+        {/* Scene 03 — Discovering SADA */}
         <AppWorkflowSection />
 
-        {/* Chapter 10: Parents & Specialists Guides */}
+        <SceneTransitionWave fromColor="#FBF3E4" toColor="#FFF8ED" waveColor="#FFC552" />
+
+        {/* Scene 04 — Ling Six Sounds */}
+        <LingSixSection />
+
+        <SceneTransitionWave fromColor="#FFF8ED" toColor="#FDFBF7" waveColor="#8F75EC" flip />
+
+        {/* Scene 05 — Auditory Skills Adventure (5 Core Skills) */}
+        <TrainingJourneySection onPlayGame={handleJumpToGame} />
+
+        <SceneTransitionWave fromColor="#FDFBF7" toColor="#EDF9F8" waveColor="#32B8B3" />
+
+        {/* Scene 06 — Listening in Noise */}
+        <ListeningNoiseSection onPlayGame={handleJumpToGame} />
+
+        <SceneTransitionWave fromColor="#FFF8ED" toColor="#27213E" waveColor="#55D6BE" flip />
+
+        {/* Scene 07 — Games & Rewards */}
+        <GamesWorldSection
+          selectedSkillId={selectedSkillIdForGame}
+          onSelectSkillId={setSelectedSkillIdForGame}
+        />
+
+        <SceneTransitionWave fromColor="#27213E" toColor="#FFF8ED" waveColor="#159D98" />
+
+        {/* Scene 08 — Parents & Specialists */}
         <GuidesSection />
 
-        {/* Chapter 11: Real Project Objectives & Target Impact */}
+        <SceneTransitionWave fromColor="#FFF8ED" toColor="#FDFBF7" waveColor="#7357D9" flip />
+
+        {/* Scene 09 — The Progress Journey */}
         <GoalsSection />
 
-        {/* Chapter 12: Meet the Graduation Project Team (10 Real Students) */}
+        <SceneTransitionWave fromColor="#FDFBF7" toColor="#FFF8ED" waveColor="#159D98" />
+
+        {/* Scene 10 — Meet the Team */}
         <TeamSection />
 
-        {/* Chapter 13: Final Cinematic Scene & Storytelling Footer */}
+        <SceneTransitionWave fromColor="#FFF8ED" toColor="#27213E" waveColor="#FFC552" flip />
+
+        {/* Scene 11 — The Ending */}
         <FinalCelebrationSection onScrollToTop={() => scrollToSection('hero')} />
       </main>
+
+      {/* Centralized Audio Controller Dock & Live RTL Subtitles */}
+      <StoryAudioBar onOpenAuditions={() => setAuditionsOpen(true)} />
+
+      {/* Voice Casting & Audition Review Modal */}
+      <Suspense fallback={null}>
+        <VoiceAuditionModal isOpen={auditionsOpen} onClose={() => setAuditionsOpen(false)} />
+      </Suspense>
     </div>
   );
 };

@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Volume2, CheckCircle2, XCircle, Info, Sparkles, RefreshCw, BarChart2 } from 'lucide-react';
-import { LING_SOUNDS } from '../data/sadaData';
-import type { LingSound } from '../data/sadaData';
+import { LING_SOUNDS, type LingSound } from '../data/sadaData';
 import { soundEngine } from '../utils/audioEngine';
+import { useStorySceneFocus } from '../hooks/useStoryAudio';
+import { CharacterStageActor } from './CharacterStageActor';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export const LingSixSection: React.FC = () => {
   const [selectedSound, setSelectedSound] = useState<LingSound>(LING_SOUNDS[0]);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  // Track user interactive simulation of the test (as shown on PDF page 5 & 6)
   const [responses, setResponses] = useState<Record<string, 'responded' | 'not-responded' | null>>({
     '/m/': 'responded',
     '/u/': 'responded',
@@ -17,10 +21,41 @@ export const LingSixSection: React.FC = () => {
     '/s/': null,
   });
 
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const orbsRef = useRef<HTMLDivElement | null>(null);
+  const { isSceneActive, activeSpeakerId } = useStorySceneFocus('scene-04-ling-six');
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    const orbs = orbsRef.current;
+    if (!section || !orbs) return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    const ctx = gsap.context(() => {
+      gsap.from(orbs.children, {
+        scale: 0.84,
+        y: 28,
+        opacity: 0,
+        stagger: 0.08,
+        duration: 0.55,
+        ease: 'back.out(1.4)',
+        scrollTrigger: {
+          trigger: orbs,
+          start: 'top 82%',
+          once: true,
+        },
+      });
+    }, section);
+
+    return () => ctx.revert();
+  }, []);
+
   const handlePlaySound = (sound: LingSound) => {
     setIsPlaying(true);
     soundEngine.playLingSound(sound.symbol, 0.9);
-    setTimeout(() => {
+    window.setTimeout(() => {
       setIsPlaying(false);
     }, 900);
   };
@@ -29,7 +64,7 @@ export const LingSixSection: React.FC = () => {
     soundEngine.playPop();
     setResponses((prev) => ({
       ...prev,
-      [symbol]: status
+      [symbol]: status,
     }));
   };
 
@@ -45,31 +80,50 @@ export const LingSixSection: React.FC = () => {
     });
   };
 
-  // Calculate score like in PDF Page 6: (responded / 6) * 100
   const totalEvaluated = Object.values(responses).filter((v) => v !== null).length;
   const totalResponded = Object.values(responses).filter((v) => v === 'responded').length;
   const scorePercent = totalEvaluated > 0 ? ((totalResponded / 6) * 100).toFixed(1) : '0.0';
 
   return (
-    <section id="ling-test" className="relative py-28 px-4 md:px-8 bg-sada-cream overflow-hidden">
-      {/* Decorative waveform rings */}
+    <section
+      ref={sectionRef}
+      id="ling-test"
+      data-scene-id="scene-04-ling-six"
+      className="sada-scene bg-sada-cream"
+    >
       <div className="max-w-7xl mx-auto">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sada-lavender text-sada-violet text-xs font-bold mb-4">
+        {/* Scene Header */}
+        <div className="text-center max-w-3xl mx-auto mb-10">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sada-lavender text-sada-violet text-xs font-bold mb-3">
             <Sparkles size={14} />
-            <span>Ling Six Sound Check · اختبار أصوات لينج الستة</span>
+            <span>المشهد 04 · تقييم الاستجابة لأصوات لينج الستة</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-black text-sada-ink leading-tight mb-4">
-            ستة أصوات تغطي <span className="text-sada-teal">كامل نطاق الكلام</span>
+          <h2 className="sada-section-title font-black text-sada-ink mb-4">
+            ستة أصوات تغطي <span className="text-sada-teal">نطاقات الكلام الأساسية</span>
           </h2>
-          <p className="text-base sm:text-lg text-sada-ink/75 leading-relaxed font-medium">
-            يُقدَّم كل صوت على حدة لمعرفة ما إذا كان الطفل يلتقط الترددات المختلفة من المنخفضة وحتى الحادة، وتُحفظ الاستجابات في سجله لمقارنة الأداء بمرور الوقت.
+          <p className="sada-body-copy text-sada-ink/75 font-medium text-center">
+            يُقدَّم كل صوت على حدة لمتابعة ما إذا كان الطفل يلتقط الترددات المنخفضة والمتوسطة والمرتفعة، وتُحفظ الاستجابات في ملفه للمقارنة عبر الوقت.
           </p>
         </div>
 
-        {/* The 6 Interactive Sound Tokens (Sound Bubbles) */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 mb-12">
+        {/* Characters: Maryam & Zain */}
+        <div className="flex items-end justify-center gap-8 mb-10">
+          <CharacterStageActor
+            characterId="maryam"
+            sizeClass="w-24 sm:w-28"
+            isSpeaking={isSceneActive && activeSpeakerId === 'maryam'}
+            isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'maryam')}
+          />
+          <CharacterStageActor
+            characterId="zain"
+            sizeClass="w-24 sm:w-28"
+            isSpeaking={isSceneActive && activeSpeakerId === 'zain'}
+            isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'zain')}
+          />
+        </div>
+
+        {/* 6 Interactive Sound Tokens */}
+        <div ref={orbsRef} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 mb-10">
           {LING_SOUNDS.map((sound) => {
             const isSelected = selectedSound.symbol === sound.symbol;
             const respStatus = responses[sound.symbol];
@@ -77,56 +131,56 @@ export const LingSixSection: React.FC = () => {
             return (
               <button
                 key={sound.symbol}
+                type="button"
                 onClick={() => {
                   soundEngine.playPop();
                   setSelectedSound(sound);
                 }}
                 className={`relative flex flex-col items-center justify-between p-4 sm:p-5 rounded-3xl border-2 transition-all duration-300 text-center ${
                   isSelected
-                    ? 'bg-white shadow-xl scale-105 border-transparent ring-4'
-                    : 'bg-white/80 hover:bg-white hover:scale-102 border-sada-violet/10'
+                    ? 'bg-white shadow-xl border-transparent ring-4'
+                    : 'bg-white/85 hover:bg-white border-sada-violet/10'
                 }`}
                 style={{
-                  boxShadow: isSelected ? `0 20px 30px -10px ${sound.color}40, 0 0 0 4px ${sound.color}50` : undefined
+                  boxShadow: isSelected
+                    ? `0 18px 28px -10px ${sound.color}40, 0 0 0 3px ${sound.color}55`
+                    : undefined,
                 }}
               >
-                {/* Response indicator dot */}
                 <div className="w-full flex items-center justify-between mb-2">
                   <span
                     className="text-[10px] font-bold px-2 py-0.5 rounded-full"
                     style={{
-                      backgroundColor: `${sound.color}15`,
-                      color: sound.color
+                      backgroundColor: `${sound.color}18`,
+                      color: sound.color,
                     }}
                   >
                     {sound.category === 'low' ? 'منخفض' : sound.category === 'mid' ? 'متوسط' : 'مرتفع'}
                   </span>
 
                   {respStatus === 'responded' && (
-                    <span className="flex items-center text-xs font-bold text-emerald-600">
-                      <CheckCircle2 size={14} />
+                    <span className="text-emerald-600" aria-label="استجاب">
+                      <CheckCircle2 size={15} />
                     </span>
                   )}
                   {respStatus === 'not-responded' && (
-                    <span className="flex items-center text-xs font-bold text-rose-500">
-                      <XCircle size={14} />
+                    <span className="text-rose-500" aria-label="لم يستجب">
+                      <XCircle size={15} />
                     </span>
                   )}
                 </div>
 
-                {/* Big Phonetic Symbol */}
                 <div
-                  className="w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center font-black text-2xl sm:text-3xl text-white mb-3 shadow-md transition-transform duration-300 hover:scale-110"
+                  className="dir-ltr w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center font-black text-2xl sm:text-3xl text-white mb-3 shadow-md transition-transform duration-300 hover:scale-105"
                   style={{ backgroundColor: sound.color }}
                 >
                   {sound.symbol}
                 </div>
 
-                {/* Sound Name & Freq */}
-                <span className="font-extrabold text-sm text-sada-ink line-clamp-1 mb-1">
+                <span className="font-extrabold text-xs sm:text-sm text-sada-ink mb-1">
                   {sound.arabicName}
                 </span>
-                <span className="text-[11px] text-sada-ink/60 font-semibold dir-ltr">
+                <span className="text-[11px] text-sada-ink/65 font-semibold">
                   {sound.frequencyRange}
                 </span>
               </button>
@@ -134,25 +188,19 @@ export const LingSixSection: React.FC = () => {
           })}
         </div>
 
-        {/* Detailed Sound Focus Card & Interactive Session Simulation */}
+        {/* Detailed Sound Card + Interactive Session Calculator */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Active Sound Detailed Card */}
-          <div className="lg:col-span-7 bg-white rounded-3xl border-2 border-sada-violet/15 p-6 sm:p-8 shadow-xl relative overflow-hidden">
-            <div
-              className="absolute top-0 right-0 w-32 h-32 rounded-bl-full opacity-10 pointer-events-none"
-              style={{ backgroundColor: selectedSound.color }}
-            />
-
-            <div className="flex flex-wrap items-center justify-between gap-4 mb-6 pb-6 border-b border-gray-100">
+          <div className="lg:col-span-7 bg-white rounded-3xl border-2 border-sada-violet/15 p-6 sm:p-8 shadow-xl">
+            <div className="flex flex-wrap items-center justify-between gap-4 mb-6 pb-5 border-b border-gray-100">
               <div className="flex items-center gap-4">
                 <div
-                  className="w-16 h-16 rounded-2xl flex items-center justify-center text-white font-black text-2xl shadow-md"
+                  className="dir-ltr w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center text-white font-black text-2xl shadow-md"
                   style={{ backgroundColor: selectedSound.color }}
                 >
                   {selectedSound.symbol}
                 </div>
                 <div>
-                  <h3 className="text-xl sm:text-2xl font-black text-sada-ink">
+                  <h3 className="text-lg sm:text-2xl font-black text-sada-ink">
                     {selectedSound.arabicName}
                   </h3>
                   <span className="text-xs sm:text-sm font-bold text-sada-teal">
@@ -161,25 +209,24 @@ export const LingSixSection: React.FC = () => {
                 </div>
               </div>
 
-              {/* User-initiated Audio Playback Button */}
               <button
+                type="button"
                 onClick={() => handlePlaySound(selectedSound)}
                 disabled={isPlaying}
-                className="flex items-center gap-2 px-5 py-3 rounded-2xl font-extrabold text-sm text-white shadow-md hover:scale-105 active:scale-95 transition-all disabled:opacity-50"
+                className="flex items-center gap-2 px-5 py-3 rounded-2xl font-extrabold text-xs sm:text-sm text-white shadow-md hover:scale-105 active:scale-95 transition-all disabled:opacity-60"
                 style={{ backgroundColor: selectedSound.color }}
               >
-                <Volume2 size={18} className={isPlaying ? 'animate-bounce' : ''} />
-                <span>{isPlaying ? 'جاري الاستماع...' : 'استمع إلى الصوت'}</span>
+                <Volume2 size={18} className={isPlaying ? 'animate-pulse' : ''} />
+                <span>{isPlaying ? 'جاري التشغيل التوضيحي...' : 'تشغيل مثال صوتي توضيحي'}</span>
               </button>
             </div>
 
-            {/* Sound Spectrum Explanation */}
             <div className="space-y-4 mb-6">
               <div>
-                <h4 className="text-xs font-bold text-sada-ink/50 uppercase tracking-wider mb-1">
+                <h4 className="text-xs font-extrabold text-sada-ink/60 mb-1">
                   الوصف الصوتي والترددي
                 </h4>
-                <p className="text-sm sm:text-base text-sada-ink/80 leading-relaxed font-medium">
+                <p className="text-sm sm:text-base text-sada-ink/85 leading-relaxed font-medium">
                   {selectedSound.description}
                 </p>
               </div>
@@ -187,21 +234,25 @@ export const LingSixSection: React.FC = () => {
               <div className="p-4 rounded-2xl bg-sada-surface border border-sada-violet/10">
                 <h4 className="text-xs font-bold text-sada-violet flex items-center gap-1.5 mb-1">
                   <Info size={14} />
-                  <span>الأهمية في متابعة القوقعة والسماعة</span>
+                  <span>الأهمية في المتابعة الوظيفية</span>
                 </h4>
-                <p className="text-xs sm:text-sm text-sada-ink/70 leading-relaxed">
+                <p className="text-xs sm:text-sm text-sada-ink/75 leading-relaxed">
                   {selectedSound.clinicalNote}
                 </p>
               </div>
+
+              <p className="text-[11px] font-semibold text-amber-800 bg-amber-50 px-3.5 py-2 rounded-xl border border-amber-200">
+                ملاحظة تعليمية: المثال الصوتي أعلاه تقريب تركيبي عبر المتصفح للتوضيح، وليس تسجيلاً معايرَ الشدة للاستخدام السريري.
+              </p>
             </div>
 
-            {/* Simulation Response Logger (Just like the app interface on PDF Page 5) */}
-            <div className="bg-sada-lavender/30 p-4 sm:p-5 rounded-2xl border border-sada-violet/15 flex flex-wrap items-center justify-between gap-3">
+            <div className="bg-sada-lavender/35 p-4 sm:p-5 rounded-2xl border border-sada-violet/15 flex flex-wrap items-center justify-between gap-3">
               <span className="text-xs font-extrabold text-sada-ink">
-                سجّل استجابة الطفل لهذا الصوت في الجلسة:
+                محاكاة تسجيل استجابة الطفل لهذا الصوت:
               </span>
               <div className="flex items-center gap-2">
                 <button
+                  type="button"
                   onClick={() => handleRecordResponse(selectedSound.symbol, 'responded')}
                   className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-extrabold transition-all ${
                     responses[selectedSound.symbol] === 'responded'
@@ -213,6 +264,7 @@ export const LingSixSection: React.FC = () => {
                   <span>استجاب</span>
                 </button>
                 <button
+                  type="button"
                   onClick={() => handleRecordResponse(selectedSound.symbol, 'not-responded')}
                   className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-extrabold transition-all ${
                     responses[selectedSound.symbol] === 'not-responded'
@@ -227,60 +279,62 @@ export const LingSixSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Live Results Overview & Scientific Formula (PDF Page 6) */}
           <div className="lg:col-span-5 bg-white rounded-3xl border-2 border-sada-violet/15 p-6 sm:p-8 shadow-xl">
-            <div className="flex items-center justify-between mb-6 pb-4 border-b border-gray-100">
+            <div className="flex items-center justify-between mb-5 pb-4 border-b border-gray-100">
               <div className="flex items-center gap-2">
                 <BarChart2 className="text-sada-violet" size={20} />
                 <h3 className="text-lg font-black text-sada-ink">
-                  تحليل النتائج ومقارنتها
+                  تحليل نتائج التقييم ومقارنتها
                 </h3>
               </div>
               <button
+                type="button"
                 onClick={handleResetSimulation}
                 title="إعادة تعيين المحاكاة"
-                className="p-1.5 rounded-lg text-sada-ink/50 hover:text-sada-ink hover:bg-gray-100 transition-colors"
+                aria-label="إعادة تعيين المحاكاة"
+                className="p-1.5 rounded-lg text-sada-ink/55 hover:text-sada-ink hover:bg-gray-100 transition-colors"
               >
-                <RefreshCw size={14} />
+                <RefreshCw size={15} />
               </button>
             </div>
 
-            {/* Score Ring Summary */}
-            <div className="flex items-center justify-around p-4 rounded-2xl bg-sada-surface border border-sada-violet/10 mb-6">
+            <div className="flex items-center justify-around p-4 rounded-2xl bg-sada-surface border border-sada-violet/10 mb-5">
               <div className="text-center">
-                <span className="text-3xl font-black text-sada-violet">{totalResponded}/6</span>
-                <p className="text-xs text-sada-ink/60 font-semibold mt-0.5">أصوات استجاب لها</p>
+                <span className="dir-ltr inline-block text-3xl font-black text-sada-violet">
+                  {totalResponded}/6
+                </span>
+                <p className="text-xs text-sada-ink/65 font-semibold mt-0.5">أصوات استجاب لها</p>
               </div>
               <div className="h-10 w-px bg-gray-200" />
               <div className="text-center">
-                <span className="text-3xl font-black text-sada-teal">{scorePercent}%</span>
-                <p className="text-xs text-sada-ink/60 font-semibold mt-0.5">نسبة الاستجابة</p>
+                <span className="dir-ltr inline-block text-3xl font-black text-sada-teal">
+                  {scorePercent}%
+                </span>
+                <p className="text-xs text-sada-ink/65 font-semibold mt-0.5">نسبة الاستجابة</p>
               </div>
             </div>
 
-            {/* Scientific Formula Box (from PDF Page 6) */}
-            <div className="p-4 rounded-2xl bg-sada-cream-warm border border-sada-yellow/40 mb-5">
-              <span className="text-xs font-bold text-amber-900 block mb-1">
+            <div className="p-4 rounded-2xl bg-sada-cream-warm border border-sada-yellow/45 mb-5">
+              <span className="text-xs font-bold text-amber-950 block mb-1.5">
                 معادلة حساب النتيجة المعتمدة:
               </span>
-              <p className="text-xs text-sada-ink/80 font-mono bg-white/70 px-3 py-1.5 rounded-lg border border-sada-yellow/30 dir-ltr text-center font-bold">
+              <p className="text-xs text-sada-ink bg-white/85 px-3 py-2 rounded-lg border border-sada-yellow/35 text-center font-bold">
                 نسبة الاستجابة = (عدد الأصوات المستجاب لها ÷ 6) × 100
               </p>
             </div>
 
-            {/* Step-by-Step Clinical Assessment Steps from PDF Page 5 */}
-            <div className="space-y-2 mb-6">
-              <span className="text-xs font-bold text-sada-ink/50 uppercase tracking-wider block mb-2">
+            <div className="space-y-2 mb-5">
+              <span className="text-xs font-extrabold text-sada-ink/65 block mb-2">
                 خطوات إجراء التقييم الوظيفي:
               </span>
               {[
                 'اختيار ملف الطفل وتهيئة البيئة المناسبة الهادئة.',
                 'تقديم أصوات لينج الستة كل صوت منفصلاً وبدون إشارات بصرية.',
-                'ملاحظة الاستجابة السلوكية بدقة وتحديد (استجاب) أو (لم يستجب).',
-                'حفظ النتائج ومراجعة منحنى التغير الزمني مع الأخصائي.'
+                'ملاحظة الاستجابة وتحديد (استجاب) أو (لم يستجب).',
+                'حفظ النتائج ومقارنتها عبر الجلسات مع الأخصائي.',
               ].map((step, idx) => (
-                <div key={idx} className="flex items-start gap-2.5 text-xs text-sada-ink/75">
-                  <span className="w-4 h-4 rounded-full bg-sada-violet/15 text-sada-violet font-bold flex items-center justify-center flex-shrink-0 mt-0.5 text-[10px]">
+                <div key={idx} className="flex items-start gap-2.5 text-xs text-sada-ink/80">
+                  <span className="w-5 h-5 rounded-full bg-sada-violet/15 text-sada-violet font-black flex items-center justify-center flex-shrink-0 text-[11px]">
                     {idx + 1}
                   </span>
                   <span>{step}</span>
@@ -288,8 +342,7 @@ export const LingSixSection: React.FC = () => {
               ))}
             </div>
 
-            {/* Disclaimer Alert */}
-            <div className="p-3.5 rounded-xl bg-gray-50 border border-gray-200 text-[11px] text-sada-ink/65 leading-relaxed">
+            <div className="p-3.5 rounded-xl bg-gray-50 border border-gray-200 text-[11px] text-sada-ink/75 leading-relaxed">
               <strong className="text-sada-ink font-bold">تنبيه علمي:</strong> تسجيل استجابة الطفل لا يساوي قياس عتبة السمع أو تشخيص كفاءة السماعة أو القوقعة؛ وتُتبع إرشادات الأخصائي بشأن تقديم الأصوات.
             </div>
           </div>

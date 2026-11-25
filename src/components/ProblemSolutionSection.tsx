@@ -1,56 +1,132 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { AlertCircle, CheckCircle2, TrendingUp, Users, HeartHandshake, Sparkles, ShieldCheck } from 'lucide-react';
 import { soundEngine } from '../utils/audioEngine';
+import { useStorySceneFocus } from '../hooks/useStoryAudio';
+import { CharacterStageActor } from './CharacterStageActor';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export const ProblemSolutionSection: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'problem' | 'solution'>('solution');
+  const [activeTab, setActiveTab] = useState<'problem' | 'solution'>('problem');
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const stageRef = useRef<HTMLDivElement | null>(null);
+  const cardsRef = useRef<HTMLDivElement | null>(null);
+  const { isSceneActive, activeSpeakerId } = useStorySceneFocus('scene-02-challenge');
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    const stage = stageRef.current;
+    const cards = cardsRef.current;
+    if (!section || !stage || !cards) return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    const ctx = gsap.context(() => {
+      gsap.from(stage, {
+        y: 36,
+        opacity: 0,
+        duration: 0.75,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 78%',
+          once: true,
+        },
+      });
+
+      gsap.from(cards.children, {
+        y: 26,
+        opacity: 0,
+        stagger: 0.12,
+        duration: 0.65,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: cards,
+          start: 'top 82%',
+          once: true,
+        },
+      });
+    }, section);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <section id="about" className="relative py-28 px-4 md:px-8 bg-sada-surface overflow-hidden">
-      {/* Wave Section Transition Divider */}
-      <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-sada-cream to-transparent pointer-events-none" />
-
+    <section
+      ref={sectionRef}
+      id="about"
+      data-scene-id="scene-02-challenge"
+      className="sada-scene bg-sada-surface"
+    >
       <div className="max-w-7xl mx-auto">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sada-lavender text-sada-violet text-xs font-bold mb-4">
+        {/* Scene Header */}
+        <div className="text-center max-w-3xl mx-auto mb-10">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sada-lavender text-sada-violet text-xs font-bold mb-3">
             <Sparkles size={14} />
-            <span>فلسفة المشروع والهدف الإنساني</span>
+            <span>المشهد 02 · فهم التحدي اليومي</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-black text-sada-ink leading-tight mb-5">
-            لماذا وُلد مشروع <span className="text-sada-violet">صَـدَى</span>؟
+          <h2 className="sada-section-title font-black text-sada-ink mb-4">
+            لماذا يبدأ كل شيء <span className="text-sada-violet">بالإصغاء المنظّم</span>؟
           </h2>
-          <p className="text-base sm:text-lg text-sada-ink/70 leading-relaxed font-medium">
-            تأهيل الطفل ضعيف السمع رحلة يومية مشتركة؛ صدى وُجد ليربط التقييم السمعي بالمتابعة المستمرة في بيئة مشجعة تمكّن الطفل، وتدعم أسرته، وتساند أخصائيه.
+          <p className="sada-body-copy text-sada-ink/75 font-medium text-center">
+            تأهيل الطفل ضعيف السمع رحلة يومية مشتركة؛ يسأل زين عن سر الحاجة للمتابعة المنظمة، وتشرح مريم ونور كيف يربط صدى التقييم بالمتابعة في بيئة مشجعة وآمنة.
           </p>
         </div>
 
-        {/* Interactive Toggle Switch */}
-        <div className="flex justify-center mb-14">
-          <div className="bg-sada-cream p-1.5 rounded-2xl border border-sada-violet/15 flex items-center shadow-inner gap-1">
+        {/* Character Conversation Cast */}
+        <div className="flex flex-wrap items-end justify-center gap-6 sm:gap-10 mb-10">
+          <CharacterStageActor
+            characterId="zain"
+            sizeClass="w-24 sm:w-28"
+            isSpeaking={isSceneActive && activeSpeakerId === 'zain'}
+            isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'zain')}
+            bubbleText={!activeSpeakerId ? 'لماذا نحتاج تنظيماً؟' : undefined}
+          />
+          <CharacterStageActor
+            characterId="maryam"
+            sizeClass="w-24 sm:w-28"
+            isSpeaking={isSceneActive && activeSpeakerId === 'maryam'}
+            isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'maryam')}
+          />
+          <CharacterStageActor
+            characterId="nour"
+            sizeClass="w-24 sm:w-28"
+            isSpeaking={isSceneActive && activeSpeakerId === 'nour'}
+            isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'nour')}
+          />
+        </div>
+
+        {/* Interactive Perspective Switch */}
+        <div className="flex justify-center mb-10">
+          <div className="bg-sada-cream p-1.5 rounded-2xl border border-sada-violet/15 flex flex-wrap sm:flex-nowrap items-center justify-center shadow-inner gap-1.5">
             <button
+              type="button"
               onClick={() => {
                 soundEngine.playPop();
                 setActiveTab('problem');
               }}
-              className={`flex items-center gap-2 px-6 py-2.5 rounded-xl font-bold text-sm transition-all ${
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all ${
                 activeTab === 'problem'
                   ? 'bg-rose-500 text-white shadow-md'
-                  : 'text-sada-ink/70 hover:text-sada-ink'
+                  : 'text-sada-ink/75 hover:text-sada-ink'
               }`}
             >
               <AlertCircle size={16} />
               <span>التحديات السابقة (المشكلة)</span>
             </button>
             <button
+              type="button"
               onClick={() => {
                 soundEngine.playPop();
                 setActiveTab('solution');
               }}
-              className={`flex items-center gap-2 px-6 py-2.5 rounded-xl font-bold text-sm transition-all ${
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all ${
                 activeTab === 'solution'
                   ? 'bg-sada-teal text-white shadow-md'
-                  : 'text-sada-ink/70 hover:text-sada-ink'
+                  : 'text-sada-ink/75 hover:text-sada-ink'
               }`}
             >
               <CheckCircle2 size={16} />
@@ -59,138 +135,119 @@ export const ProblemSolutionSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Content Showcase Grid */}
+        {/* Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          {/* Left Column: Visual Mascot & App Interaction */}
-          <div className="lg:col-span-5 flex flex-col items-center">
-            <div className="relative w-full max-w-md aspect-square rounded-3xl bg-gradient-to-br from-sada-lavender via-white to-sada-cream-warm p-6 border-2 border-sada-violet/15 shadow-xl flex flex-col items-center justify-center overflow-hidden">
-              {/* Organic Sound Blob */}
-              <div className="absolute -top-12 -right-12 w-48 h-48 rounded-full bg-sada-yellow/30 blur-2xl" />
-              <div className="absolute -bottom-12 -left-12 w-48 h-48 rounded-full bg-sada-teal/20 blur-2xl" />
-
+          {/* Visual Story Illustration */}
+          <div ref={stageRef} className="lg:col-span-5 flex flex-col items-center">
+            <div className="relative w-full max-w-md rounded-3xl bg-gradient-to-br from-sada-lavender via-white to-sada-cream-warm p-6 border-2 border-sada-violet/15 shadow-xl flex flex-col items-center justify-center overflow-hidden">
               <img
-                src="/assets/group_tablet.png"
-                alt="عمر وزين يستكشفان تطبيق صدى"
-                className="relative z-10 w-4/5 h-auto object-contain drop-shadow-xl hover:scale-105 transition-transform duration-500"
+                src="/assets/group_reading_transparent.webp"
+                alt="نور وعمر ومريم وزين يقرؤون ويتابعون رحلة التعلم"
+                loading="lazy"
+                decoding="async"
+                className="relative z-10 w-full h-auto object-contain drop-shadow-lg"
               />
-
-              <div className="absolute bottom-4 inset-x-6 bg-white/90 backdrop-blur-md px-4 py-2.5 rounded-2xl border border-sada-violet/10 text-center shadow-sm">
-                <span className="text-xs font-bold text-sada-ink">
+              <div className="mt-4 w-full bg-white/95 px-4 py-3 rounded-2xl border border-sada-violet/15 text-center shadow-xs">
+                <span className="text-xs sm:text-sm font-extrabold text-sada-ink">
                   «صدى يربط التقييم بالمتابعة في تجربة تفاعلية واحدة»
                 </span>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Dynamic Cards based on active tab */}
-          <div className="lg:col-span-7 flex flex-col gap-4">
+          {/* Dynamic Narrative Cards */}
+          <div ref={cardsRef} className="lg:col-span-7 flex flex-col gap-4">
             {activeTab === 'problem' ? (
-              <div className="space-y-4 animate-fade-in">
-                <div className="p-6 rounded-3xl bg-white border border-rose-100 shadow-sm hover:shadow-md transition-shadow">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center flex-shrink-0 font-bold text-lg">
-                      ١
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-bold text-sada-ink mb-1">
-                        صعوبة تنظيم الاستجابات ومقارنتها عبر الجلسات
-                      </h3>
-                      <p className="text-sm text-sada-ink/70 leading-relaxed">
-                        اعتماد التقييمات السمعية على نماذج ورقية متفرقة يجعل تتبع تطور استجابة الطفل لأصوات الكلام عبر الأشهر مهمة معقدة وغير موثقة بدقة رقمية.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="p-6 rounded-3xl bg-white border border-rose-100 shadow-sm hover:shadow-md transition-shadow">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center flex-shrink-0 font-bold text-lg">
-                      ٢
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-bold text-sada-ink mb-1">
-                        غياب أنشطة تفاعلية جاذبة للمتابعة المنزلية
-                      </h3>
-                      <p className="text-sm text-sada-ink/70 leading-relaxed">
-                        تواجه الأسر صعوبة في تحفيز الطفل في المنزل بأنشطة تتوافق مع قدراته السمعية دون تحويل التدريب إلى جلسة اختبار جافة تُشعر الطفل بالضغط.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="p-6 rounded-3xl bg-white border border-rose-100 shadow-sm hover:shadow-md transition-shadow">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center flex-shrink-0 font-bold text-lg">
-                      ٣
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-bold text-sada-ink mb-1">
-                        فجوة التواصل بين جلسات الأخصائي وملاحظات الأسرة
-                      </h3>
-                      <p className="text-sm text-sada-ink/70 leading-relaxed">
-                        الحاجة لسجل رقمي موحد يطلع عليه الأخصائي وولي الأمر لتقييم المهارات السمعية بصورة مستقلة وموضوعية مع مراعاة ظروف كل جلسة.
-                      </p>
+              <>
+                {[
+                  {
+                    num: '١',
+                    title: 'صعوبة تنظيم الاستجابات ومقارنتها عبر الجلسات',
+                    body: 'اعتماد التقييمات السمعية على أوراق متفرقة يصعّب تتبع تطور استجابة الطفل لأصوات الكلام عبر الأشهر بدقة منظمة.',
+                  },
+                  {
+                    num: '٢',
+                    title: 'الحاجة لأنشطة منزلية مشجعة دون ضغط',
+                    body: 'تبحث الأسر عن أنشطة تفاعلية لطيفة تتناسب مع قدرات الطفل السمعية في المنزل دون تحويل الوقت الأسري إلى اختبار جاف.',
+                  },
+                  {
+                    num: '٣',
+                    title: 'توحيد الرؤية بين الأسرة والأخصائي',
+                    body: 'الحاجة إلى سجل رقمي واضح يعكس أداء كل مهارة سمعية بصورة مستقلة مع توثيق ظروف كل جلسة.',
+                  },
+                ].map((item) => (
+                  <div
+                    key={item.num}
+                    className="p-5 sm:p-6 rounded-3xl bg-white border border-rose-100 shadow-sm hover:shadow-md transition-shadow"
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className="w-11 h-11 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center flex-shrink-0 font-black text-lg">
+                        {item.num}
+                      </div>
+                      <div>
+                        <h3 className="text-base sm:text-lg font-extrabold text-sada-ink mb-1.5">
+                          {item.title}
+                        </h3>
+                        <p className="text-xs sm:text-sm text-sada-ink/75 leading-relaxed">
+                          {item.body}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
+                ))}
+              </>
             ) : (
-              <div className="space-y-4 animate-fade-in">
-                <div className="p-6 rounded-3xl bg-white border border-sada-teal/20 shadow-sm hover:shadow-md transition-shadow">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-2xl bg-sada-teal/10 text-sada-teal flex items-center justify-center flex-shrink-0 font-bold text-lg">
-                      <TrendingUp size={24} />
+              <>
+                {[
+                  {
+                    icon: TrendingUp,
+                    tone: 'bg-sada-teal/10 text-sada-teal border-sada-teal/20',
+                    title: 'تقييمات منظمة وسجل رقمي لكل طفل',
+                    body: 'ملف موحد يحفظ نتائج أصوات لينج والمهارات السمعية الخمس مع التواريخ وظروف الجلسة ونسب الاستجابة.',
+                  },
+                  {
+                    icon: Users,
+                    tone: 'bg-sada-violet/10 text-sada-violet border-sada-violet/20',
+                    title: 'مهام تفاعلية وألعاب تعزيزية بالنجوم',
+                    body: 'تحويل الأنشطة إلى تجربة مشوقة ترفع دافعية الطفل بالمكافآت البصرية دون استخدام الألعاب كأداة تشخيص طبي.',
+                  },
+                  {
+                    icon: HeartHandshake,
+                    tone: 'bg-sada-yellow/20 text-amber-800 border-sada-yellow/40',
+                    title: 'تكامل واعي بين ولي الأمر والأخصائي',
+                    body: 'أدلة استخدام مخصصة لكل من الأسرة والأخصائي للحفاظ على بيئة استماع هادئة ومتابعة مهنية مستمرة.',
+                  },
+                ].map((item, idx) => {
+                  const Icon = item.icon;
+                  return (
+                    <div
+                      key={idx}
+                      className={`p-5 sm:p-6 rounded-3xl bg-white border shadow-sm hover:shadow-md transition-shadow ${item.tone.split(' ')[2]}`}
+                    >
+                      <div className="flex items-start gap-4">
+                        <div className={`w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0 ${item.tone.split(' ').slice(0, 2).join(' ')}`}>
+                          <Icon size={22} />
+                        </div>
+                        <div>
+                          <h3 className="text-base sm:text-lg font-extrabold text-sada-ink mb-1.5">
+                            {item.title}
+                          </h3>
+                          <p className="text-xs sm:text-sm text-sada-ink/75 leading-relaxed">
+                            {item.body}
+                          </p>
+                        </div>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="text-lg font-bold text-sada-ink mb-1">
-                        تقييمات منظمة وسجل رقمي لكل طفل
-                      </h3>
-                      <p className="text-sm text-sada-ink/70 leading-relaxed">
-                        ملف شخصي موحد يحفظ نتائج أصوات لينج والمهارات السمعية الخمس، مع توثيق التواريخ والظروف ومعدلات الإجابات الصحيحة لحساب دقيق للنسب.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="p-6 rounded-3xl bg-white border border-sada-violet/20 shadow-sm hover:shadow-md transition-shadow">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-2xl bg-sada-violet/10 text-sada-violet flex items-center justify-center flex-shrink-0 font-bold text-lg">
-                      <Users size={24} />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-bold text-sada-ink mb-1">
-                        ألعاب تعزيزية تفاعلية مدعومة بالمكافآت
-                      </h3>
-                      <p className="text-sm text-sada-ink/70 leading-relaxed">
-                        تحويل التقييم إلى تجربة مشوقة تجمع النجوم والشارات البصرية اللطيفة لرفع دافعية الطفل ومشاركته، دون استخدام الألعاب كأداة تشخيص طبي.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="p-6 rounded-3xl bg-white border border-sada-yellow/40 shadow-sm hover:shadow-md transition-shadow">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-2xl bg-sada-yellow/20 text-amber-700 flex items-center justify-center flex-shrink-0 font-bold text-lg">
-                      <HeartHandshake size={24} />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-bold text-sada-ink mb-1">
-                        تكامل واعي بين دور ولي الأمر وتوجيه الأخصائي
-                      </h3>
-                      <p className="text-sm text-sada-ink/70 leading-relaxed">
-                        أدلة استخدام مخصصة لكل من الأسرة والأخصائي توضح اشتراطات البيئة الهادئة وخطوات التدريب الآمنة للحفاظ على استمرارية التأهيل.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                  );
+                })}
+              </>
             )}
 
-            {/* Scientific disclaimer badge as in PDF */}
-            <div className="mt-4 p-4 rounded-2xl bg-amber-50/80 border border-amber-200/80 flex items-center gap-3">
-              <ShieldCheck className="text-amber-600 flex-shrink-0" size={20} />
-              <p className="text-xs text-amber-900 font-medium leading-relaxed">
-                <strong className="font-bold">تنويه علمي معتمد:</strong> تطبيق صدى وسيلة مساعدة للتقييم الوظيفي والمتابعة والتدريب السمعي، ولا يحل محل التقييم السمعي الطبي المتخصص أو ضبط السماعات الطبية وزراعة القوقعة.
+            {/* Scientific disclaimer */}
+            <div className="mt-1 p-4 rounded-2xl bg-amber-50/90 border border-amber-200 flex items-start gap-3">
+              <ShieldCheck className="text-amber-700 flex-shrink-0 mt-0.5" size={20} />
+              <p className="text-xs text-amber-950 font-medium leading-relaxed">
+                <strong className="font-bold">تنويه علمي معتمد:</strong> تطبيق صدى وسيلة مساعدة للتقييم الوظيفي والمتابعة والتدريب السمعي، ولا يحل محل التقييم السمعي المتخصص أو ضبط السماعات الطبية وزراعة القوقعة أو جلسات التأهيل تحت إشراف المختصين.
               </p>
             </div>
           </div>

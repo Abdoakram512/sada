@@ -1,231 +1,262 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   Bell,
   Sliders,
   Image as ImageIcon,
   BookOpen,
   Puzzle,
-  Volume2,
   Sparkles,
   CheckCircle2,
-  PlayCircle
+  PlayCircle,
 } from 'lucide-react';
-import { AUDITORY_SKILLS } from '../data/sadaData';
-import type { AuditorySkill } from '../data/sadaData';
+import { AUDITORY_SKILLS, CHARACTERS, type AuditorySkill } from '../data/sadaData';
 import { soundEngine } from '../utils/audioEngine';
+import { useStorySceneFocus } from '../hooks/useStoryAudio';
+import { CharacterStageActor } from './CharacterStageActor';
 
 interface TrainingJourneySectionProps {
   onPlayGame?: (skill: AuditorySkill) => void;
 }
 
+const CORE_SKILLS = AUDITORY_SKILLS.slice(0, 5);
+
+// Scene 05: Connected 5-Station Adventure through the 5 Core Independent Auditory Skills
 export const TrainingJourneySection: React.FC<TrainingJourneySectionProps> = ({
-  onPlayGame
+  onPlayGame,
 }) => {
-  const [activeSkillId, setActiveSkillId] = useState<number>(1);
-  const activeSkill = AUDITORY_SKILLS.find((s) => s.id === activeSkillId) || AUDITORY_SKILLS[0];
+  const [manualSkillId, setManualSkillId] = useState<number>(1);
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const { isSceneActive, activeSpeakerId } = useStorySceneFocus('scene-05-auditory-skills');
+  const speakerSkill =
+    isSceneActive && activeSpeakerId
+      ? CORE_SKILLS.find((s) => s.guideCharacterId === activeSpeakerId)
+      : undefined;
+  const activeSkillId = speakerSkill ? speakerSkill.id : manualSkillId;
 
   const getIcon = (name: string) => {
     switch (name) {
-      case 'Bell': return Bell;
-      case 'Sliders': return Sliders;
-      case 'Image': return ImageIcon;
-      case 'BookOpen': return BookOpen;
-      case 'Puzzle': return Puzzle;
-      case 'Volume2': return Volume2;
-      default: return Sparkles;
+      case 'Bell':
+        return Bell;
+      case 'Sliders':
+        return Sliders;
+      case 'Image':
+        return ImageIcon;
+      case 'BookOpen':
+        return BookOpen;
+      case 'Puzzle':
+        return Puzzle;
+      default:
+        return Sparkles;
     }
   };
 
   return (
-    <section id="training" className="relative py-28 px-4 md:px-8 bg-sada-surface overflow-hidden">
-      {/* Background Organic Pathway SVG */}
-      <div className="absolute inset-0 pointer-events-none opacity-20 overflow-hidden">
-        <svg className="w-full h-full" viewBox="0 0 1440 900" fill="none">
+    <section
+      ref={sectionRef}
+      id="training"
+      data-scene-id="scene-05-auditory-skills"
+      className="sada-scene bg-sada-surface"
+    >
+      {/* Connecting Adventure Trail SVG (lightweight static dashed path for smooth scroll FPS) */}
+      <div className="hidden lg:block absolute inset-0 pointer-events-none opacity-20 overflow-hidden">
+        <svg className="w-full h-full" viewBox="0 0 1200 1600" fill="none" preserveAspectRatio="none">
           <path
-            d="M-100,200 C300,50 500,450 800,250 C1100,50 1300,600 1600,400"
+            d="M 600 80 C 980 260, 220 480, 600 720 C 980 960, 220 1220, 600 1520"
             stroke="#7357D9"
-            strokeWidth="32"
+            strokeWidth="7"
             strokeLinecap="round"
-            strokeDasharray="20 20"
+            strokeDasharray="16 18"
           />
         </svg>
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sada-lavender text-sada-violet text-xs font-bold mb-4">
+        {/* Scene Header */}
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sada-lavender text-sada-violet text-xs font-bold mb-3">
             <Sparkles size={14} />
-            <span>خارطة تنمية المهارات السمعية · Five Auditory Skills</span>
+            <span>المشهد 05 · مغامرة المهارات السمعية الخمس</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-black text-sada-ink leading-tight mb-4">
-            رحلة الصعود عبر <span className="text-sada-violet">مستويات الاستماع</span>
+          <h2 className="sada-section-title font-black text-sada-ink mb-4">
+            خمس محطات سمعية <span className="text-sada-violet">تنبض بالحكاية والتطبيق</span>
           </h2>
-          <p className="text-base sm:text-lg text-sada-ink/75 leading-relaxed font-medium">
-            تدرج علمي مدروس ينقل الطفل من مجرد الانتباه لوجود الصوت وصولاً إلى الإغلاق السمعي والفهم المركب، مع مراعاة الفروق الفردية لكل بطل.
+          <p className="sada-body-copy text-sada-ink/75 font-medium text-center">
+            كل شخصية من أبطال صدى ترافق الطفل في محطة ذات بيئة بصرية مميزة؛ وتُقيّم كل مهارة بصورة نوعية مستقلة دون اشتراط ترتيب موحد.
           </p>
         </div>
 
-        {/* The Animated Auditory Milestone Path (Horizontal / Stepper Tabs) */}
-        <div className="flex items-center justify-between overflow-x-auto pb-6 mb-12 gap-3 no-scrollbar">
-          {AUDITORY_SKILLS.map((skill, index) => {
+        {/* Quick Station Jump Strip */}
+        <div className="flex items-center justify-start lg:justify-center overflow-x-auto pb-3 mb-10 gap-2.5 no-scrollbar">
+          {CORE_SKILLS.map((skill) => {
             const Icon = getIcon(skill.iconName);
-            const isActive = skill.id === activeSkillId;
-
+            const isSelected = skill.id === activeSkillId;
             return (
               <button
                 key={skill.id}
+                type="button"
                 onClick={() => {
                   soundEngine.playPop();
-                  setActiveSkillId(skill.id);
+                  setManualSkillId(skill.id);
+                  document.getElementById(`skill-station-${skill.id}`)?.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center',
+                  });
                 }}
-                className={`flex-shrink-0 flex items-center gap-3 px-5 py-3.5 rounded-2xl border-2 transition-all duration-300 ${
-                  isActive
-                    ? 'bg-white shadow-xl scale-105 border-transparent ring-4'
-                    : 'bg-white/80 hover:bg-white hover:scale-102 border-sada-violet/10 text-sada-ink/70'
+                className={`flex-shrink-0 flex items-center gap-2.5 px-4 py-2.5 rounded-2xl border transition-all ${
+                  isSelected
+                    ? 'bg-white shadow-md border-transparent ring-2'
+                    : 'bg-white/80 border-sada-violet/10 hover:bg-white'
                 }`}
                 style={{
-                  boxShadow: isActive ? `0 15px 30px -10px ${skill.color}40, 0 0 0 4px ${skill.color}50` : undefined
+                  boxShadow: isSelected ? `0 0 0 2px ${skill.color}` : undefined,
                 }}
               >
-                <div
-                  className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-black text-sm shadow-sm"
+                <span
+                  className="w-8 h-8 rounded-xl flex items-center justify-center text-white"
                   style={{ backgroundColor: skill.color }}
                 >
-                  <Icon size={18} />
-                </div>
-                <div className="text-right">
-                  <div className="flex items-center gap-1.5">
-                    <span className="text-[10px] font-bold px-1.5 py-0.2 rounded bg-gray-100 text-sada-ink/60">
-                      {index === 5 ? 'إضافي' : `المستوى ${skill.id}`}
-                    </span>
-                  </div>
-                  <span className="font-extrabold text-xs sm:text-sm text-sada-ink block mt-0.5 whitespace-nowrap">
-                    {skill.title}
-                  </span>
-                </div>
+                  <Icon size={16} />
+                </span>
+                <span className="text-xs font-extrabold text-sada-ink whitespace-nowrap">
+                  {skill.id}. {skill.title}
+                </span>
               </button>
             );
           })}
         </div>
 
-        {/* Active Skill Stage Adventure Card */}
-        <div className="bg-white rounded-[2.5rem] border-2 border-sada-violet/15 p-6 sm:p-10 shadow-2xl relative overflow-hidden">
-          {/* Accent Ribbon Border Top */}
-          <div
-            className="absolute top-0 inset-x-0 h-3 transition-colors duration-500"
-            style={{ backgroundColor: activeSkill.color }}
-          />
+        {/* 5 Distinct Connected Adventure Stations */}
+        <div className="space-y-8">
+          {CORE_SKILLS.map((skill, idx) => {
+            const Icon = getIcon(skill.iconName);
+            const guide = CHARACTERS.find((c) => c.id === skill.guideCharacterId) || CHARACTERS[0];
+            const isReversed = idx % 2 === 1;
+            const isFocused = skill.id === activeSkillId;
+            const isGuideSpeaking = isSceneActive && activeSpeakerId === guide.id;
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            {/* Left: Skill Objectives & Application Examples */}
-            <div className="lg:col-span-7 flex flex-col text-right">
-              <div className="flex items-center gap-2 mb-3">
-                <span
-                  className="text-xs font-black px-3 py-1 rounded-lg"
-                  style={{
-                    backgroundColor: `${activeSkill.color}15`,
-                    color: activeSkill.color
-                  }}
-                >
-                  {activeSkill.englishTitle}
-                </span>
-                <span className="text-xs text-sada-ink/50 font-bold">
-                  تقييم نوعي مستقل
-                </span>
-              </div>
-
-              <h3 className="text-2xl sm:text-4xl font-black text-sada-ink mb-4">
-                {activeSkill.title}
-              </h3>
-
-              <div className="p-4 rounded-2xl bg-sada-surface border border-sada-violet/10 mb-6">
-                <span className="text-xs font-bold text-sada-ink/50 uppercase tracking-wider block mb-1">
-                  هدف التقييم العلمي:
-                </span>
-                <p className="text-sm sm:text-base text-sada-ink/85 font-medium leading-relaxed">
-                  {activeSkill.objective}
-                </p>
-              </div>
-
-              {/* Task Examples from the PDF */}
-              <div className="space-y-3 mb-6">
-                <span className="text-xs font-bold text-sada-ink/50 uppercase tracking-wider block">
-                  أمثلة لمهام داخل التطبيق:
-                </span>
-                {activeSkill.examples.map((ex, eIdx) => (
-                  <div
-                    key={eIdx}
-                    className="flex items-start gap-3 p-3 rounded-xl bg-white border border-gray-100 shadow-2xs"
-                  >
-                    <CheckCircle2
-                      size={16}
-                      className="flex-shrink-0 mt-0.5"
-                      style={{ color: activeSkill.color }}
-                    />
-                    <span className="text-xs sm:text-sm text-sada-ink/80 font-medium">
-                      {ex}
-                    </span>
-                  </div>
-                ))}
-              </div>
-
-              {/* Scoring calculation formula box */}
-              <div className="p-4 rounded-2xl bg-sada-cream-warm border border-sada-yellow/40 flex items-center justify-between gap-3">
-                <div className="text-xs text-sada-ink/80">
-                  <strong className="text-amber-900 font-bold block mb-0.5">كيف تُحسب النتيجة؟</strong>
-                  <span>{activeSkill.scoringRule}</span>
-                </div>
-                <div className="hidden sm:block text-right flex-shrink-0 bg-white/80 px-3 py-1.5 rounded-lg border border-sada-yellow/30 font-mono text-[11px] font-bold text-sada-ink">
-                  نسبة الأداء = (الصحيحة ÷ المحاولات) × 100
-                </div>
-              </div>
-            </div>
-
-            {/* Right: Gamified Mini Mission Card (Connecting with Chapter 07) */}
-            <div className="lg:col-span-5 flex flex-col items-center">
-              <div
-                className="w-full rounded-3xl p-6 sm:p-8 text-center text-white relative shadow-xl overflow-hidden flex flex-col items-center justify-between min-h-[360px]"
+            return (
+              <article
+                key={skill.id}
+                id={`skill-station-${skill.id}`}
+                onClick={() => setManualSkillId(skill.id)}
+                className={`rounded-[2rem] border-2 p-5 sm:p-8 transition-all duration-500 shadow-lg bg-white relative overflow-hidden ${
+                  isFocused ? 'ring-4' : ''
+                }`}
                 style={{
-                  background: `linear-gradient(145deg, ${activeSkill.color}, #27213E)`
+                  borderColor: `${skill.color}30`,
+                  boxShadow: isFocused ? `0 20px 38px -14px ${skill.color}35, 0 0 0 3px ${skill.color}30` : undefined,
                 }}
               >
-                {/* Floating game badge */}
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-xs font-bold mb-4">
-                  <Sparkles size={13} />
-                  <span>النشاط التفاعلي المعزز</span>
-                </div>
+                {/* Distinct Environmental Mood Strip */}
+                <div
+                  className="absolute top-0 inset-x-0 h-2"
+                  style={{ backgroundColor: skill.color }}
+                />
 
-                <div className="my-auto">
-                  <div className="w-20 h-20 rounded-3xl bg-white/15 backdrop-blur-md flex items-center justify-center mx-auto mb-4 border border-white/20 shadow-inner">
-                    {React.createElement(getIcon(activeSkill.iconName), { size: 36, className: 'text-white' })}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
+                  {/* Text & Clinical Grounding Column */}
+                  <div className={`lg:col-span-7 text-right ${isReversed ? 'lg:order-2' : 'lg:order-1'}`}>
+                    <div className="flex flex-wrap items-center gap-2 mb-3">
+                      <span
+                        className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black text-white"
+                        style={{ backgroundColor: skill.color }}
+                      >
+                        <Icon size={13} />
+                        <span>{skill.environmentTag}</span>
+                      </span>
+                      <span className="dir-ltr text-xs font-bold text-sada-ink/55">
+                        {skill.englishTitle}
+                      </span>
+                    </div>
+
+                    <h3 className="sada-card-title font-black text-sada-ink mb-2">
+                      {skill.id}. {skill.title}
+                    </h3>
+
+                    <p className="text-sm sm:text-base text-sada-ink/80 font-medium leading-relaxed mb-4">
+                      {skill.objective}
+                    </p>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mb-4">
+                      {skill.examples.map((ex, eIdx) => (
+                        <div
+                          key={eIdx}
+                          className="p-3 rounded-2xl bg-sada-surface border border-gray-100 flex items-start gap-2"
+                        >
+                          <CheckCircle2
+                            size={15}
+                            className="flex-shrink-0 mt-0.5"
+                            style={{ color: skill.color }}
+                          />
+                          <span className="text-xs font-semibold text-sada-ink/85 leading-relaxed">
+                            {ex}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="flex flex-wrap items-center justify-between gap-3 p-3.5 rounded-2xl bg-sada-cream-warm border border-sada-yellow/40">
+                      <span className="text-xs font-bold text-sada-ink/85">
+                        <strong className="text-amber-950">تسجيل الأداء: </strong>
+                        {skill.scoringRule}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          soundEngine.playSuccess();
+                          onPlayGame?.(skill);
+                        }}
+                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-extrabold text-white shadow-sm hover:scale-105 transition-transform"
+                        style={{ backgroundColor: skill.color }}
+                      >
+                        <PlayCircle size={15} />
+                        <span>جرّب النشاط: {skill.gameTitle}</span>
+                      </button>
+                    </div>
                   </div>
-                  <h4 className="text-xl sm:text-2xl font-black mb-2">
-                    {activeSkill.gameTitle}
-                  </h4>
-                  <p className="text-xs sm:text-sm text-white/85 leading-relaxed max-w-xs font-medium">
-                    {activeSkill.gameDescription}
-                  </p>
+
+                  {/* Distinct Character + Real App Screen Visual Stage */}
+                  <div
+                    className={`lg:col-span-5 flex items-center justify-center gap-4 p-4 sm:p-5 rounded-3xl ${
+                      isReversed ? 'lg:order-1' : 'lg:order-2'
+                    }`}
+                    style={{
+                      background: `linear-gradient(135deg, ${skill.color}18 0%, #FFF8ED 100%)`,
+                    }}
+                  >
+                    <CharacterStageActor
+                      characterId={guide.id}
+                      sizeClass="w-24 sm:w-32"
+                      isSpeaking={isGuideSpeaking}
+                      isDimmed={Boolean(isSceneActive && activeSpeakerId && !isGuideSpeaking)}
+                      bubbleText={!isGuideSpeaking ? `رفيق المحطة: ${guide.name}` : undefined}
+                    />
+
+                    <div className="w-36 sm:w-44 rounded-3xl bg-sada-ink p-2 shadow-xl border-2 border-gray-800 flex-shrink-0">
+                      <img
+                        src={skill.screenImage}
+                        alt={`شاشة ${skill.title}`}
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-auto rounded-2xl object-cover"
+                      />
+                    </div>
+                  </div>
                 </div>
+              </article>
+            );
+          })}
+        </div>
 
-                <button
-                  onClick={() => {
-                    soundEngine.playSuccess();
-                    if (onPlayGame) onPlayGame(activeSkill);
-                  }}
-                  className="w-full mt-6 py-3.5 rounded-2xl bg-white hover:bg-sada-cream text-sada-ink font-extrabold text-sm shadow-lg flex items-center justify-center gap-2 hover:scale-102 active:scale-98 transition-all"
-                >
-                  <PlayCircle size={18} style={{ color: activeSkill.color }} />
-                  <span>انتقل لتجربة اللعبة في عالم الألعاب</span>
-                </button>
-              </div>
-
-              {/* Individual flexibility note */}
-              <p className="text-[11px] text-sada-ink/60 text-center mt-3 font-semibold">
-                * تُراعى الفروق الفردية بين الأطفال؛ ولا يُشترط ترتيب موحد للانتقال بين المهارات.
-              </p>
-            </div>
-          </div>
+        {/* Clinical Independence & Scoring Formula Summary */}
+        <div className="mt-8 p-5 rounded-2xl bg-white border border-sada-violet/15 flex flex-wrap items-center justify-between gap-4 shadow-sm">
+          <p className="text-xs sm:text-sm font-bold text-sada-ink/80">
+            * تُقيّم كل مهارة بصورة مستقلة وفق قدرات الطفل الفردية، ولا يُشترط ترتيب موحد للانتقال بين المهارات.
+          </p>
+          <span className="text-xs font-extrabold px-4 py-2 rounded-xl bg-sada-cream-warm border border-sada-yellow/40 text-sada-ink">
+            نسبة الأداء = (عدد الإجابات الصحيحة ÷ عدد المحاولات المُقيمة) × 100
+          </span>
         </div>
       </div>
     </section>
