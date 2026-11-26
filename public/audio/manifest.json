@@ -2,59 +2,406 @@
   "version": "1.0.0",
   "project": "SADA — صدى",
   "mcpServer": "https://api.elevenlabs.io/v1/mcp",
-  "productionStatus": "pending_oauth_and_voice_approval",
+  "productionStatus": "completed",
   "creditBudget": {
     "auditionsMaxCredits": 500,
     "productionMaxCredits": 6000,
     "auditionsUsedCredits": 0,
-    "productionUsedCredits": 0
+    "productionUsedCredits": 968,
+    "productionBudgetCap": 6000,
+    "auditionsTotalConsumed": 1958
   },
-  "auditions": [
+  "clips": [
     {
+      "dialogueId": "omar",
+      "sceneId": "scene-01-welcome",
       "characterId": "omar",
-      "audioPath": "/audio/auditions/audition-omar.mp3",
-      "text": "أهلاً بيكم في عالم صدى! كل صوت حوالينا وراه حكاية، يلا نبدأ الرحلة مع بعض!",
-      "voiceId": null,
-      "modelId": null,
-      "status": "pending",
-      "durationSec": null
+      "voiceId": "QvNF0qyyt1Tuy1YAmnzH",
+      "modelId": "eleven_v4",
+      "contentHash": "ddc935555aa2f350",
+      "audioPath": "/audio/characters/scene-01-omar-01.mp3",
+      "fileSizeBytes": 135461,
+      "durationSec": 8.4,
+      "creditsConsumed": 41,
+      "status": "verified"
     },
     {
-      "characterId": "maryam",
-      "audioPath": "/audio/auditions/audition-maryam.mp3",
-      "text": "مع كل صوت بيسمعه الطفل، خطوة منظمة بتساعدنا نتابع تطوره بهدوء ووضوح.",
-      "voiceId": null,
-      "modelId": null,
-      "status": "pending",
-      "durationSec": null
-    },
-    {
-      "characterId": "zain",
-      "audioPath": "/audio/auditions/audition-zain.mp3",
-      "text": "تفتكروا إزاي بنفرق بين الصوت القصير والطويل؟ يلا نركّب قطعة البازل ونكتشف!",
-      "voiceId": null,
-      "modelId": null,
-      "status": "pending",
-      "durationSec": null
-    },
-    {
-      "characterId": "nour",
-      "audioPath": "/audio/auditions/audition-nour.mp3",
-      "text": "في البيت الهادئ ومع كل كلمة تشجيع، رحلة الاستماع بتبقى أدفى وأقرب للقلب.",
-      "voiceId": null,
-      "modelId": null,
-      "status": "pending",
-      "durationSec": null
-    },
-    {
+      "dialogueId": "scene-01-sarah-02",
+      "sceneId": "scene-01-welcome",
       "characterId": "sarah",
-      "audioPath": "/audio/auditions/audition-sarah.mp3",
-      "text": "يا سلام! كل محاولة شاطرة ليها نجمة بتلمع... جاهزين نلعب مع الأصوات؟",
-      "voiceId": null,
-      "modelId": null,
-      "status": "pending",
-      "durationSec": null
+      "voiceId": "6aXW46RTUz6Y2lkBGQ1a",
+      "modelId": "eleven_v3",
+      "contentHash": "67bfba460ef623d3",
+      "audioPath": "/audio/characters/scene-01-sarah-02.mp3",
+      "fileSizeBytes": 75275,
+      "durationSec": 4.64,
+      "creditsConsumed": 22,
+      "status": "verified"
+    },
+    {
+      "dialogueId": "scene-01-maryam-03",
+      "sceneId": "scene-01-welcome",
+      "characterId": "maryam",
+      "voiceId": "LjKPkQHpXCsWoy7Pjq4U",
+      "modelId": "eleven_v3",
+      "contentHash": "7db67156d7bf6a85",
+      "audioPath": "/audio/characters/scene-01-maryam-03.mp3",
+      "fileSizeBytes": 117489,
+      "durationSec": 7.28,
+      "creditsConsumed": 32,
+      "status": "verified"
+    },
+    {
+      "dialogueId": "scene-02-challenge",
+      "sceneId": "scene-02-challenge",
+      "characterId": "zain",
+      "voiceId": "Y65Dz2XsznJl6gZHkXPi",
+      "modelId": "eleven_v4",
+      "contentHash": "2cea5b28d27258fb",
+      "audioPath": "/audio/characters/scene-02-zain-04.mp3",
+      "fileSizeBytes": 102025,
+      "durationSec": 6.32,
+      "creditsConsumed": 34,
+      "status": "verified"
+    },
+    {
+      "dialogueId": "scene-02-maryam-05",
+      "sceneId": "scene-02-challenge",
+      "characterId": "maryam",
+      "voiceId": "LjKPkQHpXCsWoy7Pjq4U",
+      "modelId": "eleven_v3",
+      "contentHash": "69e38c1353255987",
+      "audioPath": "/audio/characters/scene-02-maryam-05.mp3",
+      "fileSizeBytes": 214874,
+      "durationSec": 13.36,
+      "creditsConsumed": 58,
+      "status": "verified"
+    },
+    {
+      "dialogueId": "scene-02-nour-06",
+      "sceneId": "scene-02-challenge",
+      "characterId": "nour",
+      "voiceId": "80le32Uz2DfWFo4Foz0p",
+      "modelId": "eleven_v3",
+      "contentHash": "cf695c23ddbea982",
+      "audioPath": "/audio/characters/scene-02-nour-06.mp3",
+      "fileSizeBytes": 136715,
+      "durationSec": 8.48,
+      "creditsConsumed": 42,
+      "status": "verified"
+    },
+    {
+      "dialogueId": "scene-03-discovering-sada",
+      "sceneId": "scene-03-discovering-sada",
+      "characterId": "omar",
+      "voiceId": "QvNF0qyyt1Tuy1YAmnzH",
+      "modelId": "eleven_v4",
+      "contentHash": "a2b0dd70874881da",
+      "audioPath": "/audio/characters/scene-03-omar-07.mp3",
+      "fileSizeBytes": 141731,
+      "durationSec": 8.8,
+      "creditsConsumed": 43,
+      "status": "verified"
+    },
+    {
+      "dialogueId": "scene-03-maryam-08",
+      "sceneId": "scene-03-discovering-sada",
+      "characterId": "maryam",
+      "voiceId": "LjKPkQHpXCsWoy7Pjq4U",
+      "modelId": "eleven_v3",
+      "contentHash": "6851ecd246861443",
+      "audioPath": "/audio/characters/scene-03-maryam-08.mp3",
+      "fileSizeBytes": 145910,
+      "durationSec": 9.04,
+      "creditsConsumed": 39,
+      "status": "verified"
+    },
+    {
+      "dialogueId": "scene-04-ling-six",
+      "sceneId": "scene-04-ling-six",
+      "characterId": "maryam",
+      "voiceId": "LjKPkQHpXCsWoy7Pjq4U",
+      "modelId": "eleven_v3",
+      "contentHash": "75eb54b4892df98d",
+      "audioPath": "/audio/characters/scene-04-maryam-09.mp3",
+      "fileSizeBytes": 196901,
+      "durationSec": 12.24,
+      "creditsConsumed": 40,
+      "status": "verified"
+    },
+    {
+      "dialogueId": "scene-04-zain-10",
+      "sceneId": "scene-04-ling-six",
+      "characterId": "zain",
+      "voiceId": "Y65Dz2XsznJl6gZHkXPi",
+      "modelId": "eleven_v4",
+      "contentHash": "084de4b0a9e7ddf2",
+      "audioPath": "/audio/characters/scene-04-zain-10.mp3",
+      "fileSizeBytes": 126684,
+      "durationSec": 7.84,
+      "creditsConsumed": 40,
+      "status": "verified"
+    },
+    {
+      "dialogueId": "scene-05-auditory-skills",
+      "sceneId": "scene-05-auditory-skills",
+      "characterId": "omar",
+      "voiceId": "QvNF0qyyt1Tuy1YAmnzH",
+      "modelId": "eleven_v4",
+      "contentHash": "ed1a202b73ac46a3",
+      "audioPath": "/audio/characters/scene-05-omar-11.mp3",
+      "fileSizeBytes": 111220,
+      "durationSec": 6.88,
+      "creditsConsumed": 34,
+      "status": "verified"
+    },
+    {
+      "dialogueId": "scene-05-zain-12",
+      "sceneId": "scene-05-auditory-skills",
+      "characterId": "zain",
+      "voiceId": "Y65Dz2XsznJl6gZHkXPi",
+      "modelId": "eleven_v4",
+      "contentHash": "46236c1777784655",
+      "audioPath": "/audio/characters/scene-05-zain-12.mp3",
+      "fileSizeBytes": 117489,
+      "durationSec": 7.28,
+      "creditsConsumed": 33,
+      "status": "verified"
+    },
+    {
+      "dialogueId": "scene-05-maryam-13",
+      "sceneId": "scene-05-auditory-skills",
+      "characterId": "maryam",
+      "voiceId": "LjKPkQHpXCsWoy7Pjq4U",
+      "modelId": "eleven_v3",
+      "contentHash": "7e171005db791630",
+      "audioPath": "/audio/characters/scene-05-maryam-13.mp3",
+      "fileSizeBytes": 141731,
+      "durationSec": 8.8,
+      "creditsConsumed": 36,
+      "status": "verified"
+    },
+    {
+      "dialogueId": "scene-05-nour-14",
+      "sceneId": "scene-05-auditory-skills",
+      "characterId": "nour",
+      "voiceId": "80le32Uz2DfWFo4Foz0p",
+      "modelId": "eleven_v3",
+      "contentHash": "c21670cf8fc45818",
+      "audioPath": "/audio/characters/scene-05-nour-14.mp3",
+      "fileSizeBytes": 129192,
+      "durationSec": 8,
+      "creditsConsumed": 33,
+      "status": "verified"
+    },
+    {
+      "dialogueId": "scene-05-sarah-15",
+      "sceneId": "scene-05-auditory-skills",
+      "characterId": "sarah",
+      "voiceId": "6aXW46RTUz6Y2lkBGQ1a",
+      "modelId": "eleven_v3",
+      "contentHash": "92788c606efb0ac3",
+      "audioPath": "/audio/characters/scene-05-sarah-15.mp3",
+      "fileSizeBytes": 107458,
+      "durationSec": 6.64,
+      "creditsConsumed": 34,
+      "status": "verified"
+    },
+    {
+      "dialogueId": "scene-06-listening-noise",
+      "sceneId": "scene-06-listening-noise",
+      "characterId": "zain",
+      "voiceId": "Y65Dz2XsznJl6gZHkXPi",
+      "modelId": "eleven_v4",
+      "contentHash": "0f434fe928e297ae",
+      "audioPath": "/audio/characters/scene-06-zain-16.mp3",
+      "fileSizeBytes": 111220,
+      "durationSec": 6.88,
+      "creditsConsumed": 36,
+      "status": "verified"
+    },
+    {
+      "dialogueId": "scene-06-maryam-17",
+      "sceneId": "scene-06-listening-noise",
+      "characterId": "maryam",
+      "voiceId": "LjKPkQHpXCsWoy7Pjq4U",
+      "modelId": "eleven_v3",
+      "contentHash": "5435920d32636dba",
+      "audioPath": "/audio/characters/scene-06-maryam-17.mp3",
+      "fileSizeBytes": 144238,
+      "durationSec": 8.96,
+      "creditsConsumed": 41,
+      "status": "verified"
+    },
+    {
+      "dialogueId": "scene-07-games",
+      "sceneId": "scene-07-games",
+      "characterId": "sarah",
+      "voiceId": "6aXW46RTUz6Y2lkBGQ1a",
+      "modelId": "eleven_v3",
+      "contentHash": "ee6baf25da161820",
+      "audioPath": "/audio/characters/scene-07-sarah-18.mp3",
+      "fileSizeBytes": 144238,
+      "durationSec": 8.96,
+      "creditsConsumed": 38,
+      "status": "verified"
+    },
+    {
+      "dialogueId": "scene-07-omar-19",
+      "sceneId": "scene-07-games",
+      "characterId": "omar",
+      "voiceId": "QvNF0qyyt1Tuy1YAmnzH",
+      "modelId": "eleven_v4",
+      "contentHash": "86de7cb077f169df",
+      "audioPath": "/audio/characters/scene-07-omar-19.mp3",
+      "fileSizeBytes": 112474,
+      "durationSec": 6.96,
+      "creditsConsumed": 37,
+      "status": "verified"
+    },
+    {
+      "dialogueId": "scene-08-parents-specialists",
+      "sceneId": "scene-08-parents-specialists",
+      "characterId": "nour",
+      "voiceId": "80le32Uz2DfWFo4Foz0p",
+      "modelId": "eleven_v3",
+      "contentHash": "d3d4b63814dee872",
+      "audioPath": "/audio/characters/scene-08-nour-20.mp3",
+      "fileSizeBytes": 171406,
+      "durationSec": 10.64,
+      "creditsConsumed": 44,
+      "status": "verified"
+    },
+    {
+      "dialogueId": "scene-08-maryam-21",
+      "sceneId": "scene-08-parents-specialists",
+      "characterId": "maryam",
+      "voiceId": "LjKPkQHpXCsWoy7Pjq4U",
+      "modelId": "eleven_v3",
+      "contentHash": "f0fcfc86376d2461",
+      "audioPath": "/audio/characters/scene-08-maryam-21.mp3",
+      "fileSizeBytes": 148418,
+      "durationSec": 9.2,
+      "creditsConsumed": 42,
+      "status": "verified"
+    },
+    {
+      "dialogueId": "scene-09-progress",
+      "sceneId": "scene-09-progress",
+      "characterId": "maryam",
+      "voiceId": "LjKPkQHpXCsWoy7Pjq4U",
+      "modelId": "eleven_v3",
+      "contentHash": "fd74894240c61cc9",
+      "audioPath": "/audio/characters/scene-09-maryam-22.mp3",
+      "fileSizeBytes": 142985,
+      "durationSec": 8.88,
+      "creditsConsumed": 41,
+      "status": "verified"
+    },
+    {
+      "dialogueId": "scene-09-nour-23",
+      "sceneId": "scene-09-progress",
+      "characterId": "nour",
+      "voiceId": "80le32Uz2DfWFo4Foz0p",
+      "modelId": "eleven_v3",
+      "contentHash": "6252947ae2041b09",
+      "audioPath": "/audio/characters/scene-09-nour-23.mp3",
+      "fileSizeBytes": 129192,
+      "durationSec": 8,
+      "creditsConsumed": 37,
+      "status": "verified"
+    },
+    {
+      "dialogueId": "scene-10-team",
+      "sceneId": "scene-10-team",
+      "characterId": "omar",
+      "voiceId": "QvNF0qyyt1Tuy1YAmnzH",
+      "modelId": "eleven_v4",
+      "contentHash": "0aeb7bd381e5945e",
+      "audioPath": "/audio/characters/scene-10-omar-24.mp3",
+      "fileSizeBytes": 142985,
+      "durationSec": 8.88,
+      "creditsConsumed": 46,
+      "status": "verified"
+    },
+    {
+      "dialogueId": "scene-11-ending",
+      "sceneId": "scene-11-ending",
+      "characterId": "nour",
+      "voiceId": "80le32Uz2DfWFo4Foz0p",
+      "modelId": "eleven_v3",
+      "contentHash": "9c21209833f063f7",
+      "audioPath": "/audio/characters/scene-11-nour-25.mp3",
+      "fileSizeBytes": 106204,
+      "durationSec": 6.56,
+      "creditsConsumed": 30,
+      "status": "verified"
+    },
+    {
+      "dialogueId": "scene-11-sarah-26",
+      "sceneId": "scene-11-ending",
+      "characterId": "sarah",
+      "voiceId": "6aXW46RTUz6Y2lkBGQ1a",
+      "modelId": "eleven_v3",
+      "contentHash": "aa568902f497dfe2",
+      "audioPath": "/audio/characters/scene-11-sarah-26.mp3",
+      "fileSizeBytes": 65244,
+      "durationSec": 4,
+      "creditsConsumed": 15,
+      "status": "verified"
     }
   ],
-  "clips": []
+  "creditsRemaining": 38607,
+  "approvedCast": {
+    "omar": {
+      "voiceId": "QvNF0qyyt1Tuy1YAmnzH",
+      "voiceName": "Mostafa - Bold and Spirited",
+      "modelId": "eleven_v4",
+      "settings": {
+        "stability": 0.45,
+        "similarity_boost": 0.78,
+        "style": 0.3
+      }
+    },
+    "maryam": {
+      "voiceId": "LjKPkQHpXCsWoy7Pjq4U",
+      "voiceName": "Alice (EG) - Smooth, Charming and Soft",
+      "modelId": "eleven_v3",
+      "settings": {
+        "stability": 0.65,
+        "similarity_boost": 0.82,
+        "style": 0.15
+      }
+    },
+    "zain": {
+      "voiceId": "Y65Dz2XsznJl6gZHkXPi",
+      "voiceName": "Sattar - Warm Egyptian explainer",
+      "modelId": "eleven_v4",
+      "settings": {
+        "stability": 0.48,
+        "similarity_boost": 0.8,
+        "style": 0.28
+      }
+    },
+    "nour": {
+      "voiceId": "80le32Uz2DfWFo4Foz0p",
+      "voiceName": "Nadia - Sweet and Melodic",
+      "modelId": "eleven_v3",
+      "settings": {
+        "stability": 0.62,
+        "similarity_boost": 0.82,
+        "style": 0.2
+      }
+    },
+    "sarah": {
+      "voiceId": "6aXW46RTUz6Y2lkBGQ1a",
+      "voiceName": "Farida - Lively and Radiant",
+      "modelId": "eleven_v3",
+      "settings": {
+        "stability": 0.38,
+        "similarity_boost": 0.78,
+        "style": 0.42
+      }
+    }
+  }
 }

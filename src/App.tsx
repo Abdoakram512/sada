@@ -240,10 +240,12 @@ export const App: React.FC = () => {
       {/* Centralized Audio Controller Dock & Live RTL Subtitles */}
       <StoryAudioBar onOpenAuditions={() => setAuditionsOpen(true)} />
 
-      {/* Voice Casting & Audition Review Modal */}
-      <Suspense fallback={null}>
-        <VoiceAuditionModal isOpen={auditionsOpen} onClose={() => setAuditionsOpen(false)} />
-      </Suspense>
+      {/* Voice Casting & Audition Review Modal (Dev-only internal inspection tool) */}
+      {import.meta.env.DEV && (
+        <Suspense fallback={null}>
+          <VoiceAuditionModal isOpen={auditionsOpen} onClose={() => setAuditionsOpen(false)} />
+        </Suspense>
+      )}
     </div>
   );
 };

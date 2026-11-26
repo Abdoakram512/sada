@@ -201,15 +201,17 @@ export const StoryAudioBar: React.FC<StoryAudioBarProps> = ({ onOpenAuditions })
             </div>
           )}
 
-          <button
-            type="button"
-            onClick={onOpenAuditions}
-            className="flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100 transition-colors"
-            title="معاينة أصوات الشخصيات الخمس"
-          >
-            <Mic size={13} />
-            <span className="hidden sm:inline">أصوات الشخصيات</span>
-          </button>
+          {import.meta.env.DEV && (
+            <button
+              type="button"
+              onClick={onOpenAuditions}
+              className="flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100 transition-colors"
+              title="معاينة أصوات الشخصيات الخمس"
+            >
+              <Mic size={13} />
+              <span className="hidden sm:inline">أصوات الشخصيات</span>
+            </button>
+          )}
         </div>
       </div>
     </aside>

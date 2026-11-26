@@ -162,6 +162,9 @@ class StoryAudioController {
 
   // Called by ScrollSpy/ScrollTrigger when user enters a scene
   public notifySceneInView(sceneId: string): void {
+    if (sceneId === this.state.activeSceneId && this.state.status === 'playing') {
+      return;
+    }
     if (sceneId === this.pendingSceneActivationId && this.sceneDebounceTimer !== null) {
       return;
     }

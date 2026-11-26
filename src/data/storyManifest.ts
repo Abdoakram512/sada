@@ -12,7 +12,7 @@ export interface CharacterVoiceProfile {
   auditionText: string;
   voiceId: string | null;
   voiceName: string;
-  voiceModel: 'eleven_v3' | 'eleven_multilingual_v2' | 'pending';
+  voiceModel: 'eleven_v3' | 'eleven_v4' | 'eleven_multilingual_v2' | 'pending';
   speakingStyle: string;
   emotionalRange: string;
   assignedScenes: string[];
@@ -59,9 +59,9 @@ export const CHARACTER_VOICE_PROFILES: Record<CharacterId, CharacterVoiceProfile
     avatarImage: '/assets/char_omar.webp',
     auditionAudioPath: '/audio/auditions/audition-omar.mp3',
     auditionText: 'أهلاً بيكم في عالم صدى! كل صوت حوالينا وراه حكاية، يلا نبدأ الرحلة مع بعض!',
-    voiceId: null,
-    voiceName: 'بانتظار اعتماد الصوت (ElevenLabs OAuth)',
-    voiceModel: 'pending',
+    voiceId: 'QvNF0qyyt1Tuy1YAmnzH',
+    voiceName: 'Mostafa - Bold and Spirited (EG)',
+    voiceModel: 'eleven_v4',
     speakingStyle: 'إلقاء مصري طبيعي دافئ ومُرحّب بإيقاع حيوي واضح',
     emotionalRange: 'ترحيب، حماس، تشجيع، فخر',
     assignedScenes: ['scene-01-welcome', 'scene-03-discovering-sada', 'scene-05-auditory-skills', 'scene-07-games', 'scene-10-team']
@@ -76,9 +76,9 @@ export const CHARACTER_VOICE_PROFILES: Record<CharacterId, CharacterVoiceProfile
     avatarImage: '/assets/char_maryam.webp',
     auditionAudioPath: '/audio/auditions/audition-maryam.mp3',
     auditionText: 'مع كل صوت بيسمعه الطفل، خطوة منظمة بتساعدنا نتابع تطوره بهدوء ووضوح.',
-    voiceId: null,
-    voiceName: 'بانتظار اعتماد الصوت (ElevenLabs OAuth)',
-    voiceModel: 'pending',
+    voiceId: 'LjKPkQHpXCsWoy7Pjq4U',
+    voiceName: 'Alice (EG) - Smooth, Charming and Soft',
+    voiceModel: 'eleven_v3',
     speakingStyle: 'نبرة هادئة واضحة المخارج مناسبة للمصطلحات التربوية والسمعية',
     emotionalRange: 'طمأنينة، وضوح علمي، إرشاد منظم',
     assignedScenes: ['scene-01-welcome', 'scene-02-challenge', 'scene-03-discovering-sada', 'scene-04-ling-six', 'scene-05-auditory-skills', 'scene-06-listening-noise', 'scene-08-parents-specialists', 'scene-09-progress']
@@ -93,9 +93,9 @@ export const CHARACTER_VOICE_PROFILES: Record<CharacterId, CharacterVoiceProfile
     avatarImage: '/assets/char_zain.webp',
     auditionAudioPath: '/audio/auditions/audition-zain.mp3',
     auditionText: 'تفتكروا إزاي بنفرق بين الصوت القصير والطويل؟ يلا نركّب قطعة البازل ونكتشف!',
-    voiceId: null,
-    voiceName: 'بانتظار اعتماد الصوت (ElevenLabs OAuth)',
-    voiceModel: 'pending',
+    voiceId: 'Y65Dz2XsznJl6gZHkXPi',
+    voiceName: 'Sattar - Warm Egyptian explainer',
+    voiceModel: 'eleven_v4',
     speakingStyle: 'صوت شبابي فضولي بنبرة تساؤل واكتشاف',
     emotionalRange: 'فضول، دهشة، تركيز، حماس علمي',
     assignedScenes: ['scene-02-challenge', 'scene-04-ling-six', 'scene-05-auditory-skills', 'scene-06-listening-noise']
@@ -110,9 +110,9 @@ export const CHARACTER_VOICE_PROFILES: Record<CharacterId, CharacterVoiceProfile
     avatarImage: '/assets/char_nour.webp',
     auditionAudioPath: '/audio/auditions/audition-nour.mp3',
     auditionText: 'في البيت الهادئ ومع كل كلمة تشجيع، رحلة الاستماع بتبقى أدفى وأقرب للقلب.',
-    voiceId: null,
-    voiceName: 'بانتظار اعتماد الصوت (ElevenLabs OAuth)',
-    voiceModel: 'pending',
+    voiceId: '80le32Uz2DfWFo4Foz0p',
+    voiceName: 'Nadia - Sweet and Melodic (EG)',
+    voiceModel: 'eleven_v3',
     speakingStyle: 'صوت ناعم دافئ يبعث على الأمل والثقة',
     emotionalRange: 'دفء أسري، تعاطف، تفاؤل، احتواء',
     assignedScenes: ['scene-02-challenge', 'scene-05-auditory-skills', 'scene-08-parents-specialists', 'scene-09-progress', 'scene-11-ending']
@@ -127,9 +127,9 @@ export const CHARACTER_VOICE_PROFILES: Record<CharacterId, CharacterVoiceProfile
     avatarImage: '/assets/char_sarah.webp',
     auditionAudioPath: '/audio/auditions/audition-sarah.mp3',
     auditionText: 'يا سلام! كل محاولة شاطرة ليها نجمة بتلمع... جاهزين نلعب مع الأصوات؟',
-    voiceId: null,
-    voiceName: 'بانتظار اعتماد الصوت (ElevenLabs OAuth)',
-    voiceModel: 'pending',
+    voiceId: '6aXW46RTUz6Y2lkBGQ1a',
+    voiceName: 'Farida - Lively and Radiant (EG)',
+    voiceModel: 'eleven_v3',
     speakingStyle: 'إلقاء مرح نابض بالحيوية والفرح',
     emotionalRange: 'بهجة، لعب، احتفال، تحفيز',
     assignedScenes: ['scene-01-welcome', 'scene-05-auditory-skills', 'scene-07-games', 'scene-11-ending']
@@ -159,6 +159,7 @@ export const STORY_SCENES: StoryScene[] = [
         subtitleText: 'أهلاً بيكم في عالم صدى! كل صوت حوالينا وراه حكاية، والنهارده هنعيش الحكاية دي مع بعض. جاهزين؟ يلا بينا!',
         emotion: 'ترحيب وحماس',
         estimatedDurationSec: 7.5,
+        actualDurationSec: 8.4,
         audioPath: '/audio/characters/scene-01-omar-01.mp3',
         animationCue: 'speak-excited',
         sfxCue: '/audio/sfx/welcome-chime.mp3'
@@ -172,6 +173,7 @@ export const STORY_SCENES: StoryScene[] = [
         subtitleText: 'يلا يا أصحاب! مع كل خطوة هنسمع صوت جديد ونجمع نجمة حلوة!',
         emotion: 'بهجة ومرح',
         estimatedDurationSec: 4.8,
+        actualDurationSec: 4.64,
         audioPath: '/audio/characters/scene-01-sarah-02.mp3',
         animationCue: 'speak-celebrate'
       },
@@ -184,6 +186,7 @@ export const STORY_SCENES: StoryScene[] = [
         subtitleText: 'اتبعوا موجة الصوت معانا، وتعالوا نكتشف إزاي كل استجابة صغيرة بتفرق في رحلة الطفل.',
         emotion: 'إرشاد هادئ',
         estimatedDurationSec: 5.8,
+        actualDurationSec: 7.28,
         audioPath: '/audio/characters/scene-01-maryam-03.mp3',
         animationCue: 'speak-calm'
       }
@@ -211,6 +214,7 @@ export const STORY_SCENES: StoryScene[] = [
         subtitleText: 'استنوا لحظة... هو ليه ساعات أصوات الكلام بتحتاج تركيز وتدريب زيادة عشان نوصل لمعناها؟',
         emotion: 'تساؤل وفضول',
         estimatedDurationSec: 6.0,
+        actualDurationSec: 6.32,
         audioPath: '/audio/characters/scene-02-zain-04.mp3',
         animationCue: 'speak-curious'
       },
@@ -223,6 +227,7 @@ export const STORY_SCENES: StoryScene[] = [
         subtitleText: 'سؤال مهم يا زين! الأطفال مستخدمو السماعات الطبية أو القوقعة بيتعلموا يميزوا كل صوت بالتدريج، والورق المتفرق كان بيصعّب متابعة تطورهم.',
         emotion: 'توضيح علمي هادئ',
         estimatedDurationSec: 8.5,
+        actualDurationSec: 13.36,
         audioPath: '/audio/characters/scene-02-maryam-05.mp3',
         animationCue: 'speak-calm'
       },
@@ -235,6 +240,7 @@ export const STORY_SCENES: StoryScene[] = [
         subtitleText: 'والأهل كمان كانوا محتاجين طريقة لطيفة ومشجعة في البيت، تحوّل المتابعة لوقت مشاركة دافي من غير ضغط أو قلق.',
         emotion: 'دفء وتعاطف',
         estimatedDurationSec: 7.0,
+        actualDurationSec: 8.48,
         audioPath: '/audio/characters/scene-02-nour-06.mp3',
         animationCue: 'speak-warm'
       }
@@ -262,6 +268,7 @@ export const STORY_SCENES: StoryScene[] = [
         subtitleText: 'وهنا جه دور صدى! منظومة واحدة بتربط التقييم الوظيفي، بالتدريب التفاعلي، بمتابعة النتايج في ملف واحد لكل طفل.',
         emotion: 'حماس وتقديم',
         estimatedDurationSec: 7.2,
+        actualDurationSec: 8.8,
         audioPath: '/audio/characters/scene-03-omar-07.mp3',
         animationCue: 'speak-excited'
       },
@@ -274,6 +281,7 @@ export const STORY_SCENES: StoryScene[] = [
         subtitleText: 'من أول إنشاء ملف الطفل، لتقييم الأصوات والمهارات، لحد حفظ النتايج ومقارنتها مع الأخصائي عبر الزمن.',
         emotion: 'ترتيب ووضوح',
         estimatedDurationSec: 6.8,
+        actualDurationSec: 9.04,
         audioPath: '/audio/characters/scene-03-maryam-08.mp3',
         animationCue: 'speak-calm'
       }
@@ -301,6 +309,7 @@ export const STORY_SCENES: StoryScene[] = [
         subtitleText: 'دي أصوات لينج الستة: /m/، /u/، /a/، /i/، /ʃ/، و/s/. ست أصوات تغطي نطاقات الترددات الأساسية للكلام.',
         emotion: 'شرح تعليمي واضح',
         estimatedDurationSec: 8.0,
+        actualDurationSec: 12.24,
         audioPath: '/audio/characters/scene-04-maryam-09.mp3',
         animationCue: 'speak-calm'
       },
@@ -313,6 +322,7 @@ export const STORY_SCENES: StoryScene[] = [
         subtitleText: 'يعني من الصوت الدافي العميق لحد الهمسة العالية! وكل استجابة بتتسجل عشان نتابع وضوح السمع في الجلسة.',
         emotion: 'اكتشاف وإعجاب',
         estimatedDurationSec: 6.8,
+        actualDurationSec: 7.84,
         audioPath: '/audio/characters/scene-04-zain-10.mp3',
         animationCue: 'speak-curious'
       }
@@ -340,6 +350,7 @@ export const STORY_SCENES: StoryScene[] = [
         subtitleText: '١. الإدراك والانتباه السمعي: التقاط وجود الصوت وسط السكون وتوجيه الانتباه له.',
         emotion: 'يقظة وتفاعل',
         estimatedDurationSec: 6.0,
+        actualDurationSec: 6.88,
         audioPath: '/audio/characters/scene-05-omar-11.mp3',
         animationCue: 'speak-excited'
       },
@@ -352,6 +363,7 @@ export const STORY_SCENES: StoryScene[] = [
         subtitleText: '٢. التمييز السمعي: إدراك التشابه والاختلاف بين الأصوات والمدد والكلمات المتقاربة.',
         emotion: 'تحليل واكتشاف',
         estimatedDurationSec: 6.0,
+        actualDurationSec: 7.28,
         audioPath: '/audio/characters/scene-05-zain-12.mp3',
         animationCue: 'speak-curious'
       },
@@ -364,6 +376,7 @@ export const STORY_SCENES: StoryScene[] = [
         subtitleText: '٣. التعرف والربط السمعي: معرفة مصدر الصوت أو الكلمة وربطها بالصورة والمعنى.',
         emotion: 'شرح لطيف',
         estimatedDurationSec: 6.2,
+        actualDurationSec: 8.8,
         audioPath: '/audio/characters/scene-05-maryam-13.mp3',
         animationCue: 'speak-calm'
       },
@@ -376,6 +389,7 @@ export const STORY_SCENES: StoryScene[] = [
         subtitleText: '٤. الفهم السمعي: فهم التعليمات والجمل والقصص القصيرة والاستجابة لها.',
         emotion: 'دفء وتشجيع',
         estimatedDurationSec: 5.8,
+        actualDurationSec: 8,
         audioPath: '/audio/characters/scene-05-nour-14.mp3',
         animationCue: 'speak-warm'
       },
@@ -388,6 +402,7 @@ export const STORY_SCENES: StoryScene[] = [
         subtitleText: '٥. الإغلاق السمعي: استكمال الجزء الناقص من الكلام بالاعتماد على السياق اللغوي.',
         emotion: 'مرح وابتهاج',
         estimatedDurationSec: 5.8,
+        actualDurationSec: 6.64,
         audioPath: '/audio/characters/scene-05-sarah-15.mp3',
         animationCue: 'speak-celebrate'
       }
@@ -415,6 +430,7 @@ export const STORY_SCENES: StoryScene[] = [
         subtitleText: 'طيب لو كنا في مكان فيه صوت خلفي خفيف، زي الفصل أو السوق، نقدر نركز في الكلمة المطلوبة؟',
         emotion: 'تساؤل واقعي',
         estimatedDurationSec: 6.2,
+        actualDurationSec: 6.88,
         audioPath: '/audio/characters/scene-06-zain-16.mp3',
         animationCue: 'speak-curious'
       },
@@ -427,6 +443,7 @@ export const STORY_SCENES: StoryScene[] = [
         subtitleText: 'هذا تقييم تطبيقي إضافي وليس إلزامياً، يُجرى في ظروف آمنة ومضبوطة يحددها الأخصائي.',
         emotion: 'طمأنينة وعناية',
         estimatedDurationSec: 7.4,
+        actualDurationSec: 8.96,
         audioPath: '/audio/characters/scene-06-maryam-17.mp3',
         animationCue: 'speak-calm'
       }
@@ -454,6 +471,7 @@ export const STORY_SCENES: StoryScene[] = [
         subtitleText: 'ودلوقتي جه وقت اللعب! في عالم ألعاب صدى كل نشاط بيتحول للعبة ألوان وحركة، وكل محاولة ليها نجمة!',
         emotion: 'انطلاق وفرح',
         estimatedDurationSec: 7.0,
+        actualDurationSec: 8.96,
         audioPath: '/audio/characters/scene-07-sarah-18.mp3',
         animationCue: 'speak-celebrate',
         sfxCue: '/audio/sfx/game-sparkle.mp3'
@@ -467,6 +485,7 @@ export const STORY_SCENES: StoryScene[] = [
         subtitleText: 'يلا جربوا بنفسكم نماذج الألعاب التفاعلية وشوفوا إزاي التشجيع بيخلي الطفل متحمس للجلسة الجاية!',
         emotion: 'دعوة وتفاعل',
         estimatedDurationSec: 6.2,
+        actualDurationSec: 6.96,
         audioPath: '/audio/characters/scene-07-omar-19.mp3',
         animationCue: 'speak-excited'
       }
@@ -494,6 +513,7 @@ export const STORY_SCENES: StoryScene[] = [
         subtitleText: 'دور ولي الأمر مهم جداً؛ في البيت نوفر بيئة هادئة وتشجيعاً بحب لدعم جلسات المركز.',
         emotion: 'احتواء ودعم أسري',
         estimatedDurationSec: 7.5,
+        actualDurationSec: 10.64,
         audioPath: '/audio/characters/scene-08-nour-20.mp3',
         animationCue: 'speak-warm'
       },
@@ -506,6 +526,7 @@ export const STORY_SCENES: StoryScene[] = [
         subtitleText: 'وفي نفس الوقت، يراجع الأخصائي تقارير منظمة لكل مهارة مستقلة لدعم الخطة التأهيلية.',
         emotion: 'دقة وتعاون',
         estimatedDurationSec: 6.8,
+        actualDurationSec: 9.2,
         audioPath: '/audio/characters/scene-08-maryam-21.mp3',
         animationCue: 'speak-calm'
       }
@@ -533,6 +554,7 @@ export const STORY_SCENES: StoryScene[] = [
         subtitleText: 'مع جدول التقييم القبلي والمتابعة الدورية والتقييم البعدي، نتابع الأداء عبر الزمن في ظروف متسقة.',
         emotion: 'ثبات وموضوعية',
         estimatedDurationSec: 6.8,
+        actualDurationSec: 8.88,
         audioPath: '/audio/characters/scene-09-maryam-22.mp3',
         animationCue: 'speak-calm'
       },
@@ -545,6 +567,7 @@ export const STORY_SCENES: StoryScene[] = [
         subtitleText: 'المهم دائماً هو الاستمرارية والمشاركة؛ لأن لكل طفل إيقاعه وخطواته الخاصة.',
         emotion: 'تفاؤل وإنسانية',
         estimatedDurationSec: 6.0,
+        actualDurationSec: 8,
         audioPath: '/audio/characters/scene-09-nour-23.mp3',
         animationCue: 'speak-warm'
       }
@@ -572,6 +595,7 @@ export const STORY_SCENES: StoryScene[] = [
         subtitleText: 'وراء هذا العالم فريق عمل من عشر باحثات وباحثين، صمموا المحتوى العلمي والأدلة والألعاب.',
         emotion: 'تقدير وفخر',
         estimatedDurationSec: 7.0,
+        actualDurationSec: 8.88,
         audioPath: '/audio/characters/scene-10-omar-24.mp3',
         animationCue: 'speak-excited'
       }
@@ -599,6 +623,7 @@ export const STORY_SCENES: StoryScene[] = [
         subtitleText: 'رحلتنا مع الصوت مش بتنتهي هنا... كل محاولة ليها قيمة، وكل خطوة صغيرة بتفرق.',
         emotion: 'ختام دافئ ومؤثر',
         estimatedDurationSec: 6.0,
+        actualDurationSec: 6.56,
         audioPath: '/audio/characters/scene-11-nour-25.mp3',
         animationCue: 'speak-warm'
       },
@@ -611,6 +636,7 @@ export const STORY_SCENES: StoryScene[] = [
         subtitleText: 'مع صدى، لكل صوت حكاية، ولكل طفل رحلة!',
         emotion: 'ختام احتفالي مبهج',
         estimatedDurationSec: 4.5,
+        actualDurationSec: 4,
         audioPath: '/audio/characters/scene-11-sarah-26.mp3',
         animationCue: 'speak-celebrate',
         sfxCue: '/audio/sfx/finale-reveal.mp3'

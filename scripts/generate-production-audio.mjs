@@ -225,12 +225,22 @@ async function main() {
 
   const subAfter = await getSub();
   existingManifest.productionStatus = 'completed';
-  existingManifest.creditBudget.productionUsedCredits = spent;
+  existingManifest.creditBudget = {
+    ...(existingManifest.creditBudget || {}),
+    productionBudgetCap: MAX_PROD_BUDGET,
+    productionUsedCredits: spent,
+  };
   existingManifest.creditsRemaining = subAfter.character_limit - subAfter.character_count;
+  existingManifest.approvedCast = approved.characters;
   existingManifest.clips = clips;
   fs.writeFileSync(MANIFEST_PATH, JSON.stringify(existingManifest, null, 2));
 
-  console.log(JSON.stringify({ totalClips: clips.length, verified: clips.filter((c) => c.status === 'verified').length, creditsUsedThisRun: spent }, null, 2));
+  console.log(JSON.stringify({
+    totalClips: clips.length,
+    verified: clips.filter((c) => c.status === 'verified').length,
+    creditsUsedThisRun: spent,
+    creditsRemaining: existingManifest.creditsRemaining,
+  }, null, 2));
 }
 
 main().catch((e) => {

@@ -55,25 +55,26 @@ Repository: `sada-experience` (Baseline preserved at git branch `baseline-pre-up
 
 ---
 
-## Phase 3 — ElevenLabs Paid Egyptian Voice Casting & Real Audio Verification (Pending Human Approval)
+## Phase 3 — ElevenLabs Paid Egyptian Voice Production & Live Playback Verification (Completed)
 
 ### Objectives
-- Verify the upgraded paid **ElevenLabs Starter** account, search the paid Voice Library for authentic Egyptian Arabic voices, compare TTS models (`eleven_v3`, `eleven_v4`, `eleven_multilingual_v2`), generate 11 improved Egyptian auditions + a 4-turn Egyptian conversation demo within the remaining authorized `3,000`-credit audition budget, preserve previous reference auditions for side-by-side comparison, and verify real `<audio>` playback in Chromium.
+- Verify the upgraded paid **ElevenLabs Starter** account, search the paid Voice Library for authentic Egyptian Arabic voices, generate Egyptian auditions for user review, and upon approval produce all 26 production audio files across the 11 scenes while excluding internal audition samples from `dist/`.
 
 ### Completed Tasks
-- Inspected upgraded ElevenLabs account (`scripts/elevenlabs-inspect.mjs`):
-  - **Tier**: `starter` (`status: active`, `40,000` monthly credits, `voice_limit: 10`, `can_use_instant_voice_cloning: true`).
-  - **Egyptian Voice Library Discovery**: Queried `language=ar&accent=egyptian`, retrieving **78 verified native Egyptian Arabic voices** (`1 credit/char`).
-- Generated & verified (`scripts/generate-egyptian-auditions.mjs`) **11 new native Egyptian auditions** (`omar`: `Mawardy v3`, `Mostafa v4`, `Haytham v2`; `maryam`: `Alice (EG) v3`, `Asmaa v4`; `zain`: `Ziad v3`, `Sattar v4`; `nour`: `Nadia v3`, `Ghozlan v4`; `sarah`: `Farida v3`, `Fatima v2`) + **4 new Egyptian conversation turns** (`conv_eg_01..04`):
-  - Credits consumed in Egyptian batch: `434` (`39,663` credits remaining); cumulative audition spend across both rounds: `1,958 / 3,000` (`1,042` remaining inside audition cap).
-  - Preserved all 15 earlier reference auditions + 4 reference turns in `public/audio/audition-manifest.json` (`26` total stored auditions + `8` total conversation turns), all verified non-empty and playable in Chromium (`2.48s`–`9.57s`).
-- Upgraded `src/components/VoiceAuditionModal.tsx` with side-by-side comparison (`مرشحو المكتبة المصرية الأصيلة` vs. `المرشحون المرجعيون السابقون`), conversation group switcher (`المصري الجديد` vs. `المرجع السابق`), dialect & emotion badges, full model/voice IDs, and `sada_approved_voices_v2` export.
-- Refined `src/utils/storyAudioController.ts` (`resume()` volume/mute sync) and verified genuine user-gesture HTML `<audio>` playback via CDP mouse click on `"استمع"` (`readyState: 4`, `duration: 7.44s`, `currentTime: 0.22s`, `paused: false`, `muted: false`, `volume: 1`).
-- Updated `docs/voice-casting-report.md` and documented Free-tier vs. Starter-tier publication/licensing boundaries.
+- Approved Egyptian Cast (`docs/approved-voices.json`) selected directly by user review:
+  - **عمر (`omar`)**: `Mostafa - Bold and Spirited` (`QvNF0qyyt1Tuy1YAmnzH`, `eleven_v4`)
+  - **مريم (`maryam`)**: `Alice (EG) - Smooth, Charming and Soft` (`LjKPkQHpXCsWoy7Pjq4U`, `eleven_v3`)
+  - **زين (`zain`)**: `Sattar - Warm Egyptian explainer` (`Y65Dz2XsznJl6gZHkXPi`, `eleven_v4`)
+  - **نور (`nour`)**: `Nadia - Sweet and Melodic` (`80le32Uz2DfWFo4Foz0p`, `eleven_v3`)
+  - **سارة (`sarah`)**: `Farida - Lively and Radiant` (`6aXW46RTUz6Y2lkBGQ1a`, `eleven_v3`)
+- Generated and verified all **26 production MP3 clips** (`public/audio/characters/scene-01-omar-01.mp3`–`scene-11-sarah-26.mp3`, `4.00s`–`13.36s`, verified in Chromium `<audio loadedmetadata>`) via `scripts/generate-production-audio.mjs`:
+  - Production credits consumed: `968` (well inside `6,000` cap); remaining account balance: `38,607`.
+  - Synced `actualDurationSec` and approved character voice metadata into `src/data/storyManifest.ts` and `public/audio/manifest.json`.
+  - Fixed active-scene re-entry guard in `src/utils/storyAudioController.ts` so `goToNextScene()` handovers are never interrupted by ScrollSpy debounce.
+  - Archived internal audition candidates to `docs/voice-auditions-archive/` and gated `VoiceAuditionModal` toggle behind `import.meta.env.DEV` (`dist/audio/characters` has exact `26` `.mp3` clips; `dist/audio/auditions` excluded).
 
-### Remaining Manual Actions (Approval Checkpoint)
-1. Listen to the Egyptian Conversation Demo and Egyptian vs. Reference candidates inside **«أصوات الشخصيات»** and approve/adjust your 5 chosen voices.
-2. Upon your approval, run `scripts/generate-production-audio.mjs` to generate all 26 production dialogue clips (within the 6,000-credit production cap) and verify Story Mode end-to-end with the final files.
+### Remaining Manual Actions
+- None for audio generation. Remaining external action: final publication/deployment approval on Vercel.
 
 ---
 
@@ -122,25 +123,25 @@ Repository: `sada-experience` (Baseline preserved at git branch `baseline-pre-up
 - Converted 12 oversized character & group PNGs (`9,679 KB`) to crisp alpha-transparent `.webp` (`1,038 KB` — ~89% smaller) and archived unused legacy files in `docs/legacy-assets/`.
 - Reduced `dist/` bundle weight, self-hosted Alexandria fonts locally (`public/fonts/alexandria-0.woff2`–`3.woff2`, `100,860` B, `src/fonts.css`) eliminating external font layout shifts (`CLS: 0.0022`).
 - Replaced `SoundRibbon` `<canvas>` redraws with dual GPU-translated `<svg>` curves (`32ms` throttled tick), removed CSS `blur-2xl`/`backdrop-blur-md`/`drop-shadow` filters on scrolling elements, added `contain: layout style paint` on `.sada-scene`, removed `scale`/`rotate` scrub on heavy shadow containers, fixed Scene 07 `ScrollTrigger` card reveal threshold (`top 98%` + `clearProps`), and added post-LCP idle image pre-decoding (`2600ms`).
-- Verified `oxlint` (`0` warnings, `0` errors) and `tsc -b && vite build` (`0` errors).
-- Ran automated headless Chromium CDP audit (`verify_upgrade.mjs`) across `1440×900` desktop and all 7 viewports (`360px`, `390px`, `430px`, `768px`, `1024px`, `1440px`, `1920px`), Story Mode interaction, upgraded `VoiceAuditionModal` (conversation demo + 15 candidates), and `prefers-reduced-motion`.
+- Verified `oxlint` (`0` warnings, `0` errors) and `tsc -b && vite build` (`0` errors, `3.31s`).
+- Ran automated headless Chromium CDP audit (`verify_upgrade.mjs`) across `1440×900` desktop and all 7 viewports (`360px`, `390px`, `430px`, `768px`, `1024px`, `1440px`, `1920px`), real CDP-triggered Story Mode playback (`ابدأ الرحلة بالصوت` → Play/Pause/Resume/Replay/Next Scene handover across `/audio/characters/scene-01-omar-01.mp3` and `scene-02-zain-04.mp3`), production isolation check (`auditionBtnHiddenInProd: true`), and `prefers-reduced-motion`.
 
 ### Verified Before vs. After Lab Results (Headless Chromium CDP)
-| Metric | Baseline (`80da208`) | Upgraded (Current) |
+| Metric | Baseline (`80da208`) | Upgraded (Final Production) |
 | :--- | :--- | :--- |
 | `oxlint` warnings / errors | Not run | `0` warnings / `0` errors |
-| Main JS chunk (uncompressed / gzip) | `502.76 kB` / `156.74 kB` | `189.59 kB` / `46.86 kB` (`VoiceAuditionModal` `14.30 kB` lazy) |
+| Main JS chunk (uncompressed / gzip) | `502.76 kB` / `156.74 kB` | `189.72 kB` / `47.09 kB` |
+| Production audio clips verified | `0` | `26 / 26` MP3 (`dist/audio/auditions`: `false`) |
+| Live Story Mode playback (`ابدأ الرحلة بالصوت`) | N/A | Verified `readyState: 4`, `duration: 8.4s` & `6.32s`, pause/resume/replay/next-scene clean (`activePlayingElements: 1`) |
 | `h1` `letter-spacing` | `-1.8px` | `normal` (`0`) |
 | `h1` `line-height` / `font-size` | `72px` / `72px` (`1.00`) | `85.008px` / `61.6px` (`1.38`) |
 | Console errors | `0` | `0` |
 | Horizontal overflow (`360`–`1920px`) | `false` | `false` across all 7 viewports |
 | `prefers-reduced-motion` support | CSS only | Verified JS + CSS (`reducedMotionOk: true`) |
-| Lab Scroll FPS (60-step pass, software Chromium) | `116` FPS (static page) | `41`–`45` FPS (`droppedFrames: 8` of `59`, software rasterizer in `--headless=new`) |
-| Lab FCP / LCP (headless Chromium idle) | `1400 ms` / `1400 ms` | `1664 ms` / `1664 ms` |
-| Lab CLS (idle / post-scroll) | `0.084` | `0.0008` idle / `0.0011` after scroll |
-| Real browser audio verification | Not run | `ok: true` (`readyState: 4`, `duration: 7.44s`, `currentTime: 0.22s`, `paused: false`) |
+| Lab Scroll FPS (60-step pass, software Chromium) | `116` FPS (static page) | `44` FPS (`droppedFrames: 10` of `59`, software rasterizer in `--headless=new`) |
+| Lab FCP / LCP (headless Chromium idle) | `1400 ms` / `1400 ms` | `1636 ms` / `1636 ms` |
+| Lab CLS (idle / post-scroll) | `0.084` | `0.0008` idle / `0.0027` after scroll |
 
 ### Remaining Limitations & Manual Actions
-1. **Approval Checkpoint**: Full 26-line production audio (`scripts/generate-production-audio.mjs`) is paused pending user review/approval of the 15 voice auditions and 4-turn conversation demo in `VoiceAuditionModal`. Keep `public/audio/auditions/` available for local preview right now; exclude internal audition files before final Vercel deployment.
-2. **Physical Devices & Interactive Chrome**: Responsive checks were performed via headless Chromium viewport emulation (`360px`–`1920px`) without GPU acceleration; physical mobile testing is recommended before final public launch.
-3. **Production Deployment**: No deployment to Vercel was executed (awaiting voice approval, Phase 6 audio generation, and publication approval).
+1. **Physical Devices & Live Audio Listening**: Automated CDP verification confirmed DOM media element playback, network delivery, durations, pause/resume/replay/scene-handover states, and zero overlap; human listening on physical speakers and physical mobile devices is recommended prior to public showcase.
+2. **Production Deployment**: No deployment to Vercel was executed (awaiting final publication approval).

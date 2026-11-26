@@ -1,0 +1,57 @@
+{
+  "approvedAt": "2026-11-26T07:40:14+02:00",
+  "planTier": "starter",
+  "source": "User visual selection from VoiceAuditionModal (5 Egyptian Voice Library selections)",
+  "characters": {
+    "omar": {
+      "voiceId": "QvNF0qyyt1Tuy1YAmnzH",
+      "voiceName": "Mostafa - Bold and Spirited",
+      "modelId": "eleven_v4",
+      "settings": {
+        "stability": 0.45,
+        "similarity_boost": 0.78,
+        "style": 0.3
+      }
+    },
+    "maryam": {
+      "voiceId": "LjKPkQHpXCsWoy7Pjq4U",
+      "voiceName": "Alice (EG) - Smooth, Charming and Soft",
+      "modelId": "eleven_v3",
+      "settings": {
+        "stability": 0.65,
+        "similarity_boost": 0.82,
+        "style": 0.15
+      }
+    },
+    "zain": {
+      "voiceId": "Y65Dz2XsznJl6gZHkXPi",
+      "voiceName": "Sattar - Warm Egyptian explainer",
+      "modelId": "eleven_v4",
+      "settings": {
+        "stability": 0.48,
+        "similarity_boost": 0.8,
+        "style": 0.28
+      }
+    },
+    "nour": {
+      "voiceId": "80le32Uz2DfWFo4Foz0p",
+      "voiceName": "Nadia - Sweet and Melodic",
+      "modelId": "eleven_v3",
+      "settings": {
+        "stability": 0.62,
+        "similarity_boost": 0.82,
+        "style": 0.2
+      }
+    },
+    "sarah": {
+      "voiceId": "6aXW46RTUz6Y2lkBGQ1a",
+      "voiceName": "Farida - Lively and Radiant",
+      "modelId": "eleven_v3",
+      "settings": {
+        "stability": 0.38,
+        "similarity_boost": 0.78,
+        "style": 0.42
+      }
+    }
+  }
+}
