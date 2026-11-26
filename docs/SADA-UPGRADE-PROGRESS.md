@@ -145,3 +145,24 @@ Repository: `sada-experience` (Baseline preserved at git branch `baseline-pre-up
 ### Remaining Limitations & Manual Actions
 1. **Physical Devices & Live Audio Listening**: Automated CDP verification confirmed DOM media element playback, network delivery, durations, pause/resume/replay/scene-handover states, and zero overlap; human listening on physical speakers and physical mobile devices is recommended prior to public showcase.
 2. **Production Deployment**: No deployment to Vercel was executed (awaiting final publication approval).
+
+---
+
+## Phase 7 — Egyptian Dialect QA, Gulf Voice Removal & Tashkeel Regeneration
+
+### Objectives
+- Eliminate the Gulf-sounding voice previously assigned to **مريم (`maryam`)** (`Alice (EG)`, `LjKPkQHpXCsWoy7Pjq4U`).
+- Disambiguate Egyptian Arabic pronunciation across all `26` dialogue lines using targeted Tashkeel (`spokenText` only) and clear spoken forms for the Ling Six phonemes.
+- Regenerate all `26` production MP3 clips on the Starter plan and re-verify production build & browser playback.
+
+### Completed Tasks & Modified Files
+- Replaced `maryam` voice with genuine Cairo voice **`Heba - Soothing and Gracious`** (`JHdGl5PsEzushIzzVSd1`, `eleven_v3`, studio `64cbc624`), and archived alternative Cairo auditions (`Heba v3/v4`, `Seham v3`) inside `docs/voice-auditions-archive/` while deleting `mariam_eg_alice_v3.mp3`.
+- Added dev-only audition middleware `serveDevVoiceAuditions()` in `vite.config.ts` so `npm run dev` serves `/audio/audition-manifest.json` & `/audio/auditions/*` without including rejected/archive MP3s in `dist/`.
+- Applied Egyptian Tashkeel across all `26` `spokenText` strings in `src/data/storyManifest.ts` (including Ling Six spoken letters `'الميم، والأو، والآ، والإي، والشّين، والسّين'`) while keeping un-diacritized `subtitleText`.
+- Fixed dialogue ID regex in `scripts/generate-production-audio.mjs` (`scene-XX-speaker-YY`) and updated `docs/approved-voices.json`, `src/components/VoiceAuditionModal.tsx`, and `docs/voice-casting-report.md`.
+- Regenerated and Chromium-verified all `26 / 26` clips (`public/audio/characters/*.mp3`, `totalDur: 213.52s`, `creditsUsedThisRun: 1,089`, `creditsRemaining: 37,347`) and synced verified `actualDurationSec` durations into `src/data/storyManifest.ts` and `public/audio/manifest.json`.
+
+### Verified Final Build & CDP Audit Results
+- `oxlint`: `0` warnings, `0` errors (`33` files).
+- `tsc -b && vite build`: succeeded in `1.92s` (`DIST_CHAR_CLIPS: 26`, `DIST_AUDITIONS_EXISTS: False`, main chunk `190.33 kB` / `47.81 kB` gzip).
+- Headless Chromium CDP (`verify_upgrade.mjs`): `FCP: 1036 ms`, `LCP: 1036 ms`, `CLS: 0` idle / `0.0019` post-scroll, `67 FPS` (`droppedFrames: 5` of `59`), `overflowX: false` across all `7` viewports (`360px`–`1920px`), `consoleErrorsCount: 0`, `auditionBtnHiddenInProd: true`, `reducedMotionOk: true`, and Story Mode audio playback verified (`scene-01-omar-01.mp3` `8.64s`, `scene-02-zain-04.mp3` `6.64s`, Pause/Resume/Replay/Next Scene clean with `activePlayingElements: 1`).

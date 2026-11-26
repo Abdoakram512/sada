@@ -65,7 +65,7 @@ interface VoiceAuditionModalProps {
   onClose: () => void;
 }
 
-const APPROVED_STORAGE_KEY = 'sada_approved_voices_v2';
+const APPROVED_STORAGE_KEY = 'sada_approved_voices_v3';
 
 export const VoiceAuditionModal: React.FC<VoiceAuditionModalProps> = ({ isOpen, onClose }) => {
   const [manifest, setManifest] = useState<AuditionManifest | null>(null);
@@ -82,9 +82,9 @@ export const VoiceAuditionModal: React.FC<VoiceAuditionModalProps> = ({ isOpen, 
       if (saved) return JSON.parse(saved) as Record<CharacterId, string>;
     } catch {}
     return {
-      omar: 'omar_eg_mawardy_v3',
-      maryam: 'mariam_eg_alice_v3',
-      zain: 'zein_eg_ziad_v3',
+      omar: 'omar_eg_mostafa_v4',
+      maryam: 'mariam_eg_heba_v3',
+      zain: 'zein_eg_sattar_v4',
       nour: 'nour_eg_nadia_v3',
       sarah: 'sara_eg_farida_v3',
     };

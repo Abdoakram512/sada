@@ -29,7 +29,7 @@ const STORY_MANIFEST_TS = path.resolve(process.cwd(), 'src/data/storyManifest.ts
 function parseDialogueFromStoryManifest() {
   const src = fs.readFileSync(STORY_MANIFEST_TS, 'utf8');
   const lines = [];
-  const blockRegex = /\{\s*id:\s*'([^']+)'[\s\S]*?sceneId:\s*'([^']+)'[\s\S]*?speakerId:\s*'([^']+)'[\s\S]*?spokenText:\s*'([^']+)'[\s\S]*?audioPath:\s*'([^']+)'/g;
+  const blockRegex = /\{\s*id:\s*'(scene-\d+-(?:omar|maryam|zain|nour|sarah)-\d+)'[\s\S]*?sceneId:\s*'([^']+)'[\s\S]*?speakerId:\s*'([^']+)'[\s\S]*?spokenText:\s*'([^']+)'[\s\S]*?audioPath:\s*'([^']+)'/g;
   let m;
   while ((m = blockRegex.exec(src)) !== null) {
     lines.push({
