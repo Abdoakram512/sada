@@ -33,33 +33,45 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) return;
 
-    const ctx = gsap.context(() => {
-      gsap.to(cast, {
-        y: -28,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: section,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: 0.7,
-        },
-      });
+    const mm = gsap.matchMedia();
 
-      gsap.to(rings, {
-        y: 22,
-        opacity: 0.3,
-        ease: 'none',
-        force3D: true,
-        scrollTrigger: {
-          trigger: section,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: 0.5,
-        },
-      });
-    }, section);
+    mm.add(
+      {
+        isMobile: '(max-width: 767px)',
+        isDesktop: '(min-width: 768px)',
+      },
+      (context) => {
+        const { isMobile } = context.conditions || { isMobile: false };
 
-    return () => ctx.revert();
+        gsap.to(cast, {
+          y: isMobile ? -14 : -28,
+          ease: 'none',
+          force3D: true,
+          scrollTrigger: {
+            trigger: section,
+            start: 'top top',
+            end: 'bottom top',
+            scrub: 0.6,
+          },
+        });
+
+        gsap.to(rings, {
+          y: isMobile ? 12 : 22,
+          opacity: 0.3,
+          ease: 'none',
+          force3D: true,
+          scrollTrigger: {
+            trigger: section,
+            start: 'top top',
+            end: 'bottom top',
+            scrub: 0.5,
+          },
+        });
+      },
+      section
+    );
+
+    return () => mm.revert();
   }, []);
 
   return (
@@ -67,7 +79,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       ref={sectionRef}
       id="hero"
       data-scene-id="scene-01-welcome"
-      className="relative min-h-[calc(100svh-0.5rem)] flex flex-col justify-between pt-20 sm:pt-[4.5rem] pb-36 sm:pb-4 px-4 md:px-8 overflow-x-clip bg-gradient-to-b from-sada-cream via-[#FFF3DF] to-sada-cream"
+      className="relative min-h-[100svh] flex flex-col justify-between pt-16 sm:pt-[4.5rem] pb-16 sm:pb-4 px-3.5 sm:px-4 md:px-8 overflow-x-clip bg-gradient-to-b from-sada-cream via-[#FFF3DF] to-sada-cream"
     >
       {/* Decorative Sound Wave Rings (paused when Hero is offscreen) */}
       <div
@@ -105,13 +117,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         </h1>
 
         {/* Supporting Narrative Copy */}
-        <p className="sada-body-copy text-sada-ink/80 max-w-2xl font-medium text-center mb-2.5">
-          حكاية تفاعلية تجمع بين{' '}
-          <strong className="text-sada-violet font-extrabold">تقييم أصوات لينج الستة</strong>، وتنمية المهارات السمعية الخمس، والمتابعة المنظمة للأطفال ضعاف السمع من مستخدمي السماعات الطبية وزراعة القوقعة.
+        <p className="text-[15px] sm:text-base md:text-lg leading-relaxed text-sada-ink/80 max-w-2xl font-medium text-center mb-2">
+          تطبيق تفاعلي يجمع بين{' '}
+          <strong className="text-sada-violet font-extrabold">تقييم أصوات لينج الستة</strong>، وتنمية المهارات السمعية الخمس، والمتابعة المنظمة للأطفال من مستخدمي السماعات الطبية وزراعة القوقعة.
         </p>
 
-        {/* Core Pillars Pills */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-2.5 max-w-2xl">
+        {/* Core Pillars Pills — Hidden on ultra-compact hero fold to keep all 5 characters comfortably above fold */}
+        <div className="hidden min-[380px]:grid grid-cols-2 sm:flex sm:flex-wrap items-center justify-center gap-1.5 sm:gap-2 mb-2 sm:mb-2.5 max-w-2xl w-full sm:w-auto">
           {[
             { label: 'تقييم وظيفي', icon: Activity, color: 'bg-sada-lavender text-sada-violet border-sada-violet/20' },
             { label: 'متابعة عبر الزمن', icon: FileText, color: 'bg-emerald-50 text-sada-teal-dark border-sada-teal/25' },
@@ -122,27 +134,27 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             return (
               <div
                 key={idx}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold border ${item.color}`}
+                className={`flex items-center justify-center gap-1 px-2.5 sm:px-3 py-0.5 sm:py-1.5 rounded-xl text-[11px] sm:text-sm font-bold border ${item.color}`}
               >
-                <Icon size={14} />
+                <Icon size={13} />
                 <span>{item.label}</span>
               </div>
             );
           })}
         </div>
 
-        {/* Inline Story Mode Choice (non-blocking, zero character overlap) */}
+        {/* Inline Story Mode Choice (non-blocking, constant height) */}
         <StoryEntryOverlay />
 
-        {/* Call to Actions */}
-        <div className="flex flex-wrap items-center justify-center gap-3 mb-2">
+        {/* Call to Actions — keep quick jump pills compact on desktop, omit extra mobile row when audio mode takes priority */}
+        <div className="hidden sm:flex flex-wrap items-center justify-center gap-3 mb-2 w-auto">
           <button
             type="button"
             onClick={() => {
               storyAudioController.chooseEntryMode('story');
               soundEngine.playSuccess();
             }}
-            className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-sada-violet hover:bg-sada-violet-dark text-white font-extrabold text-sm sm:text-base shadow-lg shadow-sada-violet/25 hover:scale-105 active:scale-95 transition-all"
+            className="hidden sm:flex items-center gap-2 px-6 py-3 rounded-2xl bg-sada-violet hover:bg-sada-violet-dark text-white font-extrabold text-sm sm:text-base shadow-lg shadow-sada-violet/25 hover:scale-105 active:scale-95 transition-all"
           >
             <Volume2 size={18} />
             <span>{mode === 'story' ? 'تشغيل مشهد البداية' : 'ابدأ الرحلة بالصوت'}</span>
@@ -154,9 +166,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               soundEngine.playPop();
               onExploreClick();
             }}
-            className="flex items-center gap-2 px-5 py-3 rounded-2xl bg-white hover:bg-sada-lavender/40 text-sada-ink font-bold text-sm sm:text-base border-2 border-sada-violet/20 hover:border-sada-violet/50 shadow-sm transition-all"
+            className="min-h-[44px] flex items-center gap-1.5 px-4 sm:px-5 py-2.5 sm:py-3 rounded-2xl bg-white hover:bg-sada-lavender/40 text-sada-ink font-bold text-xs sm:text-base border-2 border-sada-violet/20 hover:border-sada-violet/50 shadow-sm transition-all active:scale-95"
           >
-            <Sparkles size={16} className="text-sada-teal" />
+            <Sparkles size={15} className="text-sada-teal" />
             <span>تقييم أصوات لينج</span>
           </button>
 
@@ -166,103 +178,141 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               soundEngine.playPop();
               onAboutClick();
             }}
-            className="px-5 py-3 rounded-2xl bg-white/75 hover:bg-white text-sada-ink/85 font-bold text-sm border border-sada-ink/10 transition-all"
+            className="min-h-[44px] px-4 sm:px-5 py-2.5 sm:py-3 rounded-2xl bg-white/80 hover:bg-white text-sada-ink/85 font-bold text-xs sm:text-base border border-sada-ink/10 transition-all active:scale-95"
           >
             فهم التحدي
           </button>
         </div>
 
-        {/* Staged 5-Character Ensemble — Responsive grid/flex with zero face overlap */}
+        {/* Staged 5-Character Ensemble */}
         <div ref={castRef} className="relative w-full max-w-5xl mt-1">
           <div
             aria-hidden="true"
-            className="mx-auto w-4/5 h-8 rounded-[100%] -mb-5"
+            className="mx-auto w-4/5 h-7 rounded-[100%] -mb-4"
             style={{ background: 'radial-gradient(ellipse at center, rgba(39,33,62,0.12) 0%, transparent 72%)' }}
           />
-          <div className="grid grid-cols-3 sm:grid-cols-5 items-end justify-items-center gap-2 sm:gap-3 px-1">
-            <div className="order-1">
+
+          {/* Desktop & Tablet Panoramic 5-Character Cast */}
+          <div className="hidden sm:grid sm:grid-cols-5 items-end justify-items-center gap-2 sm:gap-3 px-1">
+            <div>
               <CharacterStageActor
                 characterId="sarah"
                 eager
                 isActiveScene={isHeroScene}
                 isSpeaking={isHeroScene && activeSpeakerId === 'sarah'}
                 isDimmed={Boolean(isHeroScene && activeSpeakerId && activeSpeakerId !== 'sarah')}
-                sizeClass="w-32 sm:w-40 md:w-44 lg:w-48"
+                heightClass="h-44 md:h-52 lg:h-60"
                 onClick={() => storyAudioController.replayCurrentScene()}
               />
             </div>
-            <div className="order-2">
+            <div>
               <CharacterStageActor
                 characterId="zain"
                 eager
                 isActiveScene={isHeroScene}
                 isSpeaking={isHeroScene && activeSpeakerId === 'zain'}
                 isDimmed={Boolean(isHeroScene && activeSpeakerId && activeSpeakerId !== 'zain')}
-                sizeClass="w-32 sm:w-40 md:w-44 lg:w-48"
+                heightClass="h-44 md:h-52 lg:h-60"
                 onClick={() => onAboutClick()}
               />
             </div>
-            <div className="order-3 col-span-1">
+            <div>
               <CharacterStageActor
                 characterId="omar"
                 eager
                 isActiveScene={isHeroScene}
                 isSpeaking={isHeroScene && activeSpeakerId === 'omar'}
                 isDimmed={Boolean(isHeroScene && activeSpeakerId && activeSpeakerId !== 'omar')}
-                sizeClass="w-36 sm:w-44 md:w-52 lg:w-56"
+                heightClass="h-52 md:h-60 lg:h-68"
                 onClick={() => storyAudioController.replayCurrentScene()}
               />
             </div>
-            <div className="order-4 hidden sm:block">
+            <div>
               <CharacterStageActor
                 characterId="maryam"
                 eager
                 isActiveScene={isHeroScene}
                 isSpeaking={isHeroScene && activeSpeakerId === 'maryam'}
                 isDimmed={Boolean(isHeroScene && activeSpeakerId && activeSpeakerId !== 'maryam')}
-                sizeClass="w-32 sm:w-40 md:w-44 lg:w-48"
+                heightClass="h-44 md:h-52 lg:h-60"
                 onClick={() => onExploreClick()}
               />
             </div>
-            <div className="order-5 hidden sm:block">
+            <div>
               <CharacterStageActor
                 characterId="nour"
                 eager
                 isActiveScene={isHeroScene}
                 isSpeaking={isHeroScene && activeSpeakerId === 'nour'}
                 isDimmed={Boolean(isHeroScene && activeSpeakerId && activeSpeakerId !== 'nour')}
-                sizeClass="w-32 sm:w-40 md:w-44 lg:w-48"
+                heightClass="h-44 md:h-52 lg:h-60"
                 onClick={() => onAboutClick()}
               />
             </div>
           </div>
 
-          {/* Mobile secondary row for Maryam & Nour — generous height without clipping */}
-          <div className="flex sm:hidden items-end justify-center gap-6 mt-3">
-            <CharacterStageActor
-              characterId="maryam"
-              eager
-              isActiveScene={isHeroScene}
-              isSpeaking={isHeroScene && activeSpeakerId === 'maryam'}
-              isDimmed={Boolean(isHeroScene && activeSpeakerId && activeSpeakerId !== 'maryam')}
-              sizeClass="w-32"
-              onClick={() => onExploreClick()}
-            />
-            <CharacterStageActor
-              characterId="nour"
-              eager
-              isActiveScene={isHeroScene}
-              isSpeaking={isHeroScene && activeSpeakerId === 'nour'}
-              isDimmed={Boolean(isHeroScene && activeSpeakerId && activeSpeakerId !== 'nour')}
-              sizeClass="w-32"
-              onClick={() => onAboutClick()}
-            />
+          {/* Mobile Staggered 5-Character Animated Movie Ensemble (clean spacing, zero badge over faces) */}
+          <div className="sm:hidden flex flex-col items-center">
+            <div className="flex items-end justify-center gap-20 -mb-6 relative z-10">
+              <CharacterStageActor
+                characterId="zain"
+                eager
+                showLabel={false}
+                isActiveScene={isHeroScene}
+                isSpeaking={isHeroScene && activeSpeakerId === 'zain'}
+                isDimmed={Boolean(isHeroScene && activeSpeakerId && activeSpeakerId !== 'zain')}
+                heightClass="h-36"
+                onClick={() => onAboutClick()}
+              />
+              <CharacterStageActor
+                characterId="nour"
+                eager
+                showLabel={false}
+                isActiveScene={isHeroScene}
+                isSpeaking={isHeroScene && activeSpeakerId === 'nour'}
+                isDimmed={Boolean(isHeroScene && activeSpeakerId && activeSpeakerId !== 'nour')}
+                heightClass="h-36"
+                onClick={() => onAboutClick()}
+              />
+            </div>
+            <div className="flex items-end justify-center gap-2.5 relative z-20">
+              <CharacterStageActor
+                characterId="sarah"
+                eager
+                showLabel={false}
+                isActiveScene={isHeroScene}
+                isSpeaking={isHeroScene && activeSpeakerId === 'sarah'}
+                isDimmed={Boolean(isHeroScene && activeSpeakerId && activeSpeakerId !== 'sarah')}
+                heightClass="h-40"
+                onClick={() => storyAudioController.replayCurrentScene()}
+              />
+              <CharacterStageActor
+                characterId="omar"
+                eager
+                showLabel={false}
+                isActiveScene={isHeroScene}
+                isSpeaking={isHeroScene && activeSpeakerId === 'omar'}
+                isDimmed={Boolean(isHeroScene && activeSpeakerId && activeSpeakerId !== 'omar')}
+                heightClass="h-44"
+                onClick={() => storyAudioController.replayCurrentScene()}
+              />
+              <CharacterStageActor
+                characterId="maryam"
+                eager
+                showLabel={false}
+                isActiveScene={isHeroScene}
+                isSpeaking={isHeroScene && activeSpeakerId === 'maryam'}
+                isDimmed={Boolean(isHeroScene && activeSpeakerId && activeSpeakerId !== 'maryam')}
+                heightClass="h-40"
+                onClick={() => onExploreClick()}
+              />
+            </div>
           </div>
         </div>
       </div>
 
       {/* Scroll Cue */}
-      <div className="relative mt-4 flex flex-col items-center justify-center gap-1.5 text-sada-violet">
+      <div className="relative mt-2 sm:mt-4 flex flex-col items-center justify-center gap-1 text-sada-violet">
         <span className="text-xs font-bold opacity-85">مرّر لمتابعة فصول الحكاية</span>
         <ArrowDown size={16} className="animate-bounce opacity-75" />
       </div>

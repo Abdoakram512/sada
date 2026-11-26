@@ -3,11 +3,13 @@
 @tailwind utilities;
 
 :root {
-  --sada-hero-size: clamp(2.1rem, 4.5vw, 3.85rem);
-  --sada-h2-size: clamp(1.75rem, 3.4vw, 2.85rem);
-  --sada-h3-size: clamp(1.25rem, 2.1vw, 1.85rem);
-  --sada-body-size: clamp(0.95rem, 1.1vw, 1.125rem);
-  --sada-section-pad-y: clamp(3.75rem, 6.5vw, 5.75rem);
+  --sada-hero-size: clamp(1.95rem, 4.4vw, 3.85rem);
+  --sada-h2-size: clamp(1.6rem, 3.3vw, 2.85rem);
+  --sada-h3-size: clamp(1.2rem, 2.1vw, 1.85rem);
+  --sada-body-size: clamp(1rem, 1.15vw, 1.125rem);
+  --sada-section-pad-y: clamp(2.75rem, 5.5vw, 5.75rem);
+  --sada-safe-bottom: env(safe-area-inset-bottom, 0px);
+  --sada-safe-top: env(safe-area-inset-top, 0px);
 
   /* Unified Color Harmony Design Tokens (derived from SADA logo & 5 character outfits) */
   --sada-brand-violet: #7357D9;
@@ -188,11 +190,54 @@ html.lenis body {
   /* Scene wrapper baseline spacing inside components layer so utility pb-* overrides cleanly */
   .sada-scene {
     padding-block: var(--sada-section-pad-y);
-    padding-inline: clamp(1rem, 3vw, 2.5rem);
+    padding-inline: clamp(0.875rem, 3.2vw, 2.5rem);
+    scroll-margin-top: 4rem;
     position: relative;
     overflow-x: clip;
     contain: layout style paint;
   }
+
+  .pb-safe {
+    padding-bottom: max(0.75rem, var(--sada-safe-bottom));
+  }
+
+  .pt-safe-nav {
+    padding-top: max(0.625rem, var(--sada-safe-top));
+  }
+
+  .touch-target {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+/* Mobile & desktop GPU character expressiveness */
+@keyframes charBreathe {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -4px, 0);
+  }
+}
+
+@keyframes charSpeakBob {
+  0%, 100% {
+    transform: translate3d(0, -2px, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -7px, 0) scale(1.018);
+  }
+}
+
+.animate-char-breathe {
+  animation: charBreathe 4.2s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-char-speak {
+  animation: charSpeakBob 1.35s ease-in-out infinite;
+  will-change: transform;
 }
 
 /* Custom Scrollbar */

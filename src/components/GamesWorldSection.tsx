@@ -160,19 +160,23 @@ export const GamesWorldSection: React.FC<GamesWorldSectionProps> = ({
           </p>
         </div>
 
-        {/* Characters + Reward & Group Visual — Energetic Nex Playground Showcase */}
-        <div className="flex flex-wrap items-end justify-center gap-4 sm:gap-8 mb-10">
-          <CharacterStageActor
-            characterId="sarah"
-            sizeClass="w-36 sm:w-48 md:w-56"
-            isActiveScene={isSceneActive}
-            isSpeaking={isSceneActive && activeSpeakerId === 'sarah'}
-            isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'sarah')}
-          />
-          <div className="flex items-center gap-4 bg-[#362E52]/90 px-5 py-4 rounded-3xl border border-white/15 shadow-lg">
+        {/* Characters + Reward & Group Visual — Co-hosts side-by-side above playground showcase on mobile */}
+        <div className="grid grid-cols-2 lg:flex lg:items-end lg:justify-center gap-4 sm:gap-8 mb-8 sm:mb-10 justify-items-center">
+          <div className="order-1">
+            <CharacterStageActor
+              characterId="sarah"
+              heightClass="h-44 sm:h-52 md:h-60"
+              isActiveScene={isSceneActive}
+              isSpeaking={isSceneActive && activeSpeakerId === 'sarah'}
+              isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'sarah')}
+            />
+          </div>
+          <div className="col-span-2 order-3 lg:order-2 flex items-center justify-center gap-3 sm:gap-4 bg-[#362E52]/95 px-4 sm:px-5 py-3.5 sm:py-4 rounded-3xl border border-white/15 shadow-lg w-full max-w-md lg:w-auto">
             <img
               src="/assets/group_running_transparent.webp"
               alt="أبطال صدى ينطلقون في عالم الألعاب"
+              width={760}
+              height={506}
               loading="lazy"
               decoding="async"
               className="w-44 sm:w-56 h-auto object-contain"
@@ -182,20 +186,22 @@ export const GamesWorldSection: React.FC<GamesWorldSectionProps> = ({
               alt="شاشة المكافأة ونجمة التقدم في تطبيق صدى"
               loading="lazy"
               decoding="async"
-              className="w-20 sm:w-24 rounded-2xl border-2 border-white/25 shadow-lg"
+              className="w-24 sm:w-28 rounded-2xl drop-shadow-lg"
             />
           </div>
-          <CharacterStageActor
-            characterId="omar"
-            sizeClass="w-36 sm:w-48 md:w-56"
-            isActiveScene={isSceneActive}
-            isSpeaking={isSceneActive && activeSpeakerId === 'omar'}
-            isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'omar')}
-          />
+          <div className="order-2 lg:order-3">
+            <CharacterStageActor
+              characterId="omar"
+              heightClass="h-44 sm:h-52 md:h-60"
+              isActiveScene={isSceneActive}
+              isSpeaking={isSceneActive && activeSpeakerId === 'omar'}
+              isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'omar')}
+            />
+          </div>
         </div>
 
-        {/* Playful Tilted 3D Game Cards Showcase */}
-        <div className="relative mb-10 perspective-1000">
+        {/* Playful Game Cards Showcase (straight touch-ready cards on mobile, subtle depth on desktop) */}
+        <div className="relative mb-8 sm:mb-10 perspective-1000">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2 text-xs font-bold text-white/80">
               <Trophy className="text-sada-yellow" size={16} />
@@ -205,41 +211,36 @@ export const GamesWorldSection: React.FC<GamesWorldSectionProps> = ({
               <button
                 type="button"
                 onClick={handlePrevGame}
-                className="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-white transition-colors"
+                className="min-w-[44px] min-h-[44px] sm:min-w-[36px] sm:min-h-[36px] flex items-center justify-center p-2 rounded-xl bg-white/10 hover:bg-white/20 text-white transition-colors active:scale-95"
                 aria-label="اللعبة السابقة"
               >
-                <ArrowRight size={16} />
+                <ArrowRight size={17} />
               </button>
               <button
                 type="button"
                 onClick={handleNextGame}
-                className="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-white transition-colors"
+                className="min-w-[44px] min-h-[44px] sm:min-w-[36px] sm:min-h-[36px] flex items-center justify-center p-2 rounded-xl bg-white/10 hover:bg-white/20 text-white transition-colors active:scale-95"
                 aria-label="اللعبة التالية"
               >
-                <ArrowLeft size={16} />
+                <ArrowLeft size={17} />
               </button>
             </div>
           </div>
 
-          <div ref={cardsTrackRef} className="flex gap-4 overflow-x-auto pb-5 pt-2 no-scrollbar scroll-smooth">
-            {AUDITORY_SKILLS.map((skill, index) => {
+          <div ref={cardsTrackRef} className="flex gap-3 sm:gap-4 overflow-x-auto pb-4 pt-2 no-scrollbar scroll-smooth snap-x snap-mandatory">
+            {AUDITORY_SKILLS.map((skill) => {
               const isSelected = skill.id === selectedGame.id;
-              const rotations = [-1.5, 1.5, -1, 1.5, -1.2, 1];
-              const rot = rotations[index % rotations.length];
 
               return (
                 <button
                   key={skill.id}
                   type="button"
                   onClick={() => handleSelectGame(skill)}
-                  className={`flex-shrink-0 w-60 sm:w-68 rounded-3xl p-5 border-2 transition-all duration-300 text-right relative overflow-hidden hover:-translate-y-1.5 ${
+                  className={`snap-start flex-shrink-0 w-60 sm:w-68 rounded-3xl p-4 sm:p-5 border-2 transition-all duration-300 text-right relative overflow-hidden active:scale-95 ${
                     isSelected
                       ? 'bg-gradient-to-b from-white/20 to-white/5 border-sada-yellow shadow-2xl ring-2 ring-sada-yellow/40'
-                      : 'bg-white/5 border-white/15 hover:border-white/40 opacity-85 hover:opacity-100'
+                      : 'bg-white/5 border-white/15 hover:border-white/40 opacity-90 hover:opacity-100'
                   }`}
-                  style={{
-                    transform: isSelected ? 'none' : `rotate(${rot}deg)`,
-                  }}
                 >
                   <div className="flex items-center justify-between mb-3">
                     <span

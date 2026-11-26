@@ -65,7 +65,7 @@ export const FinalCelebrationSection: React.FC<FinalCelebrationSectionProps> = (
       ref={footerRef}
       id="ending"
       data-scene-id="scene-11-ending"
-      className="sada-scene pb-56 sm:pb-52 bg-gradient-to-b from-[#231D3A] via-[#1C1630] to-[#120F20] text-white"
+      className="sada-scene pb-32 sm:pb-40 bg-gradient-to-b from-[#231D3A] via-[#1C1630] to-[#120F20] text-white"
     >
       <div
         aria-hidden="true"
@@ -93,40 +93,48 @@ export const FinalCelebrationSection: React.FC<FinalCelebrationSectionProps> = (
         </p>
 
         {/* Closing Speakers + Theatrical Group Celebration */}
-        <div ref={stageRef} className="flex flex-wrap items-end justify-center gap-4 sm:gap-10 mb-10">
-          <CharacterStageActor
-            characterId="nour"
-            sizeClass="w-36 sm:w-48 md:w-56"
-            isActiveScene={isSceneActive}
-            isSpeaking={isSceneActive && activeSpeakerId === 'nour'}
-            isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'nour')}
-          />
-
-          <div className="max-w-lg sm:max-w-xl flex items-end justify-center">
-            <img
-              src="/assets/group_celebrating_transparent.webp"
-              alt="أبطال صدى الخمسة يحتفلون بنهاية الرحلة"
-              loading="lazy"
-              decoding="async"
-              className="max-h-[340px] sm:max-h-[430px] w-auto object-contain"
+        <div ref={stageRef} className="grid grid-cols-2 lg:flex lg:items-end lg:justify-center gap-4 sm:gap-10 mb-8 sm:mb-10 justify-items-center">
+          <div className="order-1">
+            <CharacterStageActor
+              characterId="nour"
+              heightClass="h-44 sm:h-56 md:h-64"
+              isActiveScene={isSceneActive}
+              isSpeaking={isSceneActive && activeSpeakerId === 'nour'}
+              isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'nour')}
             />
           </div>
 
-          <CharacterStageActor
-            characterId="sarah"
-            sizeClass="w-36 sm:w-48 md:w-56"
-            isActiveScene={isSceneActive}
-            isSpeaking={isSceneActive && activeSpeakerId === 'sarah'}
-            isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'sarah')}
-          />
+          <div className="col-span-2 order-3 lg:order-2 max-w-sm sm:max-w-lg flex items-end justify-center">
+            <img
+              src="/assets/group_celebrating_transparent.webp"
+              srcSet="/assets/group_celebrating_transparent-sm.webp 340w, /assets/group_celebrating_transparent.webp 608w"
+              sizes="(max-width: 639px) 320px, 430px"
+              alt="أبطال صدى الخمسة يحتفلون بنهاية الرحلة"
+              width={608}
+              height={648}
+              loading="lazy"
+              decoding="async"
+              className="max-h-[270px] sm:max-h-[410px] w-auto object-contain"
+            />
+          </div>
+
+          <div className="order-2 lg:order-3">
+            <CharacterStageActor
+              characterId="sarah"
+              heightClass="h-44 sm:h-56 md:h-64"
+              isActiveScene={isSceneActive}
+              isSpeaking={isSceneActive && activeSpeakerId === 'sarah'}
+              isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'sarah')}
+            />
+          </div>
         </div>
 
         {/* Action Buttons */}
-        <div className="flex flex-wrap items-center justify-center gap-3 mb-10">
+        <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center justify-center gap-2.5 sm:gap-3 mb-8 sm:mb-10 max-w-xl sm:max-w-none mx-auto">
           <button
             type="button"
             onClick={triggerCelebration}
-            className="flex items-center gap-2 px-7 py-3 rounded-2xl bg-gradient-to-r from-sada-yellow to-amber-500 text-sada-ink font-black text-sm shadow-xl hover:scale-105 active:scale-95 transition-all"
+            className="min-h-[48px] flex items-center justify-center gap-2 px-7 py-3 rounded-2xl bg-gradient-to-r from-sada-yellow to-amber-500 text-sada-ink font-black text-sm shadow-xl hover:scale-105 active:scale-95 transition-all"
           >
             <Sparkles size={17} />
             <span>احتفل بإتمام الرحلة</span>
@@ -138,7 +146,7 @@ export const FinalCelebrationSection: React.FC<FinalCelebrationSectionProps> = (
               soundEngine.playPop();
               setModalOpen(true);
             }}
-            className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm border border-white/20 transition-all"
+            className="min-h-[48px] flex items-center justify-center gap-2 px-6 py-3 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm border border-white/20 transition-all active:scale-95"
           >
             <FileText size={17} />
             <span>بطاقة ملخص المشروع</span>
@@ -147,7 +155,7 @@ export const FinalCelebrationSection: React.FC<FinalCelebrationSectionProps> = (
           <button
             type="button"
             onClick={onScrollToTop}
-            className="flex items-center gap-2 px-5 py-3 rounded-2xl bg-white/5 hover:bg-white/15 text-white/85 font-bold text-sm border border-white/15 transition-all"
+            className="min-h-[48px] flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-white/5 hover:bg-white/15 text-white/85 font-bold text-sm border border-white/15 transition-all active:scale-95"
           >
             <ArrowUp size={16} />
             <span>العودة إلى بداية الحكاية</span>

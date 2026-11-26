@@ -62,10 +62,10 @@ export const GuidesSection: React.FC = () => {
         </div>
 
         {/* Characters Duo — Prominent Family & Specialist Hosts */}
-        <div className="flex flex-wrap items-end justify-center gap-6 sm:gap-12 mb-10">
+        <div className="flex items-end justify-center gap-6 sm:gap-12 mb-8 sm:mb-10">
           <CharacterStageActor
             characterId="nour"
-            sizeClass="w-36 sm:w-48 md:w-56"
+            heightClass="h-48 sm:h-56 md:h-64"
             isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'nour'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'nour')}
@@ -73,7 +73,7 @@ export const GuidesSection: React.FC = () => {
           />
           <CharacterStageActor
             characterId="maryam"
-            sizeClass="w-36 sm:w-48 md:w-56"
+            heightClass="h-48 sm:h-56 md:h-64"
             isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'maryam'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'maryam')}
@@ -82,22 +82,22 @@ export const GuidesSection: React.FC = () => {
         </div>
 
         {/* Dual Switcher */}
-        <div className="flex justify-center mb-10">
-          <div className="bg-white p-1.5 rounded-2xl border border-sada-violet/15 flex flex-wrap sm:flex-nowrap items-center justify-center shadow-md gap-1.5">
+        <div className="flex justify-center mb-8 sm:mb-10">
+          <div className="w-full sm:w-auto bg-white p-1.5 rounded-2xl border border-sada-violet/15 grid grid-cols-2 sm:flex sm:flex-nowrap items-center justify-center shadow-md gap-1.5">
             <button
               type="button"
               onClick={() => {
                 soundEngine.playPop();
                 setActiveGuide('parent');
               }}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-extrabold text-xs sm:text-sm transition-all ${
+              className={`min-h-[44px] flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2.5 rounded-xl font-extrabold text-xs sm:text-sm transition-all active:scale-95 ${
                 activeGuide === 'parent'
                   ? 'bg-sada-teal text-white shadow-md'
                   : 'text-sada-ink/75 hover:text-sada-ink'
               }`}
             >
-              <Home size={17} />
-              <span>دليل ولي الأمر (مشاركة منزلية واعية)</span>
+              <Home size={16} className="flex-shrink-0" />
+              <span>دليل ولي الأمر</span>
             </button>
             <button
               type="button"
@@ -105,14 +105,14 @@ export const GuidesSection: React.FC = () => {
                 soundEngine.playPop();
                 setActiveGuide('specialist');
               }}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-extrabold text-xs sm:text-sm transition-all ${
+              className={`min-h-[44px] flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2.5 rounded-xl font-extrabold text-xs sm:text-sm transition-all active:scale-95 ${
                 activeGuide === 'specialist'
                   ? 'bg-sada-violet text-white shadow-md'
                   : 'text-sada-ink/75 hover:text-sada-ink'
               }`}
             >
-              <Stethoscope size={17} />
-              <span>دليل الأخصائي (متابعة منظمة ومهنية)</span>
+              <Stethoscope size={16} className="flex-shrink-0" />
+              <span>دليل الأخصائي</span>
             </button>
           </div>
         </div>
@@ -146,10 +146,14 @@ export const GuidesSection: React.FC = () => {
               <div className="lg:col-span-5 flex flex-col items-center justify-center p-6 rounded-3xl bg-gradient-to-br from-emerald-50 via-teal-50 to-white border border-sada-teal/20 text-center">
                 <img
                   src="/assets/char_guide.webp"
+                  srcSet="/assets/char_guide-sm.webp 346w, /assets/char_guide.webp 617w"
+                  sizes="(max-width: 639px) 176px, 210px"
                   alt="نور تحمل كتاب الإرشادات"
+                  width={617}
+                  height={760}
                   loading="lazy"
                   decoding="async"
-                  className="w-40 sm:w-48 h-auto object-contain mb-3"
+                  className="w-44 sm:w-52 h-auto object-contain mb-3"
                 />
                 <h4 className="text-lg font-black text-sada-ink mb-1.5">دور الأسرة الداعم</h4>
                 <p className="text-xs sm:text-sm text-sada-ink/75 leading-relaxed font-medium text-center">

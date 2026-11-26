@@ -159,35 +159,43 @@ export const AppWorkflowSection: React.FC = () => {
           </p>
         </div>
 
-        {/* Cast + Tablet Discovery Bridge — Prominent Character Framing */}
-        <div className="flex flex-wrap items-end justify-center gap-4 sm:gap-8 mb-10">
-          <CharacterStageActor
-            characterId="omar"
-            sizeClass="w-36 sm:w-48 md:w-56"
-            isActiveScene={isSceneActive}
-            isSpeaking={isSceneActive && activeSpeakerId === 'omar'}
-            isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'omar')}
-          />
-          <div className="w-48 sm:w-64 bg-white/90 rounded-3xl p-3 border border-sada-violet/15 shadow-md">
+        {/* Cast + Tablet Discovery Bridge — Paired duo above tablet on mobile, flanking triptych on desktop */}
+        <div className="grid grid-cols-2 lg:flex lg:items-end lg:justify-center gap-4 sm:gap-8 mb-8 sm:mb-10 justify-items-center">
+          <div className="order-1">
+            <CharacterStageActor
+              characterId="omar"
+              heightClass="h-48 sm:h-56 md:h-64"
+              isActiveScene={isSceneActive}
+              isSpeaking={isSceneActive && activeSpeakerId === 'omar'}
+              isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'omar')}
+            />
+          </div>
+          <div className="col-span-2 order-3 lg:order-2 w-48 sm:w-60 bg-white/95 rounded-3xl p-3 border border-sada-violet/15 shadow-md">
             <img
               src="/assets/group_tablet.webp"
+              srcSet="/assets/group_tablet-sm.webp 308w, /assets/group_tablet.webp 550w"
+              sizes="(max-width: 639px) 192px, 240px"
               alt="عمر وزين يستكشفان تطبيق صدى على الجهاز اللوحي"
+              width={550}
+              height={714}
               loading="lazy"
               decoding="async"
               className="w-full h-auto object-contain"
             />
           </div>
-          <CharacterStageActor
-            characterId="maryam"
-            sizeClass="w-36 sm:w-48 md:w-56"
-            isActiveScene={isSceneActive}
-            isSpeaking={isSceneActive && activeSpeakerId === 'maryam'}
-            isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'maryam')}
-          />
+          <div className="order-2 lg:order-3">
+            <CharacterStageActor
+              characterId="maryam"
+              heightClass="h-48 sm:h-56 md:h-64"
+              isActiveScene={isSceneActive}
+              isSpeaking={isSceneActive && activeSpeakerId === 'maryam'}
+              isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'maryam')}
+            />
+          </div>
         </div>
 
         {/* 6-Stage Selector */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5 mb-10">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-2.5 mb-8 sm:mb-10">
           {steps.map((st, idx) => {
             const Icon = st.icon;
             const isCurrent = idx === currentStep;
@@ -199,7 +207,7 @@ export const AppWorkflowSection: React.FC = () => {
                   soundEngine.playPop();
                   setCurrentStep(idx);
                 }}
-                className={`p-3.5 rounded-2xl border-2 text-right transition-all flex flex-col justify-between ${
+                className={`min-h-[48px] p-3 sm:p-3.5 rounded-2xl border-2 text-right transition-all flex flex-col justify-between active:scale-95 ${
                   isCurrent
                     ? 'bg-white shadow-lg border-sada-violet ring-2 ring-sada-violet/15'
                     : 'bg-white/75 hover:bg-white border-transparent text-sada-ink/75'

@@ -39,27 +39,39 @@ export const TrainingJourneySection: React.FC<TrainingJourneySectionProps> = ({
   useEffect(() => {
     const stations = stationsRef.current;
     if (!stations) return;
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     gsap.registerPlugin(ScrollTrigger);
-    const ctx = gsap.context(() => {
-      Array.from(stations.children).forEach((card, idx) => {
-        gsap.from(card, {
-          x: idx % 2 === 0 ? 28 : -28,
-          opacity: 0,
-          duration: 0.6,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: card,
-            start: 'top 86%',
-            once: true,
-          },
-        });
-      });
-    }, stations);
+    const mm = gsap.matchMedia();
 
-    return () => ctx.revert();
+    mm.add(
+      {
+        isMobile: '(max-width: 1023px)',
+        isDesktop: '(min-width: 1024px)',
+      },
+      (context) => {
+        const { isMobile } = context.conditions || { isMobile: false };
+        Array.from(stations.children).forEach((card, idx) => {
+          gsap.from(card, {
+            x: isMobile ? 0 : idx % 2 === 0 ? 28 : -28,
+            y: isMobile ? 22 : 0,
+            scale: isMobile ? 0.97 : 1,
+            opacity: 0,
+            duration: 0.55,
+            ease: 'power2.out',
+            clearProps: 'opacity,transform',
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 90%',
+              once: true,
+            },
+          });
+        });
+      },
+      stations
+    );
+
+    return () => mm.revert();
   }, []);
 
   const getIcon = (name: string) => {
@@ -114,8 +126,8 @@ export const TrainingJourneySection: React.FC<TrainingJourneySectionProps> = ({
           </p>
         </div>
 
-        {/* Sticky Desktop Quick Station Jump Strip */}
-        <div className="lg:sticky lg:top-20 z-20 flex items-center justify-start lg:justify-center overflow-x-auto py-2.5 px-2 mb-10 gap-2.5 no-scrollbar bg-[#F9F6FE]/95 rounded-2xl">
+        {/* Sticky Quick Station Jump Strip (Mobile & Desktop) */}
+        <div className="sticky top-[62px] lg:top-20 z-20 flex items-center justify-start lg:justify-center overflow-x-auto py-2 px-2 mb-6 sm:mb-10 gap-2 no-scrollbar bg-[#F9F6FE]/95 rounded-2xl shadow-sm border border-sada-violet/10">
           {CORE_SKILLS.map((skill) => {
             const Icon = getIcon(skill.iconName);
             const isSelected = skill.id === activeSkillId;
@@ -131,20 +143,20 @@ export const TrainingJourneySection: React.FC<TrainingJourneySectionProps> = ({
                     block: 'center',
                   });
                 }}
-                className={`flex-shrink-0 flex items-center gap-2.5 px-4 py-2.5 rounded-2xl border transition-all ${
+                className={`min-h-[44px] flex-shrink-0 flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-2xl border transition-all active:scale-95 ${
                   isSelected
                     ? 'bg-white shadow-md border-transparent ring-2'
-                    : 'bg-white/80 border-sada-violet/10 hover:bg-white'
+                    : 'bg-white/85 border-sada-violet/10 hover:bg-white'
                 }`}
                 style={{
                   boxShadow: isSelected ? `0 0 0 2px ${skill.color}` : undefined,
                 }}
               >
                 <span
-                  className="w-8 h-8 rounded-xl flex items-center justify-center text-white"
+                  className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl flex items-center justify-center text-white"
                   style={{ backgroundColor: skill.color }}
                 >
-                  <Icon size={16} />
+                  <Icon size={15} />
                 </span>
                 <span className="text-xs font-extrabold text-sada-ink whitespace-nowrap">
                   {skill.id}. {skill.title}
@@ -155,7 +167,7 @@ export const TrainingJourneySection: React.FC<TrainingJourneySectionProps> = ({
         </div>
 
         {/* 5 Distinct Connected Adventure Stations */}
-        <div ref={stationsRef} className="space-y-8">
+        <div ref={stationsRef} className="space-y-5 sm:space-y-8">
           {CORE_SKILLS.map((skill, idx) => {
             const Icon = getIcon(skill.iconName);
             const guide = CHARACTERS.find((c) => c.id === skill.guideCharacterId) || CHARACTERS[0];
@@ -168,7 +180,7 @@ export const TrainingJourneySection: React.FC<TrainingJourneySectionProps> = ({
                 key={skill.id}
                 id={`skill-station-${skill.id}`}
                 onClick={() => setManualSkillId(skill.id)}
-                className={`rounded-[2rem] border-2 p-5 sm:p-8 transition-all duration-500 shadow-lg bg-white relative overflow-hidden ${
+                className={`rounded-[1.75rem] sm:rounded-[2rem] border-2 p-4 sm:p-8 transition-all duration-500 shadow-lg bg-white relative overflow-hidden ${
                   isFocused ? 'ring-4' : ''
                 }`}
                 style={{
@@ -245,9 +257,9 @@ export const TrainingJourneySection: React.FC<TrainingJourneySectionProps> = ({
                     </div>
                   </div>
 
-                  {/* Distinct Character + Real App Screen Visual Stage */}
+                  {/* Distinct Character + Single Clean App Screen Visual Stage */}
                   <div
-                    className={`lg:col-span-5 flex items-center justify-center gap-4 p-4 sm:p-5 rounded-3xl ${
+                    className={`lg:col-span-5 flex items-end justify-center gap-3 sm:gap-5 p-3.5 sm:p-5 rounded-3xl ${
                       isReversed ? 'lg:order-1' : 'lg:order-2'
                     }`}
                     style={{
@@ -256,20 +268,20 @@ export const TrainingJourneySection: React.FC<TrainingJourneySectionProps> = ({
                   >
                     <CharacterStageActor
                       characterId={guide.id}
-                      sizeClass="w-36 sm:w-44 md:w-52"
+                      heightClass="h-44 sm:h-48 md:h-52"
                       isActiveScene={isSceneActive}
                       isSpeaking={isGuideSpeaking}
                       isDimmed={Boolean(isSceneActive && activeSpeakerId && !isGuideSpeaking)}
                       bubbleText={!isGuideSpeaking ? `رفيق المحطة: ${guide.name}` : undefined}
                     />
 
-                    <div className="w-36 sm:w-44 rounded-3xl bg-sada-ink p-2 shadow-xl border-2 border-gray-800 flex-shrink-0">
+                    <div className="w-36 sm:w-44 flex-shrink-0 flex items-center justify-center">
                       <img
                         src={skill.screenImage}
                         alt={`شاشة ${skill.title}`}
                         loading="lazy"
                         decoding="async"
-                        className="w-full h-auto rounded-2xl object-cover"
+                        className="w-full h-auto rounded-2xl drop-shadow-lg object-contain"
                       />
                     </div>
                   </div>

@@ -44,7 +44,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentSection }) => {
 
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-40 transition-colors duration-300 py-2.5 px-4 md:px-8 ${
+      className={`fixed top-0 inset-x-0 z-40 transition-colors duration-300 pt-safe-nav pb-2.5 px-3.5 sm:px-4 md:px-8 ${
         isScrolled
           ? 'bg-sada-cream/95 shadow-sm border-b border-sada-violet/10'
           : 'bg-sada-cream/90'
@@ -103,13 +103,13 @@ export const Navbar: React.FC<NavbarProps> = ({ currentSection }) => {
             type="button"
             onClick={() => storyAudioController.toggleMute()}
             aria-label={isMuted ? 'تفعيل الصوت' : 'كتم الصوت'}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border transition-all ${
+            className={`min-h-[44px] min-w-[44px] sm:min-h-[38px] sm:min-w-0 flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border transition-all ${
               isMuted
                 ? 'bg-gray-100 text-gray-600 border-gray-200'
                 : 'bg-sada-lavender text-sada-violet border-sada-violet/30 hover:bg-sada-violet hover:text-white'
             }`}
           >
-            {isMuted ? <VolumeX size={15} /> : <Volume2 size={15} />}
+            {isMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
             <span className="hidden sm:inline">{isMuted ? 'صوت مغلق' : 'الصوت مفعّل'}</span>
           </button>
 
@@ -125,7 +125,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentSection }) => {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="xl:hidden p-2 rounded-xl bg-white/90 border border-sada-violet/20 text-sada-ink hover:text-sada-violet"
+            className="xl:hidden min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl bg-white/90 border border-sada-violet/20 text-sada-ink hover:text-sada-violet active:scale-95 transition-transform"
             aria-label="قائمة فصول القصة"
             aria-expanded={mobileMenuOpen}
           >
@@ -146,7 +146,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentSection }) => {
                 key={link.id}
                 type="button"
                 onClick={() => scrollTo(link.id)}
-                className={`text-right px-3.5 py-2.5 rounded-2xl text-xs font-bold transition-all ${
+                className={`min-h-[44px] flex items-center text-right px-3.5 py-2.5 rounded-2xl text-xs font-bold transition-all active:scale-95 ${
                   currentSection === link.id
                     ? 'bg-sada-violet text-white'
                     : 'text-sada-ink bg-sada-surface hover:bg-sada-lavender/50'

@@ -167,3 +167,25 @@ Repository: `sada-experience` (Baseline preserved at git branch `baseline-pre-up
 - `oxlint`: `0` warnings, `0` errors (`33` files).
 - `tsc -b && vite build`: succeeded in `1.92s` (`DIST_CHAR_CLIPS: 26`, `DIST_AUDITIONS_EXISTS: False`, main chunk `190.33 kB` / `47.81 kB` gzip).
 - Headless Chromium CDP (`verify_upgrade.mjs`): `FCP: 1036 ms`, `LCP: 1036 ms`, `CLS: 0` idle / `0.0019` post-scroll, `67 FPS` (`droppedFrames: 5` of `59`), `overflowX: false` across all `7` viewports (`360px`–`1920px`), `consoleErrorsCount: 0`, `auditionBtnHiddenInProd: true`, `reducedMotionOk: true`, and Story Mode audio playback verified (`scene-01-omar-01.mp3` `8.64s`, `scene-02-zain-04.mp3` `6.64s`, Pause/Resume/Replay/Next Scene clean with `activePlayingElements: 1`).
+
+---
+
+## Phase 8 — Mobile-First Cinematic Redesign & Responsive System
+
+### Objectives
+- Upgrade mobile (`320px–820px`) into a first-class movie-directed experience across all 11 scenes, 5 trimmed characters, 10 scroll transitions, and touch-friendly audio/subtitle controls without breaking desktop or regenerating audio.
+
+### Completed Tasks & Modified Files
+- Created safe checkpoint branch `checkpoint-pre-mobile-redesign` (`3919427`).
+- Audited baseline mobile build across `320px–1024px` + portrait/landscape and documented all findings in [docs/mobile-experience-audit.md](file:///c:/Users/pc/.gemini/antigravity/scratch/sada-experience/docs/mobile-experience-audit.md).
+- Trimmed excess transparent padding from character & group WebP assets and added crisp `*-sm.webp` responsive variants wired via `srcSet` in [CharacterStageActor.tsx](file:///c:/Users/pc/.gemini/antigravity/scratch/sada-experience/src/components/CharacterStageActor.tsx).
+- Removed remaining duplicate outer phone bezels in [TrainingJourneySection.tsx](file:///c:/Users/pc/.gemini/antigravity/scratch/sada-experience/src/components/TrainingJourneySection.tsx) and [ListeningNoiseSection.tsx](file:///c:/Users/pc/.gemini/antigravity/scratch/sada-experience/src/components/ListeningNoiseSection.tsx).
+- Redesigned mobile stage compositions across all 11 scenes (including tiered Hero 5-cast layout, 3-up Problem/Solution cast, sticky Scene 05 jump bar, paired co-hosts above showcase cards in Scenes 03/07/09/10/11, readable mobile Dashboard/Timeline screens, and 2-col Team roster cutting Scene 10 height by `46%`).
+- Upgraded [StoryAudioBar.tsx](file:///c:/Users/pc/.gemini/antigravity/scratch/sada-experience/src/components/StoryAudioBar.tsx) with safe-area padding (`pb-safe`), **`43×44 px`–`85×44 px`** touch targets, mobile volume popover, and concise readable RTL subtitle dock; added `ScrollTrigger.config({ ignoreMobileResize: true })` and responsive `gsap.matchMedia()` transitions across all 10 [SceneTransition.tsx](file:///c:/Users/pc/.gemini/antigravity/scratch/sada-experience/src/components/SceneTransition.tsx) connectors.
+- Published full breakdown in [docs/mobile-responsive-report.md](file:///c:/Users/pc/.gemini/antigravity/scratch/sada-experience/docs/mobile-responsive-report.md).
+
+### Verified Mobile & Desktop Results (Headless Chromium CDP)
+- `oxlint`: `0` warnings, `0` errors (`33` files); `vite build`: `3.46s`.
+- **17 Viewports Tested (`320px`–`2560px` + `844×390` landscape)**: **`overflowX: false` on all 17**.
+- **`390×844` Mobile Telemetry**: `mobileFps: 121 FPS` (`0` dropped frames), total page height reduced from `28,509 px` to **`24,781 px`**, body font size `16 px`, `consoleErrorsCount: 0`.
+- **Desktop Regression (`1440×900`)**: `FCP/LCP: 1488 ms`, `CLS: 0.0004` idle / `0.0039` post-scroll, full 5-cast Hero visible above fold (`natH: 520–532 px`), Story Mode & reduced motion clean.

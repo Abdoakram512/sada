@@ -108,25 +108,25 @@ export const LingSixSection: React.FC = () => {
         </div>
 
         {/* Characters: Maryam & Zain — Expressive Teaching Dialogue Stage */}
-        <div className="flex flex-wrap items-end justify-center gap-6 sm:gap-12 mb-10">
+        <div className="flex items-end justify-center gap-6 sm:gap-12 mb-8 sm:mb-10">
           <CharacterStageActor
             characterId="maryam"
-            sizeClass="w-36 sm:w-48 md:w-56"
+            heightClass="h-48 sm:h-56 md:h-64"
             isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'maryam'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'maryam')}
           />
           <CharacterStageActor
             characterId="zain"
-            sizeClass="w-36 sm:w-48 md:w-56"
+            heightClass="h-48 sm:h-56 md:h-64"
             isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'zain'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'zain')}
           />
         </div>
 
-        {/* 6 Interactive Sound Tokens */}
-        <div ref={orbsRef} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 mb-10">
+        {/* 6 Interactive Sound Tokens — Compact 3x2 mobile matrix keeps interactive scorer visible below */}
+        <div ref={orbsRef} className="grid grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-4 mb-8 sm:mb-10">
           {LING_SOUNDS.map((sound) => {
             const isSelected = selectedSound.symbol === sound.symbol;
             const respStatus = responses[sound.symbol];
@@ -139,7 +139,7 @@ export const LingSixSection: React.FC = () => {
                   soundEngine.playPop();
                   setSelectedSound(sound);
                 }}
-                className={`relative flex flex-col items-center justify-between p-4 sm:p-5 rounded-3xl border-2 transition-all duration-300 text-center ${
+                className={`relative min-h-[112px] sm:min-h-[140px] flex flex-col items-center justify-between p-2.5 sm:p-5 rounded-2xl sm:rounded-3xl border-2 transition-all duration-300 text-center active:scale-95 ${
                   isSelected
                     ? 'bg-white shadow-xl border-transparent ring-4'
                     : 'bg-white/85 hover:bg-white border-sada-violet/10'
@@ -150,9 +150,9 @@ export const LingSixSection: React.FC = () => {
                     : undefined,
                 }}
               >
-                <div className="w-full flex items-center justify-between mb-2">
+                <div className="w-full flex items-center justify-between mb-1.5 sm:mb-2">
                   <span
-                    className="text-[10px] font-bold px-2 py-0.5 rounded-full"
+                    className="text-[10px] font-bold px-1.5 sm:px-2 py-0.5 rounded-full"
                     style={{
                       backgroundColor: `${sound.color}18`,
                       color: sound.color,
@@ -163,18 +163,18 @@ export const LingSixSection: React.FC = () => {
 
                   {respStatus === 'responded' && (
                     <span className="text-emerald-600" aria-label="استجاب">
-                      <CheckCircle2 size={15} />
+                      <CheckCircle2 size={14} />
                     </span>
                   )}
                   {respStatus === 'not-responded' && (
                     <span className="text-rose-500" aria-label="لم يستجب">
-                      <XCircle size={15} />
+                      <XCircle size={14} />
                     </span>
                   )}
                 </div>
 
                 <div
-                  className="dir-ltr w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center font-black text-2xl sm:text-3xl text-white mb-3 shadow-md transition-transform duration-300 hover:scale-105"
+                  className="dir-ltr w-12 h-12 sm:w-20 sm:h-20 rounded-full flex items-center justify-center font-black text-xl sm:text-3xl text-white mb-1.5 sm:mb-3 shadow-md transition-transform duration-300"
                   style={{ backgroundColor: sound.color }}
                 >
                   {sound.symbol}

@@ -83,45 +83,53 @@ export const GoalsSection: React.FC = () => {
           </p>
         </div>
 
-        {/* Characters + High Five Celebration */}
-        <div className="flex flex-wrap items-end justify-center gap-4 sm:gap-8 mb-10">
-          <CharacterStageActor
-            characterId="maryam"
-            sizeClass="w-36 sm:w-48 md:w-56"
-            isActiveScene={isSceneActive}
-            isSpeaking={isSceneActive && activeSpeakerId === 'maryam'}
-            isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'maryam')}
-          />
-          <div className="flex items-center gap-4 bg-white p-4 rounded-3xl border border-sada-violet/15 shadow-md">
+        {/* Characters + Readable Dashboard & Timeline Screens */}
+        <div className="grid grid-cols-2 lg:flex lg:items-end lg:justify-center gap-4 sm:gap-8 mb-8 sm:mb-10 justify-items-center">
+          <div className="order-1">
+            <CharacterStageActor
+              characterId="maryam"
+              heightClass="h-44 sm:h-52 md:h-60"
+              isActiveScene={isSceneActive}
+              isSpeaking={isSceneActive && activeSpeakerId === 'maryam'}
+              isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'maryam')}
+            />
+          </div>
+          <div className="col-span-2 order-3 lg:order-2 grid grid-cols-2 sm:flex items-center justify-items-center gap-3 sm:gap-4 bg-white p-4 rounded-3xl border border-sada-violet/15 shadow-md w-full max-w-md lg:max-w-none lg:w-auto">
             <img
               src="/assets/screens/screen_dashboard.png"
               alt="لوحة مؤشرات الأداء في تطبيق صدى"
               loading="lazy"
               decoding="async"
-              className="w-20 sm:w-28 rounded-2xl border border-gray-200"
+              className="w-36 sm:w-28 rounded-2xl drop-shadow-md order-1"
             />
             <img
               src="/assets/group_highfive.webp"
+              srcSet="/assets/group_highfive-sm.webp 335w, /assets/group_highfive.webp 599w"
+              sizes="(max-width: 639px) 160px, 144px"
               alt="سارة ومريم تحتفلان بكل خطوة"
+              width={599}
+              height={699}
               loading="lazy"
               decoding="async"
-              className="w-28 sm:w-36 h-auto object-contain"
+              className="col-span-2 sm:col-span-1 w-32 sm:w-36 h-auto object-contain order-3 sm:order-2"
             />
             <img
               src="/assets/screens/screen_timeline.png"
               alt="خطة المتابعة الدورية في تطبيق صدى"
               loading="lazy"
               decoding="async"
-              className="w-20 sm:w-28 rounded-2xl border border-gray-200"
+              className="w-36 sm:w-28 rounded-2xl drop-shadow-md order-2 sm:order-3"
             />
           </div>
-          <CharacterStageActor
-            characterId="nour"
-            sizeClass="w-36 sm:w-48 md:w-56"
-            isActiveScene={isSceneActive}
-            isSpeaking={isSceneActive && activeSpeakerId === 'nour'}
-            isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'nour')}
-          />
+          <div className="order-2 lg:order-3">
+            <CharacterStageActor
+              characterId="nour"
+              heightClass="h-44 sm:h-52 md:h-60"
+              isActiveScene={isSceneActive}
+              isSpeaking={isSceneActive && activeSpeakerId === 'nour'}
+              isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'nour')}
+            />
+          </div>
         </div>
 
         {/* Longitudinal Assessment Timeline (Pre -> Follow-up -> Post) */}
@@ -153,32 +161,32 @@ export const GoalsSection: React.FC = () => {
           </p>
         </div>
 
-        {/* 7 Project Goals Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+        {/* 7 Project Goals Grid — Compact 2-col on mobile */}
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 mb-8 sm:mb-10">
           {PROJECT_GOALS.map((goal, idx) => (
             <div
               key={idx}
-              className="p-5 rounded-3xl bg-white border border-sada-violet/15 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between"
+              className="p-3.5 sm:p-5 rounded-2xl sm:rounded-3xl bg-white border border-sada-violet/15 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between"
             >
-              <div className="flex items-center justify-between mb-3">
-                <span className="dir-ltr font-mono text-xl font-black" style={{ color: goal.color }}>
+              <div className="flex items-center justify-between mb-2 sm:mb-3">
+                <span className="dir-ltr font-mono text-lg sm:text-xl font-black" style={{ color: goal.color }}>
                   {goal.number}
                 </span>
                 <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: goal.color }} />
               </div>
               <div>
-                <h3 className="text-base font-black text-sada-ink mb-1.5">{goal.title}</h3>
+                <h3 className="text-sm sm:text-base font-black text-sada-ink mb-1">{goal.title}</h3>
                 <p className="text-xs text-sada-ink/75 leading-relaxed">{goal.description}</p>
               </div>
-              <div className="mt-4 pt-3 border-t border-gray-100 flex items-center gap-1.5 text-[11px] font-bold text-sada-ink/60">
+              <div className="mt-3 sm:mt-4 pt-2 sm:pt-3 border-t border-gray-100 flex items-center gap-1.5 text-[10px] sm:text-[11px] font-bold text-sada-ink/60">
                 <CheckCircle2 size={13} style={{ color: goal.color }} />
-                <span>هدف موثق في المشروع</span>
+                <span>هدف موثق</span>
               </div>
             </div>
           ))}
 
-          {/* Target Audience Card completing the 8-cell 4-col grid cleanly */}
-          <div className="p-5 rounded-3xl bg-gradient-to-br from-sada-ink to-[#332A52] text-white shadow-lg flex flex-col justify-between">
+          {/* Target Audience Card completing the 8-cell grid cleanly */}
+          <div className="p-3.5 sm:p-5 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-sada-ink to-[#332A52] text-white shadow-lg flex flex-col justify-between">
             <div>
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 text-sada-yellow text-[11px] font-bold mb-3">
                 <Sparkles size={12} />

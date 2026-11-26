@@ -27,6 +27,7 @@ const VoiceAuditionModal = lazy(() =>
 );
 
 gsap.registerPlugin(ScrollTrigger);
+ScrollTrigger.config({ ignoreMobileResize: true });
 
 export const App: React.FC = () => {
   const [currentAnchor, setCurrentAnchor] = useState<string>('hero');

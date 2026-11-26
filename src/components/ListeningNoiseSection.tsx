@@ -93,20 +93,20 @@ export const ListeningNoiseSection: React.FC<ListeningNoiseSectionProps> = ({ on
         </div>
 
         {/* Layered Scene */}
-        <div ref={layersRef} className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div ref={layersRef} className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
           {/* Characters & Interactive Soft Ambient Control */}
-          <div className="lg:col-span-6 bg-white rounded-[2rem] border-2 border-sada-teal/20 p-6 sm:p-8 shadow-xl">
-            <div className="flex flex-wrap items-end justify-center gap-4 sm:gap-8 mb-6">
+          <div className="lg:col-span-6 bg-white rounded-[2rem] border-2 border-sada-teal/20 p-5 sm:p-8 shadow-xl">
+            <div className="flex items-end justify-center gap-5 sm:gap-8 mb-5 sm:mb-6">
               <CharacterStageActor
                 characterId="zain"
-                sizeClass="w-36 sm:w-44 md:w-52"
+                heightClass="h-48 sm:h-52 md:h-56"
                 isActiveScene={isSceneActive}
                 isSpeaking={isSceneActive && activeSpeakerId === 'zain'}
                 isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'zain')}
               />
               <CharacterStageActor
                 characterId="maryam"
-                sizeClass="w-36 sm:w-44 md:w-52"
+                heightClass="h-48 sm:h-52 md:h-56"
                 isActiveScene={isSceneActive}
                 isSpeaking={isSceneActive && activeSpeakerId === 'maryam'}
                 isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'maryam')}
@@ -117,11 +117,11 @@ export const ListeningNoiseSection: React.FC<ListeningNoiseSectionProps> = ({ on
               {noiseSkill.objective}
             </h3>
 
-            <div className="space-y-2.5 my-5">
+            <div className="space-y-2 my-4 sm:my-5">
               {noiseSkill.examples.map((ex, i) => (
                 <div key={i} className="flex items-start gap-2.5 p-3 rounded-xl bg-sada-surface border border-teal-100">
                   <CheckCircle2 size={16} className="text-sada-teal flex-shrink-0 mt-0.5" />
-                  <span className="text-xs sm:text-sm font-semibold text-sada-ink/85">{ex}</span>
+                  <span className="text-sm font-semibold text-sada-ink/85">{ex}</span>
                 </div>
               ))}
             </div>
@@ -130,7 +130,7 @@ export const ListeningNoiseSection: React.FC<ListeningNoiseSectionProps> = ({ on
             <div className="flex flex-wrap items-center justify-between gap-3 p-4 rounded-2xl bg-teal-50/70 border border-sada-teal/20 mb-4">
               <div className="text-right">
                 <span className="text-xs font-extrabold text-sada-ink block">
-                  مثال اختياري لصوت خلفي خفيف وآمن
+                  مثال اختياري لصوت خلفي خفيف
                 </span>
                 <span className="text-[11px] text-sada-ink/65">
                   شدة منخفضة ومضبوطة لا تسبب أي إزعاج سمعي
@@ -139,13 +139,13 @@ export const ListeningNoiseSection: React.FC<ListeningNoiseSectionProps> = ({ on
               <button
                 type="button"
                 onClick={toggleAmbient}
-                className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-extrabold transition-all ${
+                className={`min-h-[44px] w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-xs font-extrabold transition-all active:scale-95 ${
                   isAmbientEffective
                     ? 'bg-sada-teal text-white shadow-sm'
                     : 'bg-white text-sada-teal-dark border border-sada-teal/30 hover:bg-teal-50'
                 }`}
               >
-                {isAmbientEffective ? <VolumeX size={15} /> : <Volume2 size={15} />}
+                {isAmbientEffective ? <VolumeX size={16} /> : <Volume2 size={16} />}
                 <span>{isAmbientEffective ? 'إيقاف الخلفية الهادئة' : 'تشغيل خلفية هادئة'}</span>
               </button>
             </div>
@@ -160,16 +160,16 @@ export const ListeningNoiseSection: React.FC<ListeningNoiseSectionProps> = ({ on
             </div>
           </div>
 
-          {/* App Mockup Stage */}
+          {/* App Mockup Stage — Clean single phone without duplicate bezel */}
           <div className="lg:col-span-6 flex flex-col items-center">
-            <div className="relative bg-white/90 rounded-[2.25rem] p-6 sm:p-8 border-2 border-sada-teal/15 shadow-xl flex flex-col items-center w-full max-w-md">
-              <div className="w-56 sm:w-64 rounded-[2.4rem] bg-sada-ink p-2.5 shadow-2xl border-4 border-gray-800 mb-5">
+            <div className="relative bg-white/95 rounded-[2.25rem] p-5 sm:p-8 border-2 border-sada-teal/15 shadow-xl flex flex-col items-center w-full max-w-md">
+              <div className="w-60 sm:w-68 mb-5 flex items-center justify-center">
                 <img
                   src={noiseSkill.screenImage}
                   alt="شاشة الاستماع في ضوضاء"
                   loading="lazy"
                   decoding="async"
-                  className="w-full h-auto rounded-[1.8rem] object-cover"
+                  className="w-full h-auto rounded-[2rem] drop-shadow-xl object-contain"
                 />
               </div>
 

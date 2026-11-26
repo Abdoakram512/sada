@@ -8,6 +8,7 @@ interface CharacterStageActorProps {
   isDimmed?: boolean;
   isActiveScene?: boolean;
   sizeClass?: string;
+  heightClass?: string;
   showLabel?: boolean;
   bubbleText?: string;
   onClick?: () => void;
@@ -19,7 +20,8 @@ export const CharacterStageActor: React.FC<CharacterStageActorProps> = ({
   isSpeaking = false,
   isDimmed = false,
   isActiveScene = false,
-  sizeClass = 'w-40 sm:w-52 md:w-60',
+  sizeClass = 'w-auto',
+  heightClass = 'h-48 sm:h-56 md:h-64',
   showLabel = true,
   bubbleText,
   onClick,
@@ -29,6 +31,7 @@ export const CharacterStageActor: React.FC<CharacterStageActorProps> = ({
   const isFemale = characterId === 'maryam' || characterId === 'nour' || characterId === 'sarah';
   const defaultSpeakLabel = isFemale ? `${char.name} تتحدث` : `${char.name} يتحدث`;
   const shouldAnimateIdle = isActiveScene;
+  const mobileSrc = char.image.replace('.webp', '-sm.webp');
 
   return (
     <div
@@ -47,10 +50,10 @@ export const CharacterStageActor: React.FC<CharacterStageActorProps> = ({
       }
       aria-label={onClick ? `${char.name} — ${char.roleTitle}` : undefined}
       className={`relative flex flex-col items-center select-none transition-[opacity,transform] duration-500 ease-out ${
-        onClick ? 'cursor-pointer' : ''
+        onClick ? 'cursor-pointer active:scale-95' : ''
       } ${
         isSpeaking
-          ? 'opacity-100 scale-[1.06] -translate-y-1.5 z-20'
+          ? 'opacity-100 scale-[1.06] -translate-y-1.5 z-30'
           : isDimmed
           ? 'opacity-75 scale-[0.94] z-10'
           : 'opacity-100 scale-100 z-10'
@@ -68,10 +71,10 @@ export const CharacterStageActor: React.FC<CharacterStageActorProps> = ({
       )}
 
       {/* Reserved fixed-height badge slot prevents CLS when speaking toggles */}
-      <div className="h-7 mb-1.5 flex items-center justify-center z-20">
+      <div className="h-6 sm:h-7 mb-1 flex items-center justify-center z-20">
         {(isSpeaking || bubbleText) && (
           <div
-            className="px-3 py-1 rounded-full bg-white/95 border shadow-sm flex items-center gap-2"
+            className="px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-white/95 border shadow-sm flex items-center gap-1.5 sm:gap-2"
             style={{ borderColor: `${char.accentColor}45` }}
           >
             {isSpeaking && (
@@ -97,21 +100,23 @@ export const CharacterStageActor: React.FC<CharacterStageActorProps> = ({
         )}
       </div>
 
-      {/* Character Cutout with distortion-free GPU transform animation (paused offscreen) */}
+      {/* Character Cutout with distortion-free height normalization & responsive srcSet */}
       <div
-        className={`relative z-10 w-full aspect-[4/5] flex items-end justify-center overflow-hidden transition-transform duration-500 ${
+        className={`relative z-10 ${heightClass} flex items-end justify-center transition-transform duration-500 ${
           isSpeaking ? 'animate-char-speak' : shouldAnimateIdle ? 'animate-char-breathe hover:scale-105' : 'hover:scale-105'
         }`}
       >
         <img
           src={char.image}
+          srcSet={`${mobileSrc} 220w, ${char.image} 400w`}
+          sizes="(max-width: 639px) 160px, 280px"
           alt={`${char.name} — ${char.roleTitle}`}
-          width={400}
-          height={500}
+          width={390}
+          height={750}
           loading={eager ? 'eager' : 'lazy'}
           fetchPriority={eager ? 'high' : 'low'}
           decoding="async"
-          className="max-h-full max-w-full w-auto h-full object-contain object-bottom"
+          className="h-full w-auto max-w-full object-contain object-bottom"
         />
       </div>
 

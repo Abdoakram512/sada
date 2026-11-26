@@ -78,26 +78,26 @@ export const ProblemSolutionSection: React.FC = () => {
           </p>
         </div>
 
-        {/* Character Conversation Cast — Theatrical Foreground Trio */}
-        <div className="flex flex-wrap items-end justify-center gap-4 sm:gap-10 mb-10">
+        {/* Character Conversation Cast — Unified horizontal dialogue stage on mobile & desktop */}
+        <div className="grid grid-cols-3 sm:flex sm:flex-wrap items-end justify-items-center sm:justify-center gap-1.5 sm:gap-10 mb-8 sm:mb-10">
           <CharacterStageActor
             characterId="zain"
-            sizeClass="w-36 sm:w-48 md:w-56"
+            heightClass="h-44 sm:h-56 md:h-64"
             isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'zain'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'zain')}
-            bubbleText={!activeSpeakerId ? 'لماذا نحتاج تنظيماً؟' : undefined}
+            bubbleText={!activeSpeakerId ? 'ليه المتابعة مهمة؟' : undefined}
           />
           <CharacterStageActor
             characterId="maryam"
-            sizeClass="w-36 sm:w-48 md:w-56"
+            heightClass="h-44 sm:h-56 md:h-64"
             isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'maryam'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'maryam')}
           />
           <CharacterStageActor
             characterId="nour"
-            sizeClass="w-36 sm:w-48 md:w-56"
+            heightClass="h-44 sm:h-56 md:h-64"
             isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'nour'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'nour')}
@@ -105,22 +105,23 @@ export const ProblemSolutionSection: React.FC = () => {
         </div>
 
         {/* Interactive Perspective Switch */}
-        <div className="flex justify-center mb-10">
-          <div className="bg-sada-cream p-1.5 rounded-2xl border border-sada-violet/15 flex flex-wrap sm:flex-nowrap items-center justify-center shadow-inner gap-1.5">
+        <div className="flex justify-center mb-8 sm:mb-10">
+          <div className="w-full sm:w-auto bg-sada-cream p-1.5 rounded-2xl border border-sada-violet/15 grid grid-cols-2 sm:flex sm:flex-nowrap items-center justify-center shadow-inner gap-1.5">
             <button
               type="button"
               onClick={() => {
                 soundEngine.playPop();
                 setActiveTab('problem');
               }}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all ${
+              className={`min-h-[44px] flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all active:scale-95 ${
                 activeTab === 'problem'
                   ? 'bg-rose-500 text-white shadow-md'
                   : 'text-sada-ink/75 hover:text-sada-ink'
               }`}
             >
-              <AlertCircle size={16} />
-              <span>التحديات السابقة (المشكلة)</span>
+              <AlertCircle size={16} className="flex-shrink-0" />
+              <span>المشكلة</span>
+              <span className="hidden sm:inline">(التحديات)</span>
             </button>
             <button
               type="button"
@@ -128,26 +129,30 @@ export const ProblemSolutionSection: React.FC = () => {
                 soundEngine.playPop();
                 setActiveTab('solution');
               }}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all ${
+              className={`min-h-[44px] flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all active:scale-95 ${
                 activeTab === 'solution'
                   ? 'bg-sada-teal text-white shadow-md'
                   : 'text-sada-ink/75 hover:text-sada-ink'
               }`}
             >
-              <CheckCircle2 size={16} />
-              <span>تطبيق صدى (الحل التفاعلي)</span>
+              <CheckCircle2 size={16} className="flex-shrink-0" />
+              <span>تطبيق صدى (الحل)</span>
             </button>
           </div>
         </div>
 
         {/* Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
           {/* Visual Story Illustration */}
           <div ref={stageRef} className="lg:col-span-5 flex flex-col items-center">
-            <div className="relative w-full max-w-md rounded-3xl bg-gradient-to-br from-sada-lavender via-white to-sada-cream-warm p-6 border-2 border-sada-violet/15 shadow-xl flex flex-col items-center justify-center overflow-hidden">
+            <div className="relative w-full max-w-md rounded-3xl bg-gradient-to-br from-sada-lavender via-white to-sada-cream-warm p-5 sm:p-6 border-2 border-sada-violet/15 shadow-xl flex flex-col items-center justify-center overflow-hidden">
               <img
                 src="/assets/group_reading_transparent.webp"
+                srcSet="/assets/group_reading_transparent-sm.webp 426w, /assets/group_reading_transparent.webp 760w"
+                sizes="(max-width: 639px) 320px, 400px"
                 alt="نور وعمر ومريم وزين يقرؤون ويتابعون رحلة التعلم"
+                width={760}
+                height={517}
                 loading="lazy"
                 decoding="async"
                 className="relative z-10 w-full h-auto object-contain"
