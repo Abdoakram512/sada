@@ -1,0 +1,423 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-11-26T00:26:08.337Z",
+  "subscriptionTier": "free",
+  "creditsBefore": 9899,
+  "creditsAfter": 9503,
+  "creditsUsedThisRun": 1524,
+  "auditionBudgetCap": 3000,
+  "auditions": [
+    {
+      "id": "omar_liam_v3",
+      "characterId": "omar",
+      "characterName": "عمر",
+      "voiceName": "Liam - Energetic, Warm",
+      "voiceId": "TX3LPaxmHKxFdv7VOQHJ",
+      "modelId": "eleven_v3",
+      "text": "أهلاً بيكم في عالم صدى! كل صوت حوالينا وراه حكاية، والنهارده هنعيش الحكاية دي مع بعض. جاهزين؟ يلا بينا!",
+      "settings": {
+        "stability": 0.45,
+        "similarity_boost": 0.78,
+        "style": 0.35
+      },
+      "recommended": true,
+      "rationale": "صوت شبابي حيوي ودافئ يناسب دور الراوي المُرَحِّب والمبادر.",
+      "audioPath": "/audio/auditions/omar/omar_liam_v3.mp3",
+      "fileSizeBytes": 152180,
+      "durationSec": 9.44,
+      "contentHash": "6bd6488aab57f2cd",
+      "creditsConsumed": 103,
+      "status": "verified"
+    },
+    {
+      "id": "omar_charlie_v4",
+      "characterId": "omar",
+      "characterName": "عمر",
+      "voiceName": "Charlie - Confident, Energetic",
+      "voiceId": "IKne3meq5aSn9XLyUdCD",
+      "modelId": "eleven_v4",
+      "text": "أهلاً بيكم في عالم صدى! كل صوت حوالينا وراه حكاية، والنهارده هنعيش الحكاية دي مع بعض. جاهزين؟ يلا بينا!",
+      "settings": {
+        "stability": 0.45,
+        "similarity_boost": 0.78,
+        "style": 0.35
+      },
+      "recommended": false,
+      "rationale": "نبرة واثقة وحماسية لاختبار وضوح العربية على Eleven v4.",
+      "audioPath": "/audio/auditions/omar/omar_charlie_v4.mp3",
+      "fileSizeBytes": 141731,
+      "durationSec": 8.8,
+      "contentHash": "b200872a93e0b1b8",
+      "creditsConsumed": 103,
+      "status": "verified"
+    },
+    {
+      "id": "omar_chris_v2",
+      "characterId": "omar",
+      "characterName": "عمر",
+      "voiceName": "Chris - Charming, Casual",
+      "voiceId": "iP95p4xoKVk53GoZ742B",
+      "modelId": "eleven_multilingual_v2",
+      "text": "أهلاً بيكم في عالم صدى! كل صوت حوالينا وراه حكاية، والنهارده هنعيش الحكاية دي مع بعض. جاهزين؟ يلا بينا!",
+      "settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.8,
+        "style": 0.3
+      },
+      "recommended": false,
+      "rationale": "نبرة ودودة متزنة للمقارنة مع Multilingual v2.",
+      "audioPath": "/audio/auditions/omar/omar_chris_v2.mp3",
+      "fileSizeBytes": 154270,
+      "durationSec": 9.57,
+      "contentHash": "ecc3fc48948816c6",
+      "creditsConsumed": 103,
+      "status": "verified"
+    },
+    {
+      "id": "mariam_alice_v3",
+      "characterId": "maryam",
+      "characterName": "مريم",
+      "voiceName": "Alice - Clear, Engaging Educator",
+      "voiceId": "Xb7hH8MSUJpSbSDYk0k2",
+      "modelId": "eleven_v3",
+      "text": "مع كل صوت بيسمعه الطفل، خطوة منظمة بتساعدنا نتابع تطوره بهدوء ووضوح، من غير قلق أو ضغط.",
+      "settings": {
+        "stability": 0.65,
+        "similarity_boost": 0.82,
+        "style": 0.15
+      },
+      "recommended": true,
+      "rationale": "مخارج واضحة ونبرة تعليمية هادئة ومطمئنة تناسب دور مريم.",
+      "audioPath": "/audio/auditions/mariam/mariam_alice_v3.mp3",
+      "fileSizeBytes": 139223,
+      "durationSec": 8.64,
+      "contentHash": "76a2f826ee8f2086",
+      "creditsConsumed": 87,
+      "status": "verified"
+    },
+    {
+      "id": "mariam_bella_v4",
+      "characterId": "maryam",
+      "characterName": "مريم",
+      "voiceName": "Bella - Professional, Bright, Warm",
+      "voiceId": "hpp4J3VqNfWAUOO0d1Us",
+      "modelId": "eleven_v4",
+      "text": "مع كل صوت بيسمعه الطفل، خطوة منظمة بتساعدنا نتابع تطوره بهدوء ووضوح، من غير قلق أو ضغط.",
+      "settings": {
+        "stability": 0.65,
+        "similarity_boost": 0.82,
+        "style": 0.15
+      },
+      "recommended": false,
+      "rationale": "صوت تعليمي مشرق ومنظم لاختبار أداء Eleven v4.",
+      "audioPath": "/audio/auditions/mariam/mariam_bella_v4.mp3",
+      "fileSizeBytes": 132954,
+      "durationSec": 8.24,
+      "contentHash": "ec0ba67775144e2d",
+      "creditsConsumed": 87,
+      "status": "verified"
+    },
+    {
+      "id": "mariam_matilda_v2",
+      "characterId": "maryam",
+      "characterName": "مريم",
+      "voiceName": "Matilda - Knowledgeable, Professional",
+      "voiceId": "XrExE9yKIg1WjnnlVkGX",
+      "modelId": "eleven_multilingual_v2",
+      "text": "مع كل صوت بيسمعه الطفل، خطوة منظمة بتساعدنا نتابع تطوره بهدوء ووضوح، من غير قلق أو ضغط.",
+      "settings": {
+        "stability": 0.68,
+        "similarity_boost": 0.82,
+        "style": 0.12
+      },
+      "recommended": false,
+      "rationale": "طبقة رصينة واضحة على Multilingual v2.",
+      "audioPath": "/audio/auditions/mariam/mariam_matilda_v2.mp3",
+      "fileSizeBytes": 119161,
+      "durationSec": 7.38,
+      "contentHash": "eeb4f975dfb0ee91",
+      "creditsConsumed": 87,
+      "status": "verified"
+    },
+    {
+      "id": "zein_will_v3",
+      "characterId": "zain",
+      "characterName": "زين",
+      "voiceName": "Will - Relaxed Optimist",
+      "voiceId": "bIHbv24MWmeRgasZH58o",
+      "modelId": "eleven_v3",
+      "text": "استنوا لحظة... هو ليه ساعات أصوات الكلام بتحتاج تركيز وتدريب زيادة عشان نفهم معناها؟",
+      "settings": {
+        "stability": 0.45,
+        "similarity_boost": 0.78,
+        "style": 0.3
+      },
+      "recommended": true,
+      "rationale": "صوت شبابي خفيف ومتسائل يميّز زين بوضوح عن عمر.",
+      "audioPath": "/audio/auditions/zein/zein_will_v3.mp3",
+      "fileSizeBytes": 104950,
+      "durationSec": 6.48,
+      "contentHash": "6dd2d2ff9305d08a",
+      "creditsConsumed": 84,
+      "status": "verified"
+    },
+    {
+      "id": "zein_river_v4",
+      "characterId": "zain",
+      "characterName": "زين",
+      "voiceName": "River - Relaxed, Informative",
+      "voiceId": "SAz9YHcvj6GT2YYXdXww",
+      "modelId": "eleven_v4",
+      "text": "استنوا لحظة... هو ليه ساعات أصوات الكلام بتحتاج تركيز وتدريب زيادة عشان نفهم معناها؟",
+      "settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.8,
+        "style": 0.25
+      },
+      "recommended": false,
+      "rationale": "صوت محايد هادئ يعبر عن الفضول التأملي على Eleven v4.",
+      "audioPath": "/audio/auditions/zein/zein_river_v4.mp3",
+      "fileSizeBytes": 99517,
+      "durationSec": 6.16,
+      "contentHash": "6e83ba74ecda9d47",
+      "creditsConsumed": 84,
+      "status": "verified"
+    },
+    {
+      "id": "zein_eric_v2",
+      "characterId": "zain",
+      "characterName": "زين",
+      "voiceName": "Eric - Smooth, Trustworthy",
+      "voiceId": "cjVigY5qzO86Huf0OWal",
+      "modelId": "eleven_multilingual_v2",
+      "text": "استنوا لحظة... هو ليه ساعات أصوات الكلام بتحتاج تركيز وتدريب زيادة عشان نفهم معناها؟",
+      "settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.8,
+        "style": 0.25
+      },
+      "recommended": false,
+      "rationale": "طبقة تينور سلسة لاختبار التمييز الصوتي على Multilingual v2.",
+      "audioPath": "/audio/auditions/zein/zein_eric_v2.mp3",
+      "fileSizeBytes": 84470,
+      "durationSec": 5.2,
+      "contentHash": "cdef56043f7ca7c1",
+      "creditsConsumed": 84,
+      "status": "verified"
+    },
+    {
+      "id": "nour_sarah_v3",
+      "characterId": "nour",
+      "characterName": "نور",
+      "voiceName": "Sarah - Reassuring, Warm",
+      "voiceId": "EXAVITQu4vr4xnSDxMaL",
+      "modelId": "eleven_v3",
+      "text": "في البيت الهادئ ومع كل كلمة تشجيع دافية، رحلة الاستماع بتبقى أجمل وأقرب لقلب الطفل.",
+      "settings": {
+        "stability": 0.58,
+        "similarity_boost": 0.82,
+        "style": 0.2
+      },
+      "recommended": true,
+      "rationale": "صوت دافئ حنون يعبّر عن الاحتواء الأسري والتفاؤل في شخصية نور.",
+      "audioPath": "/audio/auditions/nour/nour_sarah_v3.mp3",
+      "fileSizeBytes": 126684,
+      "durationSec": 7.84,
+      "contentHash": "1843e14db20ebabc",
+      "creditsConsumed": 83,
+      "status": "verified"
+    },
+    {
+      "id": "nour_lily_v4",
+      "characterId": "nour",
+      "characterName": "نور",
+      "voiceName": "Lily - Velvety, Warm",
+      "voiceId": "pFZP5JQG7iQjIQuC4Bku",
+      "modelId": "eleven_v4",
+      "text": "في البيت الهادئ ومع كل كلمة تشجيع دافية، رحلة الاستماع بتبقى أجمل وأقرب لقلب الطفل.",
+      "settings": {
+        "stability": 0.6,
+        "similarity_boost": 0.82,
+        "style": 0.2
+      },
+      "recommended": false,
+      "rationale": "نبرة مخملية دافئة على Eleven v4.",
+      "audioPath": "/audio/auditions/nour/nour_lily_v4.mp3",
+      "fileSizeBytes": 125430,
+      "durationSec": 7.76,
+      "contentHash": "20a1b480bcc74aba",
+      "creditsConsumed": 83,
+      "status": "verified"
+    },
+    {
+      "id": "nour_bella_v2",
+      "characterId": "nour",
+      "characterName": "نور",
+      "voiceName": "Bella - Warm Narrator",
+      "voiceId": "hpp4J3VqNfWAUOO0d1Us",
+      "modelId": "eleven_multilingual_v2",
+      "text": "في البيت الهادئ ومع كل كلمة تشجيع دافية، رحلة الاستماع بتبقى أجمل وأقرب لقلب الطفل.",
+      "settings": {
+        "stability": 0.6,
+        "similarity_boost": 0.82,
+        "style": 0.18
+      },
+      "recommended": false,
+      "rationale": "نبرة سردية دافئة لاختبار Multilingual v2.",
+      "audioPath": "/audio/auditions/nour/nour_bella_v2.mp3",
+      "fileSizeBytes": 117071,
+      "durationSec": 7.24,
+      "contentHash": "b3f27a09fecc92e0",
+      "creditsConsumed": 83,
+      "status": "verified"
+    },
+    {
+      "id": "sara_jessica_v3",
+      "characterId": "sarah",
+      "characterName": "سارة",
+      "voiceName": "Jessica - Playful, Bright, Warm",
+      "voiceId": "cgSgspJ2msm6clMCkdW9",
+      "modelId": "eleven_v3",
+      "text": "يا سلام! كل محاولة شاطرة ليها نجمة بتلمع... جاهزين نلعب مع الأصوات ونحتفل؟",
+      "settings": {
+        "stability": 0.38,
+        "similarity_boost": 0.78,
+        "style": 0.45
+      },
+      "recommended": true,
+      "rationale": "أكثر الأصوات حيوية وبهجة وملاءمة لطاقة سارة المحبة للألعاب.",
+      "audioPath": "/audio/auditions/sara/sara_jessica_v3.mp3",
+      "fileSizeBytes": 111220,
+      "durationSec": 6.88,
+      "contentHash": "63ff83869dcb9480",
+      "creditsConsumed": 74,
+      "status": "verified"
+    },
+    {
+      "id": "sara_laura_v4",
+      "characterId": "sarah",
+      "characterName": "سارة",
+      "voiceName": "Laura - Enthusiast, Sunny",
+      "voiceId": "FGY2WhTYpPnrIDTdsKH5",
+      "modelId": "eleven_v4",
+      "text": "يا سلام! كل محاولة شاطرة ليها نجمة بتلمع... جاهزين نلعب مع الأصوات ونحتفل؟",
+      "settings": {
+        "stability": 0.4,
+        "similarity_boost": 0.78,
+        "style": 0.42
+      },
+      "recommended": false,
+      "rationale": "نبرة مرحة متحمسة على Eleven v4.",
+      "audioPath": "/audio/auditions/sara/sara_laura_v4.mp3",
+      "fileSizeBytes": 104950,
+      "durationSec": 6.48,
+      "contentHash": "631cdceca295add6",
+      "creditsConsumed": 74,
+      "status": "verified"
+    },
+    {
+      "id": "sara_jessica_v4",
+      "characterId": "sarah",
+      "characterName": "سارة",
+      "voiceName": "Jessica - Playful, Bright, Warm",
+      "voiceId": "cgSgspJ2msm6clMCkdW9",
+      "modelId": "eleven_v4",
+      "text": "يا سلام! كل محاولة شاطرة ليها نجمة بتلمع... جاهزين نلعب مع الأصوات ونحتفل؟",
+      "settings": {
+        "stability": 0.38,
+        "similarity_boost": 0.78,
+        "style": 0.45
+      },
+      "recommended": false,
+      "rationale": "نفس صوت سارة على Eleven v4 للمقارنة المباشرة بين النموذجين.",
+      "audioPath": "/audio/auditions/sara/sara_jessica_v4.mp3",
+      "fileSizeBytes": 112474,
+      "durationSec": 6.96,
+      "contentHash": "5663819e022c5797",
+      "creditsConsumed": 74,
+      "status": "verified"
+    }
+  ],
+  "conversation": [
+    {
+      "id": "conv_01_omar",
+      "characterId": "omar",
+      "characterName": "عمر",
+      "voiceName": "Liam",
+      "voiceId": "TX3LPaxmHKxFdv7VOQHJ",
+      "modelId": "eleven_v3",
+      "text": "أهلاً يا أصحاب! سمعتوا رنة الجرس دي؟",
+      "settings": {
+        "stability": 0.45,
+        "similarity_boost": 0.78,
+        "style": 0.35
+      },
+      "audioPath": "/audio/auditions/conversations/conv_01_omar.mp3",
+      "fileSizeBytes": 40585,
+      "durationSec": 2.48,
+      "contentHash": "8e73b55db1b95765",
+      "creditsConsumed": 36,
+      "status": "verified"
+    },
+    {
+      "id": "conv_02_zein",
+      "characterId": "zain",
+      "characterName": "زين",
+      "voiceName": "Will",
+      "voiceId": "bIHbv24MWmeRgasZH58o",
+      "modelId": "eleven_v3",
+      "text": "آه سمعتها! بس قولي يا مريم، هو ليه مهم نميّز بين كل صوت والتاني؟",
+      "settings": {
+        "stability": 0.45,
+        "similarity_boost": 0.78,
+        "style": 0.3
+      },
+      "audioPath": "/audio/auditions/conversations/conv_02_zein.mp3",
+      "fileSizeBytes": 97009,
+      "durationSec": 6,
+      "contentHash": "771f3ce747b5430b",
+      "creditsConsumed": 64,
+      "status": "verified"
+    },
+    {
+      "id": "conv_03_mariam",
+      "characterId": "maryam",
+      "characterName": "مريم",
+      "voiceName": "Alice",
+      "voiceId": "Xb7hH8MSUJpSbSDYk0k2",
+      "modelId": "eleven_v3",
+      "text": "عشان كل صوت ليه تردد ومعنى، ومع المتابعة المنظمة بنشوف تطور الطفل خطوة بخطوة.",
+      "settings": {
+        "stability": 0.65,
+        "similarity_boost": 0.82,
+        "style": 0.15
+      },
+      "audioPath": "/audio/auditions/conversations/conv_03_mariam.mp3",
+      "fileSizeBytes": 118743,
+      "durationSec": 7.36,
+      "contentHash": "c1fb18d040e0228b",
+      "creditsConsumed": 77,
+      "status": "verified"
+    },
+    {
+      "id": "conv_04_sara",
+      "characterId": "sarah",
+      "characterName": "سارة",
+      "voiceName": "Jessica",
+      "voiceId": "cgSgspJ2msm6clMCkdW9",
+      "modelId": "eleven_v3",
+      "text": "والأحلى إن كل خطوة شاطرة بتجمع لينا نجمة جديدة في صدى!",
+      "settings": {
+        "stability": 0.38,
+        "similarity_boost": 0.78,
+        "style": 0.45
+      },
+      "audioPath": "/audio/auditions/conversations/conv_04_sara.mp3",
+      "fileSizeBytes": 76529,
+      "durationSec": 4.72,
+      "contentHash": "324a27ef5997a9e5",
+      "creditsConsumed": 54,
+      "status": "verified"
+    }
+  ]
+}

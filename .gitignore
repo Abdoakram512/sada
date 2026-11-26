@@ -22,3 +22,5 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+# Local secrets written by `elevenlabs onboard`
+/.env
