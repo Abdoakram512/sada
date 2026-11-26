@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Sparkles, ArrowUp, FileText, Heart, X } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { soundEngine } from '../utils/audioEngine';
 import { useStorySceneFocus } from '../hooks/useStoryAudio';
 import { CharacterStageActor } from './CharacterStageActor';
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface FinalCelebrationSectionProps {
   onScrollToTop: () => void;
@@ -13,7 +17,35 @@ export const FinalCelebrationSection: React.FC<FinalCelebrationSectionProps> = (
   onScrollToTop,
 }) => {
   const [modalOpen, setModalOpen] = useState(false);
+  const footerRef = useRef<HTMLElement | null>(null);
+  const stageRef = useRef<HTMLDivElement | null>(null);
   const { isSceneActive, activeSpeakerId } = useStorySceneFocus('scene-11-ending');
+
+  useEffect(() => {
+    const footer = footerRef.current;
+    const stage = stageRef.current;
+    if (!footer || !stage) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const ctx = gsap.context(() => {
+      gsap.from(stage.children, {
+        y: 22,
+        opacity: 0,
+        stagger: 0.1,
+        duration: 0.55,
+        ease: 'power2.out',
+        force3D: true,
+        clearProps: 'opacity,transform',
+        scrollTrigger: {
+          trigger: stage,
+          start: 'top 95%',
+          once: true,
+        },
+      });
+    }, footer);
+
+    return () => ctx.revert();
+  }, []);
 
   const triggerCelebration = () => {
     soundEngine.playSuccess();
@@ -30,9 +62,10 @@ export const FinalCelebrationSection: React.FC<FinalCelebrationSectionProps> = (
 
   return (
     <footer
+      ref={footerRef}
       id="ending"
       data-scene-id="scene-11-ending"
-      className="sada-scene pb-56 sm:pb-52 bg-gradient-to-b from-[#27213E] via-[#1D1830] to-[#120F20] text-white"
+      className="sada-scene pb-56 sm:pb-52 bg-gradient-to-b from-[#231D3A] via-[#1C1630] to-[#120F20] text-white"
     >
       <div
         aria-hidden="true"
@@ -59,29 +92,29 @@ export const FinalCelebrationSection: React.FC<FinalCelebrationSectionProps> = (
           رحلتنا مع الصوت لا تنتهي هنا؛ كل محاولة لها قيمة، وكل خطوة صغيرة تصنع فرقاً عندما تجتمع الأسرة والأخصائي والطفل في مسار واحد.
         </p>
 
-        {/* Closing Speakers + Group Celebration */}
-        <div className="flex flex-wrap items-end justify-center gap-4 sm:gap-8 mb-8">
+        {/* Closing Speakers + Theatrical Group Celebration */}
+        <div ref={stageRef} className="flex flex-wrap items-end justify-center gap-4 sm:gap-10 mb-10">
           <CharacterStageActor
             characterId="nour"
-            sizeClass="w-24 sm:w-28"
+            sizeClass="w-36 sm:w-48 md:w-56"
             isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'nour'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'nour')}
           />
 
-          <div className="max-w-md sm:max-w-lg flex items-end justify-center">
+          <div className="max-w-lg sm:max-w-xl flex items-end justify-center">
             <img
               src="/assets/group_celebrating_transparent.webp"
               alt="أبطال صدى الخمسة يحتفلون بنهاية الرحلة"
               loading="lazy"
               decoding="async"
-              className="max-h-[290px] sm:max-h-[340px] w-auto object-contain"
+              className="max-h-[340px] sm:max-h-[430px] w-auto object-contain"
             />
           </div>
 
           <CharacterStageActor
             characterId="sarah"
-            sizeClass="w-24 sm:w-28"
+            sizeClass="w-36 sm:w-48 md:w-56"
             isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'sarah'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'sarah')}

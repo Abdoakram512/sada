@@ -84,40 +84,40 @@ export const GoalsSection: React.FC = () => {
         </div>
 
         {/* Characters + High Five Celebration */}
-        <div className="flex flex-wrap items-center justify-center gap-6 mb-10">
+        <div className="flex flex-wrap items-end justify-center gap-4 sm:gap-8 mb-10">
           <CharacterStageActor
             characterId="maryam"
-            sizeClass="w-24 sm:w-28"
+            sizeClass="w-36 sm:w-48 md:w-56"
             isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'maryam'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'maryam')}
           />
-          <div className="flex items-center gap-4 bg-white p-3 rounded-3xl border border-sada-violet/15 shadow-md">
+          <div className="flex items-center gap-4 bg-white p-4 rounded-3xl border border-sada-violet/15 shadow-md">
             <img
               src="/assets/screens/screen_dashboard.png"
               alt="لوحة مؤشرات الأداء في تطبيق صدى"
               loading="lazy"
               decoding="async"
-              className="w-20 sm:w-24 rounded-2xl border border-gray-200"
+              className="w-20 sm:w-28 rounded-2xl border border-gray-200"
             />
             <img
               src="/assets/group_highfive.webp"
               alt="سارة ومريم تحتفلان بكل خطوة"
               loading="lazy"
               decoding="async"
-              className="w-24 sm:w-28 h-auto object-contain"
+              className="w-28 sm:w-36 h-auto object-contain"
             />
             <img
               src="/assets/screens/screen_timeline.png"
               alt="خطة المتابعة الدورية في تطبيق صدى"
               loading="lazy"
               decoding="async"
-              className="w-20 sm:w-24 rounded-2xl border border-gray-200"
+              className="w-20 sm:w-28 rounded-2xl border border-gray-200"
             />
           </div>
           <CharacterStageActor
             characterId="nour"
-            sizeClass="w-24 sm:w-28"
+            sizeClass="w-36 sm:w-48 md:w-56"
             isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'nour'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'nour')}

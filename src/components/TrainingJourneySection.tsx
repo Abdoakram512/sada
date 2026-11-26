@@ -84,7 +84,7 @@ export const TrainingJourneySection: React.FC<TrainingJourneySectionProps> = ({
       ref={sectionRef}
       id="training"
       data-scene-id="scene-05-auditory-skills"
-      className="sada-scene bg-sada-surface"
+      className="sada-scene bg-[#F9F6FE]"
     >
       {/* Connecting Adventure Trail SVG (lightweight static dashed path for smooth scroll FPS) */}
       <div className="hidden lg:block absolute inset-0 pointer-events-none opacity-20 overflow-hidden">
@@ -114,8 +114,8 @@ export const TrainingJourneySection: React.FC<TrainingJourneySectionProps> = ({
           </p>
         </div>
 
-        {/* Quick Station Jump Strip */}
-        <div className="flex items-center justify-start lg:justify-center overflow-x-auto pb-3 mb-10 gap-2.5 no-scrollbar">
+        {/* Sticky Desktop Quick Station Jump Strip */}
+        <div className="lg:sticky lg:top-20 z-20 flex items-center justify-start lg:justify-center overflow-x-auto py-2.5 px-2 mb-10 gap-2.5 no-scrollbar bg-[#F9F6FE]/95 rounded-2xl">
           {CORE_SKILLS.map((skill) => {
             const Icon = getIcon(skill.iconName);
             const isSelected = skill.id === activeSkillId;
@@ -256,7 +256,7 @@ export const TrainingJourneySection: React.FC<TrainingJourneySectionProps> = ({
                   >
                     <CharacterStageActor
                       characterId={guide.id}
-                      sizeClass="w-24 sm:w-32"
+                      sizeClass="w-36 sm:w-44 md:w-52"
                       isActiveScene={isSceneActive}
                       isSpeaking={isGuideSpeaking}
                       isDimmed={Boolean(isSceneActive && activeSpeakerId && !isGuideSpeaking)}

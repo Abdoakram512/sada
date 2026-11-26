@@ -11,7 +11,7 @@ export const StoryEntryOverlay: React.FC = () => {
     <div
       role="region"
       aria-label="اختيار وضع تجربة صدى"
-      className="mx-auto max-w-2xl mb-5 bg-white/95 rounded-2xl border border-sada-violet/20 px-4 py-2.5 shadow-sm flex flex-wrap items-center justify-center sm:justify-between gap-2.5 min-h-[48px]"
+      className="mx-auto max-w-2xl mb-3.5 bg-white/95 rounded-2xl border border-sada-violet/20 px-4 py-2 shadow-sm flex flex-wrap items-center justify-center sm:justify-between gap-2.5 min-h-[44px]"
     >
       <div className="flex items-center gap-2 text-right">
         <Sparkles size={15} className="text-sada-violet flex-shrink-0" />

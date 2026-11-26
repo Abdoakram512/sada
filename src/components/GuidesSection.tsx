@@ -1,15 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Home, Stethoscope, CheckCircle, ShieldAlert, Sparkles, Heart } from 'lucide-react';
 import { soundEngine } from '../utils/audioEngine';
 import { useStorySceneFocus } from '../hooks/useStoryAudio';
 import { CharacterStageActor } from './CharacterStageActor';
 
+gsap.registerPlugin(ScrollTrigger);
+
 export const GuidesSection: React.FC = () => {
   const [activeGuide, setActiveGuide] = useState<'parent' | 'specialist'>('parent');
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const cardRef = useRef<HTMLDivElement | null>(null);
   const { isSceneActive, activeSpeakerId } = useStorySceneFocus('scene-08-parents-specialists');
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    const card = cardRef.current;
+    if (!section || !card) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const ctx = gsap.context(() => {
+      gsap.from(card, {
+        y: 24,
+        opacity: 0,
+        duration: 0.55,
+        ease: 'power2.out',
+        force3D: true,
+        clearProps: 'opacity,transform',
+        scrollTrigger: {
+          trigger: card,
+          start: 'top 94%',
+          once: true,
+        },
+      });
+    }, section);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <section
+      ref={sectionRef}
       id="guides"
       data-scene-id="scene-08-parents-specialists"
       className="sada-scene bg-sada-cream"
@@ -29,11 +61,11 @@ export const GuidesSection: React.FC = () => {
           </p>
         </div>
 
-        {/* Characters Duo */}
-        <div className="flex items-end justify-center gap-8 mb-10">
+        {/* Characters Duo — Prominent Family & Specialist Hosts */}
+        <div className="flex flex-wrap items-end justify-center gap-6 sm:gap-12 mb-10">
           <CharacterStageActor
             characterId="nour"
-            sizeClass="w-24 sm:w-28"
+            sizeClass="w-36 sm:w-48 md:w-56"
             isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'nour'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'nour')}
@@ -41,7 +73,7 @@ export const GuidesSection: React.FC = () => {
           />
           <CharacterStageActor
             characterId="maryam"
-            sizeClass="w-24 sm:w-28"
+            sizeClass="w-36 sm:w-48 md:w-56"
             isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'maryam'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'maryam')}
@@ -86,7 +118,7 @@ export const GuidesSection: React.FC = () => {
         </div>
 
         {/* Content Card */}
-        <div className="bg-white rounded-[2.25rem] border-2 border-sada-violet/15 p-6 sm:p-10 shadow-xl">
+        <div ref={cardRef} className="bg-white rounded-[2.25rem] border-2 border-sada-violet/15 p-6 sm:p-10 shadow-xl">
           {activeGuide === 'parent' ? (
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center animate-fade-in">
               <div className="lg:col-span-7 space-y-5 text-right">

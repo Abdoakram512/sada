@@ -5,7 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import { Navbar } from './components/Navbar';
 import { SoundRibbon } from './components/SoundRibbon';
-import { SceneTransitionWave } from './components/SceneTransitionWave';
+import { SceneTransition } from './components/SceneTransition';
 import { HeroSection } from './components/HeroSection';
 import { ProblemSolutionSection } from './components/ProblemSolutionSection';
 import { AppWorkflowSection } from './components/AppWorkflowSection';
@@ -183,32 +183,32 @@ export const App: React.FC = () => {
           onAboutClick={() => scrollToSection('about')}
         />
 
-        <SceneTransitionWave fromColor="#FFF8ED" toColor="#FDFBF7" waveColor="#159D98" />
+        <SceneTransition variant="sound-burst" fromColor="#FFF8ED" toColor="#FDFBF7" accentColor="#159D98" />
 
         {/* Scene 02 — Understanding the Challenge */}
         <ProblemSolutionSection />
 
-        <SceneTransitionWave fromColor="#FDFBF7" toColor="#FBF3E4" waveColor="#7357D9" flip />
+        <SceneTransition variant="tablet-arch" fromColor="#FDFBF7" toColor="#FBF3E4" accentColor="#7357D9" />
 
         {/* Scene 03 — Discovering SADA */}
         <AppWorkflowSection />
 
-        <SceneTransitionWave fromColor="#FBF3E4" toColor="#FFF8ED" waveColor="#FFC552" />
+        <SceneTransition variant="prism-split" fromColor="#FBF3E4" toColor="#FFF8ED" accentColor="#FFC552" />
 
         {/* Scene 04 — Ling Six Sounds */}
         <LingSixSection />
 
-        <SceneTransitionWave fromColor="#FFF8ED" toColor="#FDFBF7" waveColor="#8F75EC" flip />
+        <SceneTransition variant="adventure-ribbon" fromColor="#FFF8ED" toColor="#F9F6FE" accentColor="#8F75EC" />
 
         {/* Scene 05 — Auditory Skills Adventure (5 Core Skills) */}
         <TrainingJourneySection onPlayGame={handleJumpToGame} />
 
-        <SceneTransitionWave fromColor="#FDFBF7" toColor="#EDF9F8" waveColor="#32B8B3" />
+        <SceneTransition variant="horizon-ripple" fromColor="#F9F6FE" toColor="#F1FAF9" accentColor="#32B8B3" />
 
         {/* Scene 06 — Listening in Noise */}
         <ListeningNoiseSection onPlayGame={handleJumpToGame} />
 
-        <SceneTransitionWave fromColor="#FFF8ED" toColor="#27213E" waveColor="#55D6BE" flip />
+        <SceneTransition variant="arcade-curtain" fromColor="#F1FAF9" toColor="#27213E" accentColor="#55D6BE" />
 
         {/* Scene 07 — Games & Rewards */}
         <GamesWorldSection
@@ -216,22 +216,22 @@ export const App: React.FC = () => {
           onSelectSkillId={setSelectedSkillIdForGame}
         />
 
-        <SceneTransitionWave fromColor="#27213E" toColor="#FFF8ED" waveColor="#159D98" />
+        <SceneTransition variant="starlight-bridge" fromColor="#27213E" toColor="#FFF8ED" accentColor="#159D98" />
 
         {/* Scene 08 — Parents & Specialists */}
         <GuidesSection />
 
-        <SceneTransitionWave fromColor="#FFF8ED" toColor="#FDFBF7" waveColor="#7357D9" flip />
+        <SceneTransition variant="timeline-sweep" fromColor="#FFF8ED" toColor="#FDFBF7" accentColor="#7357D9" />
 
         {/* Scene 09 — The Progress Journey */}
         <GoalsSection />
 
-        <SceneTransitionWave fromColor="#FDFBF7" toColor="#FFF8ED" waveColor="#159D98" />
+        <SceneTransition variant="human-arch" fromColor="#FDFBF7" toColor="#FBF3E4" accentColor="#159D98" />
 
         {/* Scene 10 — Meet the Team */}
         <TeamSection />
 
-        <SceneTransitionWave fromColor="#FFF8ED" toColor="#27213E" waveColor="#FFC552" flip />
+        <SceneTransition variant="curtain-finale" fromColor="#FBF3E4" toColor="#231D3A" accentColor="#FFC552" />
 
         {/* Scene 11 — The Ending */}
         <FinalCelebrationSection onScrollToTop={() => scrollToSection('hero')} />

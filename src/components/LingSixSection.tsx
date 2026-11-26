@@ -107,18 +107,18 @@ export const LingSixSection: React.FC = () => {
           </p>
         </div>
 
-        {/* Characters: Maryam & Zain */}
-        <div className="flex items-end justify-center gap-8 mb-10">
+        {/* Characters: Maryam & Zain — Expressive Teaching Dialogue Stage */}
+        <div className="flex flex-wrap items-end justify-center gap-6 sm:gap-12 mb-10">
           <CharacterStageActor
             characterId="maryam"
-            sizeClass="w-24 sm:w-28"
+            sizeClass="w-36 sm:w-48 md:w-56"
             isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'maryam'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'maryam')}
           />
           <CharacterStageActor
             characterId="zain"
-            sizeClass="w-24 sm:w-28"
+            sizeClass="w-36 sm:w-48 md:w-56"
             isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'zain'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'zain')}

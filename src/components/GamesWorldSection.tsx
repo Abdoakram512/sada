@@ -160,34 +160,34 @@ export const GamesWorldSection: React.FC<GamesWorldSectionProps> = ({
           </p>
         </div>
 
-        {/* Characters + Reward & Group Visual */}
-        <div className="flex flex-wrap items-center justify-center gap-6 mb-10">
+        {/* Characters + Reward & Group Visual — Energetic Nex Playground Showcase */}
+        <div className="flex flex-wrap items-end justify-center gap-4 sm:gap-8 mb-10">
           <CharacterStageActor
             characterId="sarah"
-            sizeClass="w-24 sm:w-28"
+            sizeClass="w-36 sm:w-48 md:w-56"
             isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'sarah'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'sarah')}
           />
-          <div className="flex items-center gap-4 bg-[#362E52]/90 px-4 py-3 rounded-3xl border border-white/15">
+          <div className="flex items-center gap-4 bg-[#362E52]/90 px-5 py-4 rounded-3xl border border-white/15 shadow-lg">
             <img
               src="/assets/group_running_transparent.webp"
               alt="أبطال صدى ينطلقون في عالم الألعاب"
               loading="lazy"
               decoding="async"
-              className="w-36 sm:w-44 h-auto object-contain"
+              className="w-44 sm:w-56 h-auto object-contain"
             />
             <img
               src="/assets/screens/screen_reward.png"
               alt="شاشة المكافأة ونجمة التقدم في تطبيق صدى"
               loading="lazy"
               decoding="async"
-              className="w-16 sm:w-20 rounded-2xl border-2 border-white/25 shadow-lg"
+              className="w-20 sm:w-24 rounded-2xl border-2 border-white/25 shadow-lg"
             />
           </div>
           <CharacterStageActor
             characterId="omar"
-            sizeClass="w-24 sm:w-28"
+            sizeClass="w-36 sm:w-48 md:w-56"
             isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'omar'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'omar')}

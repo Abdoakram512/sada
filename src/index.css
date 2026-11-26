@@ -7,7 +7,33 @@
   --sada-h2-size: clamp(1.75rem, 3.4vw, 2.85rem);
   --sada-h3-size: clamp(1.25rem, 2.1vw, 1.85rem);
   --sada-body-size: clamp(0.95rem, 1.1vw, 1.125rem);
-  --sada-section-pad-y: clamp(4rem, 7vw, 6.25rem);
+  --sada-section-pad-y: clamp(3.75rem, 6.5vw, 5.75rem);
+
+  /* Unified Color Harmony Design Tokens (derived from SADA logo & 5 character outfits) */
+  --sada-brand-violet: #7357D9;
+  --sada-brand-teal: #159D98;
+  --sada-brand-yellow: #FFC552;
+  --sada-brand-coral: #FF886F;
+  --sada-brand-lavender: #8F75EC;
+  --sada-ink: #27213E;
+  --sada-ink-muted: rgba(39, 33, 62, 0.78);
+
+  /* Cohesive Emotional Atmospheric Journey Backgrounds */
+  --sada-bg-welcome: #FFF8ED;
+  --sada-bg-challenge: #FDFBF7;
+  --sada-bg-app: #FBF3E4;
+  --sada-bg-ling: #FFF8ED;
+  --sada-bg-skills: #F9F6FE;
+  --sada-bg-noise: #F1FAF9;
+  --sada-bg-games: #27213E;
+  --sada-bg-guides: #FFF8ED;
+  --sada-bg-progress: #FDFBF7;
+  --sada-bg-team: #FBF3E4;
+  --sada-bg-ending: #231D3A;
+
+  --sada-card-surface: rgba(255, 255, 255, 0.96);
+  --sada-card-border: rgba(115, 87, 217, 0.14);
+  --sada-shadow-soft: 0 14px 36px -12px rgba(39, 33, 62, 0.12);
 }
 
 @layer base {

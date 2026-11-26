@@ -78,11 +78,11 @@ export const ProblemSolutionSection: React.FC = () => {
           </p>
         </div>
 
-        {/* Character Conversation Cast */}
-        <div className="flex flex-wrap items-end justify-center gap-6 sm:gap-10 mb-10">
+        {/* Character Conversation Cast — Theatrical Foreground Trio */}
+        <div className="flex flex-wrap items-end justify-center gap-4 sm:gap-10 mb-10">
           <CharacterStageActor
             characterId="zain"
-            sizeClass="w-24 sm:w-28"
+            sizeClass="w-36 sm:w-48 md:w-56"
             isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'zain'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'zain')}
@@ -90,14 +90,14 @@ export const ProblemSolutionSection: React.FC = () => {
           />
           <CharacterStageActor
             characterId="maryam"
-            sizeClass="w-24 sm:w-28"
+            sizeClass="w-36 sm:w-48 md:w-56"
             isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'maryam'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'maryam')}
           />
           <CharacterStageActor
             characterId="nour"
-            sizeClass="w-24 sm:w-28"
+            sizeClass="w-36 sm:w-48 md:w-56"
             isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'nour'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'nour')}

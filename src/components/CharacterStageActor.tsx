@@ -19,7 +19,7 @@ export const CharacterStageActor: React.FC<CharacterStageActorProps> = ({
   isSpeaking = false,
   isDimmed = false,
   isActiveScene = false,
-  sizeClass = 'w-32 sm:w-44 md:w-52',
+  sizeClass = 'w-40 sm:w-52 md:w-60',
   showLabel = true,
   bubbleText,
   onClick,
@@ -46,17 +46,23 @@ export const CharacterStageActor: React.FC<CharacterStageActorProps> = ({
           : undefined
       }
       aria-label={onClick ? `${char.name} — ${char.roleTitle}` : undefined}
-      className={`relative flex flex-col items-center select-none transition-[opacity,transform] duration-300 ${
+      className={`relative flex flex-col items-center select-none transition-[opacity,transform] duration-500 ease-out ${
         onClick ? 'cursor-pointer' : ''
-      } ${isDimmed ? 'opacity-70 scale-95' : 'opacity-100'} ${sizeClass}`}
+      } ${
+        isSpeaking
+          ? 'opacity-100 scale-[1.06] -translate-y-1.5 z-20'
+          : isDimmed
+          ? 'opacity-75 scale-[0.94] z-10'
+          : 'opacity-100 scale-100 z-10'
+      } ${sizeClass}`}
     >
-      {/* Active Speaker Aura & Voice Indicator (lightweight radial gradient — zero blur filter cost) */}
+      {/* Active Speaker Spotlight Halo (lightweight dual radial glow — zero blur filter cost) */}
       {isSpeaking && (
         <div
           aria-hidden="true"
-          className="absolute -inset-3 rounded-full pointer-events-none transition-opacity duration-300"
+          className="absolute -inset-4 rounded-full pointer-events-none transition-opacity duration-500"
           style={{
-            background: `radial-gradient(circle, ${char.accentColor}40 0%, transparent 70%)`,
+            background: `radial-gradient(circle, ${char.accentColor}48 0%, ${char.accentColor}16 45%, transparent 74%)`,
           }}
         />
       )}
@@ -93,7 +99,7 @@ export const CharacterStageActor: React.FC<CharacterStageActorProps> = ({
 
       {/* Character Cutout with distortion-free GPU transform animation (paused offscreen) */}
       <div
-        className={`relative z-10 w-full aspect-[4/5] flex items-end justify-center transition-transform duration-500 ${
+        className={`relative z-10 w-full aspect-[4/5] flex items-end justify-center overflow-hidden transition-transform duration-500 ${
           isSpeaking ? 'animate-char-speak' : shouldAnimateIdle ? 'animate-char-breathe hover:scale-105' : 'hover:scale-105'
         }`}
       >
@@ -105,7 +111,7 @@ export const CharacterStageActor: React.FC<CharacterStageActorProps> = ({
           loading={eager ? 'eager' : 'lazy'}
           fetchPriority={eager ? 'high' : 'low'}
           decoding="async"
-          className="w-full h-full object-contain"
+          className="max-h-full max-w-full w-auto h-full object-contain object-bottom"
         />
       </div>
 

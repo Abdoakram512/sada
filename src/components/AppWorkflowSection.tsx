@@ -159,16 +159,16 @@ export const AppWorkflowSection: React.FC = () => {
           </p>
         </div>
 
-        {/* Cast + Tablet Discovery Bridge */}
-        <div className="flex flex-wrap items-center justify-center gap-6 mb-10">
+        {/* Cast + Tablet Discovery Bridge — Prominent Character Framing */}
+        <div className="flex flex-wrap items-end justify-center gap-4 sm:gap-8 mb-10">
           <CharacterStageActor
             characterId="omar"
-            sizeClass="w-24 sm:w-28"
+            sizeClass="w-36 sm:w-48 md:w-56"
             isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'omar'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'omar')}
           />
-          <div className="w-40 sm:w-52 bg-white/80 rounded-3xl p-2 border border-sada-violet/15 shadow-md">
+          <div className="w-48 sm:w-64 bg-white/90 rounded-3xl p-3 border border-sada-violet/15 shadow-md">
             <img
               src="/assets/group_tablet.webp"
               alt="عمر وزين يستكشفان تطبيق صدى على الجهاز اللوحي"
@@ -179,7 +179,7 @@ export const AppWorkflowSection: React.FC = () => {
           </div>
           <CharacterStageActor
             characterId="maryam"
-            sizeClass="w-24 sm:w-28"
+            sizeClass="w-36 sm:w-48 md:w-56"
             isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'maryam'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'maryam')}

@@ -56,7 +56,7 @@ export const TeamSection: React.FC = () => {
       ref={sectionRef}
       id="team"
       data-scene-id="scene-10-team"
-      className="sada-scene bg-sada-cream"
+      className="sada-scene bg-sada-cream-warm"
     >
       <div className="max-w-7xl mx-auto">
         {/* Scene Header */}
@@ -73,16 +73,16 @@ export const TeamSection: React.FC = () => {
           </p>
         </div>
 
-        {/* Omar & Nour Presenting the Team */}
-        <div className="flex items-end justify-center gap-8 mb-10">
+        {/* Omar & Nour Presenting the Team — Prominent Co-Hosts */}
+        <div className="flex flex-wrap items-end justify-center gap-5 sm:gap-10 mb-10">
           <CharacterStageActor
             characterId="omar"
-            sizeClass="w-24 sm:w-28"
+            sizeClass="w-36 sm:w-44 md:w-52"
             isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'omar'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'omar')}
           />
-          <div className="hidden sm:block max-w-md bg-white rounded-3xl p-4 border-2 border-sada-violet/15 shadow-md text-right">
+          <div className="hidden sm:block max-w-md bg-white rounded-3xl p-5 border-2 border-sada-violet/15 shadow-md text-right self-center">
             <div className="flex items-center gap-3 mb-1.5">
               <span
                 className="w-8 h-8 rounded-xl text-white font-black text-xs flex items-center justify-center"
@@ -99,7 +99,7 @@ export const TeamSection: React.FC = () => {
           </div>
           <CharacterStageActor
             characterId="nour"
-            sizeClass="w-24 sm:w-28"
+            sizeClass="w-36 sm:w-44 md:w-52"
             isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'nour'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'nour')}
