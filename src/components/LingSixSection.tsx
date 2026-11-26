@@ -35,15 +35,16 @@ export const LingSixSection: React.FC = () => {
 
     const ctx = gsap.context(() => {
       gsap.from(orbs.children, {
-        scale: 0.84,
-        y: 28,
+        scale: 0.9,
+        y: 18,
         opacity: 0,
-        stagger: 0.08,
-        duration: 0.55,
-        ease: 'back.out(1.4)',
+        stagger: 0.06,
+        duration: 0.45,
+        ease: 'power2.out',
+        clearProps: 'opacity,transform',
         scrollTrigger: {
           trigger: orbs,
-          start: 'top 82%',
+          start: 'top 96%',
           once: true,
         },
       });
@@ -111,12 +112,14 @@ export const LingSixSection: React.FC = () => {
           <CharacterStageActor
             characterId="maryam"
             sizeClass="w-24 sm:w-28"
+            isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'maryam'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'maryam')}
           />
           <CharacterStageActor
             characterId="zain"
             sizeClass="w-24 sm:w-28"
+            isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'zain'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'zain')}
           />

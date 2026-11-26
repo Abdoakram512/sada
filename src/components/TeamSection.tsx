@@ -25,15 +25,16 @@ export const TeamSection: React.FC = () => {
 
     const ctx = gsap.context(() => {
       gsap.from(grid.children, {
-        scale: 0.92,
-        y: 22,
+        scale: 0.95,
+        y: 16,
         opacity: 0,
-        stagger: 0.05,
-        duration: 0.5,
+        stagger: 0.04,
+        duration: 0.4,
         ease: 'power2.out',
+        clearProps: 'opacity,transform',
         scrollTrigger: {
           trigger: grid,
-          start: 'top 84%',
+          start: 'top 96%',
           once: true,
         },
       });
@@ -77,6 +78,7 @@ export const TeamSection: React.FC = () => {
           <CharacterStageActor
             characterId="omar"
             sizeClass="w-24 sm:w-28"
+            isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'omar'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'omar')}
           />
@@ -98,6 +100,7 @@ export const TeamSection: React.FC = () => {
           <CharacterStageActor
             characterId="nour"
             sizeClass="w-24 sm:w-28"
+            isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'nour'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'nour')}
           />

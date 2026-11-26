@@ -26,26 +26,28 @@ export const ProblemSolutionSection: React.FC = () => {
 
     const ctx = gsap.context(() => {
       gsap.from(stage, {
-        y: 36,
+        y: 22,
         opacity: 0,
-        duration: 0.75,
+        duration: 0.5,
         ease: 'power2.out',
+        clearProps: 'opacity,transform',
         scrollTrigger: {
           trigger: section,
-          start: 'top 78%',
+          start: 'top 92%',
           once: true,
         },
       });
 
       gsap.from(cards.children, {
-        y: 26,
+        y: 18,
         opacity: 0,
-        stagger: 0.12,
-        duration: 0.65,
+        stagger: 0.08,
+        duration: 0.45,
         ease: 'power2.out',
+        clearProps: 'opacity,transform',
         scrollTrigger: {
           trigger: cards,
-          start: 'top 82%',
+          start: 'top 96%',
           once: true,
         },
       });
@@ -81,6 +83,7 @@ export const ProblemSolutionSection: React.FC = () => {
           <CharacterStageActor
             characterId="zain"
             sizeClass="w-24 sm:w-28"
+            isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'zain'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'zain')}
             bubbleText={!activeSpeakerId ? 'لماذا نحتاج تنظيماً؟' : undefined}
@@ -88,12 +91,14 @@ export const ProblemSolutionSection: React.FC = () => {
           <CharacterStageActor
             characterId="maryam"
             sizeClass="w-24 sm:w-28"
+            isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'maryam'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'maryam')}
           />
           <CharacterStageActor
             characterId="nour"
             sizeClass="w-24 sm:w-28"
+            isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'nour'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'nour')}
           />
@@ -145,7 +150,7 @@ export const ProblemSolutionSection: React.FC = () => {
                 alt="نور وعمر ومريم وزين يقرؤون ويتابعون رحلة التعلم"
                 loading="lazy"
                 decoding="async"
-                className="relative z-10 w-full h-auto object-contain drop-shadow-lg"
+                className="relative z-10 w-full h-auto object-contain"
               />
               <div className="mt-4 w-full bg-white/95 px-4 py-3 rounded-2xl border border-sada-violet/15 text-center shadow-xs">
                 <span className="text-xs sm:text-sm font-extrabold text-sada-ink">

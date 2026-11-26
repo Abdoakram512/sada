@@ -30,14 +30,15 @@ export const ListeningNoiseSection: React.FC<ListeningNoiseSectionProps> = ({ on
 
     const ctx = gsap.context(() => {
       gsap.from(layers.children, {
-        y: 28,
+        y: 20,
         opacity: 0,
-        stagger: 0.14,
-        duration: 0.65,
+        stagger: 0.1,
+        duration: 0.45,
         ease: 'power2.out',
+        clearProps: 'opacity,transform',
         scrollTrigger: {
           trigger: section,
-          start: 'top 78%',
+          start: 'top 92%',
           once: true,
         },
       });
@@ -98,12 +99,14 @@ export const ListeningNoiseSection: React.FC<ListeningNoiseSectionProps> = ({ on
               <CharacterStageActor
                 characterId="zain"
                 sizeClass="w-24 sm:w-28"
+                isActiveScene={isSceneActive}
                 isSpeaking={isSceneActive && activeSpeakerId === 'zain'}
                 isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'zain')}
               />
               <CharacterStageActor
                 characterId="maryam"
                 sizeClass="w-24 sm:w-28"
+                isActiveScene={isSceneActive}
                 isSpeaking={isSceneActive && activeSpeakerId === 'maryam'}
                 isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'maryam')}
               />

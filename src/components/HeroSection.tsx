@@ -46,14 +46,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       });
 
       gsap.to(rings, {
-        scale: 1.18,
-        opacity: 0.25,
+        y: 22,
+        opacity: 0.3,
         ease: 'none',
+        force3D: true,
         scrollTrigger: {
           trigger: section,
           start: 'top top',
           end: 'bottom top',
-          scrub: 0.7,
+          scrub: 0.5,
         },
       });
     }, section);
@@ -66,21 +67,21 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       ref={sectionRef}
       id="hero"
       data-scene-id="scene-01-welcome"
-      className="relative min-h-[calc(100svh-0.5rem)] flex flex-col justify-between pt-20 sm:pt-24 pb-20 sm:pb-20 px-4 md:px-8 overflow-x-clip bg-gradient-to-b from-sada-cream via-[#FFF3DF] to-sada-cream"
+      className="relative min-h-[calc(100svh-0.5rem)] flex flex-col justify-between pt-20 sm:pt-24 pb-44 sm:pb-24 px-4 md:px-8 overflow-x-clip bg-gradient-to-b from-sada-cream via-[#FFF3DF] to-sada-cream"
     >
-      {/* Decorative Sound Wave Rings */}
+      {/* Decorative Sound Wave Rings (paused when Hero is offscreen) */}
       <div
         ref={ringsRef}
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden"
       >
-        <div className="w-[680px] h-[680px] rounded-full border border-sada-violet/10 animate-pulse-glow" />
+        <div className={`w-[640px] h-[640px] rounded-full border border-sada-violet/10 ${isHeroScene ? 'animate-pulse-glow' : ''}`} />
         <div
-          className="absolute w-[500px] h-[500px] rounded-full border border-sada-teal/15 animate-pulse-glow"
+          className={`absolute w-[480px] h-[480px] rounded-full border border-sada-teal/15 ${isHeroScene ? 'animate-pulse-glow' : ''}`}
           style={{ animationDelay: '1s' }}
         />
         <div
-          className="absolute w-[340px] h-[340px] rounded-full border border-sada-yellow/25 animate-pulse-glow"
+          className={`absolute w-[320px] h-[320px] rounded-full border border-sada-yellow/25 ${isHeroScene ? 'animate-pulse-glow' : ''}`}
           style={{ animationDelay: '1.8s' }}
         />
       </div>
@@ -175,13 +176,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         <div ref={castRef} className="relative w-full max-w-5xl mt-1">
           <div
             aria-hidden="true"
-            className="mx-auto w-4/5 h-10 bg-sada-ink/10 rounded-[100%] blur-xl -mb-6"
+            className="mx-auto w-4/5 h-8 rounded-[100%] -mb-5"
+            style={{ background: 'radial-gradient(ellipse at center, rgba(39,33,62,0.12) 0%, transparent 72%)' }}
           />
           <div className="grid grid-cols-3 sm:grid-cols-5 items-end justify-items-center gap-2 sm:gap-3 md:gap-4 px-2">
             <div className="order-1">
               <CharacterStageActor
                 characterId="sarah"
                 eager
+                isActiveScene={isHeroScene}
                 isSpeaking={isHeroScene && activeSpeakerId === 'sarah'}
                 isDimmed={Boolean(isHeroScene && activeSpeakerId && activeSpeakerId !== 'sarah')}
                 sizeClass="w-24 sm:w-36 md:w-44"
@@ -192,6 +195,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               <CharacterStageActor
                 characterId="zain"
                 eager
+                isActiveScene={isHeroScene}
                 isSpeaking={isHeroScene && activeSpeakerId === 'zain'}
                 isDimmed={Boolean(isHeroScene && activeSpeakerId && activeSpeakerId !== 'zain')}
                 sizeClass="w-24 sm:w-36 md:w-44"
@@ -202,6 +206,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               <CharacterStageActor
                 characterId="omar"
                 eager
+                isActiveScene={isHeroScene}
                 isSpeaking={isHeroScene && activeSpeakerId === 'omar'}
                 isDimmed={Boolean(isHeroScene && activeSpeakerId && activeSpeakerId !== 'omar')}
                 sizeClass="w-28 sm:w-44 md:w-52"
@@ -212,6 +217,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               <CharacterStageActor
                 characterId="maryam"
                 eager
+                isActiveScene={isHeroScene}
                 isSpeaking={isHeroScene && activeSpeakerId === 'maryam'}
                 isDimmed={Boolean(isHeroScene && activeSpeakerId && activeSpeakerId !== 'maryam')}
                 sizeClass="w-24 sm:w-36 md:w-44"
@@ -222,6 +228,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               <CharacterStageActor
                 characterId="nour"
                 eager
+                isActiveScene={isHeroScene}
                 isSpeaking={isHeroScene && activeSpeakerId === 'nour'}
                 isDimmed={Boolean(isHeroScene && activeSpeakerId && activeSpeakerId !== 'nour')}
                 sizeClass="w-24 sm:w-36 md:w-44"
@@ -235,6 +242,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             <CharacterStageActor
               characterId="maryam"
               eager
+              isActiveScene={isHeroScene}
               isSpeaking={isHeroScene && activeSpeakerId === 'maryam'}
               isDimmed={Boolean(isHeroScene && activeSpeakerId && activeSpeakerId !== 'maryam')}
               sizeClass="w-24"
@@ -243,6 +251,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             <CharacterStageActor
               characterId="nour"
               eager
+              isActiveScene={isHeroScene}
               isSpeaking={isHeroScene && activeSpeakerId === 'nour'}
               isDimmed={Boolean(isHeroScene && activeSpeakerId && activeSpeakerId !== 'nour')}
               sizeClass="w-24"

@@ -37,19 +37,19 @@ export const StoryAudioBar: React.FC<StoryAudioBarProps> = ({ onOpenAuditions })
   return (
     <aside
       aria-label="وحدة التحكم في القصة والصوت"
-      className="fixed bottom-3 inset-x-3 sm:inset-x-auto sm:bottom-4 sm:left-1/2 sm:-translate-x-1/2 z-40 flex flex-col items-center gap-2 max-w-3xl sm:w-[92vw] pointer-events-none"
+      className="fixed bottom-3 inset-x-3 sm:inset-x-auto sm:bottom-4 sm:left-1/2 sm:-translate-x-1/2 z-40 flex flex-col items-center gap-2 max-w-3xl sm:w-[92vw] pointer-events-none transform-gpu"
     >
       {/* Live RTL Subtitle Pill */}
       {showSubtitlePill && activeDlg && speakerProfile && (
         <div
           role="status"
           aria-live="polite"
-          className="pointer-events-auto w-full bg-sada-ink/95 text-white rounded-2xl px-3.5 py-2.5 border border-white/15 shadow-xl flex items-start gap-2.5"
+          className="pointer-events-auto w-full bg-sada-ink/95 text-white rounded-2xl px-3 py-2 sm:px-3.5 sm:py-2.5 border border-white/15 shadow-xl flex items-start gap-2.5"
         >
           <img
             src={speakerProfile.avatarImage}
             alt={speakerProfile.name}
-            className="w-10 h-10 rounded-xl object-contain bg-white/10 p-0.5 flex-shrink-0"
+            className="hidden sm:block w-10 h-10 rounded-xl object-contain bg-white/10 p-0.5 flex-shrink-0"
           />
           <div className="flex-1 min-w-0 text-right">
             <div className="flex flex-wrap items-center justify-between gap-2 mb-1">

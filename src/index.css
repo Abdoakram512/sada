@@ -15,7 +15,6 @@
     direction: rtl;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
   }
 
   body {
@@ -166,6 +165,7 @@ html.lenis body {
     padding-inline: clamp(1rem, 3vw, 2.5rem);
     position: relative;
     overflow-x: clip;
+    contain: layout style paint;
   }
 }
 

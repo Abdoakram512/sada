@@ -56,14 +56,15 @@ export const GamesWorldSection: React.FC<GamesWorldSectionProps> = ({
 
     const ctx = gsap.context(() => {
       gsap.from(track.children, {
-        y: 30,
+        y: 18,
         opacity: 0,
-        stagger: 0.08,
-        duration: 0.6,
-        ease: 'back.out(1.2)',
+        stagger: 0.06,
+        duration: 0.45,
+        ease: 'power2.out',
+        clearProps: 'opacity,transform',
         scrollTrigger: {
           trigger: track,
-          start: 'top 84%',
+          start: 'top 98%',
           once: true,
         },
       });
@@ -134,14 +135,14 @@ export const GamesWorldSection: React.FC<GamesWorldSectionProps> = ({
       data-scene-id="scene-07-games"
       className="sada-scene bg-gradient-to-b from-[#27213E] via-[#1E1933] to-[#27213E] text-white"
     >
-      {/* Subtle Ambient Aura */}
+      {/* Lightweight Radial Glows (zero blur-3xl filter rasterization cost) */}
       <div
         aria-hidden="true"
-        className="absolute top-12 right-10 w-72 h-72 rounded-full bg-sada-violet/20 blur-3xl pointer-events-none"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute bottom-16 left-10 w-80 h-80 rounded-full bg-sada-teal/20 blur-3xl pointer-events-none"
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(circle at 82% 18%, rgba(115, 87, 217, 0.22) 0%, transparent 45%), radial-gradient(circle at 18% 82%, rgba(21, 157, 152, 0.2) 0%, transparent 45%)',
+        }}
       />
 
       <div className="max-w-7xl mx-auto relative z-10">
@@ -164,10 +165,11 @@ export const GamesWorldSection: React.FC<GamesWorldSectionProps> = ({
           <CharacterStageActor
             characterId="sarah"
             sizeClass="w-24 sm:w-28"
+            isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'sarah'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'sarah')}
           />
-          <div className="flex items-center gap-4 bg-white/10 backdrop-blur-md px-4 py-3 rounded-3xl border border-white/15">
+          <div className="flex items-center gap-4 bg-[#362E52]/90 px-4 py-3 rounded-3xl border border-white/15">
             <img
               src="/assets/group_running_transparent.webp"
               alt="أبطال صدى ينطلقون في عالم الألعاب"
@@ -186,6 +188,7 @@ export const GamesWorldSection: React.FC<GamesWorldSectionProps> = ({
           <CharacterStageActor
             characterId="omar"
             sizeClass="w-24 sm:w-28"
+            isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'omar'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'omar')}
           />

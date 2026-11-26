@@ -6,6 +6,7 @@ interface CharacterStageActorProps {
   characterId: CharacterId;
   isSpeaking?: boolean;
   isDimmed?: boolean;
+  isActiveScene?: boolean;
   sizeClass?: string;
   showLabel?: boolean;
   bubbleText?: string;
@@ -17,6 +18,7 @@ export const CharacterStageActor: React.FC<CharacterStageActorProps> = ({
   characterId,
   isSpeaking = false,
   isDimmed = false,
+  isActiveScene = false,
   sizeClass = 'w-32 sm:w-44 md:w-52',
   showLabel = true,
   bubbleText,
@@ -26,6 +28,7 @@ export const CharacterStageActor: React.FC<CharacterStageActorProps> = ({
   const char = CHARACTERS.find((c) => c.id === characterId) || CHARACTERS[0];
   const isFemale = characterId === 'maryam' || characterId === 'nour' || characterId === 'sarah';
   const defaultSpeakLabel = isFemale ? `${char.name} تتحدث` : `${char.name} يتحدث`;
+  const shouldAnimateIdle = isActiveScene;
 
   return (
     <div
@@ -43,15 +46,18 @@ export const CharacterStageActor: React.FC<CharacterStageActorProps> = ({
           : undefined
       }
       aria-label={onClick ? `${char.name} — ${char.roleTitle}` : undefined}
-      className={`relative flex flex-col items-center select-none transition-all duration-500 ${
+      className={`relative flex flex-col items-center select-none transition-[opacity,transform] duration-300 ${
         onClick ? 'cursor-pointer' : ''
       } ${isDimmed ? 'opacity-70 scale-95' : 'opacity-100'} ${sizeClass}`}
     >
-      {/* Active Speaker Aura & Voice Indicator */}
+      {/* Active Speaker Aura & Voice Indicator (lightweight radial gradient — zero blur filter cost) */}
       {isSpeaking && (
         <div
-          className="absolute -inset-2 rounded-full blur-2xl opacity-35 pointer-events-none transition-opacity duration-300"
-          style={{ backgroundColor: char.accentColor }}
+          aria-hidden="true"
+          className="absolute -inset-3 rounded-full pointer-events-none transition-opacity duration-300"
+          style={{
+            background: `radial-gradient(circle, ${char.accentColor}40 0%, transparent 70%)`,
+          }}
         />
       )}
 
@@ -85,10 +91,10 @@ export const CharacterStageActor: React.FC<CharacterStageActorProps> = ({
         )}
       </div>
 
-      {/* Character Cutout with distortion-free GPU transform animation & reserved aspect ratio */}
+      {/* Character Cutout with distortion-free GPU transform animation (paused offscreen) */}
       <div
         className={`relative z-10 w-full aspect-[4/5] flex items-end justify-center transition-transform duration-500 ${
-          isSpeaking ? 'animate-char-speak' : 'animate-char-breathe hover:scale-105'
+          isSpeaking ? 'animate-char-speak' : shouldAnimateIdle ? 'animate-char-breathe hover:scale-105' : 'hover:scale-105'
         }`}
       >
         <img
@@ -97,6 +103,7 @@ export const CharacterStageActor: React.FC<CharacterStageActorProps> = ({
           width={400}
           height={500}
           loading={eager ? 'eager' : 'lazy'}
+          fetchPriority={eager ? 'high' : 'low'}
           decoding="async"
           className="w-full h-full object-contain"
         />

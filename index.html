@@ -8,10 +8,9 @@
     <meta name="description" content="مشروع صدى (SADA) — تجربة قصصية تفاعلية لتقييم الاستجابة السمعية وتنمية المهارات السمعية لدى الأطفال ضعاف السمع ومستخدمي السماعات الطبية وزراعة القوقعة." />
     <meta name="theme-color" content="#7357D9" />
 
-    <!-- Google Fonts: Alexandria & IBM Plex Sans Arabic -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <!-- Self-hosted Alexandria Arabic & Latin variable font preloads (eliminates external font CLS & LCP delay) -->
+    <link rel="preload" href="/fonts/alexandria-0.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/alexandria-3.woff2" as="font" type="font/woff2" crossorigin />
   </head>
   <body class="bg-sada-cream text-sada-ink font-arabic antialiased selection:bg-sada-yellow selection:text-sada-ink overflow-x-hidden">
     <div id="root"></div>

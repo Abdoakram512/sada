@@ -34,6 +34,7 @@ export const GuidesSection: React.FC = () => {
           <CharacterStageActor
             characterId="nour"
             sizeClass="w-24 sm:w-28"
+            isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'nour'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'nour')}
             onClick={() => setActiveGuide('parent')}
@@ -41,6 +42,7 @@ export const GuidesSection: React.FC = () => {
           <CharacterStageActor
             characterId="maryam"
             sizeClass="w-24 sm:w-28"
+            isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'maryam'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'maryam')}
             onClick={() => setActiveGuide('specialist')}
@@ -115,7 +117,7 @@ export const GuidesSection: React.FC = () => {
                   alt="نور تحمل كتاب الإرشادات"
                   loading="lazy"
                   decoding="async"
-                  className="w-40 sm:w-48 h-auto object-contain mb-3 drop-shadow-md"
+                  className="w-40 sm:w-48 h-auto object-contain mb-3"
                 />
                 <h4 className="text-lg font-black text-sada-ink mb-1.5">دور الأسرة الداعم</h4>
                 <p className="text-xs sm:text-sm text-sada-ink/75 leading-relaxed font-medium text-center">

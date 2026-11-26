@@ -118,17 +118,17 @@ export const AppWorkflowSection: React.FC = () => {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         phone,
-        { scale: 0.92, y: 36, opacity: 0 },
+        { y: 24, opacity: 0.35 },
         {
-          scale: 1,
           y: 0,
           opacity: 1,
-          duration: 0.85,
-          ease: 'power3.out',
+          ease: 'power2.out',
+          force3D: true,
           scrollTrigger: {
             trigger: section,
-            start: 'top 76%',
-            once: true,
+            start: 'top 82%',
+            end: 'top 30%',
+            scrub: 0.4,
           },
         }
       );
@@ -164,6 +164,7 @@ export const AppWorkflowSection: React.FC = () => {
           <CharacterStageActor
             characterId="omar"
             sizeClass="w-24 sm:w-28"
+            isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'omar'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'omar')}
           />
@@ -179,6 +180,7 @@ export const AppWorkflowSection: React.FC = () => {
           <CharacterStageActor
             characterId="maryam"
             sizeClass="w-24 sm:w-28"
+            isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'maryam'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'maryam')}
           />

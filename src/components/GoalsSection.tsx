@@ -23,14 +23,15 @@ export const GoalsSection: React.FC = () => {
 
     const ctx = gsap.context(() => {
       gsap.from(timeline.children, {
-        y: 26,
+        y: 18,
         opacity: 0,
-        stagger: 0.14,
-        duration: 0.6,
+        stagger: 0.1,
+        duration: 0.45,
         ease: 'power2.out',
+        clearProps: 'opacity,transform',
         scrollTrigger: {
           trigger: timeline,
-          start: 'top 82%',
+          start: 'top 96%',
           once: true,
         },
       });
@@ -87,6 +88,7 @@ export const GoalsSection: React.FC = () => {
           <CharacterStageActor
             characterId="maryam"
             sizeClass="w-24 sm:w-28"
+            isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'maryam'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'maryam')}
           />
@@ -116,6 +118,7 @@ export const GoalsSection: React.FC = () => {
           <CharacterStageActor
             characterId="nour"
             sizeClass="w-24 sm:w-28"
+            isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'nour'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'nour')}
           />

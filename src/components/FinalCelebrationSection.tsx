@@ -36,7 +36,10 @@ export const FinalCelebrationSection: React.FC<FinalCelebrationSectionProps> = (
     >
       <div
         aria-hidden="true"
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[720px] h-[360px] bg-gradient-to-b from-sada-violet/20 via-sada-teal/15 to-transparent blur-3xl pointer-events-none"
+        className="absolute inset-x-0 top-0 h-72 pointer-events-none"
+        style={{
+          background: 'radial-gradient(ellipse at 50% 0%, rgba(115, 87, 217, 0.26) 0%, rgba(21, 157, 152, 0.14) 40%, transparent 75%)',
+        }}
       />
 
       <div className="max-w-7xl mx-auto relative z-10 text-center">
@@ -61,6 +64,7 @@ export const FinalCelebrationSection: React.FC<FinalCelebrationSectionProps> = (
           <CharacterStageActor
             characterId="nour"
             sizeClass="w-24 sm:w-28"
+            isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'nour'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'nour')}
           />
@@ -71,13 +75,14 @@ export const FinalCelebrationSection: React.FC<FinalCelebrationSectionProps> = (
               alt="أبطال صدى الخمسة يحتفلون بنهاية الرحلة"
               loading="lazy"
               decoding="async"
-              className="max-h-[290px] sm:max-h-[340px] w-auto object-contain drop-shadow-[0_20px_35px_rgba(115,87,217,0.35)]"
+              className="max-h-[290px] sm:max-h-[340px] w-auto object-contain"
             />
           </div>
 
           <CharacterStageActor
             characterId="sarah"
             sizeClass="w-24 sm:w-28"
+            isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'sarah'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'sarah')}
           />
@@ -140,7 +145,7 @@ export const FinalCelebrationSection: React.FC<FinalCelebrationSectionProps> = (
           role="dialog"
           aria-modal="true"
           aria-label="بطاقة تعريف مشروع صدى"
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-fade-in"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 animate-fade-in"
         >
           <div className="bg-white rounded-3xl p-6 sm:p-8 max-w-2xl w-full text-sada-ink relative shadow-2xl max-h-[90vh] overflow-y-auto">
             <button

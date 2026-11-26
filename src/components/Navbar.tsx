@@ -44,10 +44,10 @@ export const Navbar: React.FC<NavbarProps> = ({ currentSection }) => {
 
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-40 transition-all duration-300 py-2.5 px-4 md:px-8 ${
+      className={`fixed top-0 inset-x-0 z-40 transition-colors duration-300 py-2.5 px-4 md:px-8 ${
         isScrolled
-          ? 'bg-sada-cream/95 backdrop-blur-sm shadow-sm border-b border-sada-violet/10'
-          : 'bg-sada-cream/80 backdrop-blur-sm'
+          ? 'bg-sada-cream/95 shadow-sm border-b border-sada-violet/10'
+          : 'bg-sada-cream/90'
       }`}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
@@ -76,7 +76,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentSection }) => {
         {/* Desktop Navigation Links */}
         <nav
           aria-label="فصول القصة"
-          className="hidden xl:flex items-center gap-1 bg-white/90 backdrop-blur-md px-2.5 py-1.5 rounded-full border border-sada-violet/15 shadow-sm"
+          className="hidden xl:flex items-center gap-1 bg-white/95 px-2.5 py-1.5 rounded-full border border-sada-violet/15 shadow-sm"
         >
           {navLinks.map((link) => {
             const isActive = currentSection === link.id;

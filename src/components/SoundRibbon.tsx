@@ -5,80 +5,46 @@ interface SoundRibbonProps {
   activeColorRef: React.MutableRefObject<string>;
 }
 
-// Continuous signature SADA sound-wave ribbon driven by mutable refs (zero React re-renders per scroll frame)
+// GPU-accelerated dual harmonic SVG ribbon driven by refs (zero canvas redraw overhead, zero React re-renders)
 export const SoundRibbon: React.FC<SoundRibbonProps> = ({
   scrollProgressRef,
   activeColorRef,
 }) => {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const wave1Ref = useRef<SVGSVGElement | null>(null);
+  const wave2Ref = useRef<SVGSVGElement | null>(null);
+  const path1Ref = useRef<SVGPathElement | null>(null);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
     let rafId: number | null = null;
-    let t = 0;
-    let lastScroll = -1;
-    let lastDrawTime = 0;
-
-    const handleResize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-
-    handleResize();
-    window.addEventListener('resize', handleResize, { passive: true });
-
-    const drawFrame = () => {
-      const w = canvas.width;
-      const h = canvas.height;
-      const scroll = scrollProgressRef.current;
-      const primaryColor = activeColorRef.current || '#7357D9';
-
-      ctx.clearRect(0, 0, w, h);
-
-      const isMobile = w < 768;
-      const step = isMobile ? 28 : 20;
-
-      const ribbons = [
-        { color: primaryColor, alpha: 0.16, freq: 0.0018, amp: isMobile ? 26 : 42, speed: 1.0, yOffset: 0.52, width: 2.5 },
-        { color: '#159D98', alpha: 0.11, freq: 0.0024, amp: isMobile ? 20 : 32, speed: 0.78, yOffset: 0.56, width: 2 },
-        { color: '#FFC552', alpha: 0.1, freq: 0.0013, amp: isMobile ? 30 : 48, speed: 1.15, yOffset: 0.48, width: 1.8 },
-      ];
-
-      ribbons.forEach((ribbon) => {
-        ctx.beginPath();
-        ctx.strokeStyle = ribbon.color;
-        ctx.lineWidth = ribbon.width;
-        ctx.globalAlpha = ribbon.alpha;
-
-        const scrollPhase = scroll * 4.5;
-        for (let x = 0; x <= w; x += step) {
-          const y =
-            h * ribbon.yOffset +
-            Math.sin(x * ribbon.freq + t * ribbon.speed + scrollPhase) * ribbon.amp +
-            Math.cos(x * 0.0007 - t * 0.45 + scroll * 2) * 16;
-          if (x === 0) ctx.moveTo(x, y);
-          else ctx.lineTo(x, y);
-        }
-        ctx.stroke();
-      });
-
-      ctx.globalAlpha = 1;
-    };
+    let phase = 0;
+    let lastTime = 0;
+    let lastColor = '';
 
     const tick = (now: number) => {
       if (document.hidden) {
         rafId = null;
         return;
       }
-      if (now - lastDrawTime >= 32) {
-        lastDrawTime = now;
-        t += 0.024;
-        drawFrame();
+      if (now - lastTime >= 32) {
+        lastTime = now;
+        phase = (phase + 0.45) % 360;
+        const scrollShift = scrollProgressRef.current * 140;
+
+        if (wave1Ref.current) {
+          const x1 = -((phase + scrollShift) % 360);
+          wave1Ref.current.style.transform = `translate3d(${x1}px, 0, 0)`;
+        }
+        if (wave2Ref.current) {
+          const x2 = -((phase * 0.7 + scrollShift * 1.4) % 360);
+          wave2Ref.current.style.transform = `translate3d(${x2}px, 0, 0)`;
+        }
+        if (path1Ref.current && activeColorRef.current && activeColorRef.current !== lastColor) {
+          lastColor = activeColorRef.current;
+          path1Ref.current.setAttribute('stroke', lastColor);
+        }
       }
       rafId = requestAnimationFrame(tick);
     };
@@ -89,45 +55,57 @@ export const SoundRibbon: React.FC<SoundRibbonProps> = ({
           cancelAnimationFrame(rafId);
           rafId = null;
         }
-      } else if (!prefersReducedMotion && rafId === null) {
+      } else if (rafId === null) {
         rafId = requestAnimationFrame(tick);
       }
     };
 
     document.addEventListener('visibilitychange', handleVisibility);
-
-    if (prefersReducedMotion) {
-      // Static gentle wave when reduced motion is preferred; update only on scroll changes
-      drawFrame();
-      const staticInterval = window.setInterval(() => {
-        if (Math.abs(scrollProgressRef.current - lastScroll) > 0.005) {
-          lastScroll = scrollProgressRef.current;
-          drawFrame();
-        }
-      }, 150);
-
-      return () => {
-        window.removeEventListener('resize', handleResize);
-        document.removeEventListener('visibilitychange', handleVisibility);
-        window.clearInterval(staticInterval);
-      };
-    }
-
     rafId = requestAnimationFrame(tick);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
       document.removeEventListener('visibilitychange', handleVisibility);
       if (rafId !== null) cancelAnimationFrame(rafId);
     };
   }, [scrollProgressRef, activeColorRef]);
 
   return (
-    <canvas
-      ref={canvasRef}
+    <div
       aria-hidden="true"
-      className="fixed inset-0 w-full h-full pointer-events-none z-0"
-      style={{ opacity: 0.85 }}
-    />
+      className="fixed inset-0 pointer-events-none z-0 overflow-hidden opacity-60"
+    >
+      <svg
+        ref={wave1Ref}
+        viewBox="0 0 1800 240"
+        preserveAspectRatio="none"
+        shapeRendering="optimizeSpeed"
+        className="absolute top-[38%] left-0 w-[calc(100%+360px)] h-48 will-change-transform"
+      >
+        <path
+          ref={path1Ref}
+          d="M0,120 Q90,45 180,120 T360,120 T540,120 T720,120 T900,120 T1080,120 T1260,120 T1440,120 T1620,120 T1800,120"
+          fill="none"
+          stroke="#7357D9"
+          strokeWidth="2.5"
+          opacity="0.22"
+        />
+      </svg>
+
+      <svg
+        ref={wave2Ref}
+        viewBox="0 0 1800 240"
+        preserveAspectRatio="none"
+        shapeRendering="optimizeSpeed"
+        className="absolute top-[46%] left-0 w-[calc(100%+360px)] h-48 will-change-transform"
+      >
+        <path
+          d="M0,120 Q90,185 180,120 T360,120 T540,120 T720,120 T900,120 T1080,120 T1260,120 T1440,120 T1620,120 T1800,120"
+          fill="none"
+          stroke="#159D98"
+          strokeWidth="2"
+          opacity="0.16"
+        />
+      </svg>
+    </div>
   );
 };

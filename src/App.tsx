@@ -36,6 +36,7 @@ export const App: React.FC = () => {
   // Mutable refs for 60 FPS SoundRibbon without React re-render churn on every scroll frame
   const scrollProgressRef = useRef<number>(0);
   const activeColorRef = useRef<string>('#7357D9');
+  const lastSceneIdRef = useRef<string>('scene-01-welcome');
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -102,9 +103,10 @@ export const App: React.FC = () => {
         if (bestEntry) {
           const el = bestEntry.target as HTMLElement;
           const sceneId = el.dataset.sceneId;
-          if (sceneId) {
+          if (sceneId && sceneId !== lastSceneIdRef.current) {
             const meta = STORY_SCENES.find((s) => s.id === sceneId);
             if (meta) {
+              lastSceneIdRef.current = sceneId;
               setCurrentAnchor(meta.anchorId);
               activeColorRef.current = meta.accentColor;
               storyAudioController.notifySceneInView(meta.id);
@@ -113,15 +115,39 @@ export const App: React.FC = () => {
         }
       },
       {
-        rootMargin: '-20% 0px -30% 0px',
-        threshold: [0.15, 0.35, 0.6],
+        rootMargin: '-22% 0px -32% 0px',
+        threshold: 0.2,
       }
     );
 
     sceneEls.forEach((el) => observer.observe(el));
 
-    // Refresh ScrollTrigger once fonts/images settle
-    const refreshTimer = window.setTimeout(() => ScrollTrigger.refresh(), 500);
+    // Refresh ScrollTrigger once fonts/images settle & pre-decode below-the-fold story images well after LCP
+    const refreshTimer = window.setTimeout(() => {
+      ScrollTrigger.refresh();
+      const assetsToDecode = [
+        '/assets/group_reading_transparent.webp',
+        '/assets/group_tablet.webp',
+        '/assets/group_running_transparent.webp',
+        '/assets/group_highfive.webp',
+        '/assets/group_celebrating_transparent.webp',
+        '/assets/char_guide.webp',
+        '/assets/screens/screen_welcome.png',
+        '/assets/screens/screen_detection.png',
+        '/assets/screens/screen_noise.png',
+        '/assets/screens/screen_reward.png',
+        '/assets/screens/screen_dashboard.png',
+        '/assets/screens/screen_timeline.png',
+      ];
+      assetsToDecode.forEach((src) => {
+        const img = new Image();
+        img.decoding = 'async';
+        img.src = src;
+        if (typeof img.decode === 'function') {
+          img.decode().catch(() => {});
+        }
+      });
+    }, 2600);
 
     return () => {
       observer.disconnect();

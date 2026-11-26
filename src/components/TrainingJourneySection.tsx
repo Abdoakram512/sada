@@ -1,4 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
   Bell,
   Sliders,
@@ -26,12 +28,39 @@ export const TrainingJourneySection: React.FC<TrainingJourneySectionProps> = ({
 }) => {
   const [manualSkillId, setManualSkillId] = useState<number>(1);
   const sectionRef = useRef<HTMLElement | null>(null);
+  const stationsRef = useRef<HTMLDivElement | null>(null);
   const { isSceneActive, activeSpeakerId } = useStorySceneFocus('scene-05-auditory-skills');
   const speakerSkill =
     isSceneActive && activeSpeakerId
       ? CORE_SKILLS.find((s) => s.guideCharacterId === activeSpeakerId)
       : undefined;
   const activeSkillId = speakerSkill ? speakerSkill.id : manualSkillId;
+
+  useEffect(() => {
+    const stations = stationsRef.current;
+    if (!stations) return;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    gsap.registerPlugin(ScrollTrigger);
+    const ctx = gsap.context(() => {
+      Array.from(stations.children).forEach((card, idx) => {
+        gsap.from(card, {
+          x: idx % 2 === 0 ? 28 : -28,
+          opacity: 0,
+          duration: 0.6,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 86%',
+            once: true,
+          },
+        });
+      });
+    }, stations);
+
+    return () => ctx.revert();
+  }, []);
 
   const getIcon = (name: string) => {
     switch (name) {
@@ -126,7 +155,7 @@ export const TrainingJourneySection: React.FC<TrainingJourneySectionProps> = ({
         </div>
 
         {/* 5 Distinct Connected Adventure Stations */}
-        <div className="space-y-8">
+        <div ref={stationsRef} className="space-y-8">
           {CORE_SKILLS.map((skill, idx) => {
             const Icon = getIcon(skill.iconName);
             const guide = CHARACTERS.find((c) => c.id === skill.guideCharacterId) || CHARACTERS[0];
@@ -228,6 +257,7 @@ export const TrainingJourneySection: React.FC<TrainingJourneySectionProps> = ({
                     <CharacterStageActor
                       characterId={guide.id}
                       sizeClass="w-24 sm:w-32"
+                      isActiveScene={isSceneActive}
                       isSpeaking={isGuideSpeaking}
                       isDimmed={Boolean(isSceneActive && activeSpeakerId && !isGuideSpeaking)}
                       bubbleText={!isGuideSpeaking ? `رفيق المحطة: ${guide.name}` : undefined}
