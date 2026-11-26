@@ -21,14 +21,20 @@ export interface StoryAudioState {
 
 type Listener = (state: StoryAudioState) => void;
 
-const PREF_KEY = 'sada_story_prefs_v1';
+const PREF_KEY = 'sada_story_prefs_v2';
+const VOICE_GAIN_BOOST = 1.45;
 
 class StoryAudioController {
   private state: StoryAudioState;
   private listeners = new Set<Listener>();
   private audioEl: HTMLAudioElement | null = null;
+  private audioCtx: AudioContext | null = null;
+  private gainNode: GainNode | null = null;
   private preloadCache = new Map<string, HTMLAudioElement>();
   private sceneDebounceTimer: number | null = null;
+  private autoAdvanceTimer: number | null = null;
+  private scrollToAnchorFn: ((anchorId: string) => void) | null = null;
+  private isAutoScrollingUntil = 0;
   private fallbackTimer: number | null = null;
   private fallbackTickTimer: number | null = null;
   private fallbackStartMs = 0;
@@ -37,7 +43,7 @@ class StoryAudioController {
   private pendingSceneActivationId: string | null = null;
 
   constructor() {
-    let savedVolume = 0.85;
+    let savedVolume = 1.0;
     let savedSubtitles = true;
     try {
       const raw = localStorage.getItem(PREF_KEY);
@@ -92,6 +98,80 @@ class StoryAudioController {
           this.pause();
         }
       });
+
+      const cancelAutoAdvanceOnManualScroll = () => {
+        if (performance.now() < this.isAutoScrollingUntil) return;
+        this.clearAutoAdvanceTimer();
+      };
+      window.addEventListener('wheel', cancelAutoAdvanceOnManualScroll, { passive: true });
+      window.addEventListener('touchmove', cancelAutoAdvanceOnManualScroll, { passive: true });
+    }
+  }
+
+  public registerScrollHandler(fn: (anchorId: string) => void): void {
+    this.scrollToAnchorFn = fn;
+  }
+
+  private clearAutoAdvanceTimer(): void {
+    if (this.autoAdvanceTimer !== null) {
+      window.clearTimeout(this.autoAdvanceTimer);
+      this.autoAdvanceTimer = null;
+    }
+  }
+
+  private scrollToSceneAnchor(anchorId: string): void {
+    this.isAutoScrollingUntil = performance.now() + 1400;
+    if (this.scrollToAnchorFn) {
+      this.scrollToAnchorFn(anchorId);
+      return;
+    }
+    const el = document.getElementById(anchorId);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  private ensureVoiceLoudnessPipeline(): void {
+    if (!this.audioEl || this.gainNode || typeof window === 'undefined') return;
+    const AudioCtx =
+      window.AudioContext ||
+      (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+    if (!AudioCtx) return;
+
+    try {
+      const ctx = new AudioCtx();
+      const source = ctx.createMediaElementSource(this.audioEl);
+      const compressor = ctx.createDynamicsCompressor();
+      compressor.threshold.setValueAtTime(-4, ctx.currentTime);
+      compressor.knee.setValueAtTime(8, ctx.currentTime);
+      compressor.ratio.setValueAtTime(10, ctx.currentTime);
+      compressor.attack.setValueAtTime(0.004, ctx.currentTime);
+      compressor.release.setValueAtTime(0.18, ctx.currentTime);
+
+      const gain = ctx.createGain();
+      gain.gain.setValueAtTime(VOICE_GAIN_BOOST, ctx.currentTime);
+
+      source.connect(compressor);
+      compressor.connect(gain);
+      gain.connect(ctx.destination);
+
+      this.audioCtx = ctx;
+      this.gainNode = gain;
+      if (ctx.state === 'suspended') {
+        void ctx.resume();
+      }
+    } catch {
+      // Fall back safely to plain HTMLAudioElement playback
+    }
+  }
+
+  private resumeAudioCtxIfNeeded(): void {
+    this.ensureVoiceLoudnessPipeline();
+    if (this.audioCtx && this.audioCtx.state === 'suspended') {
+      void this.audioCtx.resume();
+    }
+    if (this.gainNode && this.audioCtx) {
+      this.gainNode.gain.setValueAtTime(VOICE_GAIN_BOOST, this.audioCtx.currentTime);
     }
   }
 
@@ -129,7 +209,9 @@ class StoryAudioController {
   }
 
   public chooseEntryMode(mode: 'story' | 'free'): void {
+    this.clearAutoAdvanceTimer();
     if (mode === 'story') {
+      this.resumeAudioCtxIfNeeded();
       this.patchState({ mode: 'story', isMuted: false });
       soundEngine.setMuted(false);
       this.playScene(this.state.activeSceneId, true);
@@ -145,6 +227,7 @@ class StoryAudioController {
   }
 
   public toggleStoryMode(): void {
+    this.clearAutoAdvanceTimer();
     if (this.state.mode === 'story') {
       this.stopCurrentPlayback();
       this.patchState({
@@ -154,6 +237,7 @@ class StoryAudioController {
         progressRatio: 0,
       });
     } else {
+      this.resumeAudioCtxIfNeeded();
       this.patchState({ mode: 'story', isMuted: false });
       soundEngine.setMuted(false);
       this.playScene(this.state.activeSceneId, true);
@@ -162,6 +246,9 @@ class StoryAudioController {
 
   // Called by ScrollSpy/ScrollTrigger when user enters a scene
   public notifySceneInView(sceneId: string): void {
+    if (performance.now() < this.isAutoScrollingUntil) {
+      return;
+    }
     if (sceneId === this.state.activeSceneId && this.state.status === 'playing') {
       return;
     }
@@ -248,6 +335,7 @@ class StoryAudioController {
   }
 
   public pause(): void {
+    this.clearAutoAdvanceTimer();
     if (this.audioEl && !this.audioEl.paused) {
       this.audioEl.pause();
     }
@@ -306,14 +394,13 @@ class StoryAudioController {
   }
 
   public goToNextScene(): void {
+    this.clearAutoAdvanceTimer();
+    this.resumeAudioCtxIfNeeded();
     const idx = STORY_SCENES.findIndex((s) => s.id === this.state.activeSceneId);
     const nextScene = STORY_SCENES[idx + 1];
     if (!nextScene) return;
 
-    const el = document.getElementById(nextScene.anchorId);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    this.scrollToSceneAnchor(nextScene.anchorId);
     this.patchState({
       activeSceneId: nextScene.id,
       activeDialogueIndex: 0,
@@ -411,7 +498,8 @@ class StoryAudioController {
 
   private advanceDialogueQueue(): void {
     this.stopCurrentPlayback();
-    const scene = STORY_SCENES.find((s) => s.id === this.state.activeSceneId);
+    const sceneIdx = STORY_SCENES.findIndex((s) => s.id === this.state.activeSceneId);
+    const scene = STORY_SCENES[sceneIdx];
     if (!scene) return;
 
     const nextIdx = this.state.activeDialogueIndex + 1;
@@ -428,6 +516,23 @@ class StoryAudioController {
         progressRatio: 1,
         completedScenes: completed,
       });
+
+      // Automatic scene-to-scene scroll & progression in Story Mode
+      const nextScene = STORY_SCENES[sceneIdx + 1];
+      if (this.state.mode === 'story' && nextScene && !document.hidden) {
+        this.clearAutoAdvanceTimer();
+        this.autoAdvanceTimer = window.setTimeout(() => {
+          this.autoAdvanceTimer = null;
+          if (this.state.mode !== 'story' || this.state.status === 'paused') return;
+          this.scrollToSceneAnchor(nextScene.anchorId);
+          this.patchState({
+            activeSceneId: nextScene.id,
+            activeDialogueIndex: 0,
+            activeDialogue: nextScene.dialogue[0] ?? null,
+          });
+          void this.playDialogueAt(nextScene.id, 0);
+        }, 700);
+      }
     }
   }
 

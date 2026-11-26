@@ -1,7 +1,6 @@
 {
-  "approvedAt": "2026-11-26T07:40:14+02:00",
-  "planTier": "starter",
-  "source": "User visual selection from VoiceAuditionModal (5 Egyptian Voice Library selections)",
+  "version": "2.0.0",
+  "project": "SADA — صدى (Cairo Dialect Cast)",
   "characters": {
     "omar": {
       "voiceId": "QvNF0qyyt1Tuy1YAmnzH",
@@ -9,48 +8,48 @@
       "modelId": "eleven_v4",
       "settings": {
         "stability": 0.45,
-        "similarity_boost": 0.78,
-        "style": 0.3
+        "similarity_boost": 0.85,
+        "style": 0.35
       }
     },
     "maryam": {
-      "voiceId": "JHdGl5PsEzushIzzVSd1",
-      "voiceName": "Heba - Soothing and Gracious",
-      "modelId": "eleven_v3",
+      "voiceId": "L10lEremDiJfPicq5CPh",
+      "voiceName": "Yasmine - Balanced Cairene Guide",
+      "modelId": "eleven_v4",
       "settings": {
-        "stability": 0.65,
-        "similarity_boost": 0.82,
-        "style": 0.15
+        "stability": 0.5,
+        "similarity_boost": 0.85,
+        "style": 0.2
       }
     },
     "zain": {
-      "voiceId": "Y65Dz2XsznJl6gZHkXPi",
-      "voiceName": "Sattar - Warm Egyptian explainer",
+      "voiceId": "5REPlS2Ja1VZ7zNA0ykn",
+      "voiceName": "Ziad - Dynamic Cairene Youth",
       "modelId": "eleven_v4",
       "settings": {
-        "stability": 0.48,
-        "similarity_boost": 0.8,
-        "style": 0.28
+        "stability": 0.45,
+        "similarity_boost": 0.85,
+        "style": 0.3
       }
     },
     "nour": {
-      "voiceId": "80le32Uz2DfWFo4Foz0p",
-      "voiceName": "Nadia - Sweet and Melodic",
-      "modelId": "eleven_v3",
+      "voiceId": "xPcC3nehhziQaOrIeAwv",
+      "voiceName": "Ghozlan - Soft Clear Conversational",
+      "modelId": "eleven_v4",
       "settings": {
-        "stability": 0.62,
-        "similarity_boost": 0.82,
+        "stability": 0.5,
+        "similarity_boost": 0.85,
         "style": 0.2
       }
     },
     "sarah": {
-      "voiceId": "6aXW46RTUz6Y2lkBGQ1a",
-      "voiceName": "Farida - Lively and Radiant",
-      "modelId": "eleven_v3",
+      "voiceId": "I3u6waC588j43py1kDN2",
+      "voiceName": "Fatima - Expressive Egyptian",
+      "modelId": "eleven_v4",
       "settings": {
-        "stability": 0.38,
-        "similarity_boost": 0.78,
-        "style": 0.42
+        "stability": 0.42,
+        "similarity_boost": 0.85,
+        "style": 0.35
       }
     }
   }

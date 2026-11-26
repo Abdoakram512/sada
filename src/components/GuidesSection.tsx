@@ -153,7 +153,7 @@ export const GuidesSection: React.FC = () => {
                 />
                 <h4 className="text-lg font-black text-sada-ink mb-1.5">دور الأسرة الداعم</h4>
                 <p className="text-xs sm:text-sm text-sada-ink/75 leading-relaxed font-medium text-center">
-                  مشاركة منزلية واعية تشجع الطفل في أجواء دافئة وتُكمل جلسات التأهيل المتخصصة.
+                  مشاركة منزلية بسيطة تشجع الطفل وتُكمل جلسات التأهيل المتخصصة.
                 </p>
               </div>
             </div>

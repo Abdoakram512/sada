@@ -74,7 +74,7 @@ export const ProblemSolutionSection: React.FC = () => {
             لماذا يبدأ كل شيء <span className="text-sada-violet">بالإصغاء المنظّم</span>؟
           </h2>
           <p className="sada-body-copy text-sada-ink/75 font-medium text-center">
-            تأهيل الطفل ضعيف السمع رحلة يومية مشتركة؛ يسأل زين عن سر الحاجة للمتابعة المنظمة، وتشرح مريم ونور كيف يربط صدى التقييم بالمتابعة في بيئة مشجعة وآمنة.
+            تأهيل الطفل ضعيف السمع شغل يومي مشترك بين البيت والأخصائي؛ يسأل زين ليه بنحتاج متابعة منظمة، وتوضح مريم ونور إزاي تطبيق صدى بيجمع التقييم والتدريب والمتابعة في مكان واحد.
           </p>
         </div>
 
@@ -135,7 +135,7 @@ export const ProblemSolutionSection: React.FC = () => {
               }`}
             >
               <CheckCircle2 size={16} />
-              <span>منظومة صدى (الحل التفاعلي)</span>
+              <span>تطبيق صدى (الحل التفاعلي)</span>
             </button>
           </div>
         </div>

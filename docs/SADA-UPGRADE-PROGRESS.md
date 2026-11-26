@@ -148,19 +148,20 @@ Repository: `sada-experience` (Baseline preserved at git branch `baseline-pre-up
 
 ---
 
-## Phase 7 — Egyptian Dialect QA, Gulf Voice Removal & Tashkeel Regeneration
+## Phase 7 — Cairo Dialect Overhaul, Auto-Scroll, Gain Boost & Single-Phone UI
 
 ### Objectives
-- Eliminate the Gulf-sounding voice previously assigned to **مريم (`maryam`)** (`Alice (EG)`, `LjKPkQHpXCsWoy7Pjq4U`).
-- Disambiguate Egyptian Arabic pronunciation across all `26` dialogue lines using targeted Tashkeel (`spokenText` only) and clear spoken forms for the Ling Six phonemes.
-- Regenerate all `26` production MP3 clips on the Starter plan and re-verify production build & browser playback.
+- Replace non-Cairene / MSA-leaning / Upper-Egyptian-sounding voices for **مريم**, **نور**, **سارة**, and **زين** with natural, balanced Cairo Egyptian speakers.
+- Eliminate pronunciation glitches (`بالتدريج`, `اتبعوا`, `بيصعب`) and exaggerated buzzwords (`بأمان`, `دافي`, `منظومة`).
+- Clarify SADA as an application (`تطبيق صدى` / `الأبلكيشن`) and fix the double-nested phone mockup in `AppWorkflowSection.tsx`.
+- Increase speech loudness clarity (`GainNode` + `DynamicsCompressorNode`) and add automatic scene-to-scene scroll in Story Mode.
 
 ### Completed Tasks & Modified Files
-- Replaced `maryam` voice with genuine Cairo voice **`Heba - Soothing and Gracious`** (`JHdGl5PsEzushIzzVSd1`, `eleven_v3`, studio `64cbc624`), and archived alternative Cairo auditions (`Heba v3/v4`, `Seham v3`) inside `docs/voice-auditions-archive/` while deleting `mariam_eg_alice_v3.mp3`.
-- Added dev-only audition middleware `serveDevVoiceAuditions()` in `vite.config.ts` so `npm run dev` serves `/audio/audition-manifest.json` & `/audio/auditions/*` without including rejected/archive MP3s in `dist/`.
-- Applied Egyptian Tashkeel across all `26` `spokenText` strings in `src/data/storyManifest.ts` (including Ling Six spoken letters `'الميم، والأو، والآ، والإي، والشّين، والسّين'`) while keeping un-diacritized `subtitleText`.
-- Fixed dialogue ID regex in `scripts/generate-production-audio.mjs` (`scene-XX-speaker-YY`) and updated `docs/approved-voices.json`, `src/components/VoiceAuditionModal.tsx`, and `docs/voice-casting-report.md`.
-- Regenerated and Chromium-verified all `26 / 26` clips (`public/audio/characters/*.mp3`, `totalDur: 213.52s`, `creditsUsedThisRun: 1,089`, `creditsRemaining: 37,347`) and synced verified `actualDurationSec` durations into `src/data/storyManifest.ts` and `public/audio/manifest.json`.
+- Updated [docs/approved-voices.json](docs/approved-voices.json), [src/data/storyManifest.ts](src/data/storyManifest.ts), and [src/components/VoiceAuditionModal.tsx](src/components/VoiceAuditionModal.tsx) to native Cairo `eleven_v4` cast: **Mostafa** (`omar`), **Yasmine** (`maryam`), **Ziad** (`zain`), **Ghozlan Soft** (`nour`), **Fatima Expressive** (`sarah`).
+- Rewrote all `26` `spokenText` and `subtitleText` scripts cleanly in balanced Cairene Arabic without stiff MSA markers or heavy conflicting Tashkeel, and updated UI labels across [src/components/HeroSection.tsx](src/components/HeroSection.tsx), [src/components/ProblemSolutionSection.tsx](src/components/ProblemSolutionSection.tsx), and [src/components/GuidesSection.tsx](src/components/GuidesSection.tsx).
+- Removed redundant outer CSS phone bezel and notch in [src/components/AppWorkflowSection.tsx](src/components/AppWorkflowSection.tsx) so `screen_*.png` renders as a clean single phone.
+- Upgraded [src/utils/storyAudioController.ts](src/utils/storyAudioController.ts) and [src/App.tsx](src/App.tsx): bumped default volume (`sada_story_prefs_v2` = `1.0`), added Web Audio API `GainNode` (`1.45×`) + `DynamicsCompressorNode` limiter, and added automatic smooth scrolling between scenes upon scene completion (automatically cancelled on manual scroll or pause).
+- Regenerated & verified all `26 / 26` clips (`creditsUsedThisRun: 994`, `totalDur: 199.28s`, `creditsRemaining: 36,486`) and audited key outputs directly via audio inspection.
 
 ### Verified Final Build & CDP Audit Results
 - `oxlint`: `0` warnings, `0` errors (`33` files).

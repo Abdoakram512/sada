@@ -1,9 +1,9 @@
 # SADA Voice Casting Report — Paid Egyptian Upgrade (Priority 1)
 
 Updated: 2026-11-26  
-Account Tier: **ElevenLabs Starter (Paid)** (`40,000` monthly credits; `37,347` credits remaining after Gulf-replacement auditions + full 26-clip Tashkeel production regeneration).  
-Cumulative Audition Budget Tracker: **`1,524`** (Free-tier reference) + **`434`** (Egyptian Library v1) + **`145`** (Maryam Egyptian fix: `Heba v3/v4`, `Seham v3`, conversation turn) = **`2,103 / 3,000` credits consumed**.  
-Production Regeneration Run (`26` clips with Cairo `Heba` + full Egyptian Tashkeel): **`1,089` credits** (`totalDur: 213.52s`, `26/26` Chromium verified).
+Account Tier: **ElevenLabs Starter (Paid)** (`40,000` monthly credits; `36,486` credits remaining after Cairene cast upgrade & 26-clip regeneration).  
+Cumulative Audition & QA Test Budget Tracker: **`1,524`** (Free reference) + **`434`** (Egyptian Library v1) + **`145`** (Maryam v2 test) + **`388`** (11 Cairo female/Zain `v2`/`v4` verification tests) = **`2,491 / 3,000` credits consumed**.  
+Final Cairo Production Run (`26` clips on `eleven_v4`): **`994` credits** (`totalDur: 199.28s`, `26/26` Chromium verified).
 
 ---
 
@@ -14,20 +14,20 @@ Production Regeneration Run (`26` clips with Cairo `Heba` + full Egyptian Tashke
 
 ---
 
-## 2. Final Approved Egyptian Voice Cast
+## 2. Final Approved Cairo Egyptian Voice Cast
 
-| Character | Storytelling Role | Approved Egyptian Voice (Starter) | Voice ID | Model | Rationale & Accent QA |
+| Character | Storytelling Role | Approved Cairo Voice (Starter) | Voice ID | Model | Rationale & Dialect QA |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **عمر (`omar`)** | Welcoming host & adventurer | **Mostafa - Bold and Spirited** | `QvNF0qyyt1Tuy1YAmnzH` | `eleven_v4` | Cairo studio youth voice (`64cbc624`), confident energetic warmth for hero & welcoming narration. |
-| **مريم (`maryam`)** | Calm scientific guide | **Heba - Soothing and Gracious** | `JHdGl5PsEzushIzzVSd1` | `eleven_v3` | Replaces rejected `Alice (EG)` (`LjKPkQHpXCsWoy7Pjq4U`, creator `a19cc83f`) which had Gulf inflection; `Heba` shares the authentic Cairo studio (`64cbc624`) with Mostafa/Nadia/Farida and delivers calm clarity. |
-| **زين (`zain`)** | Curious explorer & puzzle solver | **Sattar - Warm Egyptian explainer** | `Y65Dz2XsznJl6gZHkXPi` | `eleven_v4` | Natural everyday Egyptian inflection with curious, conversational pacing. |
-| **نور (`nour`)** | Warm family supporter | **Nadia - Sweet and Melodic** | `80le32Uz2DfWFo4Foz0p` | `eleven_v3` | Soft, warm Egyptian tone (`64cbc624`) suited for family guidance and emotional closure. |
-| **سارة (`sarah`)** | Playful games & reward host | **Farida - Lively and Radiant** | `6aXW46RTUz6Y2lkBGQ1a` | `eleven_v3` | Bright, joyful Egyptian youth energy (`64cbc624`) suited for games and celebrations. |
+| **عمر (`omar`)** | Welcoming host & adventurer | **Mostafa - Bold and Spirited** | `QvNF0qyyt1Tuy1YAmnzH` | `eleven_v4` | Natural Cairene youth voice with upbeat clarity. |
+| **مريم (`maryam`)** | Calm scientific guide | **Yasmine - Balanced Cairene Guide** | `L10lEremDiJfPicq5CPh` | `eleven_v4` | Authentic Cairene speaker (`7398804d`), replacing `Heba`/`Alice` after accent & pronunciation feedback (`بالتدريج` -> `واحدة واحدة`). |
+| **زين (`zain`)** | Curious explorer & puzzle solver | **Ziad - Dynamic Cairene Youth** | `5REPlS2Ja1VZ7zNA0ykn` | `eleven_v4` | Youthful Cairene cadence, replacing Upper-Egyptian-sounding `Sattar` (`Y65Dz2XsznJl6gZHkXPi`). |
+| **نور (`nour`)** | Gentle family supporter | **Ghozlan - Soft Clear Conversational** | `xPcC3nehhziQaOrIeAwv` | `eleven_v4` | Soft conversational Cairene voice (`7398804d`), balanced with Yasmine & Fatima with zero MSA stiffness. |
+| **سارة (`sarah`)** | Playful games & reward host | **Fatima - Expressive Egyptian** | `I3u6waC588j43py1kDN2` | `eleven_v4` | Lively, balanced Cairene energy (`7398804d`) unifying all three female roles under authentic Cairo Egyptian speakers. |
 
-### Pronunciation & Dialect Quality Fixes
-- **Gulf Accent Removal**: Eliminated `LjKPkQHpXCsWoy7Pjq4U` (`Alice (EG)`) completely from production audio and dev audition defaults after user accent review.
-- **Egyptian Tashkeel (`spokenText` only)**: Added disambiguating Arabic diacritics across all `26` `spokenText` scripts (`src/data/storyManifest.ts`) while keeping clean un-diacritized display subtitles (`subtitleText`).
-- **Ling Six Articulation Fix**: Updated `scene-04-maryam-09` from isolated letters (`'م، أو، آ، إي، ش، وس'`) to spoken Arabic sound names (`'الميم، والأو، والآ، والإي، والشّين، والسّين'`) so TTS never reads `"وس"` literally as *"wass"* or *"was"*.
+### Dialect, Pronunciation & Copy Quality Fixes
+- **Authentic Cairo Accent (`eleven_v4`)**: Switched all 5 characters onto `eleven_v4` with native Cairo speakers; removed heavy synthetic Tashkeel that previously tripped up pronunciation.
+- **Natural Cairene Script (`src/data/storyManifest.ts`)**: Rewrote all 26 lines in grounded Cairene speech, removed exaggerated buzzwords (`بأمان`, `دافي`, `بيئة مشجعة وآمنة`), and replaced `منصة`/`منظومة` with `تطبيق صدى` / `الأبلكيشن`.
+- **Ling Six Articulation**: Retained spoken Arabic sound names (`الميم، والأو، والآ، والإي، والشين، والسين`) in `spokenText` and clean phonetic notation in subtitles.
 
 ---
 

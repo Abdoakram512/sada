@@ -91,7 +91,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         <div className="inline-flex flex-wrap items-center justify-center gap-2 px-4 py-1 rounded-full bg-white/90 border border-sada-violet/20 shadow-sm mb-2">
           <span className="w-2 h-2 rounded-full bg-sada-teal animate-pulse" />
           <span className="text-xs sm:text-sm font-bold text-sada-violet">
-            مشروع تخرج · منظومة صدى السمعية
+            مشروع تخرج · تطبيق صدى السمعي
           </span>
           <span className="dir-ltr text-xs px-2 py-0.5 rounded-full bg-sada-yellow/45 text-sada-ink font-bold">
             SADA 2026

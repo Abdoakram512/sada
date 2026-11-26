@@ -230,19 +230,15 @@ export const AppWorkflowSection: React.FC = () => {
         <div className="bg-white rounded-[2.25rem] border-2 border-sada-violet/15 p-6 md:p-10 shadow-xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div ref={phoneRef} className="lg:col-span-5 flex flex-col items-center justify-center">
-              <div className="relative w-60 sm:w-68 aspect-[9/19] rounded-[2.75rem] bg-sada-ink p-3 shadow-2xl border-4 border-gray-800 ring-8 ring-sada-violet/10 flex flex-col items-center justify-between overflow-hidden">
-                <div className="w-20 h-4 bg-black rounded-full mb-2 z-20" />
-                <div className="relative w-full flex-1 rounded-[2rem] overflow-hidden bg-sada-surface flex items-center justify-center">
-                  <img
-                    key={activeStepData.screenImage}
-                    src={activeStepData.screenImage}
-                    alt={activeStepData.title}
-                    loading="lazy"
-                    decoding="async"
-                    className="w-full h-full object-cover animate-fade-in"
-                  />
-                </div>
-                <div className="w-24 h-1 bg-white/40 rounded-full mt-2" />
+              <div className="relative w-64 sm:w-72 flex items-center justify-center">
+                <img
+                  key={activeStepData.screenImage}
+                  src={activeStepData.screenImage}
+                  alt={activeStepData.title}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-auto object-contain rounded-[2rem] drop-shadow-xl animate-fade-in"
+                />
               </div>
               <span className="text-[11px] text-sada-ink/60 text-center mt-3 font-semibold">
                 * تصوّر مبدئي لواجهة التطبيق (Concept UI) معتمد في وثيقة المشروع.

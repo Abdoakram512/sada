@@ -65,7 +65,20 @@ export const App: React.FC = () => {
       };
       gsap.ticker.add(tickerFn);
       gsap.ticker.lagSmoothing(0);
+
+      storyAudioController.registerScrollHandler((anchorId: string) => {
+        const el = document.getElementById(anchorId);
+        if (el && lenis) {
+          lenis.scrollTo(el, { duration: 1.15 });
+        } else if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
     } else {
+      storyAudioController.registerScrollHandler((anchorId: string) => {
+        const el = document.getElementById(anchorId);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
       const handleNativeScroll = () => {
         const doc = document.documentElement;
         const max = Math.max(1, doc.scrollHeight - window.innerHeight);
