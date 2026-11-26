@@ -1,12 +1,289 @@
 {
-  "version": "1.0.0",
-  "generatedAt": "2026-11-26T00:26:08.337Z",
-  "subscriptionTier": "free",
-  "creditsBefore": 9899,
-  "creditsAfter": 9503,
-  "creditsUsedThisRun": 1524,
+  "version": "2.0.0",
+  "generatedAt": "2026-11-26T05:17:48.553Z",
+  "subscriptionTier": "starter",
+  "creditsBefore": 40000,
+  "creditsAfter": 39663,
+  "previousAuditionCredits": 1524,
+  "creditsUsedThisRun": 434,
+  "totalAuditionCreditsConsumed": 1958,
   "auditionBudgetCap": 3000,
   "auditions": [
+    {
+      "id": "omar_eg_mawardy_v3",
+      "characterId": "omar",
+      "characterName": "عمر",
+      "voiceName": "Mawardy - Warm, Natural Egyptian",
+      "voiceId": "PmRaqkJ2uk3Y9jrp9UjJ",
+      "modelId": "eleven_v3",
+      "tier": "egyptian-library",
+      "accent": "egyptian",
+      "emotionTag": "حماس وترحيب",
+      "text": "أهلاً بيكم في عالم صدى! كل صوت حوالينا وراه حكاية، جاهزين نبدأ رحلتنا مع بعض؟ يلا بينا!",
+      "settings": {
+        "stability": 0.45,
+        "similarity_boost": 0.78,
+        "style": 0.32
+      },
+      "recommended": true,
+      "rationale": "صوت شاب مصري أصيل، دافئ ومُرحّب بإيقاع طبيعي قريب من الأطفال دون مبالغة.",
+      "audioPath": "/audio/auditions/omar/omar_eg_mawardy_v3.mp3",
+      "fileSizeBytes": 119997,
+      "durationSec": 7.44,
+      "contentHash": "0d8d596f5276e257",
+      "creditsConsumed": 35,
+      "status": "verified"
+    },
+    {
+      "id": "omar_eg_mostafa_v4",
+      "characterId": "omar",
+      "characterName": "عمر",
+      "voiceName": "Mostafa - Bold and Spirited",
+      "voiceId": "QvNF0qyyt1Tuy1YAmnzH",
+      "modelId": "eleven_v4",
+      "tier": "egyptian-library",
+      "accent": "egyptian",
+      "emotionTag": "تشجيع ومغامرة",
+      "text": "أهلاً بيكم في عالم صدى! كل صوت حوالينا وراه حكاية، جاهزين نبدأ رحلتنا مع بعض؟ يلا بينا!",
+      "settings": {
+        "stability": 0.45,
+        "similarity_boost": 0.78,
+        "style": 0.3
+      },
+      "recommended": false,
+      "rationale": "صوت شاب مصري متحمس وقوي الحضور لاختبار نبرة التشجيع على نموذج Eleven v4.",
+      "audioPath": "/audio/auditions/omar/omar_eg_mostafa_v4.mp3",
+      "fileSizeBytes": 111220,
+      "durationSec": 6.88,
+      "contentHash": "12abe2e3312dc646",
+      "creditsConsumed": 35,
+      "status": "verified"
+    },
+    {
+      "id": "omar_eg_haytham_v2",
+      "characterId": "omar",
+      "characterName": "عمر",
+      "voiceName": "Haytham - Energetic, Warm and Cheerful",
+      "voiceId": "IES4nrmZdUBHByLBde0P",
+      "modelId": "eleven_multilingual_v2",
+      "tier": "egyptian-library",
+      "accent": "egyptian",
+      "emotionTag": "حوار دافئ",
+      "text": "أهلاً بيكم في عالم صدى! كل صوت حوالينا وراه حكاية، جاهزين نبدأ رحلتنا مع بعض؟ يلا بينا!",
+      "settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.8,
+        "style": 0.25
+      },
+      "recommended": false,
+      "rationale": "صوت سردي مصري دافئ ومشرق متاح مسبقًا في حسابك لاختبار Multilingual v2.",
+      "audioPath": "/audio/auditions/omar/omar_eg_haytham_v2.mp3",
+      "fileSizeBytes": 129610,
+      "durationSec": 8.03,
+      "contentHash": "3ae608270a3e9905",
+      "creditsConsumed": 35,
+      "status": "verified"
+    },
+    {
+      "id": "mariam_eg_alice_v3",
+      "characterId": "maryam",
+      "characterName": "مريم",
+      "voiceName": "Alice (EG) - Smooth, Charming and Soft",
+      "voiceId": "LjKPkQHpXCsWoy7Pjq4U",
+      "modelId": "eleven_v3",
+      "tier": "egyptian-library",
+      "accent": "egyptian",
+      "emotionTag": "شرح هادئ ومطمئن",
+      "text": "مع أصوات لينج الستة، كل تقييم منظّم بيساعدنا نتابع تطور سمع الطفل بهدوء ووضوح.",
+      "settings": {
+        "stability": 0.65,
+        "similarity_boost": 0.82,
+        "style": 0.15
+      },
+      "recommended": true,
+      "rationale": "صوت مصري نسائي شاب ناعم وواضح المخارج يجمع بين الدفء والدقة العلمية للمصطلحات.",
+      "audioPath": "/audio/auditions/mariam/mariam_eg_alice_v3.mp3",
+      "fileSizeBytes": 121251,
+      "durationSec": 7.52,
+      "contentHash": "a4cd87b3e0644902",
+      "creditsConsumed": 31,
+      "status": "verified"
+    },
+    {
+      "id": "mariam_eg_asmaa_v4",
+      "characterId": "maryam",
+      "characterName": "مريم",
+      "voiceName": "Asmaa - Natural & Engaging Egyptian",
+      "voiceId": "NwMzeQCEU9Ecy3zXYTkV",
+      "modelId": "eleven_v4",
+      "tier": "egyptian-library",
+      "accent": "egyptian",
+      "emotionTag": "توضيح علمي",
+      "text": "مع أصوات لينج الستة، كل تقييم منظّم بيساعدنا نتابع تطور سمع الطفل بهدوء ووضوح.",
+      "settings": {
+        "stability": 0.65,
+        "similarity_boost": 0.82,
+        "style": 0.15
+      },
+      "recommended": false,
+      "rationale": "صوت مصري هادئ وطبيعي (حصري للخطة المدفوعة) لاختبار نطق المصطلحات على Eleven v4.",
+      "audioPath": "/audio/auditions/mariam/mariam_eg_asmaa_v4.mp3",
+      "fileSizeBytes": 113727,
+      "durationSec": 7.04,
+      "contentHash": "146ef63afb4682ef",
+      "creditsConsumed": 31,
+      "status": "verified"
+    },
+    {
+      "id": "zein_eg_ziad_v3",
+      "characterId": "zain",
+      "characterName": "زين",
+      "voiceName": "Ziad - Dynamic and Vibrant",
+      "voiceId": "5REPlS2Ja1VZ7zNA0ykn",
+      "modelId": "eleven_v3",
+      "tier": "egyptian-library",
+      "accent": "egyptian",
+      "emotionTag": "فضول وتساؤل",
+      "text": "استنوا لحظة! هو إزاي بنفرق بين الصوت القصير والطويل لما الكلمات تتشابه؟ يلا نكتشف!",
+      "settings": {
+        "stability": 0.42,
+        "similarity_boost": 0.78,
+        "style": 0.34
+      },
+      "recommended": true,
+      "rationale": "صوت شاب مصري حيوي بطبقة أخف وإيقاع فضولي يميّز شخصية زين تمامًا عن عمر.",
+      "audioPath": "/audio/auditions/zein/zein_eg_ziad_v3.mp3",
+      "fileSizeBytes": 116235,
+      "durationSec": 7.2,
+      "contentHash": "e3e23c48ccbb9953",
+      "creditsConsumed": 33,
+      "status": "verified"
+    },
+    {
+      "id": "zein_eg_sattar_v4",
+      "characterId": "zain",
+      "characterName": "زين",
+      "voiceName": "Sattar - Warm Egyptian explainer",
+      "voiceId": "Y65Dz2XsznJl6gZHkXPi",
+      "modelId": "eleven_v4",
+      "tier": "egyptian-library",
+      "accent": "egyptian",
+      "emotionTag": "دهشة واستكشاف",
+      "text": "استنوا لحظة! هو إزاي بنفرق بين الصوت القصير والطويل لما الكلمات تتشابه؟ يلا نكتشف!",
+      "settings": {
+        "stability": 0.48,
+        "similarity_boost": 0.8,
+        "style": 0.28
+      },
+      "recommended": false,
+      "rationale": "عامية مصرية يومية سريعة وطبيعية بأسلوب صديق يشرح ويسأل بذكاء على Eleven v4.",
+      "audioPath": "/audio/auditions/zein/zein_eg_sattar_v4.mp3",
+      "fileSizeBytes": 106204,
+      "durationSec": 6.56,
+      "contentHash": "d49f23f4bda3d2bc",
+      "creditsConsumed": 33,
+      "status": "verified"
+    },
+    {
+      "id": "nour_eg_nadia_v3",
+      "characterId": "nour",
+      "characterName": "نور",
+      "voiceName": "Nadia - Sweet and Melodic",
+      "voiceId": "80le32Uz2DfWFo4Foz0p",
+      "modelId": "eleven_v3",
+      "tier": "egyptian-library",
+      "accent": "egyptian",
+      "emotionTag": "طمأنينة ودفء أسري",
+      "text": "متابعة البيت الهادية مع طفلكم كل يوم بتفرق كتير، وكل خطوة صغيرة لها قيمة كبيرة.",
+      "settings": {
+        "stability": 0.62,
+        "similarity_boost": 0.82,
+        "style": 0.2
+      },
+      "recommended": true,
+      "rationale": "نبرة مصرية ناعمة وعذبة ومليئة بالدفء الأسري، تختلف بوضوح عن نبرة مريم التعليمية.",
+      "audioPath": "/audio/auditions/nour/nour_eg_nadia_v3.mp3",
+      "fileSizeBytes": 107458,
+      "durationSec": 6.64,
+      "contentHash": "c1fd8fcfad5263cc",
+      "creditsConsumed": 32,
+      "status": "verified"
+    },
+    {
+      "id": "nour_eg_ghozlan_v4",
+      "characterId": "nour",
+      "characterName": "نور",
+      "voiceName": "Ghozlan - Soft Clear Conversational",
+      "voiceId": "xPcC3nehhziQaOrIeAwv",
+      "modelId": "eleven_v4",
+      "tier": "egyptian-library",
+      "accent": "egyptian",
+      "emotionTag": "حوار هادئ",
+      "text": "متابعة البيت الهادية مع طفلكم كل يوم بتفرق كتير، وكل خطوة صغيرة لها قيمة كبيرة.",
+      "settings": {
+        "stability": 0.62,
+        "similarity_boost": 0.8,
+        "style": 0.18
+      },
+      "recommended": false,
+      "rationale": "أسلوب مصري هادئ ومريح للأذن مناسب لتوجيه الأهل ومشاهد التهدئة على Eleven v4.",
+      "audioPath": "/audio/auditions/nour/nour_eg_ghozlan_v4.mp3",
+      "fileSizeBytes": 112474,
+      "durationSec": 6.96,
+      "contentHash": "55c540393ba78754",
+      "creditsConsumed": 32,
+      "status": "verified"
+    },
+    {
+      "id": "sara_eg_farida_v3",
+      "characterId": "sarah",
+      "characterName": "سارة",
+      "voiceName": "Farida - Lively and Radiant",
+      "voiceId": "6aXW46RTUz6Y2lkBGQ1a",
+      "modelId": "eleven_v3",
+      "tier": "egyptian-library",
+      "accent": "egyptian",
+      "emotionTag": "بهجة واحتفال",
+      "text": "يا سلام! دلوقتي جه وقت اللعب؛ كل محاولة شاطرة في صدى بتجمع لنا نجمة جديدة!",
+      "settings": {
+        "stability": 0.38,
+        "similarity_boost": 0.78,
+        "style": 0.42
+      },
+      "recommended": true,
+      "rationale": "صوت شاب مشرق ومبهج بطاقة حقيقية تناسب عالم الألعاب والتشجيع دون تصنّع كرتوني.",
+      "audioPath": "/audio/auditions/sara/sara_eg_farida_v3.mp3",
+      "fileSizeBytes": 95755,
+      "durationSec": 5.92,
+      "contentHash": "b0c134213e0cb4c8",
+      "creditsConsumed": 30,
+      "status": "verified"
+    },
+    {
+      "id": "sara_eg_fatima_v2",
+      "characterId": "sarah",
+      "characterName": "سارة",
+      "voiceName": "Fatima - Expressive Egyptian",
+      "voiceId": "I3u6waC588j43py1kDN2",
+      "modelId": "eleven_multilingual_v2",
+      "tier": "egyptian-library",
+      "accent": "egyptian",
+      "emotionTag": "حماس تلقائي",
+      "text": "يا سلام! دلوقتي جه وقت اللعب؛ كل محاولة شاطرة في صدى بتجمع لنا نجمة جديدة!",
+      "settings": {
+        "stability": 0.45,
+        "similarity_boost": 0.8,
+        "style": 0.35
+      },
+      "recommended": false,
+      "rationale": "تلقائية مصرية دافئة ومعبّرة لاختبار الأداء العاطفي على Multilingual v2.",
+      "audioPath": "/audio/auditions/sara/sara_eg_fatima_v2.mp3",
+      "fileSizeBytes": 109548,
+      "durationSec": 6.78,
+      "contentHash": "60228fb8a26a1a04",
+      "creditsConsumed": 30,
+      "status": "verified"
+    },
     {
       "id": "omar_liam_v3",
       "characterId": "omar",
@@ -20,14 +297,16 @@
         "similarity_boost": 0.78,
         "style": 0.35
       },
-      "recommended": true,
+      "recommended": false,
       "rationale": "صوت شبابي حيوي ودافئ يناسب دور الراوي المُرَحِّب والمبادر.",
       "audioPath": "/audio/auditions/omar/omar_liam_v3.mp3",
       "fileSizeBytes": 152180,
       "durationSec": 9.44,
       "contentHash": "6bd6488aab57f2cd",
       "creditsConsumed": 103,
-      "status": "verified"
+      "status": "verified",
+      "tier": "premade-reference",
+      "accent": "multilingual"
     },
     {
       "id": "omar_charlie_v4",
@@ -49,7 +328,9 @@
       "durationSec": 8.8,
       "contentHash": "b200872a93e0b1b8",
       "creditsConsumed": 103,
-      "status": "verified"
+      "status": "verified",
+      "tier": "premade-reference",
+      "accent": "multilingual"
     },
     {
       "id": "omar_chris_v2",
@@ -71,7 +352,9 @@
       "durationSec": 9.57,
       "contentHash": "ecc3fc48948816c6",
       "creditsConsumed": 103,
-      "status": "verified"
+      "status": "verified",
+      "tier": "premade-reference",
+      "accent": "multilingual"
     },
     {
       "id": "mariam_alice_v3",
@@ -86,14 +369,16 @@
         "similarity_boost": 0.82,
         "style": 0.15
       },
-      "recommended": true,
+      "recommended": false,
       "rationale": "مخارج واضحة ونبرة تعليمية هادئة ومطمئنة تناسب دور مريم.",
       "audioPath": "/audio/auditions/mariam/mariam_alice_v3.mp3",
       "fileSizeBytes": 139223,
       "durationSec": 8.64,
       "contentHash": "76a2f826ee8f2086",
       "creditsConsumed": 87,
-      "status": "verified"
+      "status": "verified",
+      "tier": "premade-reference",
+      "accent": "multilingual"
     },
     {
       "id": "mariam_bella_v4",
@@ -115,7 +400,9 @@
       "durationSec": 8.24,
       "contentHash": "ec0ba67775144e2d",
       "creditsConsumed": 87,
-      "status": "verified"
+      "status": "verified",
+      "tier": "premade-reference",
+      "accent": "multilingual"
     },
     {
       "id": "mariam_matilda_v2",
@@ -137,7 +424,9 @@
       "durationSec": 7.38,
       "contentHash": "eeb4f975dfb0ee91",
       "creditsConsumed": 87,
-      "status": "verified"
+      "status": "verified",
+      "tier": "premade-reference",
+      "accent": "multilingual"
     },
     {
       "id": "zein_will_v3",
@@ -152,14 +441,16 @@
         "similarity_boost": 0.78,
         "style": 0.3
       },
-      "recommended": true,
+      "recommended": false,
       "rationale": "صوت شبابي خفيف ومتسائل يميّز زين بوضوح عن عمر.",
       "audioPath": "/audio/auditions/zein/zein_will_v3.mp3",
       "fileSizeBytes": 104950,
       "durationSec": 6.48,
       "contentHash": "6dd2d2ff9305d08a",
       "creditsConsumed": 84,
-      "status": "verified"
+      "status": "verified",
+      "tier": "premade-reference",
+      "accent": "multilingual"
     },
     {
       "id": "zein_river_v4",
@@ -181,7 +472,9 @@
       "durationSec": 6.16,
       "contentHash": "6e83ba74ecda9d47",
       "creditsConsumed": 84,
-      "status": "verified"
+      "status": "verified",
+      "tier": "premade-reference",
+      "accent": "multilingual"
     },
     {
       "id": "zein_eric_v2",
@@ -203,7 +496,9 @@
       "durationSec": 5.2,
       "contentHash": "cdef56043f7ca7c1",
       "creditsConsumed": 84,
-      "status": "verified"
+      "status": "verified",
+      "tier": "premade-reference",
+      "accent": "multilingual"
     },
     {
       "id": "nour_sarah_v3",
@@ -218,14 +513,16 @@
         "similarity_boost": 0.82,
         "style": 0.2
       },
-      "recommended": true,
+      "recommended": false,
       "rationale": "صوت دافئ حنون يعبّر عن الاحتواء الأسري والتفاؤل في شخصية نور.",
       "audioPath": "/audio/auditions/nour/nour_sarah_v3.mp3",
       "fileSizeBytes": 126684,
       "durationSec": 7.84,
       "contentHash": "1843e14db20ebabc",
       "creditsConsumed": 83,
-      "status": "verified"
+      "status": "verified",
+      "tier": "premade-reference",
+      "accent": "multilingual"
     },
     {
       "id": "nour_lily_v4",
@@ -247,7 +544,9 @@
       "durationSec": 7.76,
       "contentHash": "20a1b480bcc74aba",
       "creditsConsumed": 83,
-      "status": "verified"
+      "status": "verified",
+      "tier": "premade-reference",
+      "accent": "multilingual"
     },
     {
       "id": "nour_bella_v2",
@@ -269,7 +568,9 @@
       "durationSec": 7.24,
       "contentHash": "b3f27a09fecc92e0",
       "creditsConsumed": 83,
-      "status": "verified"
+      "status": "verified",
+      "tier": "premade-reference",
+      "accent": "multilingual"
     },
     {
       "id": "sara_jessica_v3",
@@ -284,14 +585,16 @@
         "similarity_boost": 0.78,
         "style": 0.45
       },
-      "recommended": true,
+      "recommended": false,
       "rationale": "أكثر الأصوات حيوية وبهجة وملاءمة لطاقة سارة المحبة للألعاب.",
       "audioPath": "/audio/auditions/sara/sara_jessica_v3.mp3",
       "fileSizeBytes": 111220,
       "durationSec": 6.88,
       "contentHash": "63ff83869dcb9480",
       "creditsConsumed": 74,
-      "status": "verified"
+      "status": "verified",
+      "tier": "premade-reference",
+      "accent": "multilingual"
     },
     {
       "id": "sara_laura_v4",
@@ -313,7 +616,9 @@
       "durationSec": 6.48,
       "contentHash": "631cdceca295add6",
       "creditsConsumed": 74,
-      "status": "verified"
+      "status": "verified",
+      "tier": "premade-reference",
+      "accent": "multilingual"
     },
     {
       "id": "sara_jessica_v4",
@@ -335,10 +640,96 @@
       "durationSec": 6.96,
       "contentHash": "5663819e022c5797",
       "creditsConsumed": 74,
-      "status": "verified"
+      "status": "verified",
+      "tier": "premade-reference",
+      "accent": "multilingual"
     }
   ],
   "conversation": [
+    {
+      "id": "conv_eg_01_omar",
+      "characterId": "omar",
+      "characterName": "عمر",
+      "voiceName": "Mawardy (EG)",
+      "voiceId": "PmRaqkJ2uk3Y9jrp9UjJ",
+      "modelId": "eleven_v3",
+      "tier": "egyptian-library",
+      "text": "أهلاً يا أصحاب! سمعتوا رنة الجرس دي؟",
+      "settings": {
+        "stability": 0.45,
+        "similarity_boost": 0.78,
+        "style": 0.32
+      },
+      "audioPath": "/audio/auditions/conversations/conv_eg_01_omar.mp3",
+      "fileSizeBytes": 43510,
+      "durationSec": 2.64,
+      "contentHash": "33feed6be9e0a1c3",
+      "creditsConsumed": 14,
+      "status": "verified"
+    },
+    {
+      "id": "conv_eg_02_zein",
+      "characterId": "zain",
+      "characterName": "زين",
+      "voiceName": "Ziad (EG)",
+      "voiceId": "5REPlS2Ja1VZ7zNA0ykn",
+      "modelId": "eleven_v3",
+      "tier": "egyptian-library",
+      "text": "آه سمعتها! بس قولي يا مريم، هو ليه مهم نميّز كل صوت؟",
+      "settings": {
+        "stability": 0.42,
+        "similarity_boost": 0.78,
+        "style": 0.34
+      },
+      "audioPath": "/audio/auditions/conversations/conv_eg_02_zein.mp3",
+      "fileSizeBytes": 75275,
+      "durationSec": 4.64,
+      "contentHash": "88f43499d16b6140",
+      "creditsConsumed": 21,
+      "status": "verified"
+    },
+    {
+      "id": "conv_eg_03_mariam",
+      "characterId": "maryam",
+      "characterName": "مريم",
+      "voiceName": "Alice (EG)",
+      "voiceId": "LjKPkQHpXCsWoy7Pjq4U",
+      "modelId": "eleven_v3",
+      "tier": "egyptian-library",
+      "text": "عشان كل صوت له تردد ومعنى، وبالمتابعة بنشوف التطور بوضوح.",
+      "settings": {
+        "stability": 0.65,
+        "similarity_boost": 0.82,
+        "style": 0.15
+      },
+      "audioPath": "/audio/auditions/conversations/conv_eg_03_mariam.mp3",
+      "fileSizeBytes": 97009,
+      "durationSec": 6,
+      "contentHash": "be3920abcf1c16d1",
+      "creditsConsumed": 23,
+      "status": "verified"
+    },
+    {
+      "id": "conv_eg_04_sara",
+      "characterId": "sarah",
+      "characterName": "سارة",
+      "voiceName": "Farida (EG)",
+      "voiceId": "6aXW46RTUz6Y2lkBGQ1a",
+      "modelId": "eleven_v3",
+      "tier": "egyptian-library",
+      "text": "والأحلى إن كل خطوة بتجمع لنا نجمة جديدة في صدى!",
+      "settings": {
+        "stability": 0.38,
+        "similarity_boost": 0.78,
+        "style": 0.42
+      },
+      "audioPath": "/audio/auditions/conversations/conv_eg_04_sara.mp3",
+      "fileSizeBytes": 62318,
+      "durationSec": 3.84,
+      "contentHash": "f1b5838cd6ead301",
+      "creditsConsumed": 19,
+      "status": "verified"
+    },
     {
       "id": "conv_01_omar",
       "characterId": "omar",
@@ -357,7 +748,8 @@
       "durationSec": 2.48,
       "contentHash": "8e73b55db1b95765",
       "creditsConsumed": 36,
-      "status": "verified"
+      "status": "verified",
+      "tier": "premade-reference"
     },
     {
       "id": "conv_02_zein",
@@ -377,7 +769,8 @@
       "durationSec": 6,
       "contentHash": "771f3ce747b5430b",
       "creditsConsumed": 64,
-      "status": "verified"
+      "status": "verified",
+      "tier": "premade-reference"
     },
     {
       "id": "conv_03_mariam",
@@ -397,7 +790,8 @@
       "durationSec": 7.36,
       "contentHash": "c1fb18d040e0228b",
       "creditsConsumed": 77,
-      "status": "verified"
+      "status": "verified",
+      "tier": "premade-reference"
     },
     {
       "id": "conv_04_sara",
@@ -417,7 +811,8 @@
       "durationSec": 4.72,
       "contentHash": "324a27ef5997a9e5",
       "creditsConsumed": 54,
-      "status": "verified"
+      "status": "verified",
+      "tier": "premade-reference"
     }
   ]
 }

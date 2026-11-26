@@ -23,6 +23,9 @@ interface AuditionCandidate {
   voiceName: string;
   voiceId: string;
   modelId: string;
+  tier?: 'egyptian-library' | 'premade-reference';
+  accent?: string;
+  emotionTag?: string;
   text: string;
   settings: { stability: number; similarity_boost: number; style: number };
   recommended: boolean;
@@ -40,6 +43,7 @@ interface ConversationTurn {
   voiceName: string;
   voiceId: string;
   modelId: string;
+  tier?: 'egyptian-library' | 'premade-reference';
   text: string;
   audioPath: string;
   durationSec: number;
@@ -50,6 +54,8 @@ interface AuditionManifest {
   creditsBefore: number;
   creditsAfter: number;
   creditsUsedThisRun: number;
+  totalAuditionCreditsConsumed?: number;
+  auditionBudgetCap?: number;
   auditions: AuditionCandidate[];
   conversation: ConversationTurn[];
 }
@@ -59,7 +65,7 @@ interface VoiceAuditionModalProps {
   onClose: () => void;
 }
 
-const APPROVED_STORAGE_KEY = 'sada_approved_voices_v1';
+const APPROVED_STORAGE_KEY = 'sada_approved_voices_v2';
 
 export const VoiceAuditionModal: React.FC<VoiceAuditionModalProps> = ({ isOpen, onClose }) => {
   const [manifest, setManifest] = useState<AuditionManifest | null>(null);
@@ -67,6 +73,7 @@ export const VoiceAuditionModal: React.FC<VoiceAuditionModalProps> = ({ isOpen, 
   const [playingId, setPlayingId] = useState<string | null>(null);
   const [audioProgress, setAudioProgress] = useState<number>(0);
   const [convPlayingIndex, setConvPlayingIndex] = useState<number | null>(null);
+  const [convGroup, setConvGroup] = useState<'egyptian' | 'reference'>('egyptian');
   const [copiedMsg, setCopiedMsg] = useState<boolean>(false);
 
   const [selectedVoices, setSelectedVoices] = useState<Record<CharacterId, string>>(() => {
@@ -75,11 +82,11 @@ export const VoiceAuditionModal: React.FC<VoiceAuditionModalProps> = ({ isOpen, 
       if (saved) return JSON.parse(saved) as Record<CharacterId, string>;
     } catch {}
     return {
-      omar: 'omar_liam_v3',
-      maryam: 'mariam_alice_v3',
-      zain: 'zein_will_v3',
-      nour: 'nour_sarah_v3',
-      sarah: 'sara_jessica_v3',
+      omar: 'omar_eg_mawardy_v3',
+      maryam: 'mariam_eg_alice_v3',
+      zain: 'zein_eg_ziad_v3',
+      nour: 'nour_eg_nadia_v3',
+      sarah: 'sara_eg_farida_v3',
     };
   });
 
@@ -186,8 +193,12 @@ export const VoiceAuditionModal: React.FC<VoiceAuditionModalProps> = ({ isOpen, 
     }
   };
 
+  const activeConvTurns = (manifest?.conversation || []).filter((t) =>
+    convGroup === 'egyptian' ? t.tier === 'egyptian-library' : t.tier !== 'egyptian-library'
+  );
+
   const handleToggleConversation = () => {
-    if (!manifest?.conversation?.length) return;
+    if (!activeConvTurns.length) return;
     if (convPlayingIndex !== null) {
       stopAll();
       return;
@@ -196,7 +207,7 @@ export const VoiceAuditionModal: React.FC<VoiceAuditionModalProps> = ({ isOpen, 
       storyAudioController.pause();
     }
     stopAll();
-    void playConversationTurn(manifest.conversation, 0);
+    void playConversationTurn(activeConvTurns, 0);
   };
 
   const handleSelectCandidate = (charId: CharacterId, candidateId: string) => {
@@ -307,13 +318,14 @@ export const VoiceAuditionModal: React.FC<VoiceAuditionModalProps> = ({ isOpen, 
           )}
         </div>
 
-        {/* Plan & Licensing Transparency Banner */}
-        <div className="mb-5 p-4 rounded-2xl bg-amber-50 border border-amber-200 flex items-start gap-3">
-          <AlertCircle size={18} className="text-amber-700 flex-shrink-0 mt-0.5" />
-          <div className="text-xs text-amber-950 leading-relaxed">
-            <strong className="font-bold block mb-0.5">ملاحظة الخطة الحالية (ElevenLabs Free Tier):</strong>
-            تدعم واجهة API في الخطة المجانية الأصوات الـ 21 القياسية متعددة اللغات (<span className="dir-ltr font-mono">premade</span>) على نماذج{' '}
-            <span className="dir-ltr font-mono">eleven_v3</span> و<span className="dir-ltr font-mono">eleven_v4</span> و<span className="dir-ltr font-mono">eleven_multilingual_v2</span>، بينما تتطلب أصوات المكتبة المشتركة خطة مدفوعة (<span className="dir-ltr font-mono">402 paid_plan_required</span>). يُرجى الاستماع للتأكد من جودة النطق المصري قبل الاعتماد.
+        {/* Subscription & Audition Budget Banner */}
+        <div className="mb-5 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-start gap-3">
+          <AlertCircle size={18} className="text-emerald-700 flex-shrink-0 mt-0.5" />
+          <div className="text-xs text-emerald-950 leading-relaxed">
+            <strong className="font-bold block mb-0.5">
+              حالة الحساب المحدّثة: ElevenLabs Starter (مدفوع — {manifest ? `${manifest.creditsAfter.toLocaleString()} كريدت متبقٍ` : '40,000 كريدت'}):
+            </strong>
+            تم فتح مكتبة الأصوات المصرية الأصلية (<span className="font-bold">78 صوتًا مصريًا</span>)، وتوليد 11 مرشحًا مصريًا جديدًا + حوار مشترك مصري بتكلفة <span className="dir-ltr font-mono">{manifest?.creditsUsedThisRun ?? 434}</span> كريدت (الإجمالي التراكمي للتجارب <span className="dir-ltr font-mono">{manifest?.totalAuditionCreditsConsumed ?? 1958} / {manifest?.auditionBudgetCap ?? 3000}</span>). تم الاحتفاظ بالمرشحين السابقين للمقارنة المباشرة؛ ويُرجى ملاحظة أن تسجيلات المرحلة المجانية السابقة تخضع لشروط الاستخدام غير التجاري وإشارة الإسناد بخلاف الأصوات المولّدة تحت الاشتراك المدفوع.
           </div>
         </div>
 
@@ -334,23 +346,52 @@ export const VoiceAuditionModal: React.FC<VoiceAuditionModalProps> = ({ isOpen, 
                     معاينة حوار مشترك بين الشخصيات (4 أدوار متتالية)
                   </h4>
                   <p className="text-[11px] text-white/70">
-                    يُظهر تباين الأصوات وتسليم الحوار بين عمر، زين، مريم، وسارة
+                    قارن تباين الأصوات وتسليم الحوار المصري الجديد مقابل النسخة المرجعية السابقة
                   </p>
                 </div>
               </div>
 
-              <button
-                type="button"
-                onClick={handleToggleConversation}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-sada-yellow text-sada-ink font-black text-xs shadow-md hover:scale-105 transition-transform"
-              >
-                {convPlayingIndex !== null ? <Square size={13} /> : <Play size={13} />}
-                <span>{convPlayingIndex !== null ? 'إيقاف الحوار' : 'تشغيل الحوار المشترك'}</span>
-              </button>
+              <div className="flex flex-wrap items-center gap-2">
+                <div className="inline-flex rounded-xl bg-white/10 p-1 text-[11px] font-bold">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      stopAll();
+                      setConvGroup('egyptian');
+                    }}
+                    className={`px-2.5 py-1 rounded-lg transition-colors ${
+                      convGroup === 'egyptian' ? 'bg-sada-teal text-white' : 'text-white/75 hover:text-white'
+                    }`}
+                  >
+                    المصري الجديد (مكتبة مدفوعة)
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      stopAll();
+                      setConvGroup('reference');
+                    }}
+                    className={`px-2.5 py-1 rounded-lg transition-colors ${
+                      convGroup === 'reference' ? 'bg-white/25 text-white' : 'text-white/75 hover:text-white'
+                    }`}
+                  >
+                    المرجع السابق
+                  </button>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={handleToggleConversation}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-sada-yellow text-sada-ink font-black text-xs shadow-md hover:scale-105 transition-transform"
+                >
+                  {convPlayingIndex !== null ? <Square size={13} /> : <Play size={13} />}
+                  <span>{convPlayingIndex !== null ? 'إيقاف الحوار' : 'تشغيل الحوار المشترك'}</span>
+                </button>
+              </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
-              {manifest.conversation.map((turn, idx) => {
+              {activeConvTurns.map((turn, idx) => {
                 const isTurnPlaying = convPlayingIndex === idx;
                 const prof = CHARACTER_VOICE_PROFILES[turn.characterId];
                 return (
@@ -382,8 +423,116 @@ export const VoiceAuditionModal: React.FC<VoiceAuditionModalProps> = ({ isOpen, 
         {/* 5 Character Casting Cards */}
         <div className="space-y-5">
           {profiles.map((profile) => {
-            const cands = (manifest?.auditions || []).filter((a) => a.characterId === profile.id);
+            const allCands = (manifest?.auditions || []).filter((a) => a.characterId === profile.id);
+            const egCands = allCands.filter((a) => a.tier === 'egyptian-library');
+            const refCands = allCands.filter((a) => a.tier !== 'egyptian-library');
             const selectedId = selectedVoices[profile.id];
+
+            const renderCandidateCard = (cand: AuditionCandidate) => {
+              const isPlaying = playingId === cand.id && convPlayingIndex === null;
+              const isSelected = selectedId === cand.id;
+              const isEg = cand.tier === 'egyptian-library';
+              return (
+                <div
+                  key={cand.id}
+                  className={`p-3.5 rounded-2xl border-2 transition-all flex flex-col justify-between text-right ${
+                    isSelected
+                      ? 'bg-white border-sada-violet shadow-md ring-2 ring-sada-violet/15'
+                      : isEg
+                      ? 'bg-white border-emerald-200/80 hover:border-sada-teal'
+                      : 'bg-white/75 border-gray-100 hover:border-sada-violet/30'
+                  }`}
+                >
+                  <div>
+                    <div className="flex items-start justify-between gap-2 mb-1.5">
+                      <span className="dir-ltr text-xs font-black text-sada-ink">
+                        {cand.voiceName}
+                      </span>
+                      <div className="flex items-center gap-1 flex-shrink-0">
+                        {cand.recommended && (
+                          <span className="inline-flex items-center gap-1 text-[10px] font-black px-2 py-0.5 rounded-full bg-amber-100 text-amber-900">
+                            <Sparkles size={10} />
+                            <span>مُرشّح</span>
+                          </span>
+                        )}
+                        <span
+                          className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                            isEg ? 'bg-emerald-100 text-emerald-900' : 'bg-gray-100 text-gray-600'
+                          }`}
+                        >
+                          {isEg ? 'مصري أصيل' : 'مرجع سابق'}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-wrap items-center gap-1.5 mb-2">
+                      <span className="dir-ltr text-[10px] font-bold px-2 py-0.5 rounded-md bg-sada-lavender text-sada-violet">
+                        {cand.modelId}
+                      </span>
+                      <span className="dir-ltr text-[10px] font-mono px-1.5 py-0.5 rounded bg-gray-100 text-gray-600">
+                        {cand.voiceId.slice(0, 10)}…
+                      </span>
+                      {cand.emotionTag && (
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-amber-50 text-amber-800">
+                          {cand.emotionTag}
+                        </span>
+                      )}
+                      <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-sada-ink/60">
+                        <Clock size={10} />
+                        <span className="dir-ltr">{cand.durationSec}s</span>
+                      </span>
+                    </div>
+
+                    <p className="text-[11px] text-sada-ink/75 leading-relaxed mb-2">
+                      {cand.rationale}
+                    </p>
+
+                    <p className="text-[11px] text-sada-ink/90 bg-sada-surface p-2 rounded-xl border border-gray-100 leading-relaxed mb-3">
+                      «{cand.text}»
+                    </p>
+                  </div>
+
+                  <div>
+                    {isPlaying && (
+                      <div className="w-full h-1.5 bg-gray-100 rounded-full overflow-hidden mb-2.5">
+                        <div
+                          className="h-full rounded-full transition-all duration-100"
+                          style={{
+                            width: `${Math.round(audioProgress * 100)}%`,
+                            backgroundColor: profile.accentColor,
+                          }}
+                        />
+                      </div>
+                    )}
+
+                    <div className="flex items-center justify-between gap-2">
+                      <button
+                        type="button"
+                        onClick={() => handlePlayCandidate(cand)}
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-extrabold text-white shadow-xs transition-transform hover:scale-105"
+                        style={{ backgroundColor: profile.accentColor }}
+                      >
+                        {isPlaying ? <Pause size={12} /> : <Play size={12} />}
+                        <span>{isPlaying ? 'إيقاف' : 'استمع'}</span>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => handleSelectCandidate(profile.id, cand.id)}
+                        className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-bold border transition-colors ${
+                          isSelected
+                            ? 'bg-sada-violet text-white border-sada-violet'
+                            : 'bg-white text-sada-ink/75 border-gray-200 hover:border-sada-violet/40'
+                        }`}
+                      >
+                        {isSelected && <Check size={12} />}
+                        <span>{isSelected ? 'مختار' : 'اختيار'}</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              );
+            };
 
             return (
               <section
@@ -394,7 +543,7 @@ export const VoiceAuditionModal: React.FC<VoiceAuditionModalProps> = ({ isOpen, 
                   <img
                     src={profile.avatarImage}
                     alt={profile.name}
-                    className="w-16 h-20 object-contain rounded-2xl bg-white p-1 border border-gray-100 flex-shrink-0"
+                    className="w-20 h-24 object-contain rounded-2xl bg-white p-1 border border-gray-100 flex-shrink-0"
                   />
                   <div className="flex-1 min-w-0 text-right">
                     <div className="flex flex-wrap items-center gap-2 mb-1">
@@ -410,95 +559,31 @@ export const VoiceAuditionModal: React.FC<VoiceAuditionModalProps> = ({ isOpen, 
                   </div>
                 </div>
 
-                {cands.length === 0 ? (
+                {allCands.length === 0 ? (
                   <p className="text-xs text-sada-ink/60">جاري تحميل العينات...</p>
                 ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                    {cands.map((cand) => {
-                      const isPlaying = playingId === cand.id && convPlayingIndex === null;
-                      const isSelected = selectedId === cand.id;
-                      return (
-                        <div
-                          key={cand.id}
-                          className={`p-3.5 rounded-2xl bg-white border-2 transition-all flex flex-col justify-between text-right ${
-                            isSelected
-                              ? 'border-sada-violet shadow-md ring-2 ring-sada-violet/15'
-                              : 'border-gray-100 hover:border-sada-violet/30'
-                          }`}
-                        >
-                          <div>
-                            <div className="flex items-start justify-between gap-2 mb-1.5">
-                              <span className="dir-ltr text-xs font-black text-sada-ink">
-                                {cand.voiceName}
-                              </span>
-                              {cand.recommended && (
-                                <span className="inline-flex items-center gap-1 text-[10px] font-black px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 flex-shrink-0">
-                                  <Sparkles size={10} />
-                                  <span>مُرشّح</span>
-                                </span>
-                              )}
-                            </div>
-
-                            <div className="flex flex-wrap items-center gap-1.5 mb-2">
-                              <span className="dir-ltr text-[10px] font-bold px-2 py-0.5 rounded-md bg-sada-lavender text-sada-violet">
-                                {cand.modelId}
-                              </span>
-                              <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-sada-ink/60">
-                                <Clock size={10} />
-                                <span className="dir-ltr">{cand.durationSec}s</span>
-                              </span>
-                            </div>
-
-                            <p className="text-[11px] text-sada-ink/75 leading-relaxed mb-2.5">
-                              {cand.rationale}
-                            </p>
-
-                            <p className="text-[11px] text-sada-ink/90 bg-sada-surface p-2 rounded-xl border border-gray-100 leading-relaxed mb-3">
-                              «{cand.text}»
-                            </p>
-                          </div>
-
-                          <div>
-                            {isPlaying && (
-                              <div className="w-full h-1.5 bg-gray-100 rounded-full overflow-hidden mb-2.5">
-                                <div
-                                  className="h-full rounded-full transition-all duration-100"
-                                  style={{
-                                    width: `${Math.round(audioProgress * 100)}%`,
-                                    backgroundColor: profile.accentColor,
-                                  }}
-                                />
-                              </div>
-                            )}
-
-                            <div className="flex items-center justify-between gap-2">
-                              <button
-                                type="button"
-                                onClick={() => handlePlayCandidate(cand)}
-                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-extrabold text-white shadow-xs transition-transform hover:scale-105"
-                                style={{ backgroundColor: profile.accentColor }}
-                              >
-                                {isPlaying ? <Pause size={12} /> : <Play size={12} />}
-                                <span>{isPlaying ? 'إيقاف' : 'استمع'}</span>
-                              </button>
-
-                              <button
-                                type="button"
-                                onClick={() => handleSelectCandidate(profile.id, cand.id)}
-                                className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-bold border transition-colors ${
-                                  isSelected
-                                    ? 'bg-sada-violet text-white border-sada-violet'
-                                    : 'bg-white text-sada-ink/75 border-gray-200 hover:border-sada-violet/40'
-                                }`}
-                              >
-                                {isSelected && <Check size={12} />}
-                                <span>{isSelected ? 'مختار' : 'اختيار'}</span>
-                              </button>
-                            </div>
-                          </div>
+                  <div className="space-y-4">
+                    {egCands.length > 0 && (
+                      <div>
+                        <span className="text-[11px] font-black text-sada-teal-dark block mb-2">
+                          مرشحو المكتبة المصرية الأصيلة (الجديدة)
+                        </span>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                          {egCands.map(renderCandidateCard)}
                         </div>
-                      );
-                    })}
+                      </div>
+                    )}
+
+                    {refCands.length > 0 && (
+                      <div>
+                        <span className="text-[11px] font-bold text-sada-ink/55 block mb-2">
+                          المرشحون المرجعيون السابقون (للمقارنة)
+                        </span>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                          {refCands.map(renderCandidateCard)}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 )}
               </section>

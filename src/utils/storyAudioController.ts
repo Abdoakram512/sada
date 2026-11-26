@@ -267,6 +267,8 @@ class StoryAudioController {
 
     if (this.state.audioAvailable && this.audioEl && this.audioEl.src) {
       soundEngine.setAmbientDucked(true);
+      this.audioEl.muted = this.state.isMuted;
+      this.audioEl.volume = this.state.volume;
       void this.audioEl.play().catch(() => {
         this.startTimedSubtitleFallback(dlg, this.fallbackPausedElapsedMs);
       });

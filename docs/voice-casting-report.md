@@ -1,40 +1,36 @@
-# SADA Voice Casting Report (Phase 2 & 3)
+# SADA Voice Casting Report — Paid Egyptian Upgrade (Priority 1)
 
-Generated: 2026-11-26  
-Account Tier: **ElevenLabs Free Tier** (`10,000` monthly credits; `9,899` before audition batch → `9,503` reported by subscription endpoint after batch; `1,524` credits billed across 15 auditions + 4 conversation turns via `character-cost` headers, inside the `3,000` audition limit).
-
----
-
-## 1. Account & Plan Constraints Verified via API
-- **API Connectivity**: Verified via `npx -y @elevenlabs/cli@latest onboard check` (key ending `84a6` in gitignored `.env`).
-- **Library Voices Restriction**: Shared Egyptian Arabic library voices (e.g. `Farida`, `Nadia`, `Mawardy`, `Haytham`) returned `402 paid_plan_required` (`"Free users cannot use library voices via the API"`).
-- **Voice Design Restriction**: `POST /v1/text-to-voice/design` returned `403 feature_not_available` on Free tier.
-- **Supported Free-Tier API Voices**: All **21 `premade` multilingual voices** in `my_voices` work via API (`200 OK`, `1` credit/char) across `eleven_v3`, `eleven_v4`, and `eleven_multilingual_v2` (all marked `supports_ar: true`).
-- **Licensing / Attribution**: Free tier outputs are subject to ElevenLabs Free plan non-commercial terms and require visible attribution (`Audio powered by ElevenLabs`) if published publicly.
+Updated: 2026-11-26  
+Account Tier: **ElevenLabs Starter (Paid)** (`40,000` monthly credits; `40,000` before Egyptian audition run → `39,663` immediately reported after run; `434` billed across the 11 new Egyptian auditions + 4 conversation turns via `character-cost` headers).  
+Cumulative Audition Budget Tracker: **`1,524`** (earlier Free-tier reference run) + **`434`** (Egyptian Voice Library run) = **`1,958 / 3,000` credits consumed** (`1,042` remaining inside authorized audition cap).
 
 ---
 
-## 2. Recommended Voice Cast (Pending Human Listening Approval)
-
-| Character | Personality & Role | Recommended Voice | Voice ID | Model | Rationale & Trade-offs |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **عمر (`omar`)** | Welcoming storyteller & active adventurer | **Liam - Energetic, Warm** | `TX3LPaxmHKxFdv7VOQHJ` | `eleven_v3` | Warm youthful energy matching opening host role; compare against Charlie (`IKne3meq5aSn9XLyUdCD`, `eleven_v4`) and Chris (`iP95p4xoKVk53GoZ742B`, `eleven_multilingual_v2`). |
-| **مريم (`maryam`)** | Calm educational guide | **Alice - Clear, Engaging Educator** | `Xb7hH8MSUJpSbSDYk0k2` | `eleven_v3` | Steady educational clarity and calm pacing for scientific explanations; compare against Bella (`hpp4J3VqNfWAUOO0d1Us`, `eleven_v4`) and Matilda (`XrExE9yKIg1WjnnlVkGX`, `eleven_multilingual_v2`). |
-| **زين (`zain`)** | Curious explorer & puzzle solver | **Will - Relaxed Optimist** | `bIHbv24MWmeRgasZH58o` | `eleven_v3` | Distinct youthful lightness contrasting clearly with Omar; compare against River (`SAz9YHcvj6GT2YYXdXww`, `eleven_v4`) and Eric (`cjVigY5qzO86Huf0OWal`, `eleven_multilingual_v2`). |
-| **نور (`nour`)** | Warm, optimistic family companion | **Sarah - Reassuring, Warm** | `EXAVITQu4vr4xnSDxMaL` | `eleven_v3` | Gentle reassuring warmth distinct from Maryam's structured educator tone; compare against Lily (`pFZP5JQG7iQjIQuC4Bku`, `eleven_v4`) and Bella (`eleven_multilingual_v2`). |
-| **سارة (`sarah`)** | Energetic & playful game host | **Jessica - Playful, Bright, Warm** | `cgSgspJ2msm6clMCkdW9` | `eleven_v3` | Brightest, most upbeat female tone for Games & Celebration scenes; compare against Laura (`FGY2WhTYpPnrIDTdsKH5`, `eleven_v4`) and Jessica (`eleven_v4`). |
+## 1. Account & Egyptian Voice Library Verification
+- **Subscription & Capabilities**: `tier: "starter"`, `status: "active"`, `voice_limit: 10`, `can_use_instant_voice_cloning: true`.
+- **Voice Library Search (`language=ar&accent=egyptian`)**: Returned **78 verified native Egyptian Arabic voices** (`free_users_allowed` true & paid-only exclusive `professional`/`high_quality` voices), including young storytellers, calm female educators, warm family voices, and upbeat hosts at `1 credit/char`.
+- **Licensing & Publication Rights Note**: Audio generated under the current **Starter** plan carries paid-tier commercial/publication rights per ElevenLabs Starter terms (checking individual voice `notice_period`, which is `730`–`4015` days for our selected cast). Previously generated Free-tier reference samples remain archived strictly as comparison candidates (`tier: "premade-reference"`) and do **not** retroactively gain paid commercial rights unless regenerated under the active Starter plan; rejected candidates will be excluded from the final production bundle.
 
 ---
 
-## 3. Automated Verification vs. Human Listening Boundary
-- **Automated Checks Performed (19/19 Passed)**:
-  - All 15 character auditions (`public/audio/auditions/{omar,mariam,zein,nour,sara}/*.mp3`) and 4 conversation turns (`public/audio/auditions/conversations/*.mp3`) exist on disk, are non-empty (`40,585`–`154,270` bytes), and passed Chromium `<audio>` `loadedmetadata` playback validation (`durationSec`: `2.48s`–`9.57s`).
-- **Requires Human Listening**:
-  - Subjective evaluation of **Egyptian Arabic dialect naturalness** (since Free-tier API limits voices to multilingual premade voices rather than native Egyptian shared library voices) and choosing the final preferred voice/model per character inside `VoiceAuditionModal`.
+## 2. Recommended Paid Egyptian Voice Cast vs. Previous Reference Cast
+
+| Character | Storytelling Role | Previous Reference (Free Tier) | New Recommended Egyptian Voice (Starter) | Voice ID | Model | Rationale & Model Evaluation |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **عمر (`omar`)** | Welcoming host & adventurer | Liam (`TX3LPaxmHKxFdv7VOQHJ`) | **Mawardy - Warm, Natural Egyptian** | `PmRaqkJ2uk3Y9jrp9UjJ` | `eleven_v3` | Everyday natural Egyptian Arabic (*Masri*), clear youth warmth; compare vs. `Mostafa - Bold` (`QvNF0qyyt1Tuy1YAmnzH`, `eleven_v4`) & `Haytham` (`IES4nrmZdUBHByLBde0P`, `eleven_multilingual_v2`). |
+| **مريم (`maryam`)** | Calm scientific guide | Alice (`Xb7hH8MSUJpSbSDYk0k2`) | **Alice (EG) - Smooth, Charming and Soft** | `LjKPkQHpXCsWoy7Pjq4U` | `eleven_v3` | Paid-exclusive young Egyptian woman; smooth articulation for terms like *أصوات لينج الستة* & *تقييم*; compare vs. `Asmaa` (`NwMzeQCEU9Ecy3zXYTkV`, `eleven_v4`). |
+| **زين (`zain`)** | Curious explorer & puzzle solver | Will (`bIHbv24MWmeRgasZH58o`) | **Ziad - Dynamic and Vibrant** | `5REPlS2Ja1VZ7zNA0ykn` | `eleven_v3` | Lighter pitch, punchy youthful questioning cadence contrasting distinctly with Omar; compare vs. `Sattar` (`Y65Dz2XsznJl6gZHkXPi`, `eleven_v4`). |
+| **نور (`nour`)** | Warm family supporter | Sarah (`EXAVITQu4vr4xnSDxMaL`) | **Nadia - Sweet and Melodic** | `80le32Uz2DfWFo4Foz0p` | `eleven_v3` | Gentle, honeyed Egyptian warmth ideal for Parents guide & Closing reflection; compare vs. `Ghozlan - Soft` (`xPcC3nehhziQaOrIeAwv`, `eleven_v4`). |
+| **سارة (`sarah`)** | Playful games & reward host | Jessica (`cgSgspJ2msm6clMCkdW9`) | **Farida - Lively and Radiant** | `6aXW46RTUz6Y2lkBGQ1a` | `eleven_v3` | Bright, radiant upbeat Egyptian energy suited for Games & Celebration; compare vs. `Fatima - Expressive` (`I3u6waC588j43py1kDN2`, `eleven_multilingual_v2`). |
+
+### Model Comparison Notes
+- **`eleven_v3`**: Richest emotional expression, natural Egyptian colloquial inflection, and dynamic reactions for interactive dialogue.
+- **`eleven_v4`**: Crisp pacing and strong articulation for scientific terms (`Mostafa`, `Asmaa`, `Sattar`, `Ghozlan`) — available as direct alternates in `VoiceAuditionModal`.
+- **`eleven_multilingual_v2`**: Steady balanced pacing (`Haytham`, `Fatima`), useful for steady narrative comparison.
 
 ---
 
-## 4. Next Step (Approval Checkpoint)
-1. Open the website preview and click **«أصوات الشخصيات»** in the bottom bar.
-2. Play the **Multi-Character Conversation Demo** and compare all 3 candidates per character.
-3. Confirm your 5 preferred voices (or upgrade plan if you want native Egyptian library voices like `Farida`, `Nadia`, `Mawardy`, `Will Helmi`, `Ghozlan`), then export `approved-voices.json` or reply with your choices so Phase 6 generates all 26 production lines.
+## 3. Verified Audition & Conversation Files
+- **Stored in**: `public/audio/auditions/{omar,mariam,zein,nour,sara}/*_eg_*.mp3` & `public/audio/auditions/conversations/conv_eg_*.mp3` (plus previous 15 reference auditions & 4 reference turns preserved in `public/audio/audition-manifest.json`).
+- **Automated Verification**: All **11 new Egyptian auditions** (`95,755`–`129,610` B, `5.92s`–`8.03s`) and **4 Egyptian conversation turns** (`43,510`–`97,009` B, `2.69s`–`6.00s`) passed Chromium `<audio>` `loadedmetadata` playback checks (`26` total stored auditions + `8` total conversation turns).
+- **Production Audio Status (`26` lines in `public/audio/characters/`)**: Held at Approval Checkpoint — **not generated yet** until you review and approve the updated 5-character Egyptian voice selections in **«أصوات الشخصيات»**.
