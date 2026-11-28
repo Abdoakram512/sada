@@ -1,23 +1,16 @@
 # Feedback storage
 
-The current site is a project presentation with illustrative assessment demos. It has no account registration or child-record backend. This integration collects website feedback only; it must not collect child or health records.
+The feedback section displays one embedded published Google Form directly, with a full-window fallback link. The duplicate quick form, tab switcher, POST endpoint and entry IDs have been removed. There is no separate feedback route.
 
-Both feedback tabs use one published Google Form: optional name, required role, required rating (1–5), and required feedback. The owner has linked a private Google Sheets response destination through Forms. Email collection, sign-in requirement, and public response summaries were disabled when configured. Do not enable public response summaries or publish the response sheet.
+Google Forms stores responses in the existing owner-linked private Google Sheet. All four questions are required: name, role, rating and feedback. The description says the name is required. No editor URL, response data or credentials belong in the frontend.
 
-`src/data/feedbackConfig.ts` contains only public respondent endpoints and field IDs. Editor links and response-sheet links must not be added to frontend code. If a question is deleted/recreated, re-check its field ID and perform a labelled test submission before deploying.
+## Verification — 2026-11-28
 
-The quick form uses a native HTTPS POST in a new tab. Feedback is not placed in URL query parameters or stored in browser storage. Google validates and acknowledges the submission on its own page. The site deliberately does not show a saved-success state, since it cannot read Google's cross-origin result. If popups are blocked or Google rejects the submission, the user can retry with the retained text or use the embedded Google Form / full-window link. No credentials, Apps Script deployment, or server secrets are required.
-
-## Verification (2026-11-28)
-
-- `npm ci`: passed; audit reported zero vulnerabilities.
-- `npm run build`: passed (TypeScript and Vite production build).
-- `npm run lint`: passed (oxlint).
-- No test script is defined in package.json.
-- Published Google Form: submitted a clearly labelled technical test and verified it in the owner's response dashboard.
-- Quick website form: empty required message blocked submission without displaying a status; populated form submitted successfully and Google's confirmation was observed. Tested Arabic plus `&` and `+`, role selection, and non-default rating.
-- Embedded form loaded with all four questions; full-window link points to the published respondent form.
-- Desktop layout inspected in the browser; existing site identity and animation code are unchanged.
-- Mobile verification remains incomplete: the browser viewport override did not change the measured desktop viewport, and subsequent native browser control was stopped because the tool could not verify the current URL. No mobile pass is claimed.
-
-Two clearly labelled technical test responses were submitted during verification. Keep or remove them through the owner's Forms dashboard as appropriate; they are not real visitor feedback.
+- npm ci: passed, zero reported vulnerabilities.
+- npm run build: passed.
+- npm run lint: passed.
+- No automated test script is defined.
+- Existing published form: completing role, rating and feedback while leaving name empty blocked submission and displayed the required-question error at the name field.
+- Adding a labelled technical test name allowed submission; Google displayed its recorded-response confirmation. Owner response count increased from 3 to 4.
+- One labelled technical test response was added in this update.
+- Responsive wrapper uses full width, wrapping fallback link and responsive iframe height. Visual viewport verification is recorded separately after deployment.
