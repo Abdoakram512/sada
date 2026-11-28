@@ -101,14 +101,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       <div className="max-w-7xl mx-auto w-full flex-1 flex flex-col items-center justify-center text-center relative z-10">
         {/* Prestigious University & Faculty Identity Header */}
         <div className="w-full max-w-4xl mx-auto mb-2.5 sm:mb-3.5 px-2">
-          <div className="flex flex-col items-center justify-center text-center py-2 sm:py-2.5 px-3 sm:px-6 rounded-3xl bg-white/80 backdrop-blur-xs border border-sada-violet/20 shadow-xs">
-            <div className="inline-flex items-center justify-center gap-1.5 sm:gap-2 mb-0.5 sm:mb-1">
-              <span className="w-2 h-2 rounded-full bg-sada-violet animate-pulse" />
-              <span className="text-[11px] sm:text-xs md:text-sm font-extrabold tracking-wide text-sada-violet">
-                مشروع تخرج نوعي معتمد · SADA 2026
-              </span>
-              <span className="w-2 h-2 rounded-full bg-sada-teal animate-pulse" />
-            </div>
+          <div className="flex flex-col items-center justify-center text-center py-2 sm:py-3 px-3 sm:px-6 rounded-3xl bg-white/80 backdrop-blur-xs border border-sada-violet/20 shadow-xs">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-black text-sada-ink leading-tight tracking-tight">
               جامعة الزقازيق
             </h2>
