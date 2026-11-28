@@ -15,6 +15,7 @@ import {
 import { useStorySceneFocus } from '../hooks/useStoryAudio';
 import { storyAudioController } from '../utils/storyAudioController';
 import { CharacterStageActor } from './CharacterStageActor';
+import { FeedbackSection } from './FeedbackSection';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -37,7 +38,6 @@ const ENGINEERS: EngineerData[] = [
   {
     id: 'akram',
     displayName: 'أكرم',
-    secondaryName: 'عبدالرحمن أكرم',
     role: 'مهندس برمجيات',
     image: '/assets/eng_akram.webp',
     image2x: '/assets/eng_akram@2x.webp',
@@ -381,17 +381,6 @@ export const DevelopmentTeamSection: React.FC = () => {
                       {eng.displayName}
                     </h3>
 
-                    {/* Secondary Name (if present) */}
-                    {eng.secondaryName ? (
-                      <p className="text-xs sm:text-sm md:text-base font-bold text-sada-ink/65 mt-0.5">
-                        {eng.secondaryName}
-                      </p>
-                    ) : (
-                      <p className="text-xs sm:text-sm md:text-base font-bold text-sada-ink/65 mt-0.5 opacity-0 pointer-events-none select-none">
-                        &nbsp;
-                      </p>
-                    )}
-
                     {/* Role Pill */}
                     <div className="mt-1.5 sm:mt-2.5">
                       <span
@@ -457,28 +446,25 @@ export const DevelopmentTeamSection: React.FC = () => {
               </button>
             </div>
 
-            {/* Direct Action Buttons */}
+            {/* WhatsApp Action Button */}
             <div className="flex items-center gap-2.5 w-full sm:w-auto justify-center">
-              <a
-                href={CONTACT_TEL_HREF}
-                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 min-h-[44px] px-5 py-2.5 rounded-2xl bg-sada-ink/5 hover:bg-sada-ink/10 text-sada-ink text-xs sm:text-sm font-black transition-colors"
-              >
-                <Phone size={15} />
-                <span>اتصال مباشر</span>
-              </a>
-
               <a
                 href={CONTACT_WHATSAPP_HREF}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 min-h-[44px] px-5 py-2.5 rounded-2xl bg-sada-teal hover:bg-sada-teal-dark text-white text-xs sm:text-sm font-black transition-all shadow-md hover:shadow-lg"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 min-h-[44px] px-6 py-2.5 rounded-2xl bg-sada-teal hover:bg-sada-teal-dark text-white text-xs sm:text-sm font-black transition-all shadow-md hover:shadow-lg"
               >
-                <MessageCircle size={16} />
+                <MessageCircle size={17} />
                 <span>محادثة واتساب</span>
               </a>
             </div>
           </div>
         </div>
+
+        {/* ========================================================================= */}
+        {/* USER FEEDBACK & GOOGLE FORM SECTION                                      */}
+        {/* ========================================================================= */}
+        <FeedbackSection />
       </div>
     </section>
   );

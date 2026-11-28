@@ -32,6 +32,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentSection }) => {
     { id: 'guides', label: 'الأدلة' },
     { id: 'team', label: 'الفريق' },
     { id: 'developers', label: 'التطوير' },
+    { id: 'feedback', label: 'رأيك' },
   ];
 
   const scrollTo = (id: string) => {

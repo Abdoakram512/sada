@@ -245,4 +245,27 @@ Repository: `sada-experience` (Baseline preserved at git branch `baseline-pre-up
   - **Mobile 360×740**: Figures rendered at **`280px` height** (target `260–360px`), `overflowX: false`.
   - Full body shoes-to-head visibility, unclipped faces, and crisp rendering confirmed across all viewports.
 
+---
+
+## Phase 11 — User Feedback Section, Google Form Integration & Contact Streamlining (Completed)
+
+### Objectives
+- Create an interactive feedback section allowing visitors to submit their evaluation and thoughts directly to the software development team.
+- Integrate Google Form embedding with live in-page preview and direct WhatsApp feedback channel.
+- Remove secondary name `عبدالرحمن أكرم` so Engineer Akram is titled strictly as `أكرم`.
+- Remove `اتصال مباشر` button from the contact dock, keeping the copyable telephone display and the WhatsApp button.
+
+### Completed Tasks & Modified Files
+- Created [src/data/feedbackConfig.ts](src/data/feedbackConfig.ts) to store configurable Google Form URLs and contact endpoints.
+- Created [src/components/FeedbackSection.tsx](src/components/FeedbackSection.tsx) with dual tabs:
+  1. **كتابة الرأي**: 5 interactive rating stars, name (optional), role selector, message textarea, and a direct WhatsApp submission button sending formatted feedback to `01115240237`.
+  2. **Google Form 📝**: Embedded responsive `<iframe>` view for Google Forms with a 1-click guide to link a personal form via `forms.new`.
+- Updated [src/components/DevelopmentTeamSection.tsx](src/components/DevelopmentTeamSection.tsx):
+  - Removed `secondaryName: 'عبدالرحمن أكرم'`.
+  - Removed `اتصال مباشر` button.
+  - Embedded `<FeedbackSection />` directly below the contact dock.
+- Updated [src/components/Navbar.tsx](src/components/Navbar.tsx) with a direct navigation link `رأيك` (`#feedback`).
+- Verified via CDP screenshots on desktop (`1440×900`) and mobile (`390×844`): 0 overflow, 0 lint warnings/errors, clean build in `2.41s`.
+
+
 
