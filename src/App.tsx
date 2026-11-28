@@ -99,7 +99,7 @@ export const App: React.FC = () => {
     };
   }, []);
 
-  // Unified Scene Observer across all 11 connected scenes
+  // Unified Scene Observer across all 12 connected scenes
   useEffect(() => {
     const sceneEls = Array.from(document.querySelectorAll<HTMLElement>('[data-scene-id]'));
     if (sceneEls.length === 0) return;
@@ -147,6 +147,8 @@ export const App: React.FC = () => {
         '/assets/group_highfive.webp',
         '/assets/group_celebrating_transparent.webp',
         '/assets/char_guide.webp',
+        '/assets/eng_akram.webp',
+        '/assets/eng_abualqasim.webp',
         '/assets/screens/screen_welcome.png',
         '/assets/screens/screen_detection.png',
         '/assets/screens/screen_noise.png',

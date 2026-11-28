@@ -78,11 +78,11 @@ export const ProblemSolutionSection: React.FC = () => {
           </p>
         </div>
 
-        {/* Character Conversation Cast — Unified horizontal dialogue stage on mobile & desktop */}
+        {/* Character Conversation Cast — Unified horizontal dialogue stage on mobile & desktop (Jana lead spotlight) */}
         <div className="grid grid-cols-3 sm:flex sm:flex-wrap items-end justify-items-center sm:justify-center gap-1.5 sm:gap-10 mb-8 sm:mb-10">
           <CharacterStageActor
             characterId="zain"
-            heightClass="h-44 sm:h-56 md:h-64"
+            heightClass="h-40 sm:h-52 md:h-60"
             isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'zain'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'zain')}
@@ -90,14 +90,14 @@ export const ProblemSolutionSection: React.FC = () => {
           />
           <CharacterStageActor
             characterId="jana"
-            heightClass="h-44 sm:h-56 md:h-64"
+            heightClass="h-48 sm:h-60 md:h-72"
             isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'jana'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'jana')}
           />
           <CharacterStageActor
             characterId="nour"
-            heightClass="h-44 sm:h-56 md:h-64"
+            heightClass="h-40 sm:h-52 md:h-60"
             isActiveScene={isSceneActive}
             isSpeaking={isSceneActive && activeSpeakerId === 'nour'}
             isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'nour')}

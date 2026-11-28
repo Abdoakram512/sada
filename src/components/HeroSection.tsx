@@ -79,7 +79,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       ref={sectionRef}
       id="hero"
       data-scene-id="scene-01-welcome"
-      className="relative min-h-[100svh] flex flex-col justify-between pt-16 sm:pt-[4.5rem] pb-16 sm:pb-4 px-3.5 sm:px-4 md:px-8 overflow-x-clip bg-gradient-to-b from-sada-cream via-[#FFF3DF] to-sada-cream"
+      className="relative min-h-[100svh] flex flex-col justify-between pt-[4.25rem] sm:pt-[4.5rem] pb-16 sm:pb-5 px-3 sm:px-4 md:px-8 overflow-x-clip bg-gradient-to-b from-sada-cream via-[#FFF3DF] to-sada-cream"
     >
       {/* Decorative Sound Wave Rings (paused when Hero is offscreen) */}
       <div
@@ -100,7 +100,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
       <div className="max-w-7xl mx-auto w-full flex-1 flex flex-col items-center justify-center text-center relative z-10">
         {/* Project Tag */}
-        <div className="inline-flex flex-wrap items-center justify-center gap-2 px-4 py-1 rounded-full bg-white/90 border border-sada-violet/20 shadow-sm mb-2">
+        <div className="inline-flex flex-wrap items-center justify-center gap-2 px-3.5 sm:px-4 py-1 rounded-full bg-white/90 border border-sada-violet/20 shadow-sm mb-1.5 sm:mb-2">
           <span className="w-2 h-2 rounded-full bg-sada-teal animate-pulse" />
           <span className="text-xs sm:text-sm font-bold text-sada-violet">
             مشروع تخرج · تطبيق صدى السمعي
@@ -111,19 +111,19 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         </div>
 
         {/* Main Arabic Headline — clean RTL spacing & line-height */}
-        <h1 className="sada-hero-title font-black text-sada-ink max-w-4xl mb-2">
+        <h1 className="sada-hero-title font-black text-sada-ink max-w-4xl mb-1.5 sm:mb-2">
           <span>لكل صوت حكاية، </span>
           <span className="sada-gradient-text">ولكل طفل رحلة</span>
         </h1>
 
         {/* Supporting Narrative Copy */}
-        <p className="text-[15px] sm:text-base md:text-lg leading-relaxed text-sada-ink/80 max-w-2xl font-medium text-center mb-2">
+        <p className="text-[14px] sm:text-base md:text-lg leading-relaxed text-sada-ink/80 max-w-2xl font-medium text-center mb-1.5 sm:mb-2">
           تطبيق تفاعلي يجمع بين{' '}
           <strong className="text-sada-violet font-extrabold">تقييم أصوات لينج الستة</strong>، وتنمية المهارات السمعية الخمس، والمتابعة المنظمة للأطفال الصم وضعاف السمع.
         </p>
 
         {/* Core Pillars Pills — Hidden on ultra-compact hero fold to keep all 5 characters comfortably above fold */}
-        <div className="hidden min-[380px]:grid grid-cols-2 sm:flex sm:flex-wrap items-center justify-center gap-1.5 sm:gap-2 mb-2 sm:mb-2.5 max-w-2xl w-full sm:w-auto">
+        <div className="hidden min-[380px]:grid grid-cols-2 sm:flex sm:flex-wrap items-center justify-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2.5 max-w-2xl w-full sm:w-auto">
           {[
             { label: 'تقييم وظيفي', icon: Activity, color: 'bg-sada-lavender text-sada-violet border-sada-violet/20' },
             { label: 'متابعة عبر الزمن', icon: FileText, color: 'bg-emerald-50 text-sada-teal-dark border-sada-teal/25' },
@@ -192,7 +192,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             style={{ background: 'radial-gradient(ellipse at center, rgba(39,33,62,0.12) 0%, transparent 72%)' }}
           />
 
-          {/* Desktop & Tablet Panoramic 5-Character Cast (Jana centerpiece protagonist) */}
+          {/* Desktop & Tablet Panoramic 5-Character Cast (Jana elevated centerpiece protagonist) */}
           <div className="hidden sm:grid sm:grid-cols-5 items-end justify-items-center gap-2 sm:gap-3 px-1">
             <div>
               <CharacterStageActor
@@ -201,7 +201,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 isActiveScene={isHeroScene}
                 isSpeaking={isHeroScene && activeSpeakerId === 'omar'}
                 isDimmed={Boolean(isHeroScene && activeSpeakerId && activeSpeakerId !== 'omar')}
-                heightClass="h-44 md:h-52 lg:h-60"
+                heightClass="h-40 md:h-48 lg:h-52"
                 onClick={() => storyAudioController.replayCurrentScene()}
               />
             </div>
@@ -212,18 +212,25 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 isActiveScene={isHeroScene}
                 isSpeaking={isHeroScene && activeSpeakerId === 'zain'}
                 isDimmed={Boolean(isHeroScene && activeSpeakerId && activeSpeakerId !== 'zain')}
-                heightClass="h-44 md:h-52 lg:h-60"
+                heightClass="h-40 md:h-48 lg:h-52"
                 onClick={() => onAboutClick()}
               />
             </div>
-            <div>
+            <div className="relative flex flex-col items-center">
+              <div
+                aria-hidden="true"
+                className="absolute -inset-4 rounded-full pointer-events-none"
+                style={{
+                  background: 'radial-gradient(circle, rgba(255,197,82,0.34) 0%, rgba(255,197,82,0.08) 55%, transparent 74%)',
+                }}
+              />
               <CharacterStageActor
                 characterId="jana"
                 eager
                 isActiveScene={isHeroScene}
                 isSpeaking={isHeroScene && activeSpeakerId === 'jana'}
                 isDimmed={Boolean(isHeroScene && activeSpeakerId && activeSpeakerId !== 'jana')}
-                heightClass="h-52 md:h-60 lg:h-68"
+                heightClass="h-52 md:h-64 lg:h-72"
                 onClick={() => storyAudioController.replayCurrentScene()}
               />
             </div>
@@ -234,7 +241,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 isActiveScene={isHeroScene}
                 isSpeaking={isHeroScene && activeSpeakerId === 'maryam'}
                 isDimmed={Boolean(isHeroScene && activeSpeakerId && activeSpeakerId !== 'maryam')}
-                heightClass="h-44 md:h-52 lg:h-60"
+                heightClass="h-40 md:h-48 lg:h-52"
                 onClick={() => onExploreClick()}
               />
             </div>
@@ -245,37 +252,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 isActiveScene={isHeroScene}
                 isSpeaking={isHeroScene && activeSpeakerId === 'nour'}
                 isDimmed={Boolean(isHeroScene && activeSpeakerId && activeSpeakerId !== 'nour')}
-                heightClass="h-44 md:h-52 lg:h-60"
+                heightClass="h-40 md:h-48 lg:h-52"
                 onClick={() => onAboutClick()}
               />
             </div>
           </div>
 
-          {/* Mobile Staggered 5-Character Animated Movie Ensemble (Jana foreground centerpiece) */}
-          <div className="sm:hidden flex flex-col items-center">
-            <div className="flex items-end justify-center gap-20 -mb-6 relative z-10">
-              <CharacterStageActor
-                characterId="zain"
-                eager
-                showLabel={false}
-                isActiveScene={isHeroScene}
-                isSpeaking={isHeroScene && activeSpeakerId === 'zain'}
-                isDimmed={Boolean(isHeroScene && activeSpeakerId && activeSpeakerId !== 'zain')}
-                heightClass="h-36"
-                onClick={() => onAboutClick()}
-              />
-              <CharacterStageActor
-                characterId="nour"
-                eager
-                showLabel={false}
-                isActiveScene={isHeroScene}
-                isSpeaking={isHeroScene && activeSpeakerId === 'nour'}
-                isDimmed={Boolean(isHeroScene && activeSpeakerId && activeSpeakerId !== 'nour')}
-                heightClass="h-36"
-                onClick={() => onAboutClick()}
-              />
-            </div>
-            <div className="flex items-end justify-center gap-2.5 relative z-20">
+          {/* Mobile Panoramic V-Arc 5-Character Ensemble — Jana centered & taller, stays cleanly above StoryAudioBar */}
+          <div className="sm:hidden flex items-end justify-center gap-0.5 px-0 pt-1">
+            <div className="-mx-0.5 relative z-10">
               <CharacterStageActor
                 characterId="omar"
                 eager
@@ -283,19 +268,41 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 isActiveScene={isHeroScene}
                 isSpeaking={isHeroScene && activeSpeakerId === 'omar'}
                 isDimmed={Boolean(isHeroScene && activeSpeakerId && activeSpeakerId !== 'omar')}
-                heightClass="h-40"
+                heightClass="h-24 min-[375px]:h-28 min-[410px]:h-32"
                 onClick={() => storyAudioController.replayCurrentScene()}
+              />
+            </div>
+            <div className="-mx-0.5 relative z-10">
+              <CharacterStageActor
+                characterId="zain"
+                eager
+                showLabel={false}
+                isActiveScene={isHeroScene}
+                isSpeaking={isHeroScene && activeSpeakerId === 'zain'}
+                isDimmed={Boolean(isHeroScene && activeSpeakerId && activeSpeakerId !== 'zain')}
+                heightClass="h-24 min-[375px]:h-28 min-[410px]:h-32"
+                onClick={() => onAboutClick()}
+              />
+            </div>
+            <div className="relative z-20 mx-0.5 flex flex-col items-center">
+              <div
+                aria-hidden="true"
+                className="absolute -inset-3 rounded-full pointer-events-none"
+                style={{
+                  background: 'radial-gradient(circle, rgba(255,197,82,0.34) 0%, transparent 72%)',
+                }}
               />
               <CharacterStageActor
                 characterId="jana"
                 eager
-                showLabel={false}
                 isActiveScene={isHeroScene}
                 isSpeaking={isHeroScene && activeSpeakerId === 'jana'}
                 isDimmed={Boolean(isHeroScene && activeSpeakerId && activeSpeakerId !== 'jana')}
-                heightClass="h-44"
+                heightClass="h-32 min-[375px]:h-40 min-[410px]:h-44"
                 onClick={() => storyAudioController.replayCurrentScene()}
               />
+            </div>
+            <div className="-mx-0.5 relative z-10">
               <CharacterStageActor
                 characterId="maryam"
                 eager
@@ -303,8 +310,20 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 isActiveScene={isHeroScene}
                 isSpeaking={isHeroScene && activeSpeakerId === 'maryam'}
                 isDimmed={Boolean(isHeroScene && activeSpeakerId && activeSpeakerId !== 'maryam')}
-                heightClass="h-40"
+                heightClass="h-24 min-[375px]:h-28 min-[410px]:h-32"
                 onClick={() => onExploreClick()}
+              />
+            </div>
+            <div className="-mx-0.5 relative z-10">
+              <CharacterStageActor
+                characterId="nour"
+                eager
+                showLabel={false}
+                isActiveScene={isHeroScene}
+                isSpeaking={isHeroScene && activeSpeakerId === 'nour'}
+                isDimmed={Boolean(isHeroScene && activeSpeakerId && activeSpeakerId !== 'nour')}
+                heightClass="h-24 min-[375px]:h-28 min-[410px]:h-32"
+                onClick={() => onAboutClick()}
               />
             </div>
           </div>

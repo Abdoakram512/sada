@@ -164,7 +164,7 @@ export const AppWorkflowSection: React.FC = () => {
           <div className="order-1">
             <CharacterStageActor
               characterId="jana"
-              heightClass="h-48 sm:h-56 md:h-64"
+              heightClass="h-48 sm:h-60 md:h-72"
               isActiveScene={isSceneActive}
               isSpeaking={isSceneActive && activeSpeakerId === 'jana'}
               isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'jana')}
@@ -186,7 +186,7 @@ export const AppWorkflowSection: React.FC = () => {
           <div className="order-2 lg:order-3">
             <CharacterStageActor
               characterId="omar"
-              heightClass="h-48 sm:h-56 md:h-64"
+              heightClass="h-40 sm:h-52 md:h-56"
               isActiveScene={isSceneActive}
               isSpeaking={isSceneActive && activeSpeakerId === 'omar'}
               isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'omar')}

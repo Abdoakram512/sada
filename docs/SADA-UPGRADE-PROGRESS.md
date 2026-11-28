@@ -207,6 +207,6 @@ Repository: `sada-experience` (Baseline preserved at git branch `baseline-pre-up
 - Regenerated only the 9 changed/new ElevenLabs `eleven_v4` clips (preserving the 18 untouched supporting clips via SHA-256 caching; `398` characters billed, `17,367` remaining; `27 / 27` clips verified) and removed the 8 obsolete MP3 files.
 
 ### Verified Build & CDP Audit Results
-- `oxlint`: `0` warnings, `0` errors (`34` files); `tsc -b && vite build`: `2.04s`.
-- Headless Chromium CDP (`verify_upgrade.mjs`): `FCP/LCP: 956 ms`, `CLS: 0` idle / `0.0035` post-scroll, `56 FPS`, `overflowX: false` across all `8` tested viewports (`320px`–`1920px`), `consoleErrorsCount: 0`, `reducedMotionOk: true`, `hasCochlearLeak: false`, `hasSarahLeak: false`, and live playback verified (`scene-01-jana-01.mp3` `10.72s`).
+- `oxlint`: `0` warnings, `0` errors (`34` files); `tsc -b && vite build`: `1.93s`.
+- Headless Chromium CDP (`verify_upgrade.mjs` & `verify_mobile_redesign.mjs`): `FCP/LCP: 964 ms` desktop, `CLS: 0` idle / `0.0035` post-scroll, `59 FPS` desktop, `122 FPS` (`0` dropped frames) mobile (`390×844`), `overflowX: false` across all `17` breakpoints (`320px`–`2560px` + `844×390` landscape), `consoleErrorsCount: 0`, `reducedMotionOk: true`, `hasCochlearLeak: false`, `hasSarahLeak: false`, and live playback verified (`scene-01-jana-01.mp3` `10.72s`).
 

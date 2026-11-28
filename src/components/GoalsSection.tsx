@@ -88,7 +88,7 @@ export const GoalsSection: React.FC = () => {
           <div className="order-1">
             <CharacterStageActor
               characterId="jana"
-              heightClass="h-44 sm:h-52 md:h-60"
+              heightClass="h-48 sm:h-56 md:h-64"
               isActiveScene={isSceneActive}
               isSpeaking={isSceneActive && activeSpeakerId === 'jana'}
               isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'jana')}
@@ -124,7 +124,7 @@ export const GoalsSection: React.FC = () => {
           <div className="order-2 lg:order-3">
             <CharacterStageActor
               characterId="nour"
-              heightClass="h-44 sm:h-52 md:h-60"
+              heightClass="h-40 sm:h-48 md:h-56"
               isActiveScene={isSceneActive}
               isSpeaking={isSceneActive && activeSpeakerId === 'nour'}
               isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'nour')}

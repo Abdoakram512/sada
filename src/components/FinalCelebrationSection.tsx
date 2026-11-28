@@ -92,12 +92,12 @@ export const FinalCelebrationSection: React.FC<FinalCelebrationSectionProps> = (
           ودي كانت حكاية صدى. كل طفل يستحق فرصة يتعلم ويتواصل ويكتشف العالم بطريقته.
         </p>
 
-        {/* Closing Speakers + Theatrical Group Celebration */}
+        {/* Closing Speakers + Theatrical Group Celebration (Jana focus) */}
         <div ref={stageRef} className="grid grid-cols-2 lg:flex lg:items-end lg:justify-center gap-4 sm:gap-10 mb-8 sm:mb-10 justify-items-center">
           <div className="order-1">
             <CharacterStageActor
               characterId="nour"
-              heightClass="h-44 sm:h-56 md:h-64"
+              heightClass="h-40 sm:h-52 md:h-56"
               isActiveScene={isSceneActive}
               isSpeaking={isSceneActive && activeSpeakerId === 'nour'}
               isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'nour')}
@@ -121,7 +121,7 @@ export const FinalCelebrationSection: React.FC<FinalCelebrationSectionProps> = (
           <div className="order-2 lg:order-3">
             <CharacterStageActor
               characterId="jana"
-              heightClass="h-44 sm:h-56 md:h-64"
+              heightClass="h-48 sm:h-60 md:h-72"
               isActiveScene={isSceneActive}
               isSpeaking={isSceneActive && activeSpeakerId === 'jana'}
               isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'jana')}
