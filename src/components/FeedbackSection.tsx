@@ -4,7 +4,6 @@ import {
   Star,
   Send,
   ExternalLink,
-  FileText,
   Sparkles,
   CheckCircle2,
 } from 'lucide-react';
@@ -14,30 +13,11 @@ export const FeedbackSection: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'quick' | 'googleForm'>('quick');
   const [rating, setRating] = useState<number>(5);
   const [name, setName] = useState('');
-  const [role, setRole] = useState('زائر مهتم');
+  const [role, setRole] = useState('زائر');
   const [message, setMessage] = useState('');
-  const [customFormUrl, setCustomFormUrl] = useState(FEEDBACK_CONFIG.googleFormUrl);
-
+  const [submitted, setSubmitted] = useState(false);
   const roles = ['ولي أمر', 'أخصائي تخاطب', 'مهتم بالتقنية', 'زائر'];
-
-  const handleSendWhatsApp = (e: React.FormEvent) => {
-    e.preventDefault();
-    const starString = '⭐'.repeat(rating);
-    const text = [
-      'السلام عليكم يا بشمهندس، حابب أشارك رأيي في تجربة صَـدَى:',
-      `• الاسم: ${name.trim() || 'فاعل خير'}`,
-      `• الصفة: ${role}`,
-      `• التقييم: ${starString} (${rating}/5)`,
-      message.trim() ? `• الملاحظات والإنطباع:\n${message.trim()}` : '',
-    ]
-      .filter(Boolean)
-      .join('\n');
-
-    const whatsappUrl = `https://wa.me/${FEEDBACK_CONFIG.whatsappNumber}?text=${encodeURIComponent(text)}`;
-    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-  };
-
-  const activeGoogleUrl = customFormUrl || FEEDBACK_CONFIG.googleFormUrl;
+  const activeGoogleUrl = FEEDBACK_CONFIG.googleFormUrl;
 
   return (
     <div
@@ -96,9 +76,17 @@ export const FeedbackSection: React.FC = () => {
 
       {/* TAB 1: Quick Interactive Feedback */}
       {activeTab === 'quick' && (
-        <form onSubmit={handleSendWhatsApp} className="space-y-4">
+        <form
+          action={FEEDBACK_CONFIG.submitUrl}
+          method="post"
+          target="_blank"
+          rel="noopener noreferrer"
+          onSubmit={() => setSubmitted(true)}
+          className="space-y-4"
+        >
+          <input type="hidden" name={FEEDBACK_CONFIG.fields.rating} value={rating} />
           <p className="text-xs sm:text-sm text-sada-ink/75 font-medium leading-relaxed">
-            ملاحظاتك وانطباعك يصلان مباشرة لفريق التطوير لتحسين تجربة الأطفال الصم وضعاف السمع.
+            تُحفظ ملاحظاتك في Google Forms لدى فريق صدى. لا تكتب بيانات طفل أو معلومات صحية أو بيانات اتصال خاصة.
           </p>
 
           {/* Rating Stars */}
@@ -114,6 +102,7 @@ export const FeedbackSection: React.FC = () => {
                   onClick={() => setRating(star)}
                   className="p-1 text-sada-yellow hover:scale-110 transition-transform focus:outline-none"
                   aria-label={`${star} من 5 نجوم`}
+                  aria-pressed={star === rating}
                 >
                   <Star
                     size={26}
@@ -143,6 +132,8 @@ export const FeedbackSection: React.FC = () => {
               </label>
               <input
                 id="feedback-name"
+                name={FEEDBACK_CONFIG.fields.name}
+                maxLength={100}
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -157,6 +148,8 @@ export const FeedbackSection: React.FC = () => {
               </label>
               <select
                 id="feedback-role"
+                name={FEEDBACK_CONFIG.fields.role}
+                required
                 value={role}
                 onChange={(e) => setRole(e.target.value)}
                 className="w-full px-3.5 py-2.5 rounded-xl border border-sada-ink/15 text-xs sm:text-sm focus:border-sada-violet focus:outline-none bg-sada-surface"
@@ -177,6 +170,9 @@ export const FeedbackSection: React.FC = () => {
             </label>
             <textarea
               id="feedback-message"
+              name={FEEDBACK_CONFIG.fields.message}
+              required
+              maxLength={3000}
               rows={3}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
@@ -189,7 +185,7 @@ export const FeedbackSection: React.FC = () => {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
             <span className="text-[11px] text-sada-ink/60 flex items-center gap-1 font-medium">
               <CheckCircle2 size={13} className="text-sada-teal" />
-              <span>يتم إرسال الرأي مباشرة لفريق تطوير صدى</span>
+              <span>تأكد من ظهور «لقد تم تسجيل ردك» في نافذة Google</span>
             </span>
 
             <button
@@ -197,125 +193,53 @@ export const FeedbackSection: React.FC = () => {
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-sada-teal hover:bg-sada-teal-dark text-white text-xs sm:text-sm font-black shadow-md transition-all hover:shadow-lg active:scale-95"
             >
               <Send size={15} />
-              <span>إرسال الرأي لفريق التطوير</span>
+              <span>إرسال الرأي عبر Google Forms</span>
             </button>
           </div>
+          {submitted && (
+            <p role="status" className="text-xs text-sada-ink/75 leading-relaxed">
+              تم فتح نافذة Google لإتمام الإرسال. لا يُعد الرأي محفوظًا إلا بعد ظهور رسالة «لقد تم تسجيل ردك» هناك.
+              إذا لم تظهر النافذة، استخدم تبويب Google Form لإرسال رأيك. بياناتك ما زالت هنا لتتمكن من المحاولة مجددًا.
+            </p>
+          )}
         </form>
       )}
 
       {/* TAB 2: Embedded Google Form */}
       {activeTab === 'googleForm' && (
         <div className="space-y-4">
-          {activeGoogleUrl ? (
-            <div className="space-y-3">
-              <div className="flex items-center justify-between text-xs">
-                <span className="font-bold text-sada-teal-dark">استمارة تقييم Google Form مدمجة:</span>
-                <a
-                  href={activeGoogleUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-sada-violet font-bold hover:underline"
-                >
-                  <ExternalLink size={13} />
-                  <span>فتح في نافذة كاملة</span>
-                </a>
-              </div>
-
-              {/* Embedded Iframe */}
-              <div className="w-full h-[520px] rounded-2xl overflow-hidden border border-sada-ink/10 shadow-inner bg-sada-surface">
-                <iframe
-                  src={activeGoogleUrl}
-                  title="استمارة تقييم تجربة صدى"
-                  width="100%"
-                  height="100%"
-                  frameBorder="0"
-                  marginHeight={0}
-                  marginWidth={0}
-                  className="w-full h-full"
-                >
-                  جارٍ تحميل الاستمارة...
-                </iframe>
-              </div>
+          <div className="space-y-3">
+            <div className="flex items-center justify-between text-xs">
+              <span className="font-bold text-sada-teal-dark">استمارة تقييم Google Form مدمجة:</span>
+              <a
+                href={activeGoogleUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-sada-violet font-bold hover:underline"
+              >
+                <ExternalLink size={13} />
+                <span>فتح في نافذة كاملة</span>
+              </a>
             </div>
-          ) : (
-            <div className="p-4 sm:p-5 rounded-2xl bg-sada-lavender/30 border border-sada-violet/20 text-sada-ink space-y-3">
-              <div className="flex items-center gap-2 text-sada-violet font-black text-sm">
-                <FileText size={18} />
-                <span>ربط استمارة Google Form بحسابك الشخصي</span>
-              </div>
 
-              <p className="text-xs sm:text-sm text-sada-ink/80 leading-relaxed font-medium">
-                لربط استمارتك الخاصة من حساب Google الخاص بك في دقيقة واحدة:
-              </p>
-
-              <ol className="text-xs text-sada-ink/85 space-y-1.5 list-decimal list-inside pr-1 font-semibold">
-                <li>
-                  افتح{' '}
-                  <a
-                    href="https://forms.new"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sada-violet underline font-black"
-                  >
-                    forms.new
-                  </a>{' '}
-                  على حساب Google الخاص بك.
-                </li>
-                <li>اكتب عنواناً بسيطاً: «استمارة تقييم تجربة تطبيق صدى».</li>
-                <li>
-                  أضف الأسئلة: (الاسم، صفتك، تقييمك للتطبيق، رأيك وملاحظاتك).
-                </li>
-                <li>اضغط إرسال (Send) &gt; تبويب الرابط أو التضمين (`&lt; &gt;`) وانسخ الرابط.</li>
-              </ol>
-
-              {/* Live URL Input for immediate preview */}
-              <div className="pt-2">
-                <label className="block text-xs font-bold text-sada-ink mb-1">
-                  ضع رابط الـ Google Form الخاص بك هنا للمعاينة الفورية:
-                </label>
-                <div className="flex gap-2">
-                  <input
-                    type="url"
-                    value={customFormUrl}
-                    onChange={(e) => setCustomFormUrl(e.target.value)}
-                    placeholder="https://docs.google.com/forms/d/e/.../viewform"
-                    className="flex-1 px-3 py-2 rounded-xl border border-sada-ink/20 text-xs focus:border-sada-violet focus:outline-none bg-white dir-ltr text-left"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => {
-                      if (customFormUrl.trim()) {
-                        setActiveTab('googleForm');
-                      }
-                    }}
-                    className="px-4 py-2 rounded-xl bg-sada-violet text-white text-xs font-bold shadow-xs hover:bg-sada-violet-dark"
-                  >
-                    تطبيق
-                  </button>
-                </div>
-              </div>
-
-              <div className="pt-1 flex items-center justify-between">
-                <a
-                  href="https://forms.new"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white border border-sada-violet/30 text-sada-violet text-xs font-bold hover:bg-sada-violet/5"
-                >
-                  <ExternalLink size={13} />
-                  <span>إنشاء استمارة جديدة على حسابك (forms.new)</span>
-                </a>
-
-                <button
-                  type="button"
-                  onClick={() => setActiveTab('quick')}
-                  className="text-xs text-sada-ink/70 hover:text-sada-ink underline"
-                >
-                  أو استخدم الرأي المباشر
-                </button>
-              </div>
+            <p className="text-xs text-sada-ink/75 leading-relaxed">
+              الإرسال والحفظ يتمان داخل Google Forms. إذا تعذر تحميل الاستمارة، افتحها في نافذة كاملة.
+            </p>
+            {/* Embedded Iframe */}
+            <div className="w-full h-[520px] rounded-2xl overflow-hidden border border-sada-ink/10 shadow-inner bg-sada-surface">
+              <iframe
+                src={`${activeGoogleUrl}?embedded=true`}
+                loading="lazy"
+                referrerPolicy="no-referrer"
+                title="استمارة تقييم تجربة صدى"
+                width="100%"
+                height="100%"
+                className="w-full h-full"
+              >
+                جارٍ تحميل الاستمارة...
+              </iframe>
             </div>
-          )}
+          </div>
         </div>
       )}
     </div>

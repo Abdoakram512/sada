@@ -1,18 +1,13 @@
-/**
- * Configuration for the SADA Feedback & Google Form integration.
- *
- * To connect your personal Google Form:
- * 1. Go to https://forms.new on your Google account.
- * 2. Create your simple feedback form (e.g. Name, Rating, Feedback message).
- * 3. Click "Send" (إرسال) -> Select the Link or Embed tab (< >).
- * 4. Copy the URL and replace the value below.
- */
-export const FEEDBACK_CONFIG = {
-  // If you have a Google Form URL, put it here.
-  // Example: 'https://docs.google.com/forms/d/e/1FAIpQLSeXXXXXXXXX/viewform?embedded=true'
-  googleFormUrl: '',
+// Public respondent endpoints only. Never add editor links, credentials, or response data here.
+const formBase = 'https://docs.google.com/forms/d/e/1FAIpQLSd7vgeQGLH3Qp0rsWIb17Vd3uDmVjF6cjNiR2_UjuBbQCGlWQ';
 
-  // Developer contact for direct WhatsApp feedback
-  whatsappNumber: '201115240237',
-  phoneDisplay: '01115240237',
+export const FEEDBACK_CONFIG = {
+  googleFormUrl: `${formBase}/viewform`,
+  submitUrl: `${formBase}/formResponse`,
+  fields: {
+    name: 'entry.2140136021',
+    role: 'entry.113083260',
+    rating: 'entry.355970353',
+    message: 'entry.1211818827',
+  },
 };
