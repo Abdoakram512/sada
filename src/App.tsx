@@ -56,6 +56,7 @@ export const App: React.FC = () => {
         gestureOrientation: 'vertical',
         smoothWheel: true,
       });
+      (window as unknown as { __lenis?: Lenis }).__lenis = lenis;
 
       lenis.on('scroll', (e: { progress: number }) => {
         scrollProgressRef.current = e.progress;

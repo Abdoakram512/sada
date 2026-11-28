@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 # Local secrets written by `elevenlabs onboard`
 /.env
+
+# Temporary scratch and audit artifacts
+scratch/

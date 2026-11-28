@@ -210,3 +210,39 @@ Repository: `sada-experience` (Baseline preserved at git branch `baseline-pre-up
 - `oxlint`: `0` warnings, `0` errors (`34` files); `tsc -b && vite build`: `1.93s`.
 - Headless Chromium CDP (`verify_upgrade.mjs` & `verify_mobile_redesign.mjs`): `FCP/LCP: 964 ms` desktop, `CLS: 0` idle / `0.0035` post-scroll, `59 FPS` desktop, `122 FPS` (`0` dropped frames) mobile (`390×844`), `overflowX: false` across all `17` breakpoints (`320px`–`2560px` + `844×390` landscape), `consoleErrorsCount: 0`, `reducedMotionOk: true`, `hasCochlearLeak: false`, `hasSarahLeak: false`, and live playback verified (`scene-01-jana-01.mp3` `10.72s`).
 
+---
+
+## Phase 10 — Development Team Creative Redesign · Character Identity Lock & Unified Hero Stage (Completed)
+
+### Objectives
+- Completely eliminate the rejected two-card boxed profile layout in favor of an impressive, cinematic, character-led interactive stage.
+- Enforce strict Character Identity Lock using the final approved photo references of both software engineers (**أكرم / عبدالرحمن أكرم** and **أبو القاسم**) with zero AI facial drift, distortion, or clothing changes.
+- Deliver oversized dominant characters hitting target dimensions: Desktop (`600–750px`), Tablet (`350–470px`), and Mobile (`260–360px`).
+- Integrate Jana as the host and protagonist introducing the engineers with her existing Egyptian dialogue (`scene-11-jana-dev.mp3`), sleek unified contact capsule (`01115240237`), and smooth GSAP ScrollTrigger reveals with zero layout shifts or horizontal overflow.
+
+### Completed Tasks & Modified Files
+- Created safe git checkpoint branch `checkpoint-pre-dev-redesign` (`bb48a48`).
+- Extracted pixel-perfect, high-resolution transparent cutouts from the approved reference images using local neural background removal (`rembg` ONNX):
+  - **Engineer 01 (Akram / عبدالرحمن أكرم)**: [public/assets/eng_akram.webp](public/assets/eng_akram.webp) & `@2x` (`357×1001px`, `79 KB`) preserving exact olive quarter-zip sweatshirt ("K-67 LONDON EST. 1981"), dark navy backpack straps, black cargo joggers, olive/white sneakers, dark hair, beard, no glasses.
+  - **Engineer 02 (Abu Al-Qasim / أبو القاسم)**: [public/assets/eng_abualqasim.webp](public/assets/eng_abualqasim.webp) & `@2x` (`369×1004px`, `74 KB`) preserving exact black quarter-zip pullover, white undershirt, black backpack straps, curly dark hair, black beard, rectangular glasses, black wrist watch, dark jeans, black sneakers.
+- Completely redesigned [src/components/DevelopmentTeamSection.tsx](src/components/DevelopmentTeamSection.tsx):
+  - Removed all boxed `<article>` cards, border wrappers, and constrained height containers.
+  - Built a unified 3D architectural platform base with layered multi-stop radial gradients, contact floor shadows grounding the shoes, and ambient floating audio stars (`✦`, `★`, `+`).
+  - Positioned Jana organically as host alongside her speech bubble with play audio trigger and live speaking indicator.
+  - Anchored typography directly to the stage: artistic section title `فريق التطوير`, primary names (`أكرم` / `عبدالرحمن أكرم` and `أبو القاسم`), code role badges (`مهندس برمجيات`), and single floating frosted contact dock (`01115240237`, click-to-call, WhatsApp, and copy button with checkmark feedback).
+  - Wired GSAP ScrollTrigger timeline for smooth staggered reveal without hiding stage structures.
+- Added programmatic Lenis scroll helper hook in [src/App.tsx](src/App.tsx).
+
+### Verified Build & Responsive CDP Telemetry
+- `oxlint`: `0` warnings, `0` errors on 34 files.
+- `tsc -b && vite build`: built in `2.80s` cleanly.
+- Headless Chromium CDP Audit Across Viewports (`scratch/cdp_audit.mjs` & `scratch/capture_dev_perfect.mjs`):
+  - **Desktop 1920×1080**: Figures rendered at **`660px` height** (target `600–750px`), `overflowX: false`.
+  - **Desktop 1440×900**: Figures rendered at **`660px` height** (target `500–650px`), `overflowX: false`.
+  - **Desktop 1024×768**: Figures rendered at **`580px` height** (target `420–550px`), `overflowX: false`.
+  - **Tablet 768×1024**: Figures rendered at **`480px` height** (target `350–470px`), `overflowX: false`.
+  - **Mobile 390×844**: Figures rendered at **`320px` height** (target `260–360px`), `overflowX: false`.
+  - **Mobile 360×740**: Figures rendered at **`280px` height** (target `260–360px`), `overflowX: false`.
+  - Full body shoes-to-head visibility, unclipped faces, and crisp rendering confirmed across all viewports.
+
+
