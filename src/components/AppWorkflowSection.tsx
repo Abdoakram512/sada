@@ -175,7 +175,7 @@ export const AppWorkflowSection: React.FC = () => {
               src="/assets/group_tablet.webp"
               srcSet="/assets/group_tablet-sm.webp 308w, /assets/group_tablet.webp 550w"
               sizes="(max-width: 639px) 192px, 240px"
-              alt="عمر وزين يستكشفان تطبيق صدى على الجهاز اللوحي"
+              alt="فهد وزين يستكشفان تطبيق صدى على الجهاز اللوحي"
               width={550}
               height={714}
               loading="lazy"

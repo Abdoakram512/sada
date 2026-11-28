@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Sparkles, ArrowUp, FileText, Heart, X } from 'lucide-react';
+import { Sparkles, ArrowUp, FileText, X } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { soundEngine } from '../utils/audioEngine';
 import { useStorySceneFocus } from '../hooks/useStoryAudio';
@@ -164,15 +164,15 @@ export const FinalCelebrationSection: React.FC<FinalCelebrationSectionProps> = (
 
         {/* Footer Info */}
         <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/65">
-          <div className="flex items-center gap-2">
+          <div className="flex flex-col sm:flex-row items-center gap-2 text-center sm:text-right">
             <span className="font-bold text-white text-sm">صَـدَى · SADA</span>
-            <span>—</span>
-            <span>مشروع تخرج لخدمة الأطفال ضعاف السمع</span>
+            <span className="hidden sm:inline">—</span>
+            <span>مشروع صدى – كلية علوم الإعاقة والتأهيل، جامعة الزقازيق · تحت إشراف الدكتور عطية محمد</span>
           </div>
 
           <div className="flex items-center gap-3">
             <span className="flex items-center gap-1">
-              صُنع بكل <Heart size={13} className="text-rose-400 fill-rose-400" /> من أجل كل طفل
+              إعداد وتنفيذ طلاب وطالبات المشروع
             </span>
             <span>•</span>
             <span>2026</span>
@@ -226,8 +226,16 @@ export const FinalCelebrationSection: React.FC<FinalCelebrationSectionProps> = (
                 ٥. أدلة إرشادية مخصصة لكل من ولي الأمر والأخصائي.
               </p>
               <div className="p-4 rounded-2xl bg-sada-surface border border-sada-violet/15 text-xs">
-                <strong className="text-sada-violet block mb-1">فريق العمل (10 باحثين):</strong>
-                جني محمود عزت رضوان، فهد جلال صلاح، شيرين وليد، رحمة شعبان، جيهان محمد فاروق، همس عبد الله عبد السميع، سلمى احمد رضوان، لمياء محمد ابراهيم، ياسمين ايمن محمد، ماجده نبوي حفني.
+                <div className="mb-2.5 pb-2 border-b border-sada-violet/15">
+                  <span className="text-sada-violet font-bold block mb-0.5">الجهة الأكاديمية والإشراف:</span>
+                  <p className="text-sada-ink/85 font-semibold">
+                    كلية علوم الإعاقة والتأهيل – جامعة الزقازيق · تحت إشراف الدكتور عطية محمد (دكتور المادة)
+                  </p>
+                </div>
+                <strong className="text-sada-teal-dark block mb-1">إعداد وتنفيذ طلاب وطالبات المشروع:</strong>
+                <p className="text-sada-ink/80 leading-relaxed">
+                  جني محمود عزت رضوان، فهد جلال صلاح، شيرين وليد، رحمة شعبان، جيهان محمد فاروق، همس عبد الله عبد السميع، سلمى احمد رضوان، لمياء محمد ابراهيم، ياسمين ايمن محمد، ماجده نبوي حفني.
+                </p>
               </div>
             </div>
 

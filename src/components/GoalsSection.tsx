@@ -106,7 +106,7 @@ export const GoalsSection: React.FC = () => {
               src="/assets/group_highfive.webp"
               srcSet="/assets/group_highfive-sm.webp 335w, /assets/group_highfive.webp 599w"
               sizes="(max-width: 639px) 160px, 144px"
-              alt="جنى ومريم تحتفلان بكل خطوة"
+              alt="جنى وشيرين تحتفلان بكل خطوة"
               width={599}
               height={699}
               loading="lazy"

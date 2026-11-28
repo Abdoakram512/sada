@@ -60,17 +60,31 @@ export const TeamSection: React.FC = () => {
     >
       <div className="max-w-7xl mx-auto">
         {/* Scene Header */}
-        <div className="text-center max-w-3xl mx-auto mb-10">
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sada-lavender text-sada-violet text-xs font-bold mb-3">
             <GraduationCap size={16} />
-            <span>المشهد 10 · أبطال صناعة صدى — فريق مشروع التخرج</span>
+            <span>المشهد 10 · أبطال صناعة صدى — فريق طلاب وطالبات المشروع</span>
           </div>
-          <h2 className="sada-section-title font-black text-sada-ink mb-4">
+          <h2 className="sada-section-title font-black text-sada-ink mb-3 sm:mb-4">
             العقول المبدعة <span className="text-sada-teal">وراء فكرة صَـدَى</span>
           </h2>
-          <p className="sada-body-copy text-sada-ink/75 font-medium text-center">
-            عشر باحثات وباحثين تكاتفوا لإعداد المحتوى العلمي والأدلة الإرشادية والأنشطة التأهيلية الموثقة في مقترح المشروع الرسمي.
+          <p className="sada-body-copy text-sada-ink/75 font-medium text-center mb-4">
+            مشروع صدى – كلية علوم الإعاقة والتأهيل، جامعة الزقازيق · إعداد وتنفيذ طلاب وطالبات المشروع
           </p>
+
+          {/* Academic Supervisor Recognition Banner */}
+          <div className="inline-flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 px-5 py-2.5 rounded-2xl bg-white border-2 border-sada-violet/20 shadow-sm text-sada-ink">
+            <div className="flex items-center gap-2">
+              <Award className="text-sada-violet" size={18} />
+              <span className="text-xs sm:text-sm font-bold text-sada-ink/70">تحت إشراف:</span>
+              <span className="text-xs sm:text-sm font-black text-sada-violet">الدكتور عطية محمد</span>
+              <span className="text-[11px] sm:text-xs font-bold text-sada-teal-dark bg-sada-teal/10 px-2 py-0.5 rounded-full">دكتور المادة ومشرف المشروع</span>
+            </div>
+            <span className="hidden sm:inline text-sada-ink/20">|</span>
+            <div className="text-[11px] sm:text-xs font-bold text-sada-ink/75">
+              كلية علوم الإعاقة والتأهيل · جامعة الزقازيق
+            </div>
+          </div>
         </div>
 
         {/* Omar & Nour Presenting the Team — Paired duo above spotlight card on mobile */}
@@ -110,7 +124,7 @@ export const TeamSection: React.FC = () => {
           </div>
         </div>
 
-        {/* 10 Researchers Grid — Compact 2-col on mobile cuts scroll bloat while keeping all names & roles legible */}
+        {/* 10 Students Grid — Compact 2-col on mobile cuts scroll bloat while keeping all names & roles legible */}
         <div ref={gridRef} className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-2.5 sm:gap-4 mb-8 sm:mb-10">
           {TEAM_MEMBERS.map((member) => {
             const isSelected = selectedMember.id === member.id;

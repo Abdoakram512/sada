@@ -53,13 +53,13 @@ export interface TeamMember {
 export const CHARACTERS: Character[] = [
   {
     id: 'maryam',
-    name: 'مريم',
+    name: 'شيرين',
     roleTitle: 'المرشدة الهادئة والمستكشفة المنظمة',
     accentColor: '#7357D9',
     bgGradient: 'from-[#7357D9]/20 via-[#E9E2FF]/40 to-transparent',
     badge: 'دقة الملاحظة والتنظيم',
     image: '/assets/char_maryam.webp',
-    description: 'تحب مريم قراءة الكتب وتدوين ملاحظات الأصوات بدقة متناهية، وتقود الأطفال للتعرف على أصوات لينج بأسلوب هادئ ومنهجي.',
+    description: 'تحب شيرين قراءة الكتب وتدوين ملاحظات الأصوات بدقة متناهية، وتقود الأطفال للتعرف على أصوات لينج بأسلوب هادئ ومنهجي.',
     strengths: ['الانتباه الهادئ', 'تدوين الاستجابات', 'التركيز المنظم'],
     motto: '«كل همسة وكل صوت.. وراءه باب جديد للمعرفة»'
   },
@@ -77,7 +77,7 @@ export const CHARACTERS: Character[] = [
   },
   {
     id: 'omar',
-    name: 'عمر',
+    name: 'فهد',
     roleTitle: 'المُرحِّب النشيط وبطل الانتباه السمعي',
     accentColor: '#FF886F',
     bgGradient: 'from-[#FF886F]/20 via-[#FFE5D9]/40 to-transparent',
@@ -90,13 +90,13 @@ export const CHARACTERS: Character[] = [
   },
   {
     id: 'nour',
-    name: 'نور',
+    name: 'رحمة',
     roleTitle: 'الصديقة اللطيفة والداعمة المتفائلة',
     accentColor: '#8F75EC',
     bgGradient: 'from-[#8F75EC]/20 via-[#F4EFFF]/40 to-transparent',
     badge: 'الفهم السمعي والدفء الأسري',
     image: '/assets/char_nour.webp',
-    description: 'بزهور سترتها البنفسجية وطوقها المبهج، تصغي نور لحكايات الأطفال وتربط بين ما يسمعونه من جمل ومعانٍ في جو أسري هادئ.',
+    description: 'بزهور سترتها البنفسجية وطوقها المبهج، تصغي رحمة لحكايات الأطفال وتربط بين ما يسمعونه من جمل ومعانٍ في جو أسري هادئ.',
     strengths: ['فهم التعليمات اللفظية', 'ربط الجمل بالمعنى', 'الدعم الأسري'],
     motto: '«بالإصغاء نفهم الكلمات.. ونبني أحلى الصداقات»'
   },

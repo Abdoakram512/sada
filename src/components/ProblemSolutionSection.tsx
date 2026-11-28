@@ -74,7 +74,7 @@ export const ProblemSolutionSection: React.FC = () => {
             لماذا يبدأ كل شيء <span className="text-sada-violet">بالإصغاء المنظّم</span>؟
           </h2>
           <p className="sada-body-copy text-sada-ink/75 font-medium text-center">
-            تأهيل الطفل الأصم أو ضعيف السمع شغل يومي مشترك بين البيت والأخصائي؛ يسأل زين ليه بنحتاج متابعة منظمة، وتوضح جنى ونور إزاي تطبيق صدى بيجمع التقييم والتدريب والمتابعة في مكان واحد.
+            تأهيل الطفل الأصم أو ضعيف السمع شغل يومي مشترك بين البيت والأخصائي؛ يسأل زين ليه بنحتاج متابعة منظمة، وتوضح جنى ورحمة إزاي تطبيق صدى – من إعداد طلاب وطالبات كلية علوم الإعاقة والتأهيل بجامعة الزقازيق تحت إشراف الدكتور عطية محمد – بيجمع التقييم والتدريب والمتابعة في مكان واحد.
           </p>
         </div>
 
@@ -150,7 +150,7 @@ export const ProblemSolutionSection: React.FC = () => {
                 src="/assets/group_reading_transparent.webp"
                 srcSet="/assets/group_reading_transparent-sm.webp 426w, /assets/group_reading_transparent.webp 760w"
                 sizes="(max-width: 639px) 320px, 400px"
-                alt="جنى وعمر ومريم وزين يقرؤون ويتابعون رحلة التعلم"
+                alt="جنى وفهد وشيرين وزين يقرؤون ويتابعون رحلة التعلم"
                 width={760}
                 height={517}
                 loading="lazy"

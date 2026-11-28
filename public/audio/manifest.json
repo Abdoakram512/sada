@@ -7,7 +7,7 @@
     "auditionsMaxCredits": 500,
     "productionMaxCredits": 6000,
     "auditionsUsedCredits": 0,
-    "productionUsedCredits": 398,
+    "productionUsedCredits": 295,
     "productionBudgetCap": 6000,
     "auditionsTotalConsumed": 2103
   },
@@ -18,11 +18,11 @@
       "characterId": "jana",
       "voiceId": "I3u6waC588j43py1kDN2",
       "modelId": "eleven_v4",
-      "contentHash": "931338769c730c28",
+      "contentHash": "95e045b51fa94f14",
       "audioPath": "/audio/characters/scene-01-jana-01.mp3",
-      "fileSizeBytes": 172660,
-      "durationSec": 10.72,
-      "creditsConsumed": 56,
+      "fileSizeBytes": 262103,
+      "durationSec": 16.32,
+      "creditsConsumed": 88,
       "status": "verified"
     },
     {
@@ -31,10 +31,10 @@
       "characterId": "omar",
       "voiceId": "QvNF0qyyt1Tuy1YAmnzH",
       "modelId": "eleven_v4",
-      "contentHash": "f5ad3a6b32eaf846",
+      "contentHash": "cf23b756ae6d055e",
       "audioPath": "/audio/characters/scene-01-omar-02.mp3",
-      "fileSizeBytes": 126684,
-      "durationSec": 7.84,
+      "fileSizeBytes": 123758,
+      "durationSec": 7.68,
       "creditsConsumed": 39,
       "status": "verified"
     },
@@ -74,7 +74,7 @@
       "audioPath": "/audio/characters/scene-02-jana-05.mp3",
       "fileSizeBytes": 172660,
       "durationSec": 10.72,
-      "creditsConsumed": 52,
+      "creditsConsumed": 0,
       "status": "verified"
     },
     {
@@ -100,7 +100,7 @@
       "audioPath": "/audio/characters/scene-03-jana-07.mp3",
       "fileSizeBytes": 140477,
       "durationSec": 8.72,
-      "creditsConsumed": 45,
+      "creditsConsumed": 0,
       "status": "verified"
     },
     {
@@ -204,7 +204,7 @@
       "audioPath": "/audio/characters/scene-05-jana-15.mp3",
       "fileSizeBytes": 117489,
       "durationSec": 7.28,
-      "creditsConsumed": 35,
+      "creditsConsumed": 0,
       "status": "verified"
     },
     {
@@ -243,7 +243,7 @@
       "audioPath": "/audio/characters/scene-07-jana-18.mp3",
       "fileSizeBytes": 154687,
       "durationSec": 9.6,
-      "creditsConsumed": 42,
+      "creditsConsumed": 0,
       "status": "verified"
     },
     {
@@ -295,7 +295,7 @@
       "audioPath": "/audio/characters/scene-09-jana-22.mp3",
       "fileSizeBytes": 139223,
       "durationSec": 8.64,
-      "creditsConsumed": 42,
+      "creditsConsumed": 0,
       "status": "verified"
     },
     {
@@ -317,11 +317,11 @@
       "characterId": "omar",
       "voiceId": "QvNF0qyyt1Tuy1YAmnzH",
       "modelId": "eleven_v4",
-      "contentHash": "e5cf9e974403990d",
+      "contentHash": "14e52ee0ed723497",
       "audioPath": "/audio/characters/scene-10-omar-24.mp3",
-      "fileSizeBytes": 135461,
-      "durationSec": 8.4,
-      "creditsConsumed": 0,
+      "fileSizeBytes": 216127,
+      "durationSec": 13.44,
+      "creditsConsumed": 77,
       "status": "verified"
     },
     {
@@ -334,7 +334,7 @@
       "audioPath": "/audio/characters/scene-11-jana-dev.mp3",
       "fileSizeBytes": 112474,
       "durationSec": 6.96,
-      "creditsConsumed": 38,
+      "creditsConsumed": 0,
       "status": "verified"
     },
     {
@@ -356,15 +356,15 @@
       "characterId": "jana",
       "voiceId": "I3u6waC588j43py1kDN2",
       "modelId": "eleven_v4",
-      "contentHash": "76b0e845d8b25092",
+      "contentHash": "a364527d91b4d343",
       "audioPath": "/audio/characters/scene-12-jana-26.mp3",
-      "fileSizeBytes": 168898,
-      "durationSec": 10.48,
-      "creditsConsumed": 49,
+      "fileSizeBytes": 304317,
+      "durationSec": 18.96,
+      "creditsConsumed": 91,
       "status": "verified"
     }
   ],
-  "creditsRemaining": 17367,
+  "creditsRemaining": 16957,
   "approvedCast": {
     "omar": {
       "voiceId": "QvNF0qyyt1Tuy1YAmnzH",

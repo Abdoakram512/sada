@@ -57,7 +57,7 @@ export const GuidesSection: React.FC = () => {
             تكامل واعٍ بين <span className="text-sada-teal">المنزل وجلسات المختص</span>
           </h2>
           <p className="sada-body-copy text-sada-ink/75 font-medium text-center">
-            تشارك نور نصائح المتابعة المنزلية الهادئة للأسرة، بينما تستعرض مريم أدوات التنظيم والمتابعة المهنية للأخصائي.
+            تشارك رحمة نصائح المتابعة المنزلية الهادئة للأسرة، بينما تستعرض شيرين أدوات التنظيم والمتابعة المهنية للأخصائي.
           </p>
         </div>
 
@@ -148,7 +148,7 @@ export const GuidesSection: React.FC = () => {
                   src="/assets/char_guide.webp"
                   srcSet="/assets/char_guide-sm.webp 346w, /assets/char_guide.webp 617w"
                   sizes="(max-width: 639px) 176px, 210px"
-                  alt="نور تحمل كتاب الإرشادات"
+                  alt="رحمة تحمل كتاب الإرشادات"
                   width={617}
                   height={760}
                   loading="lazy"

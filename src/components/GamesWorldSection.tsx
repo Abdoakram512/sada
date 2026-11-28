@@ -156,7 +156,7 @@ export const GamesWorldSection: React.FC<GamesWorldSectionProps> = ({
             تشجيع بصري بروح <span className="text-sada-yellow">اللعب والاستكشاف</span>
           </h2>
           <p className="sada-body-copy text-white/80 font-medium text-center">
-            تضيف جنى وعمر بهجة اللعب والنجوم التحفيزية لرفع دافعية الطفل للمشاركة، مع وضوح تام بأنها نماذج توضيحية تعزيزية وليست أداة تشخيص طبي.
+            تضيف جنى وفهد بهجة اللعب والنجوم التحفيزية لرفع دافعية الطفل للمشاركة، مع وضوح تام بأنها نماذج توضيحية تعزيزية وليست أداة تشخيص طبي.
           </p>
         </div>
 
