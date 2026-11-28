@@ -7,7 +7,7 @@
     "auditionsMaxCredits": 500,
     "productionMaxCredits": 6000,
     "auditionsUsedCredits": 0,
-    "productionUsedCredits": 295,
+    "productionUsedCredits": 283,
     "productionBudgetCap": 6000,
     "auditionsTotalConsumed": 2103
   },
@@ -18,11 +18,11 @@
       "characterId": "jana",
       "voiceId": "I3u6waC588j43py1kDN2",
       "modelId": "eleven_v4",
-      "contentHash": "95e045b51fa94f14",
+      "contentHash": "b117f2cc7513e85b",
       "audioPath": "/audio/characters/scene-01-jana-01.mp3",
-      "fileSizeBytes": 262103,
-      "durationSec": 16.32,
-      "creditsConsumed": 88,
+      "fileSizeBytes": 305571,
+      "durationSec": 19.04,
+      "creditsConsumed": 98,
       "status": "verified"
     },
     {
@@ -35,7 +35,7 @@
       "audioPath": "/audio/characters/scene-01-omar-02.mp3",
       "fileSizeBytes": 123758,
       "durationSec": 7.68,
-      "creditsConsumed": 39,
+      "creditsConsumed": 0,
       "status": "verified"
     },
     {
@@ -317,11 +317,11 @@
       "characterId": "omar",
       "voiceId": "QvNF0qyyt1Tuy1YAmnzH",
       "modelId": "eleven_v4",
-      "contentHash": "14e52ee0ed723497",
+      "contentHash": "a70caaba6ee770b4",
       "audioPath": "/audio/characters/scene-10-omar-24.mp3",
-      "fileSizeBytes": 216127,
-      "durationSec": 13.44,
-      "creditsConsumed": 77,
+      "fileSizeBytes": 240369,
+      "durationSec": 14.96,
+      "creditsConsumed": 85,
       "status": "verified"
     },
     {
@@ -356,15 +356,15 @@
       "characterId": "jana",
       "voiceId": "I3u6waC588j43py1kDN2",
       "modelId": "eleven_v4",
-      "contentHash": "a364527d91b4d343",
+      "contentHash": "b9b3057ff65c8d7a",
       "audioPath": "/audio/characters/scene-12-jana-26.mp3",
-      "fileSizeBytes": 304317,
-      "durationSec": 18.96,
-      "creditsConsumed": 91,
+      "fileSizeBytes": 335246,
+      "durationSec": 20.88,
+      "creditsConsumed": 100,
       "status": "verified"
     }
   ],
-  "creditsRemaining": 16957,
+  "creditsRemaining": 16662,
   "approvedCast": {
     "omar": {
       "voiceId": "QvNF0qyyt1Tuy1YAmnzH",

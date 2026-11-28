@@ -59,32 +59,55 @@ export const TeamSection: React.FC = () => {
       className="sada-scene bg-sada-cream-warm"
     >
       <div className="max-w-7xl mx-auto">
-        {/* Scene Header */}
+        {/* Dedicated Academic Supervision Showcase */}
+        <div className="max-w-4xl mx-auto mb-10 sm:mb-12">
+          <div className="relative overflow-hidden rounded-3xl bg-white border-2 border-sada-violet/25 shadow-lg p-6 sm:p-8 text-center">
+            {/* Top Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sada-lavender text-sada-violet text-xs sm:text-sm font-black mb-3">
+              <Award size={16} />
+              <span>الإشراف الأكاديمي المعتمد</span>
+            </div>
+
+            {/* Doctor's Name - Bold, Large, Prestigious */}
+            <h3 className="text-3xl sm:text-4xl md:text-5xl font-black text-sada-ink tracking-tight mb-2">
+              الدكتور عطية محمد
+            </h3>
+
+            {/* Academic Position */}
+            <div className="inline-block px-4 py-1.5 rounded-full bg-sada-violet/10 text-sada-violet text-base sm:text-xl md:text-2xl font-black mb-2">
+              رئيس قسم السمعيات
+            </div>
+
+            {/* Faculty & University */}
+            <p className="text-sm sm:text-base md:text-lg font-extrabold text-sada-teal-dark mb-1">
+              كلية علوم الإعاقة والتأهيل · جامعة الزقازيق
+            </p>
+
+            <span className="inline-block text-xs sm:text-sm font-bold text-sada-ink/65 mb-4">
+              المشرف الأكاديمي على مشروع صدى
+            </span>
+
+            {/* Supporting Arabic Statement */}
+            <div className="max-w-2xl mx-auto pt-4 border-t border-sada-violet/15">
+              <p className="text-xs sm:text-sm md:text-base text-sada-ink/80 leading-relaxed font-medium">
+                «يأتي مشروع صدى تحت إشراف الدكتور عطية محمد، رئيس قسم السمعيات بكلية علوم الإعاقة والتأهيل بجامعة الزقازيق، ومن إعداد وتنفيذ طلاب وطالبات الكلية، بهدف توظيف التكنولوجيا في دعم الأطفال الصم وضعاف السمع.»
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Student Team Intro - Restored Contribution Meaning */}
         <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sada-lavender text-sada-violet text-xs font-bold mb-3">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sada-teal/10 text-sada-teal-dark text-xs font-bold mb-3">
             <GraduationCap size={16} />
-            <span>المشهد 10 · أبطال صناعة صدى — فريق طلاب وطالبات المشروع</span>
+            <span>المشهد 10 · أبطال صناعة صدى — فريق طلاب وطالبات المشروع (10 طلاب)</span>
           </div>
           <h2 className="sada-section-title font-black text-sada-ink mb-3 sm:mb-4">
             العقول المبدعة <span className="text-sada-teal">وراء فكرة صَـدَى</span>
           </h2>
-          <p className="sada-body-copy text-sada-ink/75 font-medium text-center mb-4">
-            مشروع صدى – كلية علوم الإعاقة والتأهيل، جامعة الزقازيق · إعداد وتنفيذ طلاب وطالبات المشروع
+          <p className="sada-body-copy text-sada-ink/80 font-medium text-center">
+            عشرة من طلاب وطالبات كلية علوم الإعاقة والتأهيل تكاتفوا لإعداد المحتوى العلمي والأدلة الإرشادية والأنشطة التأهيلية الموثقة في مقترح المشروع.
           </p>
-
-          {/* Academic Supervisor Recognition Banner */}
-          <div className="inline-flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 px-5 py-2.5 rounded-2xl bg-white border-2 border-sada-violet/20 shadow-sm text-sada-ink">
-            <div className="flex items-center gap-2">
-              <Award className="text-sada-violet" size={18} />
-              <span className="text-xs sm:text-sm font-bold text-sada-ink/70">تحت إشراف:</span>
-              <span className="text-xs sm:text-sm font-black text-sada-violet">الدكتور عطية محمد</span>
-              <span className="text-[11px] sm:text-xs font-bold text-sada-teal-dark bg-sada-teal/10 px-2 py-0.5 rounded-full">دكتور المادة ومشرف المشروع</span>
-            </div>
-            <span className="hidden sm:inline text-sada-ink/20">|</span>
-            <div className="text-[11px] sm:text-xs font-bold text-sada-ink/75">
-              كلية علوم الإعاقة والتأهيل · جامعة الزقازيق
-            </div>
-          </div>
         </div>
 
         {/* Omar & Nour Presenting the Team — Paired duo above spotlight card on mobile */}

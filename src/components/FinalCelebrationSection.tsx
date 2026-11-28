@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Sparkles, ArrowUp, FileText, X } from 'lucide-react';
+import { Sparkles, ArrowUp, FileText, Heart, X } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { soundEngine } from '../utils/audioEngine';
 import { useStorySceneFocus } from '../hooks/useStoryAudio';
@@ -129,6 +129,31 @@ export const FinalCelebrationSection: React.FC<FinalCelebrationSectionProps> = (
           </div>
         </div>
 
+        {/* Prominent Academic Closing Identity */}
+        <div className="max-w-3xl mx-auto my-7 p-5 sm:p-7 rounded-3xl bg-white/5 border border-white/15 backdrop-blur-xs text-center shadow-lg">
+          <div className="text-xs sm:text-sm font-bold text-sada-yellow mb-1.5">
+            المشروع الأكاديمي المعتمد · صَـدَى — SADA 2026
+          </div>
+          <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-white mb-1">
+            جامعة الزقازيق
+          </h3>
+          <p className="text-base sm:text-lg md:text-xl font-extrabold text-sada-teal-light mb-3">
+            كلية علوم الإعاقة والتأهيل · قسم السمعيات
+          </p>
+          <div className="pt-3 border-t border-white/10 flex flex-col items-center">
+            <span className="text-xs sm:text-sm font-medium text-white/70 mb-0.5">تحت إشراف</span>
+            <div className="text-xl sm:text-2xl md:text-3xl font-black text-white">
+              الدكتور عطية محمد
+            </div>
+            <div className="text-xs sm:text-sm font-black text-sada-yellow px-3 py-0.5 rounded-full bg-white/10 mt-1">
+              رئيس قسم السمعيات · المشرف الأكاديمي على مشروع صدى
+            </div>
+            <p className="text-xs sm:text-sm text-white/85 font-bold mt-2">
+              إعداد وتنفيذ: طلاب وطالبات المشروع (10 طلاب)
+            </p>
+          </div>
+        </div>
+
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center justify-center gap-2.5 sm:gap-3 mb-8 sm:mb-10 max-w-xl sm:max-w-none mx-auto">
           <button
@@ -163,16 +188,16 @@ export const FinalCelebrationSection: React.FC<FinalCelebrationSectionProps> = (
         </div>
 
         {/* Footer Info */}
-        <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/65">
+        <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/70">
           <div className="flex flex-col sm:flex-row items-center gap-2 text-center sm:text-right">
             <span className="font-bold text-white text-sm">صَـدَى · SADA</span>
             <span className="hidden sm:inline">—</span>
-            <span>مشروع صدى – كلية علوم الإعاقة والتأهيل، جامعة الزقازيق · تحت إشراف الدكتور عطية محمد</span>
+            <span>جامعة الزقازيق · كلية علوم الإعاقة والتأهيل · قسم السمعيات · إشراف د. عطية محمد</span>
           </div>
 
           <div className="flex items-center gap-3">
-            <span className="flex items-center gap-1">
-              إعداد وتنفيذ طلاب وطالبات المشروع
+            <span className="flex items-center gap-1.5 text-white/90 font-medium">
+              صُنع بكل <Heart size={14} className="text-rose-400 fill-rose-400 inline-block" /> من أجل كل طفل
             </span>
             <span>•</span>
             <span>2026</span>
@@ -229,7 +254,7 @@ export const FinalCelebrationSection: React.FC<FinalCelebrationSectionProps> = (
                 <div className="mb-2.5 pb-2 border-b border-sada-violet/15">
                   <span className="text-sada-violet font-bold block mb-0.5">الجهة الأكاديمية والإشراف:</span>
                   <p className="text-sada-ink/85 font-semibold">
-                    كلية علوم الإعاقة والتأهيل – جامعة الزقازيق · تحت إشراف الدكتور عطية محمد (دكتور المادة)
+                    كلية علوم الإعاقة والتأهيل – جامعة الزقازيق · تحت إشراف الدكتور عطية محمد (رئيس قسم السمعيات والمشرف الأكاديمي على مشروع صدى)
                   </p>
                 </div>
                 <strong className="text-sada-teal-dark block mb-1">إعداد وتنفيذ طلاب وطالبات المشروع:</strong>

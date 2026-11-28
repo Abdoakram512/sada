@@ -99,18 +99,45 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       </div>
 
       <div className="max-w-7xl mx-auto w-full flex-1 flex flex-col items-center justify-center text-center relative z-10">
-        {/* Project Tag */}
-        <div className="inline-flex flex-wrap items-center justify-center gap-2 px-3.5 sm:px-4 py-1 rounded-full bg-white/90 border border-sada-violet/20 shadow-sm mb-1.5 sm:mb-2">
-          <span className="w-2 h-2 rounded-full bg-sada-teal animate-pulse" />
-          <span className="text-xs sm:text-sm font-bold text-sada-violet">
-            مشروع صدى – كلية علوم الإعاقة والتأهيل، جامعة الزقازيق
-          </span>
-          <span className="text-xs font-semibold text-sada-ink/75 hidden sm:inline">
-            · تحت إشراف الدكتور عطية محمد
-          </span>
-          <span className="dir-ltr text-xs px-2 py-0.5 rounded-full bg-sada-yellow/45 text-sada-ink font-bold">
-            SADA 2026
-          </span>
+        {/* Prestigious University & Faculty Identity Header */}
+        <div className="w-full max-w-4xl mx-auto mb-2.5 sm:mb-3.5 px-2">
+          <div className="flex flex-col items-center justify-center text-center py-2 sm:py-2.5 px-3 sm:px-6 rounded-3xl bg-white/80 backdrop-blur-xs border border-sada-violet/20 shadow-xs">
+            <div className="inline-flex items-center justify-center gap-1.5 sm:gap-2 mb-0.5 sm:mb-1">
+              <span className="w-2 h-2 rounded-full bg-sada-violet animate-pulse" />
+              <span className="text-[11px] sm:text-xs md:text-sm font-extrabold tracking-wide text-sada-violet">
+                مشروع تخرج نوعي معتمد · SADA 2026
+              </span>
+              <span className="w-2 h-2 rounded-full bg-sada-teal animate-pulse" />
+            </div>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-black text-sada-ink leading-tight tracking-tight">
+              جامعة الزقازيق
+            </h2>
+            <p className="text-base sm:text-lg md:text-xl lg:text-[22px] font-extrabold text-sada-teal-dark mt-0.5 sm:mt-1">
+              كلية علوم الإعاقة والتأهيل · قسم السمعيات
+            </p>
+          </div>
+        </div>
+
+        {/* Academic Supervision & Student Execution Showcase */}
+        <div className="w-full max-w-3xl mx-auto mb-2.5 sm:mb-3 px-2">
+          <div className="py-2.5 px-4 sm:px-6 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-sada-lavender/70 via-white/95 to-amber-50/70 border-2 border-sada-violet/25 shadow-xs flex flex-col items-center justify-center text-center">
+            <span className="text-xs sm:text-sm font-bold text-sada-violet/90 mb-0.5">
+              تحت إشراف
+            </span>
+            <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-sada-ink tracking-tight">
+                الدكتور عطية محمد
+              </h3>
+              <span className="px-2.5 py-0.5 rounded-full bg-sada-violet/10 text-sada-violet text-xs sm:text-sm md:text-base font-black">
+                رئيس قسم السمعيات
+              </span>
+            </div>
+            <div className="flex flex-wrap items-center justify-center gap-2 mt-1 text-[11px] sm:text-xs md:text-sm font-extrabold text-sada-ink/80">
+              <span className="text-sada-teal-dark">المشرف الأكاديمي على مشروع صدى</span>
+              <span className="text-sada-ink/30">•</span>
+              <span>إعداد وتنفيذ: طلاب وطالبات المشروع (10 طلاب)</span>
+            </div>
+          </div>
         </div>
 
         {/* Main Arabic Headline — clean RTL spacing & line-height */}
