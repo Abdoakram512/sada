@@ -1,16 +1,7 @@
-# Feedback storage
+# Feedback integration
 
-The feedback section displays one embedded published Google Form directly, with a full-window fallback link. The duplicate quick form, tab switcher, POST endpoint and entry IDs have been removed. There is no separate feedback route.
+One native SADA feedback form replaces the Google Forms iframe. No Google form interface or branding is embedded in the site. Name, role, rating and message submit via a native HTTPS POST to the existing published form. The name is required both locally (including whitespace validation) and in Google Forms.
 
-Google Forms stores responses in the existing owner-linked private Google Sheet. All four questions are required: name, role, rating and feedback. The description says the name is required. No editor URL, response data or credentials belong in the frontend.
+Submission opens Google's confirmation in a new tab. The site cannot read the cross-origin result and deliberately does not claim that a response was saved. Values remain in the native form so the visitor can retry. A direct fallback link appears after submission. No hidden iframe, fetch with no-cors, credentials, local storage or false success state is used.
 
-## Verification â€” 2026-11-28
-
-- npm ci: passed, zero reported vulnerabilities.
-- npm run build: passed.
-- npm run lint: passed.
-- No automated test script is defined.
-- Existing published form: completing role, rating and feedback while leaving name empty blocked submission and displayed the required-question error at the name field.
-- Adding a labelled technical test name allowed submission; Google displayed its recorded-response confirmation. Owner response count increased from 3 to 4.
-- One labelled technical test response was added in this update.
-- Responsive wrapper uses full width, wrapping fallback link and responsive iframe height. Published site visually verified at 390×844 and 1280×900. The section and fallback link fit both viewports; exactly one iframe and zero duplicate feedback buttons are present.
+The existing field IDs were verified in the earlier integration. The existing form and private response destination remain unchanged. The prior update verified that an empty name is rejected and a complete response is stored. This update was authored through the GitHub connector without controlling the user's computer. Build/deployment checks must be verified remotely; no local browser or build is claimed.
