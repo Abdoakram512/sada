@@ -155,7 +155,7 @@ export const AppWorkflowSection: React.FC = () => {
             رحلة <span className="text-sada-teal">مترابطة في التطبيق</span> من البداية إلى المتابعة
           </h2>
           <p className="sada-body-copy text-sada-ink/75 font-medium text-center">
-            يكشف عمر ومريم كيف يجمع تطبيق صدى ملف الطفل، وتقييم لينج، والمهارات السمعية، والتقارير في ست خطوات واضحة.
+            تكشف جنى وأصحابها كيف يجمع تطبيق صدى ملف الطفل، وتقييم لينج، والمهارات السمعية، والتقارير في ست خطوات واضحة.
           </p>
         </div>
 
@@ -163,11 +163,11 @@ export const AppWorkflowSection: React.FC = () => {
         <div className="grid grid-cols-2 lg:flex lg:items-end lg:justify-center gap-4 sm:gap-8 mb-8 sm:mb-10 justify-items-center">
           <div className="order-1">
             <CharacterStageActor
-              characterId="omar"
+              characterId="jana"
               heightClass="h-48 sm:h-56 md:h-64"
               isActiveScene={isSceneActive}
-              isSpeaking={isSceneActive && activeSpeakerId === 'omar'}
-              isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'omar')}
+              isSpeaking={isSceneActive && activeSpeakerId === 'jana'}
+              isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'jana')}
             />
           </div>
           <div className="col-span-2 order-3 lg:order-2 w-48 sm:w-60 bg-white/95 rounded-3xl p-3 border border-sada-violet/15 shadow-md">
@@ -185,11 +185,11 @@ export const AppWorkflowSection: React.FC = () => {
           </div>
           <div className="order-2 lg:order-3">
             <CharacterStageActor
-              characterId="maryam"
+              characterId="omar"
               heightClass="h-48 sm:h-56 md:h-64"
               isActiveScene={isSceneActive}
-              isSpeaking={isSceneActive && activeSpeakerId === 'maryam'}
-              isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'maryam')}
+              isSpeaking={isSceneActive && activeSpeakerId === 'omar'}
+              isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'omar')}
             />
           </div>
         </div>

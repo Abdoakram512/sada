@@ -87,11 +87,11 @@ export const GoalsSection: React.FC = () => {
         <div className="grid grid-cols-2 lg:flex lg:items-end lg:justify-center gap-4 sm:gap-8 mb-8 sm:mb-10 justify-items-center">
           <div className="order-1">
             <CharacterStageActor
-              characterId="maryam"
+              characterId="jana"
               heightClass="h-44 sm:h-52 md:h-60"
               isActiveScene={isSceneActive}
-              isSpeaking={isSceneActive && activeSpeakerId === 'maryam'}
-              isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'maryam')}
+              isSpeaking={isSceneActive && activeSpeakerId === 'jana'}
+              isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'jana')}
             />
           </div>
           <div className="col-span-2 order-3 lg:order-2 grid grid-cols-2 sm:flex items-center justify-items-center gap-3 sm:gap-4 bg-white p-4 rounded-3xl border border-sada-violet/15 shadow-md w-full max-w-md lg:max-w-none lg:w-auto">
@@ -106,7 +106,7 @@ export const GoalsSection: React.FC = () => {
               src="/assets/group_highfive.webp"
               srcSet="/assets/group_highfive-sm.webp 335w, /assets/group_highfive.webp 599w"
               sizes="(max-width: 639px) 160px, 144px"
-              alt="سارة ومريم تحتفلان بكل خطوة"
+              alt="جنى ومريم تحتفلان بكل خطوة"
               width={599}
               height={699}
               loading="lazy"
@@ -194,7 +194,7 @@ export const GoalsSection: React.FC = () => {
               </span>
               <h3 className="text-base font-black mb-2">الفئة المستهدفة</h3>
               <p className="text-xs text-white/85 leading-relaxed">
-                الأطفال ضعاف السمع من مستخدمي السماعات الطبية أو زراعة القوقعة الإلكترونية، مع مراعاة الفروق الفردية.
+                الأطفال الصم وضعاف السمع، مع مراعاة الفروق الفردية.
               </p>
             </div>
             <p className="mt-4 pt-3 border-t border-white/15 text-xs font-extrabold text-sada-yellow">

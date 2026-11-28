@@ -119,7 +119,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         {/* Supporting Narrative Copy */}
         <p className="text-[15px] sm:text-base md:text-lg leading-relaxed text-sada-ink/80 max-w-2xl font-medium text-center mb-2">
           تطبيق تفاعلي يجمع بين{' '}
-          <strong className="text-sada-violet font-extrabold">تقييم أصوات لينج الستة</strong>، وتنمية المهارات السمعية الخمس، والمتابعة المنظمة للأطفال من مستخدمي السماعات الطبية وزراعة القوقعة.
+          <strong className="text-sada-violet font-extrabold">تقييم أصوات لينج الستة</strong>، وتنمية المهارات السمعية الخمس، والمتابعة المنظمة للأطفال الصم وضعاف السمع.
         </p>
 
         {/* Core Pillars Pills — Hidden on ultra-compact hero fold to keep all 5 characters comfortably above fold */}
@@ -192,15 +192,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             style={{ background: 'radial-gradient(ellipse at center, rgba(39,33,62,0.12) 0%, transparent 72%)' }}
           />
 
-          {/* Desktop & Tablet Panoramic 5-Character Cast */}
+          {/* Desktop & Tablet Panoramic 5-Character Cast (Jana centerpiece protagonist) */}
           <div className="hidden sm:grid sm:grid-cols-5 items-end justify-items-center gap-2 sm:gap-3 px-1">
             <div>
               <CharacterStageActor
-                characterId="sarah"
+                characterId="omar"
                 eager
                 isActiveScene={isHeroScene}
-                isSpeaking={isHeroScene && activeSpeakerId === 'sarah'}
-                isDimmed={Boolean(isHeroScene && activeSpeakerId && activeSpeakerId !== 'sarah')}
+                isSpeaking={isHeroScene && activeSpeakerId === 'omar'}
+                isDimmed={Boolean(isHeroScene && activeSpeakerId && activeSpeakerId !== 'omar')}
                 heightClass="h-44 md:h-52 lg:h-60"
                 onClick={() => storyAudioController.replayCurrentScene()}
               />
@@ -218,11 +218,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             </div>
             <div>
               <CharacterStageActor
-                characterId="omar"
+                characterId="jana"
                 eager
                 isActiveScene={isHeroScene}
-                isSpeaking={isHeroScene && activeSpeakerId === 'omar'}
-                isDimmed={Boolean(isHeroScene && activeSpeakerId && activeSpeakerId !== 'omar')}
+                isSpeaking={isHeroScene && activeSpeakerId === 'jana'}
+                isDimmed={Boolean(isHeroScene && activeSpeakerId && activeSpeakerId !== 'jana')}
                 heightClass="h-52 md:h-60 lg:h-68"
                 onClick={() => storyAudioController.replayCurrentScene()}
               />
@@ -251,7 +251,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             </div>
           </div>
 
-          {/* Mobile Staggered 5-Character Animated Movie Ensemble (clean spacing, zero badge over faces) */}
+          {/* Mobile Staggered 5-Character Animated Movie Ensemble (Jana foreground centerpiece) */}
           <div className="sm:hidden flex flex-col items-center">
             <div className="flex items-end justify-center gap-20 -mb-6 relative z-10">
               <CharacterStageActor
@@ -277,22 +277,22 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             </div>
             <div className="flex items-end justify-center gap-2.5 relative z-20">
               <CharacterStageActor
-                characterId="sarah"
-                eager
-                showLabel={false}
-                isActiveScene={isHeroScene}
-                isSpeaking={isHeroScene && activeSpeakerId === 'sarah'}
-                isDimmed={Boolean(isHeroScene && activeSpeakerId && activeSpeakerId !== 'sarah')}
-                heightClass="h-40"
-                onClick={() => storyAudioController.replayCurrentScene()}
-              />
-              <CharacterStageActor
                 characterId="omar"
                 eager
                 showLabel={false}
                 isActiveScene={isHeroScene}
                 isSpeaking={isHeroScene && activeSpeakerId === 'omar'}
                 isDimmed={Boolean(isHeroScene && activeSpeakerId && activeSpeakerId !== 'omar')}
+                heightClass="h-40"
+                onClick={() => storyAudioController.replayCurrentScene()}
+              />
+              <CharacterStageActor
+                characterId="jana"
+                eager
+                showLabel={false}
+                isActiveScene={isHeroScene}
+                isSpeaking={isHeroScene && activeSpeakerId === 'jana'}
+                isDimmed={Boolean(isHeroScene && activeSpeakerId && activeSpeakerId !== 'jana')}
                 heightClass="h-44"
                 onClick={() => storyAudioController.replayCurrentScene()}
               />

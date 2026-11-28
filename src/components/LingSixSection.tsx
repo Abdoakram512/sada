@@ -346,7 +346,7 @@ export const LingSixSection: React.FC = () => {
             </div>
 
             <div className="p-3.5 rounded-xl bg-gray-50 border border-gray-200 text-[11px] text-sada-ink/75 leading-relaxed">
-              <strong className="text-sada-ink font-bold">تنبيه علمي:</strong> تسجيل استجابة الطفل لا يساوي قياس عتبة السمع أو تشخيص كفاءة السماعة أو القوقعة؛ وتُتبع إرشادات الأخصائي بشأن تقديم الأصوات.
+              <strong className="text-sada-ink font-bold">تنبيه علمي:</strong> تسجيل استجابة الطفل لا يساوي قياس عتبة السمع أو تشخيص كفاءة السماعة أو مستوى السمع؛ وتُتبع إرشادات الأخصائي بشأن تقديم الأصوات.
             </div>
           </div>
         </div>

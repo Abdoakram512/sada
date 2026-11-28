@@ -19,7 +19,7 @@ export const FinalCelebrationSection: React.FC<FinalCelebrationSectionProps> = (
   const [modalOpen, setModalOpen] = useState(false);
   const footerRef = useRef<HTMLElement | null>(null);
   const stageRef = useRef<HTMLDivElement | null>(null);
-  const { isSceneActive, activeSpeakerId } = useStorySceneFocus('scene-11-ending');
+  const { isSceneActive, activeSpeakerId } = useStorySceneFocus('scene-12-ending');
 
   useEffect(() => {
     const footer = footerRef.current;
@@ -64,7 +64,7 @@ export const FinalCelebrationSection: React.FC<FinalCelebrationSectionProps> = (
     <footer
       ref={footerRef}
       id="ending"
-      data-scene-id="scene-11-ending"
+      data-scene-id="scene-12-ending"
       className="sada-scene pb-32 sm:pb-40 bg-gradient-to-b from-[#231D3A] via-[#1C1630] to-[#120F20] text-white"
     >
       <div
@@ -78,7 +78,7 @@ export const FinalCelebrationSection: React.FC<FinalCelebrationSectionProps> = (
       <div className="max-w-7xl mx-auto relative z-10 text-center">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-sada-yellow text-xs font-bold mb-5">
           <Sparkles size={15} />
-          <span>المشهد 11 · الختام واجتماع الأبطال</span>
+          <span>المشهد 12 · الختام واجتماع الأبطال</span>
         </div>
 
         <h2 className="sada-section-title font-black mb-4">
@@ -89,7 +89,7 @@ export const FinalCelebrationSection: React.FC<FinalCelebrationSectionProps> = (
         </h2>
 
         <p className="sada-body-copy text-white/80 max-w-2xl mx-auto font-medium text-center mb-8">
-          رحلتنا مع الصوت لا تنتهي هنا؛ كل محاولة لها قيمة، وكل خطوة صغيرة تصنع فرقاً عندما تجتمع الأسرة والأخصائي والطفل في مسار واحد.
+          ودي كانت حكاية صدى. كل طفل يستحق فرصة يتعلم ويتواصل ويكتشف العالم بطريقته.
         </p>
 
         {/* Closing Speakers + Theatrical Group Celebration */}
@@ -109,7 +109,7 @@ export const FinalCelebrationSection: React.FC<FinalCelebrationSectionProps> = (
               src="/assets/group_celebrating_transparent.webp"
               srcSet="/assets/group_celebrating_transparent-sm.webp 340w, /assets/group_celebrating_transparent.webp 608w"
               sizes="(max-width: 639px) 320px, 430px"
-              alt="أبطال صدى الخمسة يحتفلون بنهاية الرحلة"
+              alt="جنى وأبطال صدى يحتفلون بنهاية الرحلة"
               width={608}
               height={648}
               loading="lazy"
@@ -120,11 +120,11 @@ export const FinalCelebrationSection: React.FC<FinalCelebrationSectionProps> = (
 
           <div className="order-2 lg:order-3">
             <CharacterStageActor
-              characterId="sarah"
+              characterId="jana"
               heightClass="h-44 sm:h-56 md:h-64"
               isActiveScene={isSceneActive}
-              isSpeaking={isSceneActive && activeSpeakerId === 'sarah'}
-              isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'sarah')}
+              isSpeaking={isSceneActive && activeSpeakerId === 'jana'}
+              isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'jana')}
             />
           </div>
         </div>
@@ -210,7 +210,7 @@ export const FinalCelebrationSection: React.FC<FinalCelebrationSectionProps> = (
 
             <div className="space-y-4 text-sm text-sada-ink/85 leading-relaxed text-right">
               <p>
-                <strong className="text-sada-ink font-bold">طبيعة المشروع:</strong> تطبيق تفاعلي رقمي لتقييم الاستجابة السمعية وتنمية المهارات السمعية لدى الأطفال ضعاف السمع من مستخدمي السماعات الطبية وزراعة القوقعة.
+                <strong className="text-sada-ink font-bold">طبيعة المشروع:</strong> تطبيق تفاعلي رقمي لتقييم الاستجابة السمعية وتنمية المهارات السمعية لدى الأطفال الصم وضعاف السمع.
               </p>
               <p>
                 <strong className="text-sada-ink font-bold">المكونات الأساسية:</strong>

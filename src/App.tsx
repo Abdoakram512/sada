@@ -16,6 +16,7 @@ import { GamesWorldSection } from './components/GamesWorldSection';
 import { GuidesSection } from './components/GuidesSection';
 import { GoalsSection } from './components/GoalsSection';
 import { TeamSection } from './components/TeamSection';
+import { DevelopmentTeamSection } from './components/DevelopmentTeamSection';
 import { FinalCelebrationSection } from './components/FinalCelebrationSection';
 import { StoryAudioBar } from './components/StoryAudioBar';
 import { STORY_SCENES } from './data/storyManifest';
@@ -245,9 +246,14 @@ export const App: React.FC = () => {
         {/* Scene 10 — Meet the Team */}
         <TeamSection />
 
-        <SceneTransition variant="curtain-finale" fromColor="#FBF3E4" toColor="#231D3A" accentColor="#FFC552" />
+        <SceneTransition variant="human-arch" fromColor="#FBF3E4" toColor="#FFF8ED" accentColor="#159D98" />
 
-        {/* Scene 11 — The Ending */}
+        {/* Scene 11 — Development Team */}
+        <DevelopmentTeamSection />
+
+        <SceneTransition variant="curtain-finale" fromColor="#FFF8ED" toColor="#231D3A" accentColor="#FFC552" />
+
+        {/* Scene 12 — The Ending */}
         <FinalCelebrationSection onScrollToTop={() => scrollToSection('hero')} />
       </main>
 

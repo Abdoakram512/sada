@@ -189,3 +189,24 @@ Repository: `sada-experience` (Baseline preserved at git branch `baseline-pre-up
 - **17 Viewports Tested (`320px`–`2560px` + `844×390` landscape)**: **`overflowX: false` on all 17**.
 - **`390×844` Mobile Telemetry**: `mobileFps: 121 FPS` (`0` dropped frames), total page height reduced from `28,509 px` to **`24,781 px`**, body font size `16 px`, `consoleErrorsCount: 0`.
 - **Desktop Regression (`1440×900`)**: `FCP/LCP: 1488 ms`, `CLS: 0.0004` idle / `0.0039` post-scroll, full 5-cast Hero visible above fold (`natH: 520–532 px`), Story Mode & reduced motion clean.
+
+---
+
+## Phase 9 — Jana Protagonist Upgrade & Development Team Section (Completed)
+
+### Objectives
+- Make **جنى (`jana`)** the main protagonist and primary narrator across the interactive SADA experience while keeping `عمر` and the rest of the cast in supporting roles.
+- Introduce a compact, friendly **فريق التطوير** (`#developers`, Scene 11) section before the closing scene showcasing the two software engineers (**أكرم / عبدالرحمن أكرم** and **أبو القاسم**) side-by-side at equal visual weight in SADA's 3D cartoon style with shared contact details (`01115240237`).
+- Keep target-group framing focused strictly on **الأطفال الصم وضعاف السمع** without adding cochlear implant users.
+
+### Completed Tasks & Modified Files
+- Created safe git checkpoint branch `checkpoint-pre-jana-upgrade` (`dfc474b`).
+- Renamed `sarah` (`سارة`) to **`jana` (`جنى`)** using existing character assets ([public/assets/char_jana.webp](public/assets/char_jana.webp), [public/assets/char_jana-sm.webp](public/assets/char_jana-sm.webp)) across [src/data/sadaData.ts](src/data/sadaData.ts), [src/data/storyManifest.ts](src/data/storyManifest.ts), [docs/approved-voices.json](docs/approved-voices.json), [scripts/generate-production-audio.mjs](scripts/generate-production-audio.mjs), and scene components.
+- Promoted **جنى** to center stage in [HeroSection.tsx](src/components/HeroSection.tsx) and lead narration across Opening, Challenge (`ProblemSolutionSection.tsx`), App Workflow, Auditory Closure, Games World, Progress, Development Team Intro, and Ending (`FinalCelebrationSection.tsx`, Scene 12); removed cochlear implant wording across copy, data, and dialogue.
+- Generated 3D stylized cartoon engineer assets ([public/assets/eng_akram.webp](public/assets/eng_akram.webp), [public/assets/eng_abualqasim.webp](public/assets/eng_abualqasim.webp)) and implemented [DevelopmentTeamSection.tsx](src/components/DevelopmentTeamSection.tsx), wired into [App.tsx](src/App.tsx) and [Navbar.tsx](src/components/Navbar.tsx).
+- Regenerated only the 9 changed/new ElevenLabs `eleven_v4` clips (preserving the 18 untouched supporting clips via SHA-256 caching; `398` characters billed, `17,367` remaining; `27 / 27` clips verified) and removed the 8 obsolete MP3 files.
+
+### Verified Build & CDP Audit Results
+- `oxlint`: `0` warnings, `0` errors (`34` files); `tsc -b && vite build`: `2.04s`.
+- Headless Chromium CDP (`verify_upgrade.mjs`): `FCP/LCP: 956 ms`, `CLS: 0` idle / `0.0035` post-scroll, `56 FPS`, `overflowX: false` across all `8` tested viewports (`320px`–`1920px`), `consoleErrorsCount: 0`, `reducedMotionOk: true`, `hasCochlearLeak: false`, `hasSarahLeak: false`, and live playback verified (`scene-01-jana-01.mp3` `10.72s`).
+

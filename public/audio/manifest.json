@@ -7,35 +7,35 @@
     "auditionsMaxCredits": 500,
     "productionMaxCredits": 6000,
     "auditionsUsedCredits": 0,
-    "productionUsedCredits": 994,
+    "productionUsedCredits": 398,
     "productionBudgetCap": 6000,
     "auditionsTotalConsumed": 2103
   },
   "clips": [
     {
-      "dialogueId": "scene-01-omar-01",
+      "dialogueId": "scene-01-jana-01",
       "sceneId": "scene-01-welcome",
-      "characterId": "omar",
-      "voiceId": "QvNF0qyyt1Tuy1YAmnzH",
+      "characterId": "jana",
+      "voiceId": "I3u6waC588j43py1kDN2",
       "modelId": "eleven_v4",
-      "contentHash": "c5df72066b587feb",
-      "audioPath": "/audio/characters/scene-01-omar-01.mp3",
-      "fileSizeBytes": 178929,
-      "durationSec": 11.12,
+      "contentHash": "931338769c730c28",
+      "audioPath": "/audio/characters/scene-01-jana-01.mp3",
+      "fileSizeBytes": 172660,
+      "durationSec": 10.72,
       "creditsConsumed": 56,
       "status": "verified"
     },
     {
-      "dialogueId": "scene-01-sarah-02",
+      "dialogueId": "scene-01-omar-02",
       "sceneId": "scene-01-welcome",
-      "characterId": "sarah",
-      "voiceId": "I3u6waC588j43py1kDN2",
+      "characterId": "omar",
+      "voiceId": "QvNF0qyyt1Tuy1YAmnzH",
       "modelId": "eleven_v4",
-      "contentHash": "f567018979e1e36c",
-      "audioPath": "/audio/characters/scene-01-sarah-02.mp3",
-      "fileSizeBytes": 89486,
-      "durationSec": 5.52,
-      "creditsConsumed": 26,
+      "contentHash": "f5ad3a6b32eaf846",
+      "audioPath": "/audio/characters/scene-01-omar-02.mp3",
+      "fileSizeBytes": 126684,
+      "durationSec": 7.84,
+      "creditsConsumed": 39,
       "status": "verified"
     },
     {
@@ -48,7 +48,7 @@
       "audioPath": "/audio/characters/scene-01-maryam-03.mp3",
       "fileSizeBytes": 104950,
       "durationSec": 6.48,
-      "creditsConsumed": 35,
+      "creditsConsumed": 0,
       "status": "verified"
     },
     {
@@ -61,20 +61,20 @@
       "audioPath": "/audio/characters/scene-02-zain-04.mp3",
       "fileSizeBytes": 103278,
       "durationSec": 6.4,
-      "creditsConsumed": 34,
+      "creditsConsumed": 0,
       "status": "verified"
     },
     {
-      "dialogueId": "scene-02-maryam-05",
+      "dialogueId": "scene-02-jana-05",
       "sceneId": "scene-02-challenge",
-      "characterId": "maryam",
-      "voiceId": "L10lEremDiJfPicq5CPh",
+      "characterId": "jana",
+      "voiceId": "I3u6waC588j43py1kDN2",
       "modelId": "eleven_v4",
-      "contentHash": "a1186eda56941b84",
-      "audioPath": "/audio/characters/scene-02-maryam-05.mp3",
-      "fileSizeBytes": 164718,
-      "durationSec": 10.24,
-      "creditsConsumed": 57,
+      "contentHash": "eff12f514a48893e",
+      "audioPath": "/audio/characters/scene-02-jana-05.mp3",
+      "fileSizeBytes": 172660,
+      "durationSec": 10.72,
+      "creditsConsumed": 52,
       "status": "verified"
     },
     {
@@ -87,20 +87,20 @@
       "audioPath": "/audio/characters/scene-02-nour-06.mp3",
       "fileSizeBytes": 109966,
       "durationSec": 6.8,
-      "creditsConsumed": 37,
+      "creditsConsumed": 0,
       "status": "verified"
     },
     {
-      "dialogueId": "scene-03-omar-07",
+      "dialogueId": "scene-03-jana-07",
       "sceneId": "scene-03-discovering-sada",
-      "characterId": "omar",
-      "voiceId": "QvNF0qyyt1Tuy1YAmnzH",
+      "characterId": "jana",
+      "voiceId": "I3u6waC588j43py1kDN2",
       "modelId": "eleven_v4",
-      "contentHash": "45d1cc60537386d5",
-      "audioPath": "/audio/characters/scene-03-omar-07.mp3",
-      "fileSizeBytes": 131700,
-      "durationSec": 8.16,
-      "creditsConsumed": 40,
+      "contentHash": "2b34982cf73e2cc1",
+      "audioPath": "/audio/characters/scene-03-jana-07.mp3",
+      "fileSizeBytes": 140477,
+      "durationSec": 8.72,
+      "creditsConsumed": 45,
       "status": "verified"
     },
     {
@@ -113,7 +113,7 @@
       "audioPath": "/audio/characters/scene-03-maryam-08.mp3",
       "fileSizeBytes": 121251,
       "durationSec": 7.52,
-      "creditsConsumed": 42,
+      "creditsConsumed": 0,
       "status": "verified"
     },
     {
@@ -126,7 +126,7 @@
       "audioPath": "/audio/characters/scene-04-maryam-09.mp3",
       "fileSizeBytes": 171406,
       "durationSec": 10.64,
-      "creditsConsumed": 44,
+      "creditsConsumed": 0,
       "status": "verified"
     },
     {
@@ -139,7 +139,7 @@
       "audioPath": "/audio/characters/scene-04-zain-10.mp3",
       "fileSizeBytes": 131700,
       "durationSec": 8.16,
-      "creditsConsumed": 39,
+      "creditsConsumed": 0,
       "status": "verified"
     },
     {
@@ -152,7 +152,7 @@
       "audioPath": "/audio/characters/scene-05-omar-11.mp3",
       "fileSizeBytes": 122505,
       "durationSec": 7.6,
-      "creditsConsumed": 38,
+      "creditsConsumed": 0,
       "status": "verified"
     },
     {
@@ -165,7 +165,7 @@
       "audioPath": "/audio/characters/scene-05-zain-12.mp3",
       "fileSizeBytes": 123758,
       "durationSec": 7.68,
-      "creditsConsumed": 36,
+      "creditsConsumed": 0,
       "status": "verified"
     },
     {
@@ -178,7 +178,7 @@
       "audioPath": "/audio/characters/scene-05-maryam-13.mp3",
       "fileSizeBytes": 153434,
       "durationSec": 9.52,
-      "creditsConsumed": 46,
+      "creditsConsumed": 0,
       "status": "verified"
     },
     {
@@ -191,20 +191,20 @@
       "audioPath": "/audio/characters/scene-05-nour-14.mp3",
       "fileSizeBytes": 112474,
       "durationSec": 6.96,
-      "creditsConsumed": 31,
+      "creditsConsumed": 0,
       "status": "verified"
     },
     {
-      "dialogueId": "scene-05-sarah-15",
+      "dialogueId": "scene-05-jana-15",
       "sceneId": "scene-05-auditory-skills",
-      "characterId": "sarah",
+      "characterId": "jana",
       "voiceId": "I3u6waC588j43py1kDN2",
       "modelId": "eleven_v4",
-      "contentHash": "1367b117739f153b",
-      "audioPath": "/audio/characters/scene-05-sarah-15.mp3",
-      "fileSizeBytes": 107458,
-      "durationSec": 6.64,
-      "creditsConsumed": 33,
+      "contentHash": "354cad00766ae490",
+      "audioPath": "/audio/characters/scene-05-jana-15.mp3",
+      "fileSizeBytes": 117489,
+      "durationSec": 7.28,
+      "creditsConsumed": 35,
       "status": "verified"
     },
     {
@@ -217,7 +217,7 @@
       "audioPath": "/audio/characters/scene-06-zain-16.mp3",
       "fileSizeBytes": 100771,
       "durationSec": 6.24,
-      "creditsConsumed": 36,
+      "creditsConsumed": 0,
       "status": "verified"
     },
     {
@@ -230,20 +230,20 @@
       "audioPath": "/audio/characters/scene-06-maryam-17.mp3",
       "fileSizeBytes": 126684,
       "durationSec": 7.84,
-      "creditsConsumed": 41,
+      "creditsConsumed": 0,
       "status": "verified"
     },
     {
-      "dialogueId": "scene-07-sarah-18",
+      "dialogueId": "scene-07-jana-18",
       "sceneId": "scene-07-games",
-      "characterId": "sarah",
+      "characterId": "jana",
       "voiceId": "I3u6waC588j43py1kDN2",
       "modelId": "eleven_v4",
-      "contentHash": "3114a2f0f927fb3b",
-      "audioPath": "/audio/characters/scene-07-sarah-18.mp3",
-      "fileSizeBytes": 140477,
-      "durationSec": 8.72,
-      "creditsConsumed": 37,
+      "contentHash": "04c2e8fd583dd419",
+      "audioPath": "/audio/characters/scene-07-jana-18.mp3",
+      "fileSizeBytes": 154687,
+      "durationSec": 9.6,
+      "creditsConsumed": 42,
       "status": "verified"
     },
     {
@@ -256,7 +256,7 @@
       "audioPath": "/audio/characters/scene-07-omar-19.mp3",
       "fileSizeBytes": 114981,
       "durationSec": 7.12,
-      "creditsConsumed": 37,
+      "creditsConsumed": 0,
       "status": "verified"
     },
     {
@@ -269,7 +269,7 @@
       "audioPath": "/audio/characters/scene-08-nour-20.mp3",
       "fileSizeBytes": 153434,
       "durationSec": 9.52,
-      "creditsConsumed": 45,
+      "creditsConsumed": 0,
       "status": "verified"
     },
     {
@@ -282,20 +282,20 @@
       "audioPath": "/audio/characters/scene-08-maryam-21.mp3",
       "fileSizeBytes": 109966,
       "durationSec": 6.8,
-      "creditsConsumed": 38,
+      "creditsConsumed": 0,
       "status": "verified"
     },
     {
-      "dialogueId": "scene-09-maryam-22",
+      "dialogueId": "scene-09-jana-22",
       "sceneId": "scene-09-progress",
-      "characterId": "maryam",
-      "voiceId": "L10lEremDiJfPicq5CPh",
+      "characterId": "jana",
+      "voiceId": "I3u6waC588j43py1kDN2",
       "modelId": "eleven_v4",
-      "contentHash": "cc2ce49a6193fd51",
-      "audioPath": "/audio/characters/scene-09-maryam-22.mp3",
-      "fileSizeBytes": 108712,
-      "durationSec": 6.72,
-      "creditsConsumed": 38,
+      "contentHash": "9fc3667fe8cfa0db",
+      "audioPath": "/audio/characters/scene-09-jana-22.mp3",
+      "fileSizeBytes": 139223,
+      "durationSec": 8.64,
+      "creditsConsumed": 42,
       "status": "verified"
     },
     {
@@ -308,7 +308,7 @@
       "audioPath": "/audio/characters/scene-09-nour-23.mp3",
       "fileSizeBytes": 116235,
       "durationSec": 7.2,
-      "creditsConsumed": 33,
+      "creditsConsumed": 0,
       "status": "verified"
     },
     {
@@ -321,12 +321,25 @@
       "audioPath": "/audio/characters/scene-10-omar-24.mp3",
       "fileSizeBytes": 135461,
       "durationSec": 8.4,
-      "creditsConsumed": 46,
+      "creditsConsumed": 0,
+      "status": "verified"
+    },
+    {
+      "dialogueId": "scene-11-jana-dev",
+      "sceneId": "scene-11-dev-team",
+      "characterId": "jana",
+      "voiceId": "I3u6waC588j43py1kDN2",
+      "modelId": "eleven_v4",
+      "contentHash": "846a2156168085da",
+      "audioPath": "/audio/characters/scene-11-jana-dev.mp3",
+      "fileSizeBytes": 112474,
+      "durationSec": 6.96,
+      "creditsConsumed": 38,
       "status": "verified"
     },
     {
       "dialogueId": "scene-11-nour-25",
-      "sceneId": "scene-11-ending",
+      "sceneId": "scene-12-ending",
       "characterId": "nour",
       "voiceId": "xPcC3nehhziQaOrIeAwv",
       "modelId": "eleven_v4",
@@ -334,24 +347,24 @@
       "audioPath": "/audio/characters/scene-11-nour-25.mp3",
       "fileSizeBytes": 109966,
       "durationSec": 6.8,
-      "creditsConsumed": 32,
+      "creditsConsumed": 0,
       "status": "verified"
     },
     {
-      "dialogueId": "scene-11-sarah-26",
-      "sceneId": "scene-11-ending",
-      "characterId": "sarah",
+      "dialogueId": "scene-12-jana-26",
+      "sceneId": "scene-12-ending",
+      "characterId": "jana",
       "voiceId": "I3u6waC588j43py1kDN2",
       "modelId": "eleven_v4",
-      "contentHash": "6fa146caaeae6288",
-      "audioPath": "/audio/characters/scene-11-sarah-26.mp3",
-      "fileSizeBytes": 72767,
-      "durationSec": 4.48,
-      "creditsConsumed": 17,
+      "contentHash": "76b0e845d8b25092",
+      "audioPath": "/audio/characters/scene-12-jana-26.mp3",
+      "fileSizeBytes": 168898,
+      "durationSec": 10.48,
+      "creditsConsumed": 49,
       "status": "verified"
     }
   ],
-  "creditsRemaining": 36486,
+  "creditsRemaining": 17367,
   "approvedCast": {
     "omar": {
       "voiceId": "QvNF0qyyt1Tuy1YAmnzH",
@@ -393,7 +406,7 @@
         "style": 0.2
       }
     },
-    "sarah": {
+    "jana": {
       "voiceId": "I3u6waC588j43py1kDN2",
       "voiceName": "Fatima - Expressive Egyptian",
       "modelId": "eleven_v4",

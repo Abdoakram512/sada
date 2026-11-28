@@ -86,7 +86,7 @@ export const VoiceAuditionModal: React.FC<VoiceAuditionModalProps> = ({ isOpen, 
       maryam: 'mariam_eg_yasmine_v4',
       zain: 'zein_eg_ziad_v4',
       nour: 'nour_eg_ghozlan_v4',
-      sarah: 'sara_eg_fatima_v4',
+      jana: 'sara_eg_fatima_v4',
     };
   });
 

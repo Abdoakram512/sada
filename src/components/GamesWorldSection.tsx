@@ -156,7 +156,7 @@ export const GamesWorldSection: React.FC<GamesWorldSectionProps> = ({
             تشجيع بصري بروح <span className="text-sada-yellow">اللعب والاستكشاف</span>
           </h2>
           <p className="sada-body-copy text-white/80 font-medium text-center">
-            تضيف سارة وعمر بهجة اللعب والنجوم التحفيزية لرفع دافعية الطفل للمشاركة، مع وضوح تام بأنها نماذج توضيحية تعزيزية وليست أداة تشخيص طبي.
+            تضيف جنى وعمر بهجة اللعب والنجوم التحفيزية لرفع دافعية الطفل للمشاركة، مع وضوح تام بأنها نماذج توضيحية تعزيزية وليست أداة تشخيص طبي.
           </p>
         </div>
 
@@ -164,11 +164,11 @@ export const GamesWorldSection: React.FC<GamesWorldSectionProps> = ({
         <div className="grid grid-cols-2 lg:flex lg:items-end lg:justify-center gap-4 sm:gap-8 mb-8 sm:mb-10 justify-items-center">
           <div className="order-1">
             <CharacterStageActor
-              characterId="sarah"
+              characterId="jana"
               heightClass="h-44 sm:h-52 md:h-60"
               isActiveScene={isSceneActive}
-              isSpeaking={isSceneActive && activeSpeakerId === 'sarah'}
-              isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'sarah')}
+              isSpeaking={isSceneActive && activeSpeakerId === 'jana'}
+              isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'jana')}
             />
           </div>
           <div className="col-span-2 order-3 lg:order-2 flex items-center justify-center gap-3 sm:gap-4 bg-[#362E52]/95 px-4 sm:px-5 py-3.5 sm:py-4 rounded-3xl border border-white/15 shadow-lg w-full max-w-md lg:w-auto">

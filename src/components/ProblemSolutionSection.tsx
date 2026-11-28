@@ -74,7 +74,7 @@ export const ProblemSolutionSection: React.FC = () => {
             لماذا يبدأ كل شيء <span className="text-sada-violet">بالإصغاء المنظّم</span>؟
           </h2>
           <p className="sada-body-copy text-sada-ink/75 font-medium text-center">
-            تأهيل الطفل ضعيف السمع شغل يومي مشترك بين البيت والأخصائي؛ يسأل زين ليه بنحتاج متابعة منظمة، وتوضح مريم ونور إزاي تطبيق صدى بيجمع التقييم والتدريب والمتابعة في مكان واحد.
+            تأهيل الطفل الأصم أو ضعيف السمع شغل يومي مشترك بين البيت والأخصائي؛ يسأل زين ليه بنحتاج متابعة منظمة، وتوضح جنى ونور إزاي تطبيق صدى بيجمع التقييم والتدريب والمتابعة في مكان واحد.
           </p>
         </div>
 
@@ -89,11 +89,11 @@ export const ProblemSolutionSection: React.FC = () => {
             bubbleText={!activeSpeakerId ? 'ليه المتابعة مهمة؟' : undefined}
           />
           <CharacterStageActor
-            characterId="maryam"
+            characterId="jana"
             heightClass="h-44 sm:h-56 md:h-64"
             isActiveScene={isSceneActive}
-            isSpeaking={isSceneActive && activeSpeakerId === 'maryam'}
-            isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'maryam')}
+            isSpeaking={isSceneActive && activeSpeakerId === 'jana'}
+            isDimmed={Boolean(isSceneActive && activeSpeakerId && activeSpeakerId !== 'jana')}
           />
           <CharacterStageActor
             characterId="nour"
@@ -150,7 +150,7 @@ export const ProblemSolutionSection: React.FC = () => {
                 src="/assets/group_reading_transparent.webp"
                 srcSet="/assets/group_reading_transparent-sm.webp 426w, /assets/group_reading_transparent.webp 760w"
                 sizes="(max-width: 639px) 320px, 400px"
-                alt="نور وعمر ومريم وزين يقرؤون ويتابعون رحلة التعلم"
+                alt="جنى وعمر ومريم وزين يقرؤون ويتابعون رحلة التعلم"
                 width={760}
                 height={517}
                 loading="lazy"
@@ -257,7 +257,7 @@ export const ProblemSolutionSection: React.FC = () => {
             <div className="mt-1 p-4 rounded-2xl bg-amber-50/90 border border-amber-200 flex items-start gap-3">
               <ShieldCheck className="text-amber-700 flex-shrink-0 mt-0.5" size={20} />
               <p className="text-xs text-amber-950 font-medium leading-relaxed">
-                <strong className="font-bold">تنويه علمي معتمد:</strong> تطبيق صدى وسيلة مساعدة للتقييم الوظيفي والمتابعة والتدريب السمعي، ولا يحل محل التقييم السمعي المتخصص أو ضبط السماعات الطبية وزراعة القوقعة أو جلسات التأهيل تحت إشراف المختصين.
+                <strong className="font-bold">تنويه علمي معتمد:</strong> تطبيق صدى وسيلة مساعدة للتقييم الوظيفي والمتابعة والتدريب السمعي، ولا يحل محل التقييم السمعي المتخصص أو ضبط السماعات الطبية أو جلسات التأهيل تحت إشراف المختصين.
               </p>
             </div>
           </div>

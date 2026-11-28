@@ -28,7 +28,7 @@ export const CharacterStageActor: React.FC<CharacterStageActorProps> = ({
   eager = false,
 }) => {
   const char = CHARACTERS.find((c) => c.id === characterId) || CHARACTERS[0];
-  const isFemale = characterId === 'maryam' || characterId === 'nour' || characterId === 'sarah';
+  const isFemale = characterId === 'maryam' || characterId === 'nour' || characterId === 'jana';
   const defaultSpeakLabel = isFemale ? `${char.name} تتحدث` : `${char.name} يتحدث`;
   const shouldAnimateIdle = isActiveScene;
   const mobileSrc = char.image.replace('.webp', '-sm.webp');
