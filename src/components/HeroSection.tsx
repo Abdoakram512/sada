@@ -135,22 +135,22 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
         {/* Main Arabic Headline — clean RTL spacing & line-height */}
         <h1 className="sada-hero-title font-black text-sada-ink max-w-4xl mb-1.5 sm:mb-2">
-          <span>لكل صوت حكاية، </span>
-          <span className="sada-gradient-text">ولكل طفل رحلة</span>
+          <span>صَـدَى — </span>
+          <span className="sada-gradient-text">كل صوت له استجابة</span>
         </h1>
 
         {/* Supporting Narrative Copy */}
         <p className="text-[14px] sm:text-base md:text-lg leading-relaxed text-sada-ink/80 max-w-2xl font-medium text-center mb-1.5 sm:mb-2">
-          تطبيق تفاعلي يجمع بين{' '}
-          <strong className="text-sada-violet font-extrabold">تقييم أصوات لينج الستة</strong>، وتنمية المهارات السمعية الخمس، والمتابعة المنظمة للأطفال الصم وضعاف السمع.
+          تطبيق تفاعلي يهدف إلى{' '}
+          <strong className="text-sada-violet font-extrabold">تقييم المهارات السمعية</strong> لدى الأطفال الصم وضعاف السمع، من خلال تقييم أصوات لينج الستة والمهارات السمعية الخمس، بما يساعد الأخصائي على رصد مستوى القدرات السمعية وتوثيق نتائج التقييم بصورة منظمة.
         </p>
 
         {/* Core Pillars Pills — Hidden on ultra-compact hero fold to keep all 5 characters comfortably above fold */}
         <div className="hidden min-[380px]:grid grid-cols-2 sm:flex sm:flex-wrap items-center justify-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2.5 max-w-2xl w-full sm:w-auto">
           {[
-            { label: 'تقييم وظيفي', icon: Activity, color: 'bg-sada-lavender text-sada-violet border-sada-violet/20' },
-            { label: 'متابعة عبر الزمن', icon: FileText, color: 'bg-emerald-50 text-sada-teal-dark border-sada-teal/25' },
-            { label: 'ألعاب تعزيزية', icon: Gamepad2, color: 'bg-amber-50 text-amber-800 border-amber-300' },
+            { label: 'تقييم أصوات لينج', icon: Activity, color: 'bg-sada-lavender text-sada-violet border-sada-violet/20' },
+            { label: 'المهارات السمعية الخمس', icon: FileText, color: 'bg-emerald-50 text-sada-teal-dark border-sada-teal/25' },
+            { label: 'أنشطة تقييم مشجعة', icon: Gamepad2, color: 'bg-amber-50 text-amber-800 border-amber-300' },
             { label: 'الأسرة والأخصائي', icon: ShieldCheck, color: 'bg-rose-50 text-sada-coral-dark border-rose-200' },
           ].map((item, idx) => {
             const Icon = item.icon;

@@ -157,7 +157,7 @@ export const GuidesSection: React.FC = () => {
                 />
                 <h4 className="text-lg font-black text-sada-ink mb-1.5">دور الأسرة الداعم</h4>
                 <p className="text-xs sm:text-sm text-sada-ink/75 leading-relaxed font-medium text-center">
-                  مشاركة منزلية بسيطة تشجع الطفل وتُكمل جلسات التأهيل المتخصصة.
+                  مشاركة منزلية بسيطة تشجع الطفل وتُكمل المتابعة السمعية المنظمة.
                 </p>
               </div>
             </div>
@@ -191,7 +191,7 @@ export const GuidesSection: React.FC = () => {
                 </div>
                 <h4 className="text-lg font-black text-sada-ink mb-2">متابعة منظمة وموضوعية</h4>
                 <p className="text-xs sm:text-sm text-sada-ink/75 leading-relaxed font-medium text-center">
-                  توثيق الجلسات والظروف يمنح الأخصائي مرجعاً واضحاً لتوجيه الخطة التأهيلية الملائمة لقدرات الطفل.
+                  توثيق الجلسات والظروف يمنح الأخصائي مرجعاً واضحاً لتوجيه خطة المتابعة الملائمة لقدرات الطفل.
                 </p>
               </div>
             </div>
@@ -205,7 +205,7 @@ export const GuidesSection: React.FC = () => {
                 تنويه علمي معتمد:
               </span>
               <p className="text-xs text-amber-950 leading-relaxed font-medium">
-                تطبيق صدى وسيلة مساعدة للتقييم الوظيفي والمتابعة والتدريب السمعي، ولا يحل محل التقييم السمعي المتخصص أو ضبط السماعات الطبية أو جلسات التأهيل تحت إشراف المختصين.
+                تطبيق صدى وسيلة مساعدة للتقييم الوظيفي والمتابعة السمعية المنظمة، ولا يحل محل التقييم السمعي المتخصص أو ضبط المعينات السمعية الطبية أو الجلسات السريرية.
               </p>
             </div>
           </div>
@@ -218,7 +218,7 @@ export const GuidesSection: React.FC = () => {
             <span className="text-xs font-bold text-sada-yellow">القيمة المضافة للمشروع</span>
           </div>
           <p className="text-sm sm:text-lg font-black max-w-3xl mx-auto leading-relaxed text-center">
-            «يجمع صدى في مكان واحد تقييم الاستجابة السمعية، وتقييم المهارات السمعية، وتوثيق النتائج، وأدلة الاستخدام، والألعاب التعزيزية؛ ويساعد في تحقيق تعاون أفضل بين الطفل وولي الأمر والأخصائي، إلى جانب الجلسات التأهيلية.»
+            «يجمع صدى في مكان واحد تقييم الاستجابة السمعية، وتقييم المهارات السمعية، وتوثيق النتائج، وأدلة الاستخدام، والأنشطة التفاعلية المشجعة؛ ويساعد في تحقيق تعاون أفضل بين الطفل وولي الأمر والأخصائي لدعم المتابعة السمعية الدقيقة.»
           </p>
         </div>
       </div>

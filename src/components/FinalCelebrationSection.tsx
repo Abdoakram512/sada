@@ -154,6 +154,13 @@ export const FinalCelebrationSection: React.FC<FinalCelebrationSectionProps> = (
           </div>
         </div>
 
+        {/* Core Closing Philosophy Banner */}
+        <div className="max-w-2xl mx-auto mb-8 text-center px-4 py-3 rounded-2xl bg-white/10 border border-white/20">
+          <p className="text-base sm:text-lg font-black text-sada-yellow">
+            «لأن التقييم الدقيق هو البداية لفهم قدرات كل طفل واحتياجاته.»
+          </p>
+        </div>
+
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center justify-center gap-2.5 sm:gap-3 mb-8 sm:mb-10 max-w-xl sm:max-w-none mx-auto">
           <button
@@ -235,18 +242,18 @@ export const FinalCelebrationSection: React.FC<FinalCelebrationSectionProps> = (
 
             <div className="space-y-4 text-sm text-sada-ink/85 leading-relaxed text-right">
               <p>
-                <strong className="text-sada-ink font-bold">طبيعة المشروع:</strong> تطبيق تفاعلي رقمي لتقييم الاستجابة السمعية وتنمية المهارات السمعية لدى الأطفال الصم وضعاف السمع.
+                <strong className="text-sada-ink font-bold">طبيعة المشروع:</strong> تطبيق تفاعلي رقمي لتقييم الاستجابة السمعية والمهارات السمعية لدى الأطفال الصم وضعاف السمع.
               </p>
               <p>
                 <strong className="text-sada-ink font-bold">المكونات الأساسية:</strong>
                 <br />
                 ١. تقييم الاستجابة لأصوات لينج الستة (/m/, /u/, /a/, /i/, /ʃ/, /s/).
                 <br />
-                ٢. تقييم المهارات السمعية الخمس الأساسية (إدراك، تمييز، تعرف وربط، فهم، إغلاق).
+                ٢. تقييم المهارات السمعية الخمس الأساسية (كشف، انتباه، تمييز، تعرف وربط، فهم).
                 <br />
-                ٣. وحدة تطبيقية إضافية للاستماع في وجود ضوضاء باشتراطات سلامة معتمدة.
+                ٣. وحدة تطبيقية إضافية للاستماع في وجود ضوضاء باشتراطات سلامة معتمدة تحت إشراف الأخصائي.
                 <br />
-                ٤. ألعاب تعزيزية ومكافآت بصرية للطفل (وليست أداة تشخيص).
+                ٤. أنشطة تقييم تفاعلية مشجعة ومكافآت بصرية للطفل (وليست أداة تشخيص).
                 <br />
                 ٥. أدلة إرشادية مخصصة لكل من ولي الأمر والأخصائي.
               </p>

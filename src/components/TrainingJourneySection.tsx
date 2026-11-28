@@ -116,10 +116,10 @@ export const TrainingJourneySection: React.FC<TrainingJourneySectionProps> = ({
         <div className="text-center max-w-3xl mx-auto mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sada-lavender text-sada-violet text-xs font-bold mb-3">
             <Sparkles size={14} />
-            <span>المشهد 05 · مغامرة المهارات السمعية الخمس</span>
+            <span>المشهد 05 · تقييم المهارات السمعية الخمس</span>
           </div>
           <h2 className="sada-section-title font-black text-sada-ink mb-4">
-            خمس محطات سمعية <span className="text-sada-violet">تنبض بالحكاية والتطبيق</span>
+            خمسة محاور تقييمية <span className="text-sada-violet">لقياس الاستجابة السمعية</span>
           </h2>
           <p className="sada-body-copy text-sada-ink/75 font-medium text-center">
             كل شخصية من أبطال صدى ترافق الطفل في محطة ذات بيئة بصرية مميزة؛ وتُقيّم كل مهارة بصورة نوعية مستقلة دون اشتراط ترتيب موحد.

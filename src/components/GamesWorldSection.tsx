@@ -150,13 +150,13 @@ export const GamesWorldSection: React.FC<GamesWorldSectionProps> = ({
         <div className="text-center max-w-3xl mx-auto mb-10">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-sada-yellow text-xs font-bold mb-3">
             <Gamepad2 size={15} />
-            <span>المشهد 07 · عالم ألعاب صدى التعزيزية</span>
+            <span>المشهد 07 · أنشطة التقييم التفاعلية المشجعة</span>
           </div>
           <h2 className="sada-section-title font-black mb-4">
-            تشجيع بصري بروح <span className="text-sada-yellow">اللعب والاستكشاف</span>
+            أنشطة تفاعلية مشجعة <span className="text-sada-yellow">بروح المشاركة والاستكشاف</span>
           </h2>
           <p className="sada-body-copy text-white/80 font-medium text-center">
-            تضيف جنى وفهد بهجة اللعب والنجوم التحفيزية لرفع دافعية الطفل للمشاركة، مع وضوح تام بأنها نماذج توضيحية تعزيزية وليست أداة تشخيص طبي.
+            تضع جنى وفهد مهام التقييم في قالب محبب ومشجع للطفل، لتسهيل رصد الاستجابة السمعية بدقة دون أن يشعر الطفل بضغط الاختبار أو التوتر.
           </p>
         </div>
 
